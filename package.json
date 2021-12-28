@@ -1,11 +1,12 @@
 {
   "name": "gattner.name",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Consulting and development of digital solutions",
   "scripts": {
-    "start": "npm install && npm run dev",
+    "start": "npm install && npm run fetch:data && npm run dev",
     "serve": "NODE_ENV=development parcel serve ./public/index.html --no-cache",
     "dev": "npm run serve",
+    "prebuild": "npm run fetch:data",
     "build": "rm -rf ./dist/ && NODE_ENV=production parcel build ./public/index.html -d ./dist/ --no-cache --detailed-report 10 --public-url /",
     "build:sw": "mv ./dist/report.html ./dist/report.html.backup && NODE_ENV=production parcel build ./public/service-worker.js -d ./dist/ --no-cache && rm ./dist/report.html && mv ./dist/report.html.backup ./dist/report.html",
     "postbuild": "NODE_ENV=production workbox injectManifest && npm run build:sw",
@@ -13,6 +14,7 @@
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write \"**/*.{js,ts,tsx}\"",
     "lint": "eslint . --ext ts --ext tsx --ext js",
+    "fetch:data": "dotenv -e .env.local node build/index.mjs",
     "test:unit": "jest",
     "test": "npm run lint && npm run type-check && npm run test:unit",
     "coverage": "jest --coverage"
@@ -57,6 +59,8 @@
     "babel-eslint": "^10.1.0",
     "babel-plugin-styled-components": "^1.11.1",
     "conventional-changelog-conventionalcommits": "^4.4.0",
+    "dotenv": "^10.0.0",
+    "dotenv-cli": "^4.1.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-config-react-app": "^5.2.1",
