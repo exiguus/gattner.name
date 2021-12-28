@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "lib": ["DOM", "ES2016", "ES2017", "esnext.asynciterable", "DOM.Iterable"],
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
+    "jsxFragmentFactory": "React.Fragment",
+    "baseUrl": ".",
+    "paths": {
+      "react": ["node_modules/preact-compat/"],
+      "react-dom": ["node_modules/preact-compat/"],
+      "react-router": ["node_modules/preact-compat/"]
+    },
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "removeComments": true,
+    "typeRoots": [
+      "node_modules/@types",
+    ],
+  },
+  "exclude": ["node_modules"],
+  "include": ["**/*.ts", "**/*.tsx"]
+}

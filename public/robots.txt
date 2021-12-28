@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /_
+Disallow: /this.
+Disallow: /error
+Disallow: /report.html

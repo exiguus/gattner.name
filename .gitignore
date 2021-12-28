@@ -1,0 +1,9 @@
+.cache
+.sw-tmp
+node_modules
+dist/
+data/
+coverage/
+.env.local
+.env.production
+TODO.md

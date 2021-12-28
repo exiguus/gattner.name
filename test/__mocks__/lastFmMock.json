@@ -1,0 +1,49 @@
+{
+  "recenttracks": {
+    "@attr": {
+      "page": "1",
+      "total": "83518",
+      "user": "exiguus_",
+      "perPage": "1",
+      "totalPages": "83518"
+    },
+    "track": [
+      {
+        "artist": {
+          "mbid": "25cb62f5-ebcf-413f-bba1-d9f55edd44dd",
+          "#text": "Milliarden"
+        },
+        "album": {
+          "mbid": "9cc0c265-6988-4679-8ec5-9aea45449615",
+          "#text": "Betrüger"
+        },
+        "image": [
+          {
+            "size": "small",
+            "#text": "https:\/\/lastfm.freetls.fastly.net\/i\/u\/34s\/76b9ded0190fc475b10ed91718cb0166.jpg"
+          },
+          {
+            "size": "medium",
+            "#text": "https:\/\/lastfm.freetls.fastly.net\/i\/u\/64s\/76b9ded0190fc475b10ed91718cb0166.jpg"
+          },
+          {
+            "size": "large",
+            "#text": "https:\/\/lastfm.freetls.fastly.net\/i\/u\/174s\/76b9ded0190fc475b10ed91718cb0166.jpg"
+          },
+          {
+            "size": "extralarge",
+            "#text": "https:\/\/lastfm.freetls.fastly.net\/i\/u\/300x300\/76b9ded0190fc475b10ed91718cb0166.jpg"
+          }
+        ],
+        "streamable": "0",
+        "date": {
+          "uts": "1604074599",
+          "#text": "30 Oct 2020, 16:16"
+        },
+        "url": "https:\/\/www.last.fm\/music\/Milliarden\/_\/Marie",
+        "name": "Marie",
+        "mbid": "52199593-2543-424f-a4bd-f25158e42a6a"
+      }
+    ]
+  }
+}
