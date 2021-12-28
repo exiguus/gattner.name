@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import styled from 'styled-components'
-import theme from '../../styles/theme'
+import styled, { useTheme } from 'styled-components'
 import { footer } from '../../../data/site.json'
 import { Section } from '../Section'
 import { Link } from '../Link'
@@ -54,6 +53,7 @@ const MenuLink = styled.li`
 `
 
 const Footer: FunctionComponent = () => {
+  const theme = useTheme()
   return (
     <footer>
       <Section>
@@ -64,7 +64,7 @@ const Footer: FunctionComponent = () => {
                 href={footer.nav.github.url}
                 title={footer.nav.github.title}
               >
-                <GithubIcon fill={theme.application.color} />
+                <GithubIcon fill={theme.link.color} />
               </Link>
             </StyledListItem>
             <StyledListItem>
@@ -72,12 +72,12 @@ const Footer: FunctionComponent = () => {
                 href={footer.nav.twitter.url}
                 title={footer.nav.twitter.title}
               >
-                <TwitterIcon fill={theme.application.color} />
+                <TwitterIcon fill={theme.link.color} />
               </Link>
             </StyledListItem>
             <StyledListItem>
               <Link to={footer.nav.about.url} title={footer.nav.about.title}>
-                <SimonIcon fill={theme.application.color} />
+                <SimonIcon fill={theme.link.color} />
               </Link>
             </StyledListItem>
             <StyledListItem>
@@ -85,7 +85,7 @@ const Footer: FunctionComponent = () => {
                 href={footer.nav.contact.url}
                 title={footer.nav.contact.title}
               >
-                <EnvelopeIcon fill={theme.application.color} />
+                <EnvelopeIcon fill={theme.link.color} />
               </Link>
             </StyledListItem>
             <StyledListItem>
@@ -93,13 +93,15 @@ const Footer: FunctionComponent = () => {
                 href={footer.nav.analysis.url}
                 title={footer.nav.analysis.title}
               >
-                <AnalysisIcon fill={theme.application.color} />
+                <AnalysisIcon fill={theme.link.color} />
               </Link>
             </StyledListItem>
           </StyledList>
           <Menu>
             <MenuLink>
-              <Link to="/impressum">Impressum</Link>
+              <Link to="/impressum" lineThrough={true}>
+                Impressum
+              </Link>
             </MenuLink>
           </Menu>
           <LastFm

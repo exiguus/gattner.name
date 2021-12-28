@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { name, title } from '../../../data/site.json'
 import { Section } from '../Section'
 import { Link } from '../Link'
+import { Mark } from '../Mark'
 
 const StyledHeaderInner = styled.div`
   @media (min-width: ${(props): string =>
@@ -56,7 +57,6 @@ const MenuLink = styled.li`
 
 const StyledNavLink = styled(Link)`
   font-size: inherit;
-  color: ${(props): string => props.theme.link.color};
   text-decoration: none;
 
   &:hover,
@@ -72,21 +72,31 @@ const Header: FunctionComponent = () => {
       <Section>
         <StyledHeaderInner>
           <Brand data-testid="brand">
-            <StyledNavLink to="/">{name} </StyledNavLink>
+            <StyledNavLink to="/">
+              <Mark>{name}</Mark>{' '}
+            </StyledNavLink>
             <br />
             <StyledNavLink to="/">
-              <Title>{title}</Title>
+              <Title>
+                <Mark>{title}</Mark>
+              </Title>
             </StyledNavLink>
           </Brand>
           <Menu>
             <MenuLink>
-              <StyledNavLink to="/">Home</StyledNavLink>
+              <StyledNavLink to="/" lineThrough={true}>
+                Home
+              </StyledNavLink>
             </MenuLink>
             <MenuLink>
-              <StyledNavLink to="/about">About</StyledNavLink>
+              <StyledNavLink to="/about" lineThrough={true}>
+                About
+              </StyledNavLink>
             </MenuLink>
             <MenuLink>
-              <StyledNavLink to="/contact">Contact</StyledNavLink>
+              <StyledNavLink to="/contact" lineThrough={true}>
+                Contact
+              </StyledNavLink>
             </MenuLink>
           </Menu>
         </StyledHeaderInner>

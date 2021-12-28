@@ -10,7 +10,6 @@ import useWindowSize from '../../hooks/useWindowSize'
 import { title, description, keywords } from '../../../data/site.json'
 import { isTouch } from '../../utils/device'
 import { isServer } from '../../utils/ssr'
-import { AppLayout } from '../AppLayout'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { Main } from '../../components/Main'
@@ -78,7 +77,7 @@ const PageLayout: FunctionComponent<PageLayoutProps> = ({ children }) => {
     if (isTouch()) setMinHeight(`${height}px`)
   }, [height])
   return (
-    <AppLayout>
+    <>
       {ssr ? (
         <DocumentMeta {...meta}>
           <StyledContent minHeight={minHeight}>
@@ -94,7 +93,7 @@ const PageLayout: FunctionComponent<PageLayoutProps> = ({ children }) => {
           <Footer />
         </StyledContent>
       )}
-    </AppLayout>
+    </>
   )
 }
 

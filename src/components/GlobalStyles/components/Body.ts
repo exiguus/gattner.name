@@ -3,7 +3,8 @@ import { createGlobalStyle } from 'styled-components'
 const Body = createGlobalStyle`
   @keyframes fadeInBody {
     0% {
-      background-color: white;
+      background-color: ${(props): string =>
+        props.theme.application.backgroundAnimationColor};;
       opacity: 0;
     }
     100% {
@@ -46,8 +47,8 @@ const Body = createGlobalStyle`
   }
 
   ::selection {
-    background-color: rgba(${(props): string =>
-      props.theme.application.highlightColor}, 0.5);
+    background-color: ${(props): string =>
+      props.theme.application.highlightColor};
   }
 `
 

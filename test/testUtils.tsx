@@ -23,6 +23,7 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 interface ProviderProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   children?: any
 }
 
@@ -36,6 +37,7 @@ const Providers: FunctionComponent<ProviderProps> = ({
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const customRender = (ui: any, options = {}): RenderResult =>
   render(ui, { wrapper: Providers, ...options })
 

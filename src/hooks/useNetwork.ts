@@ -29,7 +29,7 @@ type NetworkInformation = {
   readonly downlink: number
   readonly downlinkMax?: number
   readonly rtt: number
-  onchange: Function | null
+  onchange: () => void
 }
 
 interface NavigatorConnection extends Navigator {
@@ -49,7 +49,7 @@ function useNetwork(): NetworkTypes {
     downlink: 3.45,
     downlinkMax: 3.5,
     rtt: 50,
-    onchange: null,
+    onchange: () => null,
   }
   const [network, setNetwork] = useState({
     online: window.navigator.onLine || true,

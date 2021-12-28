@@ -3,7 +3,7 @@ import { render } from '../testUtils'
 import { LastFm } from '../../src/components/LastFm'
 import 'jest-styled-components'
 import '@testing-library/jest-dom/extend-expect'
-import { act, waitFor, screen } from '@testing-library/react'
+import { waitFor, screen } from '@testing-library/react'
 
 describe('LastFm Component', () => {
   test('matches text', async () => {
@@ -20,6 +20,6 @@ describe('LastFm Component', () => {
       expect(screen.getByTestId('lastfm-listen').textContent).toBe(
         'Marie by Milliarden'
       )
-    }, 2000)
+    }, 3000)
   })
 })
