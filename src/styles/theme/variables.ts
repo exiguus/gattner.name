@@ -1,6 +1,8 @@
 export const variables = {
   BrandPrimary: '#333333',
   BrandPrimaryHover: '#666666',
+  BrandSecondary: '#CCCCCC',
+  BrandSecondaryHover: '#EEEEEE',
 
   White: '#FFFFFF',
 

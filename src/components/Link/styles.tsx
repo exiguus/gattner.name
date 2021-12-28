@@ -1,0 +1,75 @@
+import styled, { css } from 'styled-components'
+import { NavLink } from 'react-router-dom'
+
+export const StyleNavLink = css`
+  display: inline-block;
+  font-size: inherit;
+  color: ${(props): string => props.theme.link.color};
+  text-decoration: none;
+  overflow: hidden;
+
+  &:link,
+  &:hover,
+  &:active,
+  &:focus,
+  &:visited {
+    color: ${(props): string => props.theme.link.color};
+  }
+
+  svg {
+    padding: 0.5em;
+    height: 1.5em;
+    fill: ${(props): string => props.theme.link.color};
+  }
+
+  &:hover svg,
+  &:active svg,
+  &:focus svg {
+    fill: ${(props): string => props.theme.link.hoverColor};
+  }
+`
+
+export const StyledNavLink = styled(NavLink)`
+  ${StyleNavLink}
+  position: relative;
+
+  ::before {
+    position: absolute;
+    content: '';
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: ${(props): string => props.theme.link.color};
+    transform: translateX(-100%);
+    overflow: hidden;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      transform: translateX(0);
+      transition: 4.2s ease-out 0.4s;
+    }
+  }
+`
+
+export const StyledExternalNavLink = styled.a`
+  ${StyleNavLink}
+
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: underline;
+  }
+`
+
+export const StyledActiveNavLink = styled.span<{ lineThrough: boolean }>`
+  ${StyleNavLink}
+  font-weight: 600;
+  ${({ lineThrough }): string =>
+    lineThrough ? `text-decoration: line-through;` : ''}
+`

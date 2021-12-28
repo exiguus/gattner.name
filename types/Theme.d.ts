@@ -1,14 +1,11 @@
-export type Theme = {
+export type ThemeBase = {
   fonts: {
     monospace: string
   }
   application: {
-    backgroundColor: string
-    color: string
     margin: string
     padding: string
     minHeight: string
-    highlightColor: string
   }
   section: {
     maxWidthTablet: string
@@ -18,10 +15,6 @@ export type Theme = {
       padding: string
       paddingMobile: string
     }
-  }
-  link: {
-    color: string
-    hoverColor: string
   }
   breakpoint: {
     screen4k: string
@@ -35,6 +28,21 @@ export type Theme = {
   }
 }
 
+export type ThemeExtended = {
+  name: string
+  application: {
+    backgroundColor: string
+    backgroundAnimationColor: string
+    color: string
+    highlightColor: string
+  }
+  link: {
+    color: string
+    hoverColor: string
+  }
+}
+
+export type Theme = ThemeBase & ThemeExtended
 declare module 'styled-components' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   export interface DefaultTheme extends Theme {}

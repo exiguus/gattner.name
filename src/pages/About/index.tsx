@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
-import theme from '../../styles/theme'
+import { useTheme } from 'styled-components'
 import SimonIcon from '../../assets/simon.svg'
 import useVisible from '../../hooks/useVisible'
 import { PageLayout } from '../../layouts/PageLayout'
@@ -21,6 +21,9 @@ const About: FunctionComponent = () => {
       clearTimeout(setSmileTimeout)
     }
   }, [visibilityState])
+
+  const theme = useTheme()
+
   return (
     <PageLayout>
       <Headline
