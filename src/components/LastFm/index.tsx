@@ -57,7 +57,7 @@ const LastFm: FunctionComponent<LastFmProps> = ({ userName, apiKey }) => {
       online
     ) {
       fetch(
-        `${process.env.EXIGUUS_MS_HOST}/2.0/?method=user.getRecentTracks&user=${userName}&api_key=${apiKey}&limit=1&nowplaying=true&format=json`
+        `${process.env.LAST_FM_API_HOST}/2.0/?method=user.getRecentTracks&user=${userName}&api_key=${apiKey}&limit=1&nowplaying=true&format=json`
       )
         .then(response => {
           if (response.ok) {
