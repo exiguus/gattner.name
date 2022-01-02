@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { useTheme } from 'styled-components'
-import SimonIcon from '../../assets/simon.svg'
+import { content, quote, title } from '../../../data/about.json'
 import useVisible from '../../hooks/useVisible'
 import { PageLayout } from '../../layouts/PageLayout'
 import { Headline } from '../../components/Headline'
 import { Paragraph } from '../../components/Paragraph'
 import { Blockquote } from '../../components/Blockquote'
-import { content, quote, title } from '../../../data/about.json'
+import { Icon } from '../../components/Icon'
 
 const About: FunctionComponent = () => {
   const visible = useVisible()
@@ -29,7 +29,8 @@ const About: FunctionComponent = () => {
       <Headline
         text={title}
         icon={
-          <SimonIcon
+          <Icon
+            type="simon-alt"
             fill={theme.application.color}
             stroke={hasSmile ? theme.application.color : 'transparent'}
           />

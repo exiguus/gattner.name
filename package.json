@@ -15,7 +15,7 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,mjs}\"",
     "lint": "eslint . --ext ts --ext tsx --ext js --ext jsx --ext mjs",
     "fetch:data": "dotenv -e .env.local node build/index.mjs",
-    "test:unit": "jest",
+    "test:unit": "dotenv -e .env.local jest",
     "test": "npm run lint && npm run type-check && npm run test:unit",
     "coverage": "jest --coverage"
   },
