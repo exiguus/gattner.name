@@ -11,6 +11,11 @@ describe('Paragraph Component', () => {
     expect(screen.getByText('test string')).toBeInTheDocument()
   })
 
+  test('matches child text', async () => {
+    render(<Paragraph>test string</Paragraph>)
+    expect(screen.getByText('test string')).toBeInTheDocument()
+  })
+
   test('matches animate text', async () => {
     const text = 'test string'
     const words = text.split(' ')
