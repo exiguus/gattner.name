@@ -1,6 +1,6 @@
 {
   "name": "gattner.name",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Consulting and development of digital solutions",
   "scripts": {
     "start": "npm install && npm run fetch:data && npm run dev",
@@ -12,8 +12,8 @@
     "postbuild": "NODE_ENV=production workbox injectManifest && npm run build:sw",
     "report": "NODE_ENV=production parcel build ./public/index.html --detailed-report 10",
     "type-check": "tsc --pretty --noEmit",
-    "format": "prettier --write \"**/*.{js,ts,tsx}\"",
-    "lint": "eslint . --ext ts --ext tsx --ext js",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,mjs}\"",
+    "lint": "eslint . --ext ts --ext tsx --ext js --ext jsx --ext mjs",
     "fetch:data": "dotenv -e .env.local node build/index.mjs",
     "test:unit": "jest",
     "test": "npm run lint && npm run type-check && npm run test:unit",
