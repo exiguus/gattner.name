@@ -1,13 +1,16 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { useTheme } from 'styled-components'
-import SimonIcon from '../../assets/simon.svg'
+import { content, contact, quote, title } from '../../../data/contact.json'
 import useVisible from '../../hooks/useVisible'
 import { PageLayout } from '../../layouts/PageLayout'
 import { Headline } from '../../components/Headline'
 import { Paragraph } from '../../components/Paragraph'
 import { Blockquote } from '../../components/Blockquote'
 import { HorizontalBreak } from '../../components/HorizontalBreak'
-import { content, contact, quote, title } from '../../../data/contact.json'
+import { List } from '../../components/List'
+import { ListItem } from '../../components/ListItem'
+import { Link } from '../../components/Link'
+import { Icon } from '../../components/Icon'
 
 const Impressum: FunctionComponent = () => {
   const visible = useVisible()
@@ -30,7 +33,8 @@ const Impressum: FunctionComponent = () => {
       <Headline
         text={title}
         icon={
-          <SimonIcon
+          <Icon
+            type="simon-alt"
             fill={theme.application.color}
             stroke={hasSmile ? theme.application.color : 'transparent'}
           />
@@ -40,11 +44,21 @@ const Impressum: FunctionComponent = () => {
         <Paragraph text={quote} />
       </Blockquote>
       {content.map((text, index) => (
-        <Paragraph key={index} text={text} />
+        <Paragraph key={`cp-${index}`} text={text} />
       ))}
       <HorizontalBreak />
-      {contact.map((text, index) => (
-        <Paragraph key={index} text={text} />
+      <List type="line">
+        {contact.links.map(({ text, href, title }, index) => (
+          <ListItem key={`cl-${index}`}>
+            <Link href={href} title={title}>
+              {text}
+            </Link>
+          </ListItem>
+        ))}
+      </List>
+      <HorizontalBreak />
+      {contact.information.map((text, index) => (
+        <Paragraph key={`ci-${index}`} text={text} />
       ))}
     </PageLayout>
   )

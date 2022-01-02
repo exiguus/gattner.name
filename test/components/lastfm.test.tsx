@@ -10,7 +10,14 @@ describe('LastFm Component', () => {
     const spy = jest.spyOn(global, 'fetch')
 
     render(
-      <LastFm userName="exiguus_" apiKey="98a2e5544a139a5675d1a85b8126f0f7" />
+      <>
+        {process.env.LAST_FM_API_KEY && process.env.LAST_FM_USER_NAME && (
+          <LastFm
+            userName={process.env.LAST_FM_USER_NAME}
+            apiKey={process.env.LAST_FM_API_KEY}
+          />
+        )}
+      </>
     )
 
     await waitFor(() => expect(spy).toHaveBeenCalledTimes(1))

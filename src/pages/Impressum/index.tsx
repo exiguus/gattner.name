@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react'
+import { address, vat, contact, title } from '../../../data/impressum.json'
 import { PageLayout } from '../../layouts/PageLayout'
 import { Headline } from '../../components/Headline'
 import { Paragraph } from '../../components/Paragraph'
 import { HorizontalBreak } from '../../components/HorizontalBreak'
-import { address, vat, contact, title } from '../../../data/impressum.json'
 
 const Impressum: FunctionComponent = () => {
   return (

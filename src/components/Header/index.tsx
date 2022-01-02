@@ -4,6 +4,8 @@ import { name, title } from '../../../data/site.json'
 import { Section } from '../Section'
 import { Link } from '../Link'
 import { Mark } from '../Mark'
+import { List } from '../List'
+import { ListItem } from '../ListItem'
 
 const StyledHeaderInner = styled.div`
   @media (min-width: ${(props): string =>
@@ -23,36 +25,10 @@ const Brand = styled.h1`
     margin-bottom: 0;
   }
 `
+
 const Title = styled.strong`
   display: block;
   font-weight: 300;
-`
-
-const Menu = styled.ul`
-  padding: 0 0.5rem;
-  @media (min-width: ${(props): string =>
-      props.theme.breakpoint.screenTablet}) {
-    padding: 0;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-`
-
-const MenuLink = styled.li`
-  display: inline-block;
-  margin-right: 1em;
-  @media (min-width: ${(props): string =>
-      props.theme.breakpoint.screenTablet}) {
-    display: block;
-    margin-left: 1em;
-    margin-right: 0;
-  }
-  text-decoration: none;
-
-  a.active {
-    font-weight: 600;
-  }
 `
 
 const StyledNavLink = styled(Link)`
@@ -82,23 +58,23 @@ const Header: FunctionComponent = () => {
               </Title>
             </StyledNavLink>
           </Brand>
-          <Menu>
-            <MenuLink>
+          <List type="nav">
+            <ListItem type="nav">
               <StyledNavLink to="/" lineThrough={true}>
                 Home
               </StyledNavLink>
-            </MenuLink>
-            <MenuLink>
+            </ListItem>
+            <ListItem type="nav">
               <StyledNavLink to="/about" lineThrough={true}>
                 About
               </StyledNavLink>
-            </MenuLink>
-            <MenuLink>
+            </ListItem>
+            <ListItem type="nav">
               <StyledNavLink to="/contact" lineThrough={true}>
                 Contact
               </StyledNavLink>
-            </MenuLink>
-          </Menu>
+            </ListItem>
+          </List>
         </StyledHeaderInner>
       </Section>
     </header>
