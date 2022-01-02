@@ -120,7 +120,7 @@
     "rendererConfig": {
       "renderAfterDocumentEvent": "prerender-trigger",
       "inject": "true",
-      "injectProperty": "__SSR"
+      "injectProperty": "__PRERENDER"
     }
   },
   "compress": {

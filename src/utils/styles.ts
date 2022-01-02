@@ -1,14 +1,14 @@
-import { isServer } from './ssr'
-const ssr = isServer()
+import { isPrerender } from './prerender'
+const prerender = isPrerender()
 
 function removeStyles(): boolean {
-  if (!ssr && process.env.NODE_ENV === 'production')
+  if (!prerender && process.env.NODE_ENV === 'production')
     document.querySelector('style[data-styled="pre-active"]')?.remove()
   return true
 }
 
 function addStyles(): boolean {
-  if (ssr) {
+  if (prerender) {
     const sheets = document.styleSheets as StyleSheetList
     for (let i = 0; i < sheets.length; i++) {
       const sheet = sheets[i]

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactNode } from 'react'
 import styled from 'styled-components'
 import { Animation } from './components/Animation'
-import { isServer } from '../../utils/ssr'
+import { isPrerender } from '../../utils/prerender'
 
 const StyledParagraph = styled.p`
   margin-bottom: 1rem;
@@ -25,7 +25,7 @@ const Paragraph: FunctionComponent<ParagraphProps> = ({
 }) => {
   return (
     <StyledParagraph data-content={isContent}>
-      {animate && text && !isServer()
+      {animate && text && !isPrerender()
         ? text
             .split(' ')
             .map((word, index) => <Animation key={index} text={word} />)

@@ -1,8 +1,8 @@
-import { isServer } from './ssr'
-const ssr = isServer()
+import { isPrerender } from './prerender'
+const prerender = isPrerender()
 
 function preHeadLinkScripts(): boolean {
-  if (ssr) {
+  if (prerender) {
     const scriptNodes = document.querySelectorAll('script[src$=".js"]')
     scriptNodes.forEach(scriptNode => {
       const link = document.createElement('link')
@@ -16,7 +16,7 @@ function preHeadLinkScripts(): boolean {
 }
 
 function preHeadLinkFonts(): boolean {
-  if (ssr) {
+  if (prerender) {
     const styleNode = document.querySelector('style')
     const fontHrefs =
       styleNode?.innerText.match(/(\/[A-Za-z0-9-.]*\.woff2)/g) || []
