@@ -6,7 +6,7 @@
     "start": "npm install && npm run fetch:data && npm run dev",
     "serve": "NODE_ENV=development parcel serve ./public/index.html --no-cache",
     "dev": "npm run serve",
-    "prebuild": "npm run fetch:data",
+    "prebuild": "npm run fetch:data && npm test",
     "build": "rm -rf ./dist/ && NODE_ENV=production parcel build ./public/index.html -d ./dist/ --no-cache --detailed-report 10 --public-url /",
     "build:sw": "mv ./dist/report.html ./dist/report.html.backup && NODE_ENV=production parcel build ./public/service-worker.js -d ./dist/ --no-cache && rm ./dist/report.html && mv ./dist/report.html.backup ./dist/report.html",
     "postbuild": "NODE_ENV=production workbox injectManifest && npm run build:sw",
