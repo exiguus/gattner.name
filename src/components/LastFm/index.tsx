@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FunctionComponent } from 'react'
-import { isServer } from '../../utils/ssr'
+import { isPrerender } from '../../utils/prerender'
 import styled from 'styled-components'
 import useNetwork from '../../hooks/useNetwork'
 
@@ -91,17 +91,17 @@ const LastFm: FunctionComponent<LastFmProps> = ({ userName, apiKey }) => {
     userName,
   ])
 
-  const ssr = isServer()
+  const prerender = isPrerender()
   return (
     <StyledLastFm data-testid="lastfm">
       <StyledLastFmInner>
-        {!isPending && !ssr && `Listen to `}
+        {!isPending && !prerender && `Listen to `}
         <strong>
           {isPending &&
-            ssr &&
+            prerender &&
             `${lastFmData.songName} by ${lastFmData.artistName}`}
-          {isPending && !ssr && fetchError.length === 0 && 'Updating...'}
-          {!isPending && !ssr && (
+          {isPending && !prerender && fetchError.length === 0 && 'Updating...'}
+          {!isPending && !prerender && (
             <span data-testid="lastfm-listen">
               {lastFmData.songName} by {lastFmData.artistName}
             </span>

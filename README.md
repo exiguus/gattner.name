@@ -34,6 +34,6 @@ npm run build
 
 ## Prerender
 
-`window['__SSR']` is true while prerender and undefined if not.
+`window['__PRERENDER']` is true while prerender and undefined if not.
 
 React render is called in `process.env.NODE_ENV=development` and hydrate in production mode.

@@ -9,7 +9,7 @@ import DocumentMeta from 'react-document-meta'
 import useWindowSize from '../../hooks/useWindowSize'
 import { title, description, keywords } from '../../../data/site.json'
 import { isTouch } from '../../utils/device'
-import { isServer } from '../../utils/ssr'
+import { isPrerender } from '../../utils/prerender'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { Main } from '../../components/Main'
@@ -57,9 +57,9 @@ interface PageLayoutProps {
 }
 
 const PageLayout: FunctionComponent<PageLayoutProps> = ({ children }) => {
-  const ssr = isServer()
+  const prerender = isPrerender()
   let meta = {}
-  if (ssr) {
+  if (prerender) {
     meta = {
       title,
       description,
@@ -78,7 +78,7 @@ const PageLayout: FunctionComponent<PageLayoutProps> = ({ children }) => {
   }, [height])
   return (
     <>
-      {ssr ? (
+      {prerender ? (
         <DocumentMeta {...meta}>
           <StyledContent minHeight={minHeight}>
             <Header />

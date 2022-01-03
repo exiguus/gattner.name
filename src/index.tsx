@@ -1,23 +1,23 @@
 import 'preact/devtools'
 import React from 'react'
 import { hydrate, render } from 'react-dom'
-import { isServer } from './utils/ssr'
+import { isPrerender } from './utils/prerender'
 import { preHeadLinkScripts, preHeadLinkFonts } from './utils/head'
 import { addStyles } from './utils/styles'
 import App from './App'
 
-const ssr = isServer()
+const prerender = isPrerender()
 
 const appId = 'root'
 const appElement = document.getElementById(appId) as HTMLElement
 
 const eventName = 'prerender-trigger'
 
-if (!ssr) {
+if (!prerender) {
   document.documentElement.setAttribute('data-js', 'true')
 }
 
-appElement.setAttribute('data-ssr', `${ssr}`)
+appElement.setAttribute('data-prerender', `${prerender}`)
 
 const addLoadingEvent = ({ detail }: { detail?: object }): CustomEvent => {
   return new CustomEvent(eventName, {
@@ -46,7 +46,7 @@ appElement.hasChildNodes()
   ? hydrate(<App />, appElement, callback)
   : render(<App />, appElement, callback)
 
-if (process.env.NODE_ENV === 'production' && !ssr) {
+if (process.env.NODE_ENV === 'production' && !prerender) {
   const sw = '/service-worker.js'
   navigator.serviceWorker
     .register(sw)
