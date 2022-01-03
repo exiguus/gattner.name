@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import { footer } from '../../../data/site.json'
+import { FooterProps } from '../../../schemas'
 import { Section } from '../Section'
 import { Link } from '../Link'
 import { List } from '../List'
@@ -14,14 +14,14 @@ const StyledFooterInner = styled.div`
   align-items: center;
 `
 
-const Footer: FunctionComponent = () => {
+const Footer: FunctionComponent<FooterProps> = ({ nav, menu }) => {
   return (
     <footer>
       <Section>
         <StyledFooterInner>
-          {footer.nav.list && (
+          {nav.list && (
             <List type="footer">
-              {footer.nav.list.map(({ href, title, icon }, index) => (
+              {nav.list.map(({ href, title, icon }, index) => (
                 <ListItem type="icon" key={index}>
                   <Link href={href} title={title}>
                     <Icon type={icon} />
@@ -31,11 +31,13 @@ const Footer: FunctionComponent = () => {
             </List>
           )}
           <List type="menu">
-            <ListItem type="menu">
-              <Link to="/impressum" lineThrough={true}>
-                Impressum
-              </Link>
-            </ListItem>
+            {menu.list.map(({ href, title, text }, index) => (
+              <ListItem key={`mli-${index}`} type="menu">
+                <Link to={href} title={title} lineThrough={true}>
+                  {text}
+                </Link>
+              </ListItem>
+            ))}
           </List>
           {process.env.LAST_FM_API_KEY && process.env.LAST_FM_USER_NAME && (
             <LastFm

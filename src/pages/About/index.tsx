@@ -1,14 +1,13 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { useTheme } from 'styled-components'
-import { content, quote, title } from '../../../data/about.json'
+import { AboutProps } from '../../../schemas'
 import useVisible from '../../hooks/useVisible'
-import { PageLayout } from '../../layouts/PageLayout'
 import { Headline } from '../../components/Headline'
 import { Paragraph } from '../../components/Paragraph'
 import { Blockquote } from '../../components/Blockquote'
 import { Icon } from '../../components/Icon'
 
-const About: FunctionComponent = () => {
+const About: FunctionComponent<AboutProps> = ({ content, quote, title }) => {
   const visible = useVisible()
   const { visibilityState } = visible
   const [hasSmile, setSmile] = useState(false)
@@ -25,7 +24,7 @@ const About: FunctionComponent = () => {
   const theme = useTheme()
 
   return (
-    <PageLayout>
+    <>
       <Headline
         text={title}
         icon={
@@ -42,7 +41,7 @@ const About: FunctionComponent = () => {
       {content.map((text, index) => (
         <Paragraph key={`cp-${index}`} text={text} />
       ))}
-    </PageLayout>
+    </>
   )
 }
 

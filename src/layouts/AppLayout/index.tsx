@@ -1,9 +1,4 @@
-import React, {
-  FunctionComponent,
-  ReactElement,
-  useEffect,
-  useState,
-} from 'react'
+import React, { FunctionComponent, ReactNode, useEffect, useState } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { darkTheme, getRandomColor, lightTheme } from '../../styles/theme'
 import { Theme } from '../../../types/Theme'
@@ -11,7 +6,7 @@ import { GlobalStyles } from '../../components/GlobalStyles'
 import useMatchMedia from '../../hooks/useMatchMedia'
 
 interface AppLayoutProps {
-  children: ReactElement
+  children: ReactNode
 }
 
 const AppLayout: FunctionComponent<AppLayoutProps> = ({ children }) => {

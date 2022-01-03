@@ -9,6 +9,7 @@ const StyledParagraph = styled.p`
 
 type CommonProps = {
   isContent?: boolean
+  dataTestid?: string
 }
 
 type TruncateProps =
@@ -21,10 +22,11 @@ const Paragraph: FunctionComponent<ParagraphProps> = ({
   text,
   animate = false,
   isContent,
+  dataTestid,
   children,
 }) => {
   return (
-    <StyledParagraph data-content={isContent}>
+    <StyledParagraph data-content={isContent} data-testid={dataTestid}>
       {animate && text && !isPrerender()
         ? text
             .split(' ')

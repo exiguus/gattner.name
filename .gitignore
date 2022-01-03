@@ -3,6 +3,7 @@
 node_modules
 dist/
 data/
+.tmp-build/
 coverage/
 .env.local
 .env.production
