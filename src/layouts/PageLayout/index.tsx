@@ -6,8 +6,8 @@ import React, {
 } from 'react'
 import styled from 'styled-components'
 import DocumentMeta from 'react-document-meta'
+import { AppProps, PageProps } from '../../../schemas'
 import useWindowSize from '../../hooks/useWindowSize'
-import { title, description, keywords } from '../../../data/site.json'
 import { isTouch } from '../../utils/device'
 import { isPrerender } from '../../utils/prerender'
 import { Header } from '../../components/Header'
@@ -52,11 +52,18 @@ const StyledContent = styled.div<StyledContentProps>`
   }
 `
 
-interface PageLayoutProps {
+interface PageLayoutProps extends PageProps, AppProps {
   children: ReactNode
 }
 
-const PageLayout: FunctionComponent<PageLayoutProps> = ({ children }) => {
+const PageLayout: FunctionComponent<PageLayoutProps> = ({
+  title,
+  header,
+  description,
+  keywords,
+  footer,
+  children,
+}) => {
   const prerender = isPrerender()
   let meta = {}
   if (prerender) {
@@ -81,16 +88,16 @@ const PageLayout: FunctionComponent<PageLayoutProps> = ({ children }) => {
       {prerender ? (
         <DocumentMeta {...meta}>
           <StyledContent minHeight={minHeight}>
-            <Header />
+            <Header {...header} />
             <Main>{children}</Main>
-            <Footer />
+            <Footer {...footer} />
           </StyledContent>
         </DocumentMeta>
       ) : (
         <StyledContent minHeight={minHeight}>
-          <Header />
+          <Header {...header} />
           <Main>{children}</Main>
-          <Footer />
+          <Footer {...footer} />
         </StyledContent>
       )}
     </>

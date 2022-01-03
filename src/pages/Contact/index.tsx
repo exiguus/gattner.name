@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { useTheme } from 'styled-components'
-import { content, contact, quote, title } from '../../../data/contact.json'
+import { ContactProps } from '../../../schemas'
 import useVisible from '../../hooks/useVisible'
-import { PageLayout } from '../../layouts/PageLayout'
 import { Headline } from '../../components/Headline'
 import { Paragraph } from '../../components/Paragraph'
 import { Blockquote } from '../../components/Blockquote'
@@ -12,7 +11,12 @@ import { ListItem } from '../../components/ListItem'
 import { Link } from '../../components/Link'
 import { Icon } from '../../components/Icon'
 
-const Impressum: FunctionComponent = () => {
+const Impressum: FunctionComponent<ContactProps> = ({
+  content,
+  contact,
+  quote,
+  title,
+}) => {
   const visible = useVisible()
   const { visibilityState } = visible
   const [hasSmile, setSmile] = useState(false)
@@ -29,7 +33,7 @@ const Impressum: FunctionComponent = () => {
   const theme = useTheme()
 
   return (
-    <PageLayout>
+    <>
       <Headline
         text={title}
         icon={
@@ -60,7 +64,7 @@ const Impressum: FunctionComponent = () => {
       {contact.information.map((text, index) => (
         <Paragraph key={`ci-${index}`} text={text} />
       ))}
-    </PageLayout>
+    </>
   )
 }
 

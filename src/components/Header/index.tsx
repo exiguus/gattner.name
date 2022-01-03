@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import { name, title } from '../../../data/site.json'
+import { HeaderProps } from '../../../schemas'
 import { Section } from '../Section'
 import { Link } from '../Link'
 import { Mark } from '../Mark'
@@ -42,7 +42,7 @@ const StyledNavLink = styled(Link)`
   }
 `
 
-const Header: FunctionComponent = () => {
+const Header: FunctionComponent<HeaderProps> = ({ title, name, menu }) => {
   return (
     <header>
       <Section>
@@ -59,21 +59,13 @@ const Header: FunctionComponent = () => {
             </StyledNavLink>
           </Brand>
           <List type="nav">
-            <ListItem type="nav">
-              <StyledNavLink to="/" lineThrough={true}>
-                Home
-              </StyledNavLink>
-            </ListItem>
-            <ListItem type="nav">
-              <StyledNavLink to="/about" lineThrough={true}>
-                About
-              </StyledNavLink>
-            </ListItem>
-            <ListItem type="nav">
-              <StyledNavLink to="/contact" lineThrough={true}>
-                Contact
-              </StyledNavLink>
-            </ListItem>
+            {menu.list.map(({ title, text, href }, index) => (
+              <ListItem type="nav" key={`mli-${index}`}>
+                <StyledNavLink to={href} title={title} lineThrough={true}>
+                  {text}
+                </StyledNavLink>
+              </ListItem>
+            ))}
           </List>
         </StyledHeaderInner>
       </Section>

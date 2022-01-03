@@ -1,13 +1,17 @@
 import React, { FunctionComponent } from 'react'
-import { address, vat, contact, title } from '../../../data/impressum.json'
-import { PageLayout } from '../../layouts/PageLayout'
+import { ImpressumProps } from '../../../schemas'
 import { Headline } from '../../components/Headline'
 import { Paragraph } from '../../components/Paragraph'
 import { HorizontalBreak } from '../../components/HorizontalBreak'
 
-const Impressum: FunctionComponent = () => {
+const Impressum: FunctionComponent<ImpressumProps> = ({
+  address,
+  vat,
+  contact,
+  title,
+}) => {
   return (
-    <PageLayout>
+    <>
       <Headline text={title} />
       {address.map((text, index) => (
         <Paragraph key={index} text={text} />
@@ -20,7 +24,7 @@ const Impressum: FunctionComponent = () => {
       {contact.map((text, index) => (
         <Paragraph key={index} text={text} />
       ))}
-    </PageLayout>
+    </>
   )
 }
 

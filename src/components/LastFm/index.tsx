@@ -1,9 +1,9 @@
 import React, { useState, useEffect, FunctionComponent } from 'react'
+import Ajv from 'ajv'
+import { userRecenttracksSchema } from '../../../schemas/lastFm'
 import { isPrerender } from '../../utils/prerender'
 import styled from 'styled-components'
 import useNetwork from '../../hooks/useNetwork'
-
-// TODO: write a provider and normalize data
 
 const StyledLastFm = styled.aside`
   position: fixed;
@@ -68,13 +68,13 @@ const LastFm: FunctionComponent<LastFmProps> = ({ userName, apiKey }) => {
         })
         .then(data => {
           setIsPending(false)
-          if (data?.recenttracks?.track[0]) {
+          const ajv = new Ajv()
+          const validate = ajv.compile(userRecenttracksSchema)
+          if (validate(data)) {
+            const { recenttracks } = data
             setLastFmData({
-              artistName:
-                data.recenttracks.track[0]?.artist['#text'] ||
-                initialLastFmData.artistName,
-              songName:
-                data.recenttracks.track[0]?.name || initialLastFmData.songName,
+              artistName: recenttracks.track[0].artist['#text'],
+              songName: recenttracks.track[0].name,
             })
           }
         })

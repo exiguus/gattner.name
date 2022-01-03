@@ -4,6 +4,8 @@ import { hydrate, render } from 'react-dom'
 import { isPrerender } from './utils/prerender'
 import { preHeadLinkScripts, preHeadLinkFonts } from './utils/head'
 import { addStyles } from './utils/styles'
+
+import app from '../data/app.json'
 import App from './App'
 
 const prerender = isPrerender()
@@ -43,8 +45,8 @@ const callback = async (): Promise<void> => {
 }
 
 appElement.hasChildNodes()
-  ? hydrate(<App />, appElement, callback)
-  : render(<App />, appElement, callback)
+  ? hydrate(<App {...app} />, appElement, callback)
+  : render(<App {...app} />, appElement, callback)
 
 if (process.env.NODE_ENV === 'production' && !prerender) {
   const sw = '/service-worker.js'
