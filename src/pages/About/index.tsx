@@ -40,7 +40,7 @@ const About: FunctionComponent = () => {
         <Paragraph text={quote} />
       </Blockquote>
       {content.map((text, index) => (
-        <Paragraph key={index} text={text} />
+        <Paragraph key={`cp-${index}`} text={text} />
       ))}
     </PageLayout>
   )

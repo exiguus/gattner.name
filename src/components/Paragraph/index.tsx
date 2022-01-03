@@ -20,7 +20,7 @@ type ParagraphProps = CommonProps & TruncateProps
 const Paragraph: FunctionComponent<ParagraphProps> = ({
   text,
   animate = false,
-  isContent = false,
+  isContent,
   children,
 }) => {
   return (

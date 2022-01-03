@@ -9,7 +9,7 @@ const Home: FunctionComponent = () => {
   const text = content[getRandomInt(0, content.length - 1)]
   return (
     <PageLayout>
-      <Paragraph text={text} animate={true} data-content="yes" />
+      <Paragraph text={text} animate={true} data-content="false" />
       {isPrerender() &&
         content.map((text, index) => (
           <Paragraph isContent={true} key={`cp-${index}`} text={text} />
