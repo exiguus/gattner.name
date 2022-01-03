@@ -44,7 +44,7 @@ registerRoute(navigationRoute)
 
 // Use an explicit cache-first strategy and a dedicated cache for last-fm
 self.addEventListener('fetch', event => {
-  if (event.request.url.startsWith('https://ws.audioscrobbler.com')) {
+  if (event.request.url.startsWith(process.env.LAST_FM_API_HOST)) {
     const cacheFirst = new CacheFirst({
       cacheName: 'lastfm-cache',
       plugins: [

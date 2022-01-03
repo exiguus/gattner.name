@@ -17,7 +17,7 @@ import { ExpirationPlugin } from 'workbox-expiration'
 // build tools to precache a list of URLs, including fallbacks.
 
 // __WB_MANIFEST will be injected with workbox-build
-precacheAndRoute([{"revision":"ff85b1979fe40ab1ba9bc790ee1507c2","url":"about/index.html"},{"revision":"fc149e4e764aedd189ce92139de845f3","url":"android-chrome-192x192.eea872c7.png"},{"revision":"88c3bf2c40b4574a3f90d2fe02de2d8f","url":"android-chrome-512x512.b48c1b9c.png"},{"revision":"d5315e526be8097543f06ba08b746bdf","url":"apple-touch-icon.78aca0cb.png"},{"revision":"fedae6a679459cd3c2f82e6b75636ee3","url":"contact/index.html"},{"revision":"7fcff12a7b8af4e96528ef0dd90c90ce","url":"favicon-16x16.d6a89f28.png"},{"revision":"bbb4935cf13d353b5a13d854114e8608","url":"favicon-32x32.94cd8979.png"},{"revision":"56e880ec6629cfe6a254bc193d5b6d9d","url":"ibm-plex-mono-v6-latin-300.36397342.woff2"},{"revision":"0c4a54706495d75dc9e484eb51714f46","url":"ibm-plex-mono-v6-latin-600.9893db3a.woff2"},{"revision":"a120a0c98f5fbec49b81fcfd8b976053","url":"impressum/index.html"},{"revision":"5195388d07edd46a154055b0e8c19f80","url":"index.html"},{"revision":"fdc1b7ea72671efe9e8de16bfae2829e","url":"report.html"},{"revision":"cfe3d26783a61904ef174231242e1661","url":"site.webmanifest"},{"revision":"4ff96bab1dfcd2a4e2c0eb93b478875e","url":"src.f9a80dd8.js"},{"revision":"2b1d9517fb4310c9ea4217e8f0bc9eaf","url":"src.f9a80dd8.js.map"}])
+precacheAndRoute([{"revision":"cf8641722e4bacf39936dc2a84e769a5","url":"about/index.html"},{"revision":"fc149e4e764aedd189ce92139de845f3","url":"android-chrome-192x192.eea872c7.png"},{"revision":"88c3bf2c40b4574a3f90d2fe02de2d8f","url":"android-chrome-512x512.b48c1b9c.png"},{"revision":"d5315e526be8097543f06ba08b746bdf","url":"apple-touch-icon.78aca0cb.png"},{"revision":"cbd6f18626a48a7b5eed8bae713a0ae2","url":"contact/index.html"},{"revision":"7fcff12a7b8af4e96528ef0dd90c90ce","url":"favicon-16x16.d6a89f28.png"},{"revision":"bbb4935cf13d353b5a13d854114e8608","url":"favicon-32x32.94cd8979.png"},{"revision":"56e880ec6629cfe6a254bc193d5b6d9d","url":"ibm-plex-mono-v6-latin-300.36397342.woff2"},{"revision":"0c4a54706495d75dc9e484eb51714f46","url":"ibm-plex-mono-v6-latin-600.9893db3a.woff2"},{"revision":"5e2d6a2d506b778ad8f2c6f59dd2b1f6","url":"impressum/index.html"},{"revision":"509eb0b2d8d97a5dc8a96aa439e8dda1","url":"index.html"},{"revision":"4547e415bc9d5a7197edb9ffbcce0900","url":"report.html"},{"revision":"cfe3d26783a61904ef174231242e1661","url":"site.webmanifest"},{"revision":"b0b8f2c11585c193c1e611136b1fbfbc","url":"src.a6afbb53.js"},{"revision":"c7a42c963b266478f460d947c8eed12c","url":"src.a6afbb53.js.map"}])
 
 // Enable navigation preload.
 navigationPreload.enable()
@@ -44,7 +44,7 @@ registerRoute(navigationRoute)
 
 // Use an explicit cache-first strategy and a dedicated cache for last-fm
 self.addEventListener('fetch', event => {
-  if (event.request.url.startsWith('https://ws.audioscrobbler.com')) {
+  if (event.request.url.startsWith(process.env.LAST_FM_API_HOST)) {
     const cacheFirst = new CacheFirst({
       cacheName: 'lastfm-cache',
       plugins: [
