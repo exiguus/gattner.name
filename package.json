@@ -98,6 +98,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.1",
+    "@badrap/valita": "^0.1.0",
     "babel-polyfill": "^6.26.0",
     "preact": "10.6.4",
     "preact-compat": "^3.19.0",

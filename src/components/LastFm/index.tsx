@@ -1,6 +1,9 @@
 import React, { useState, useEffect, FunctionComponent } from 'react'
-import Ajv from 'ajv'
-import { userRecenttracksSchema } from '../../../schemas/lastFm'
+import {
+  validate,
+  UserRecenttracks,
+  userRecenttracksSchema,
+} from '../../../schemas/lastFm'
 import { isPrerender } from '../../utils/prerender'
 import styled from 'styled-components'
 import useNetwork from '../../hooks/useNetwork'
@@ -69,10 +72,12 @@ const LastFm: FunctionComponent<LastFmProps> = ({ userName, apiKey }) => {
         })
         .then(data => {
           setIsPending(false)
-          const ajv = new Ajv()
-          const validate = ajv.compile(userRecenttracksSchema)
-          if (validate(data)) {
-            const { recenttracks } = data
+          const validData = validate<UserRecenttracks>(
+            userRecenttracksSchema,
+            data
+          )
+          if (validData) {
+            const { recenttracks } = validData
             setLastFmData({
               artistName: recenttracks.track[0].artist['#text'],
               songName: recenttracks.track[0].name,
