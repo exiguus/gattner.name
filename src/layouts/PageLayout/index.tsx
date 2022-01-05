@@ -6,6 +6,7 @@ import React, {
 } from 'react'
 import styled from 'styled-components'
 import DocumentMeta from 'react-document-meta'
+import { version, author } from '../../../package.json'
 import { AppProps, PageProps } from '../../../schemas'
 import useWindowSize from '../../hooks/useWindowSize'
 import { isTouch } from '../../utils/device'
@@ -74,6 +75,10 @@ const PageLayout: FunctionComponent<PageLayoutProps> = ({
       meta: {
         name: {
           keywords,
+          version,
+          author: author.name,
+          copyright: author.name,
+          'last-modified': new Date(document.lastModified),
         },
       },
     }
