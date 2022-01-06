@@ -8,6 +8,7 @@ import SimonIcon from '../../assets/simon-alt.svg'
 import SimonAltIcon from '../../assets/simon.svg'
 import AnalysisIcon from '../../assets/analysis-alt.svg'
 import EnvelopeIcon from '../../assets/envelope-alt.svg'
+import ForkIcon from '../../assets/fork-alt.svg'
 
 type Icons = {
   [x in IconName]: ElementType
@@ -20,6 +21,7 @@ const icons: Icons = {
   'simon-alt': SimonAltIcon,
   analysis: AnalysisIcon,
   envelope: EnvelopeIcon,
+  fork: ForkIcon,
 }
 
 interface IconProps {

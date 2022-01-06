@@ -45,8 +45,20 @@ const callback = async (): Promise<void> => {
 }
 
 appElement.hasChildNodes()
-  ? hydrate(<App {...app} />, appElement, callback)
-  : render(<App {...app} />, appElement, callback)
+  ? hydrate(
+      <React.StrictMode>
+        <App {...app} />
+      </React.StrictMode>,
+      appElement,
+      callback
+    )
+  : render(
+      <React.StrictMode>
+        <App {...app} />
+      </React.StrictMode>,
+      appElement,
+      callback
+    )
 
 if (process.env.NODE_ENV === 'production' && !prerender) {
   const sw = '/service-worker.js'
