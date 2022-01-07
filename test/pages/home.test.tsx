@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '../testUtils'
 import Home from '../../src/pages/Home'
-import home from '../../data/home.json'
+import home from '../../data/content/home.json'
 import 'jest-styled-components'
 import '@testing-library/jest-dom/extend-expect'
 import { screen } from '@testing-library/react'

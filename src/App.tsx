@@ -3,11 +3,11 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { AppProps } from 'schemas'
 import { AppLayout } from './layouts/AppLayout'
 
-import page from '../data/page.json'
-import home from '../data/home.json'
-import about from '../data/about.json'
-import contact from '../data/contact.json'
-import impressum from '../data/impressum.json'
+import page from '../data/content/page.json'
+import home from '../data/content/home.json'
+import about from '../data/content/about.json'
+import contact from '../data/content/contact.json'
+import impressum from '../data/content/impressum.json'
 
 import Home from './pages/Home'
 import About from './pages/About'
@@ -38,7 +38,7 @@ const App: FunctionComponent<AppProps> = props => {
         <Switch>
           {routes.map(({ name, path }, index) => (
             <Route exact path={path} key={`r-${index}`}>
-              <PageLayout {...props} {...page}>
+              <PageLayout {...props} {...page} name={name} path={path}>
                 <Page name={name} />
               </PageLayout>
             </Route>

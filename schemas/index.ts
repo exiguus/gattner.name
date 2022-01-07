@@ -167,9 +167,62 @@ export const impressumSchema: JSONSchemaType<ImpressumProps> = {
   additionalProperties: false,
 }
 
-type Route = {
+export type Meta = {
+  title?: string
+  description?: string
+  canonical?: string
+  meta: {
+    name?: {
+      [x: string]: string
+    }
+    property?: {
+      [x: string]: string
+    }
+  } | null
+} | null
+
+export const metaSchema: JSONSchemaType<Meta> = {
+  type: 'object',
+  properties: {
+    title: { type: 'string', nullable: true },
+    description: { type: 'string', nullable: true },
+    canonical: { type: 'string', nullable: true },
+    meta: {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'object',
+          patternProperties: {
+            '[a-z]*': { type: 'string' },
+          },
+          required: [],
+          nullable: true,
+          additionalProperties: false,
+        },
+        property: {
+          type: 'object',
+          patternProperties: {
+            '[a-z]*': { type: 'string' },
+          },
+          required: [],
+          nullable: true,
+          additionalProperties: false,
+        },
+      },
+      required: [],
+      nullable: true,
+      additionalProperties: false,
+    },
+  },
+  required: [],
+  nullable: true,
+  additionalProperties: false,
+}
+
+export type Route = {
   name: string
   path: string
+  meta: Meta | null
 }
 
 export const routeSchema: JSONSchemaType<Route> = {
@@ -177,6 +230,7 @@ export const routeSchema: JSONSchemaType<Route> = {
   properties: {
     name: { type: 'string' },
     path: { type: 'string' },
+    meta: metaSchema,
   },
   required: ['name', 'path'],
   additionalProperties: false,
@@ -279,22 +333,18 @@ export const pageSchema: JSONSchemaType<PageProps> = {
 }
 
 export interface AppProps {
-  name: string
-  title: string
-  description: string
-  keywords: string
+  origin: string
   routes: Route[]
+  meta: Meta
 }
 
 export const appSchema: JSONSchemaType<AppProps> = {
   type: 'object',
   properties: {
-    name: { type: 'string' },
-    title: { type: 'string' },
-    description: { type: 'string' },
-    keywords: { type: 'string' },
+    origin: { type: 'string' },
     routes: routesSchema,
+    meta: metaSchema,
   },
-  required: ['title', 'name', 'description', 'keywords', 'routes'],
+  required: ['routes', 'meta', 'origin'],
   additionalProperties: false,
 }

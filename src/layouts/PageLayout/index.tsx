@@ -6,11 +6,11 @@ import React, {
 } from 'react'
 import styled from 'styled-components'
 import DocumentMeta from 'react-document-meta'
-import { version, author } from '../../../package.json'
-import { AppProps, PageProps } from '../../../schemas'
+import { AppProps, Meta, PageProps, Route } from '../../../schemas'
 import useWindowSize from '../../hooks/useWindowSize'
 import { isTouch } from '../../utils/device'
 import { isPrerender } from '../../utils/prerender'
+import { getDocumentMeta } from '../../utils/meta'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { Main } from '../../components/Main'
@@ -54,34 +54,41 @@ const StyledContent = styled.div<StyledContentProps>`
 `
 
 interface PageLayoutProps extends PageProps, AppProps {
+  path: Route['path']
+  name: Route['name']
   children: ReactNode
 }
 
 const PageLayout: FunctionComponent<PageLayoutProps> = ({
-  title,
   header,
-  description,
-  keywords,
+  origin,
+  path,
+  name,
   footer,
   children,
+  routes,
+  meta,
 }) => {
   const prerender = isPrerender()
-  let meta = {}
+  let documentMeta = {}
   if (prerender) {
-    meta = {
-      title,
-      description,
-      // canonical: 'http://example.com/',
+    const metaDynamic: Meta = {
+      canonical: `${origin}${path}`,
       meta: {
         name: {
-          keywords,
-          version,
-          author: author.name,
-          copyright: author.name,
-          'last-modified': new Date(document.lastModified),
+          'last-modified': `${new Date(document.lastModified)}`,
+        },
+        property: {
+          'og:url': `${origin}${path}`,
+          'twitter:domain': `${new URL(origin).hostname}`,
+          'twitter:url': `${origin}${path}`,
         },
       },
     }
+    const metaPage =
+      routes.find(route => route.meta != null && route.name === name)?.meta ??
+      null
+    documentMeta = getDocumentMeta(meta, metaDynamic, metaPage)
   }
   const { height } = useWindowSize()
   const [minHeight, setMinHeight] = useState('100vh')
@@ -91,7 +98,7 @@ const PageLayout: FunctionComponent<PageLayoutProps> = ({
   return (
     <>
       {prerender ? (
-        <DocumentMeta {...meta}>
+        <DocumentMeta {...documentMeta}>
           <StyledContent minHeight={minHeight}>
             <Header {...header} />
             <Main>{children}</Main>
