@@ -6,5 +6,4 @@ module.exports = {
   ],
   swDest: 'public/service-worker.js',
   swSrc: 'src/service-worker.js',
-  mode: process.env.NODE_ENV,
 }
