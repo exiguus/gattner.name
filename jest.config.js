@@ -21,4 +21,5 @@ module.exports = {
     '\\.(gif|woff|woff2|svg|png)$': '<rootDir>/test/__mocks__/fileMock.js',
   },
   setupFilesAfterEnv: ['<rootDir>/test/__mocks__/windowMediaMock.js'],
+  testEnvironment: 'jsdom',
 }
