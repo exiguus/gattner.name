@@ -5,7 +5,7 @@ import { isPrerender } from './utils/prerender'
 import { preHeadLinkScripts, preHeadLinkFonts } from './utils/head'
 import { addStyles } from './utils/styles'
 
-import app from '../data/app.json'
+import app from '../data/content/app.json'
 import App from './App'
 
 const prerender = isPrerender()

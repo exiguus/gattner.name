@@ -4,6 +4,8 @@ node_modules
 dist/
 data/
 .tmp-build/
+public/
+!public/index.html
 coverage/
 .env.local
 .env.production
