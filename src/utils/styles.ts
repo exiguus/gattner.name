@@ -1,32 +1,27 @@
-import { isPrerender } from './prerender'
-const prerender = isPrerender()
-
-function removeStyles(): boolean {
-  if (!prerender && process.env.NODE_ENV === 'production')
-    document.querySelector('style[data-styled="pre-active"]')?.remove()
-  return true
-}
-
-function addStyles(): boolean {
-  if (prerender) {
-    const sheets = document.styleSheets as StyleSheetList
-    for (let i = 0; i < sheets.length; i++) {
-      const sheet = sheets[i]
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const owner = sheet.ownerNode as Element | any
+export function addStyledComponentStyles(): void {
+  const styleSheetList: StyleSheetList = document.styleSheets
+  // https://developer.mozilla.org/en-US/docs/Web/API/StyleSheetList
+  // const styleSheetList: StyleSheetList = document.styleSheets
+  Array.from(styleSheetList).forEach(cssStyleSheet => {
+    // Owners are: HTMLLinkElement, HTMLStyleElement, or SVGStyleElement
+    //  but sheet.ownerNode has the type: Element | ProcessingInstruction | null
+    //  see: https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet
+    // https://developer.mozilla.org/en-US/docs/Web/API/StyleSheet/ownerNode
+    const owner = cssStyleSheet.ownerNode ?? document.querySelector('style')
+    if (owner != null && 'setAttribute' in owner) {
       owner.setAttribute('data-styled', 'pre-active')
-      if (!sheet?.href && owner?.innerText === '') {
-        const cssText = [].slice
-          .call(sheet.cssRules)
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          .reduce(function (prev, cssRule: any) {
-            return prev + cssRule.cssText
-          }, '')
-        owner.innerHTML = cssText
-      }
     }
-  }
-  return true
+    if (
+      !cssStyleSheet?.href &&
+      owner != null &&
+      'innerHTML' in owner &&
+      owner?.innerHTML === ''
+    ) {
+      const cssText = Array.from(cssStyleSheet.cssRules).reduce(
+        (prev: string, { cssText }): string => `${prev}${cssText}`,
+        ''
+      )
+      owner.innerHTML = cssText
+    }
+  })
 }
-
-export { removeStyles, addStyles }

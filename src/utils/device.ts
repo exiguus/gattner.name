@@ -1,5 +1,2 @@
-function isTouch(): boolean {
-  return 'ontouchstart' in window || !!navigator.maxTouchPoints
-}
-
-export { isTouch }
+export const isTouch = (): boolean =>
+  'ontouchstart' in window || !!navigator.maxTouchPoints

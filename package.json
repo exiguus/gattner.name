@@ -19,6 +19,7 @@
     "lint": "eslint . --ext ts --ext tsx --ext js --ext jsx --ext mjs",
     "fetch:data": "dotenv -e .env.local node ./.tmp-build/build && rm -rf ./.tmp-build/",
     "test:unit": "dotenv -e .env.local jest",
+    "test:unit:watch": "jest --watch",
     "test": "npm run lint && npm run type-check && npm run test:unit",
     "coverage": "jest --coverage"
   },

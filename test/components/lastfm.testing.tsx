@@ -27,6 +27,6 @@ describe('LastFm Component', () => {
       expect(screen.getByTestId('lastfm-listen').textContent).toBe(
         'Marie by Milliarden'
       )
-    }, 3000)
+    }, 5000)
   })
 })
