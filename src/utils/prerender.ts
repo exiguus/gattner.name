@@ -1,9 +1,9 @@
 declare global {
   interface Window {
-    __PRERENDER: boolean
+    __PRERENDER?: boolean
   }
 }
 
-const isPrerender = (): boolean => window['__PRERENDER'] || false
+const isPrerender = (): boolean => !!window['__PRERENDER']
 
 export { isPrerender }

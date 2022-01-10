@@ -88,7 +88,7 @@ const PageLayout: FunctionComponent<PageLayoutProps> = ({
     const metaPage =
       routes.find(route => route.meta != null && route.name === name)?.meta ??
       null
-    documentMeta = getDocumentMeta(meta, metaDynamic, metaPage)
+    documentMeta = getDocumentMeta(metaPage, metaDynamic, meta)
   }
   const { height } = useWindowSize()
   const [minHeight, setMinHeight] = useState('100vh')

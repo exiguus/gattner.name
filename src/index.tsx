@@ -2,8 +2,8 @@ import 'preact/devtools'
 import React from 'react'
 import { hydrate, render } from 'react-dom'
 import { isPrerender } from './utils/prerender'
-import { preHeadLinkScripts, preHeadLinkFonts } from './utils/head'
-import { addStyles } from './utils/styles'
+import { addPreloadScripts, addPrefetchFonts } from './utils/head'
+import { addStyledComponentStyles } from './utils/styles'
 
 import app from '../data/content/app.json'
 import App from './App'
@@ -34,9 +34,11 @@ const dispatchLoadingEvent = ({ detail }: { detail?: object }): boolean => {
 }
 
 const callback = async (): Promise<void> => {
-  await addStyles()
-  await preHeadLinkScripts()
-  await preHeadLinkFonts()
+  if (prerender) {
+    await addStyledComponentStyles()
+    await addPreloadScripts()
+    await addPrefetchFonts()
+  }
   dispatchLoadingEvent({
     detail: {
       type: appId,
