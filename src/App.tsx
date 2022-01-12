@@ -36,8 +36,8 @@ const App: FunctionComponent<AppProps> = props => {
     <AppLayout>
       <BrowserRouter forceRefresh={process.env.NODE_ENV === 'production'}>
         <Switch>
-          {routes.map(({ name, path }, index) => (
-            <Route exact path={path} key={`r-${index}`}>
+          {routes.map(({ name, path }) => (
+            <Route exact path={path} key={`r-${name}`}>
               <PageLayout {...props} {...page} name={name} path={path}>
                 <Page name={name} />
               </PageLayout>

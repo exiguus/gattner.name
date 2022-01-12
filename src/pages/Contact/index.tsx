@@ -52,9 +52,9 @@ const Impressum: FunctionComponent<ContactProps> = ({
       ))}
       <HorizontalBreak />
       <List type="line">
-        {contact.links.map(({ text, href, title }, index) => (
-          <ListItem key={`cl-${index}`}>
-            <Link href={href} title={title}>
+        {contact.links.map(({ id, text, href, title }) => (
+          <ListItem key={`cl-${id}`}>
+            <Link data-testid={`contact-link-${id}`} href={href} title={title}>
               {text}
             </Link>
           </ListItem>

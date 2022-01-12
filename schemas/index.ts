@@ -41,6 +41,7 @@ export const aboutSchema: JSONSchemaType<AboutProps> = {
 }
 
 export type Link = {
+  id: string
   title: string
   href: string
   text: string
@@ -61,19 +62,18 @@ export const iconSchema: JSONSchemaType<Icon> = {
 }
 
 export type LinkIcon = {
-  title: string
-  href: string
   icon: string
-}
+} & Pick<Link, 'href' | 'title' | 'id'>
 
 export const linkSchema: JSONSchemaType<Link> = {
   type: 'object',
   properties: {
+    id: { type: 'string' },
     text: { type: 'string' },
     title: { type: 'string' },
     href: { type: 'string' },
   },
-  required: ['text', 'title', 'href'],
+  required: ['text', 'title', 'href', 'id'],
   additionalProperties: false,
 }
 
@@ -81,10 +81,11 @@ export const linkIconSchema: JSONSchemaType<LinkIcon> = {
   type: 'object',
   properties: {
     icon: iconSchema,
+    id: { type: 'string' },
     title: { type: 'string' },
     href: { type: 'string' },
   },
-  required: ['icon', 'title', 'href'],
+  required: ['icon', 'title', 'href', 'id'],
   additionalProperties: false,
 }
 

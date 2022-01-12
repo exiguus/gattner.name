@@ -48,20 +48,25 @@ const Header: FunctionComponent<HeaderProps> = ({ title, name, menu }) => {
       <Section>
         <StyledHeaderInner>
           <Brand data-testid="brand">
-            <StyledNavLink to="/">
+            <StyledNavLink to="/" dataTestId="brand-name">
               <Mark>{name}</Mark>{' '}
             </StyledNavLink>
             <br />
-            <StyledNavLink to="/">
+            <StyledNavLink to="/" dataTestId="brand-title">
               <Title>
                 <Mark>{title}</Mark>
               </Title>
             </StyledNavLink>
           </Brand>
           <List type="nav">
-            {menu.list.map(({ title, text, href }, index) => (
-              <ListItem type="nav" key={`mli-${index}`}>
-                <StyledNavLink to={href} title={title} lineThrough={true}>
+            {menu.list.map(({ id, title, text, href }) => (
+              <ListItem type="nav" key={`header-mli-${id}`}>
+                <StyledNavLink
+                  dataTestId={`header-nav-link-${id}`}
+                  to={href}
+                  title={title}
+                  lineThrough={true}
+                >
                   {text}
                 </StyledNavLink>
               </ListItem>

@@ -71,7 +71,6 @@ const LastFm: FunctionComponent<LastFmProps> = ({ userName, apiKey }) => {
           }
         })
         .then(data => {
-          setIsPending(false)
           const validData = validate<UserRecenttracks>(
             userRecenttracksSchema,
             data
@@ -85,6 +84,7 @@ const LastFm: FunctionComponent<LastFmProps> = ({ userName, apiKey }) => {
           }
         })
         .catch(error => setFetchError(error.message))
+        .finally(() => setIsPending(false))
     } else {
       setIsPending(false)
     }
