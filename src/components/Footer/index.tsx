@@ -21,9 +21,13 @@ const Footer: FunctionComponent<FooterProps> = ({ nav, menu }) => {
         <StyledFooterInner>
           {nav.list && (
             <List type="footer">
-              {nav.list.map(({ href, title, icon }, index) => (
-                <ListItem type="icon" key={index}>
-                  <Link href={href} title={title}>
+              {nav.list.map(({ id, href, title, icon }) => (
+                <ListItem type="icon" key={`fnli-${id}`}>
+                  <Link
+                    dataTestId={`footer-nav-link-${id}`}
+                    href={href}
+                    title={title}
+                  >
                     <Icon type={icon} />
                   </Link>
                 </ListItem>
@@ -31,9 +35,14 @@ const Footer: FunctionComponent<FooterProps> = ({ nav, menu }) => {
             </List>
           )}
           <List type="menu">
-            {menu.list.map(({ href, title, text }, index) => (
-              <ListItem key={`mli-${index}`} type="menu">
-                <Link to={href} title={title} lineThrough={true}>
+            {menu.list.map(({ id, href, title, text }) => (
+              <ListItem key={`fmli-${id}`} type="menu">
+                <Link
+                  dataTestId={`footer-menu-link-${id}`}
+                  to={href}
+                  title={title}
+                  lineThrough={true}
+                >
                   {text}
                 </Link>
               </ListItem>

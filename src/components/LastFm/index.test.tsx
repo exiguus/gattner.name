@@ -1,14 +1,9 @@
 import React from 'react'
-import { render } from '../testUtils'
-import { LastFm } from '../../src/components/LastFm'
-import 'jest-styled-components'
-import '@testing-library/jest-dom/extend-expect'
-import { waitFor, screen } from '@testing-library/react'
+import { render, waitFor, screen } from '../../../test/testUtils'
+import { LastFm } from '.'
 
 describe('LastFm Component', () => {
   test('matches text', async () => {
-    const spy = jest.spyOn(global, 'fetch')
-
     render(
       <>
         {process.env.LAST_FM_API_KEY && process.env.LAST_FM_USER_NAME && (
@@ -20,13 +15,18 @@ describe('LastFm Component', () => {
       </>
     )
 
-    await waitFor(() => expect(spy).toHaveBeenCalledTimes(1))
+    await waitFor(() => {
+      expect(screen.getByTestId('lastfm')).toBeInTheDocument()
+    })
 
-    // TODO: there is no user handle to waitFor and jest throw a act(...) console.error
-    setTimeout(async () => {
+    await waitFor(() => {
+      expect(screen.getByTestId('lastfm-listen')).toBeInTheDocument()
+    })
+
+    await waitFor(() => {
       expect(screen.getByTestId('lastfm-listen').textContent).toBe(
         'Marie by Milliarden'
       )
-    }, 5000)
+    })
   })
 })

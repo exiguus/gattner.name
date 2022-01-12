@@ -1,9 +1,6 @@
 import React from 'react'
-import { render } from '../testUtils'
-import { Paragraph } from '../../src/components/Paragraph'
-import 'jest-styled-components'
-import '@testing-library/jest-dom/extend-expect'
-import { waitFor, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '../../../test/testUtils'
+import { Paragraph } from '.'
 
 describe('Paragraph Component', () => {
   test('matches text', async () => {

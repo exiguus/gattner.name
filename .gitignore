@@ -9,4 +9,5 @@ public/
 coverage/
 .env.local
 .env.production
+.env.test
 TODO.md

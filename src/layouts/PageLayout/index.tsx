@@ -99,14 +99,14 @@ const PageLayout: FunctionComponent<PageLayoutProps> = ({
     <>
       {prerender ? (
         <DocumentMeta {...documentMeta}>
-          <StyledContent minHeight={minHeight}>
+          <StyledContent minHeight={minHeight} data-testid={`page-${name}`}>
             <Header {...header} />
             <Main>{children}</Main>
             <Footer {...footer} />
           </StyledContent>
         </DocumentMeta>
       ) : (
-        <StyledContent minHeight={minHeight}>
+        <StyledContent minHeight={minHeight} data-testid={`page-${name}`}>
           <Header {...header} />
           <Main>{children}</Main>
           <Footer {...footer} />

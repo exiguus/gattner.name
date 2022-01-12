@@ -17,6 +17,7 @@ export interface LinkProps {
   href?: string
   title?: string
   exact?: boolean
+  dataTestId?: string
   lineThrough?: boolean
 }
 
@@ -25,6 +26,7 @@ const Link: FunctionComponent<LinkProps> = ({
   to,
   href,
   title,
+  dataTestId,
   exact = true,
   lineThrough = false,
 }) => {
@@ -52,6 +54,7 @@ const Link: FunctionComponent<LinkProps> = ({
           onClickCapture={handleClick}
           href={href}
           title={title}
+          data-testid={dataTestId}
         >
           {children}
         </StyledExternalNavLink>
@@ -60,11 +63,20 @@ const Link: FunctionComponent<LinkProps> = ({
         <>
           {window.location.pathname === to ||
           window.location.pathname === to + '/' ? (
-            <StyledActiveNavLink lineThrough={lineThrough} title={title}>
+            <StyledActiveNavLink
+              data-testid={dataTestId}
+              lineThrough={lineThrough}
+              title={title}
+            >
               {children}
             </StyledActiveNavLink>
           ) : (
-            <StyledNavLink to={to} title={title} exact={exact}>
+            <StyledNavLink
+              data-testid={dataTestId}
+              to={to}
+              title={title}
+              exact={exact}
+            >
               {children}
             </StyledNavLink>
           )}

@@ -12,7 +12,7 @@ const Home: FunctionComponent<HomeProps> = props => {
       <Paragraph
         text={text}
         animate={true}
-        dataTestid="slogan"
+        dataTestId="slogan"
         data-content="false"
       />
       {isPrerender() &&
