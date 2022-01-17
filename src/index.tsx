@@ -1,12 +1,14 @@
 import 'preact/devtools'
 import React from 'react'
 import { hydrate, render } from 'react-dom'
+import { sentrySetup } from './utils/sentry'
 import { isPrerender } from './utils/prerender'
 import { addPreloadScripts, addPrefetchFonts } from './utils/head'
 import { addStyledComponentStyles } from './utils/styles'
-
 import app from '../data/content/app.json'
 import App from './App'
+
+sentrySetup()
 
 const prerender = isPrerender()
 
