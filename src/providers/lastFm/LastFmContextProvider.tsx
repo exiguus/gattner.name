@@ -12,6 +12,7 @@ import {
 } from '../../lib/lastFm/normalizeUserRecenttracks'
 import { UserRecenttracks } from 'schemas/lastFm'
 import { getUserRecenttracks } from '../../lib/lastFm/getUserRecenttracks'
+import { sentryWithExtras } from '../../hooks/useSentry'
 
 export const LastFmContextProvider: FunctionComponent = ({ children }) => {
   const [userRecenttrack, setUserRecenttrack] = useState<UserRecenttrack>()
@@ -49,6 +50,7 @@ export const LastFmContextProvider: FunctionComponent = ({ children }) => {
           console.error('LastFM provider', error, data)
         }
 
+        sentryWithExtras('LastFm Provider', error, data)
         return message
       }
     },

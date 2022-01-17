@@ -5,11 +5,14 @@ export const validate = <T>(schema: v.Type, data: unknown): T | undefined => {
     const result = schema.parse(data)
     return result as T
   } catch (error) {
-    console.warn(error instanceof Error ? error.message : error, {
-      error,
-      data,
-      schema,
-    })
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(error instanceof Error ? error.message : error, {
+        error,
+        data,
+        schema,
+      })
+    }
+
     if (error instanceof Error) {
       throw error
     }

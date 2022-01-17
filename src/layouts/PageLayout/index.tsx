@@ -76,6 +76,7 @@ const PageLayout: FunctionComponent<PageLayoutProps> = ({
       canonical: `${origin}${path}`,
       meta: {
         name: {
+          release: `${new Date(document.lastModified).toISOString()}`,
           'last-modified': `${new Date(document.lastModified)}`,
         },
         property: {
