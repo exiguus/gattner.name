@@ -47,19 +47,3 @@ export const userRecenttracksSchema = v.object({
 export type UserRecenttracks = {
   recenttracks: Recenttracks
 }
-
-export const validate = <T>(schema: v.Type, data: unknown): T | undefined => {
-  try {
-    const result = schema.parse(data)
-    return result as T
-  } catch (err) {
-    console.warn(err instanceof Error ? err.message : err, {
-      err,
-      data,
-      schema,
-    })
-    if (err instanceof Error) {
-      throw err
-    }
-  }
-}

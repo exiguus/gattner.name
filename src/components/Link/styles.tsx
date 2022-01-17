@@ -40,7 +40,7 @@ export const StyledNavLink = styled(NavLink)`
     height: 2px;
     width: 100%;
     background-color: ${(props): string => props.theme.link.color};
-    transform: translateX(-100%);
+    transform: translateX(-101%);
     overflow: hidden;
   }
 

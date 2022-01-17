@@ -4,6 +4,7 @@ import { darkTheme, getRandomColor, lightTheme } from '../../styles/theme'
 import { Theme } from '../../../types/Theme'
 import { GlobalStyles } from '../../components/GlobalStyles'
 import useMatchMedia from '../../hooks/useMatchMedia'
+import { LastFmContextProvider } from '../../providers/lastFm'
 
 interface AppLayoutProps {
   children: ReactNode
@@ -34,10 +35,16 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({ children }) => {
     })`
   }, [darkMode, theme])
 
+  if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const { worker } = require('../../../mocks/browser')
+    worker.start()
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      {children}
+      <LastFmContextProvider>{children}</LastFmContextProvider>
     </ThemeProvider>
   )
 }

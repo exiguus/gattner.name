@@ -1,5 +1,7 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import styled from 'styled-components'
+import useNetwork from '../../hooks/useNetwork'
+import { isPrerender } from '../../utils/prerender'
 import { FooterProps } from '../../../schemas'
 import { Section } from '../Section'
 import { Link } from '../Link'
@@ -15,6 +17,20 @@ const StyledFooterInner = styled.div`
 `
 
 const Footer: FunctionComponent<FooterProps> = ({ nav, menu }) => {
+  const [showLastFm, setShowLastFm] = useState<boolean>(false)
+  const { online, connection } = useNetwork()
+  const hasConnection =
+    connection.effectiveType !== 'slow-2g' &&
+    connection.effectiveType !== '2g' &&
+    online &&
+    !isPrerender()
+
+  useEffect(() => {
+    if (hasConnection) {
+      setShowLastFm(true)
+    }
+  }, [hasConnection])
+
   return (
     <footer>
       <Section>
@@ -48,12 +64,7 @@ const Footer: FunctionComponent<FooterProps> = ({ nav, menu }) => {
               </ListItem>
             ))}
           </List>
-          {process.env.LAST_FM_API_KEY && process.env.LAST_FM_USER_NAME && (
-            <LastFm
-              userName={process.env.LAST_FM_USER_NAME}
-              apiKey={process.env.LAST_FM_API_KEY}
-            />
-          )}
+          {showLastFm && <LastFm />}
         </StyledFooterInner>
       </Section>
     </footer>
