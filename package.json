@@ -4,13 +4,15 @@
   "description": "Consulting and development of digital solutions",
   "scripts": {
     "start": "npm install && npm run fetch:data && npm run dev",
-    "serve": "NODE_ENV=development parcel serve ./public/index.html --no-cache",
+    "serve": "NODE_ENV=development dotenv -e .env.local parcel serve ./public/index.html --no-cache",
+    "predev": "npm run build:msw",
     "dev": "npm run serve",
     "dev:build": "npm run build:app",
     "prebuild": "npm run build:fetch && npm run fetch:data && cp ./data/files/**.* ./public/ && npm test",
     "build": "npm run build:app",
     "build:app": "rm -rf ./dist/ && NODE_ENV=production parcel build ./public/index.html -d ./dist/ --no-cache --detailed-report 10 --public-url /",
     "build:sw": "mv ./dist/report.html ./dist/report.html.backup && NODE_ENV=production parcel build ./public/service-worker.js -d ./dist/ --no-cache --experimental-scope-hoisting && rm ./dist/report.html && mv ./dist/report.html.backup ./dist/report.html",
+    "build:msw": "npx msw init dist -y",
     "build:fetch": "rm -rf ./.tmp-build/ && tsc --build ./build/",
     "postbuild": "cp ./data/files/public/** ./dist/ && NODE_ENV=production workbox injectManifest && npm run build:sw",
     "report": "NODE_ENV=production parcel build ./public/index.html --detailed-report 10",
@@ -102,6 +104,7 @@
   "dependencies": {
     "@babel/runtime": "^7.12.1",
     "@badrap/valita": "^0.1.0",
+    "axios": "^0.24.0",
     "babel-polyfill": "^6.26.0",
     "preact": "10.6.4",
     "preact-compat": "^3.19.0",
@@ -184,5 +187,8 @@
     "node": ">=14",
     "npm": ">= 6.0.1"
   },
-  "engineStrict": true
+  "engineStrict": true,
+  "msw": {
+    "workerDirectory": "dist"
+  }
 }

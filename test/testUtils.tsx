@@ -4,23 +4,10 @@ import 'jest-styled-components'
 import '@testing-library/jest-dom/extend-expect'
 import { render, RenderResult } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
-import { rest } from 'msw'
-import { setupServer } from 'msw/node'
+import { server } from '../mocks/server'
 import { AppLayout } from '../src/layouts/AppLayout'
-import lastFmMock from './__mocks__/lastFmMock.json'
 
 import 'whatwg-fetch'
-
-const server = setupServer(
-  rest.get('https://ws.audioscrobbler.com/2.0/', (req, res, ctx) => {
-    const method = req.url.searchParams.get('method')
-    if (method === 'user.getRecentTracks') {
-      return res(ctx.json(lastFmMock))
-    } else {
-      return res(ctx.json({}))
-    }
-  })
-)
 
 beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
