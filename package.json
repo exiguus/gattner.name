@@ -17,7 +17,7 @@
     "postbuild": "cp ./data/files/public/** ./dist/ && NODE_ENV=production workbox injectManifest && npm run build:sw",
     "report": "NODE_ENV=production parcel build ./public/index.html --detailed-report 10",
     "type-check": "tsc --pretty --noEmit",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,mjs}\"",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,mjs,html}\"",
     "lint": "eslint . --ext ts --ext tsx --ext js --ext jsx --ext mjs",
     "fetch:data": "dotenv -e .env.local node ./.tmp-build/build && rm -rf ./.tmp-build/",
     "test:unit": "jest",
