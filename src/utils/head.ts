@@ -3,7 +3,8 @@ export function addPreloadScripts(): void {
 
   scriptNodes.forEach(scriptNode => {
     const link = document.createElement('link')
-    link.rel = 'preload'
+    link.rel =
+      scriptNode.getAttribute('type') === 'module' ? 'modulepreload' : 'preload'
     link.as = 'script'
     link.href = `/${scriptNode.getAttribute('src')?.split('/')[1]}`
     document.head.append(link)

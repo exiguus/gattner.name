@@ -112,6 +112,7 @@ export function getContent(filePaths: FilePath[], header: HeaderInit): void {
 export async function getFiles(header: HeaderInit): Promise<void> {
   const tree = await getRepositoryTree(header)
   const files = tree.filter(
+    // filter only files and no directories
     ({ mode, path }) => mode === '100644' && path.startsWith('files/')
   )
   files.forEach(({ path }) => getFile(path, header))

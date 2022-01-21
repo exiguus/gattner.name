@@ -59,9 +59,12 @@ export const LastFmContextProvider: FunctionComponent = ({ children }) => {
 
   // Initialize
   useEffect(() => {
+    let isMounted = true
     setPendingRequests(n => n + 1)
 
     getUserRecenttracks().then(fr => {
+      if (!isMounted) return // do not update state if component is not mounted anymore
+
       if (fr.result === 'successful') {
         update(fr.data)
       } else {
@@ -70,6 +73,10 @@ export const LastFmContextProvider: FunctionComponent = ({ children }) => {
 
       setPendingRequests(n => n - 1)
     })
+
+    return () => {
+      isMounted = false
+    }
   }, [update])
 
   // Create context value

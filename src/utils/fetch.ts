@@ -1,6 +1,6 @@
 import * as v from '@badrap/valita'
 import axios, { AxiosResponse } from 'axios'
-import { isAxiosError } from './isAxiosError'
+import { isAxiosError } from './axios'
 import { httpConfig } from '../lib/http.service'
 import { validate } from './validate'
 
