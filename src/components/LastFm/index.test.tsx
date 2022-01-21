@@ -15,15 +15,11 @@ describe('LastFm Component', () => {
         <LastFm />
       </MockLastFmContextProvider>
     )
-    await waitFor(() => {
-      expect(screen.getByTestId('lastfm')).toBeInTheDocument()
-    })
+
+    expect(screen.getByTestId('lastfm')).toBeInTheDocument()
 
     await waitFor(() => {
       expect(screen.getByTestId('lastfm-listen')).toBeInTheDocument()
-    })
-
-    await waitFor(() => {
       expect(screen.getByTestId('lastfm-listen').textContent).toEqual(
         userRecenttrack
       )
