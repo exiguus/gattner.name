@@ -168,6 +168,46 @@ export const impressumSchema: JSONSchemaType<ImpressumProps> = {
   additionalProperties: false,
 }
 
+export interface ErrorProps {
+  title: string
+  quote: {
+    content: Array<string>
+    author: string
+    cite: string
+  }
+  content: Array<string>
+}
+
+export const errorSchema: JSONSchemaType<ErrorProps> = {
+  type: 'object',
+  properties: {
+    title: { type: 'string' },
+    quote: {
+      type: 'object',
+      properties: {
+        content: {
+          type: 'array',
+          items: { type: 'string' },
+          minItems: 1,
+          uniqueItems: true,
+        },
+        author: { type: 'string' },
+        cite: { type: 'string' },
+      },
+      required: ['content', 'author', 'cite'],
+      additionalProperties: false,
+    },
+    content: {
+      type: 'array',
+      items: { type: 'string' },
+      minItems: 1,
+      uniqueItems: true,
+    },
+  },
+  required: ['title', 'quote', 'content'],
+  additionalProperties: false,
+}
+
 export type Meta = {
   title?: string
   description?: string

@@ -7,8 +7,10 @@ import {
   impressumSchema,
   appSchema,
   pageSchema,
+  errorSchema,
   AppProps,
   PageProps,
+  ErrorProps,
   HomeProps,
   AboutProps,
   ContactProps,
@@ -18,6 +20,7 @@ import {
 type PageSchema =
   | AppProps
   | PageProps
+  | ErrorProps
   | HomeProps
   | AboutProps
   | ContactProps
@@ -33,6 +36,7 @@ export const targetPath = './data'
 export const contentFilePaths: FilePath[] = [
   { path: 'content/app.json', schema: appSchema },
   { path: 'content/page.json', schema: pageSchema },
+  { path: 'content/error.json', schema: errorSchema },
   { path: 'content/home.json', schema: homeSchema },
   { path: 'content/about.json', schema: aboutSchema },
   { path: 'content/contact.json', schema: contactSchema },

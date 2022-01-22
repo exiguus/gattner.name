@@ -129,7 +129,8 @@
       "/",
       "/about",
       "/contact",
-      "/impressum"
+      "/impressum",
+      "/error"
     ],
     "rendererConfig": {
       "headless": true,

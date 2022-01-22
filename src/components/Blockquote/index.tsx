@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react'
+import React, { FunctionComponent, ReactNode } from 'react'
 import styled from 'styled-components'
 
 const StyledBlockquote = styled.blockquote`
@@ -16,8 +16,41 @@ const StyledBlockquote = styled.blockquote`
   }
 `
 
-const Blockquote = ({ children }: { children: ReactNode }): ReactElement => {
-  return <StyledBlockquote>{children}</StyledBlockquote>
+const StyledFigcaption = styled.figcaption`
+  display: block;
+  text-align: right;
+  width: 100%;
+`
+
+type OptionalProps =
+  | { quote: string; children?: never }
+  | { quote?: never; children: ReactNode }
+
+export type BlockquoteProps = {
+  author?: string
+  cite?: string
+} & OptionalProps
+const Blockquote: FunctionComponent<BlockquoteProps> = ({
+  author,
+  cite,
+  quote,
+  children,
+}) => {
+  return (
+    <figure>
+      <StyledBlockquote>{quote || children}</StyledBlockquote>
+      {author && (
+        <StyledFigcaption>
+          ― {author}
+          {cite && (
+            <>
+              , <cite>{cite}</cite>
+            </>
+          )}
+        </StyledFigcaption>
+      )}
+    </figure>
+  )
 }
 
 export { Blockquote }
