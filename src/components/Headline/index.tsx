@@ -24,20 +24,28 @@ const StyledIcon = styled.div`
   }
 `
 
-interface HeadlineProps {
-  text?: string
+type OptionalProps =
+  | { text: string; children?: never }
+  | { text?: never; children: ReactNode }
+
+type HeadlineProps = {
   icon?: ReactNode
   srOnly?: boolean
-}
+} & OptionalProps
 
 const Headline: FunctionComponent<HeadlineProps> = ({
   text,
   icon,
   srOnly = false,
+  children,
 }) => {
   return (
     <StyledHeadline>
-      {(text && icon) || (text && srOnly) ? <SrOnly>{text}</SrOnly> : text}
+      {((text || children) && icon) || ((text || children) && srOnly) ? (
+        <SrOnly>{text || children}</SrOnly>
+      ) : (
+        text || children
+      )}
       {icon && <StyledIcon>{icon}</StyledIcon>}
     </StyledHeadline>
   )

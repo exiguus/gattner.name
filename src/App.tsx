@@ -8,11 +8,14 @@ import home from '../data/content/home.json'
 import about from '../data/content/about.json'
 import contact from '../data/content/contact.json'
 import impressum from '../data/content/impressum.json'
+import error from '../data/content/error.json'
 
 import Home from './pages/Home'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Impressum from './pages/Impressum'
+import Error from './pages/Error'
+
 import { PageLayout } from './layouts/PageLayout'
 
 const Page = ({ name }: { name: string }): JSX.Element | null => {
@@ -25,6 +28,8 @@ const Page = ({ name }: { name: string }): JSX.Element | null => {
       return <Contact {...contact} />
     case 'impressum':
       return <Impressum {...impressum} />
+    case 'error':
+      return <Error {...error} />
     default:
       return null
   }
@@ -43,7 +48,7 @@ const App: FunctionComponent<AppProps> = props => {
               </PageLayout>
             </Route>
           ))}
-          <Redirect to="/" />
+          <Redirect to="/error" />
         </Switch>
       </BrowserRouter>
     </AppLayout>

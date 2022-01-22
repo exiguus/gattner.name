@@ -35,6 +35,7 @@ export const fetch = async <RequestType, SuccessDataType>({
   method?: 'get' | 'post'
   request?: RequestType
   responseSchema?: v.Type<SuccessDataType>
+  // eslint-disable-next-line sonarjs/cognitive-complexity
 }): Promise<FetchResult<SuccessDataType>> => {
   let response: AxiosResponse<SuccessDataType> | undefined
 

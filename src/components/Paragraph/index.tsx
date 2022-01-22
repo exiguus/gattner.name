@@ -3,13 +3,17 @@ import styled from 'styled-components'
 import { Animation } from './components/Animation'
 import { isPrerender } from '../../utils/prerender'
 
-const StyledParagraph = styled.p`
+type AlignProps = 'left' | 'right' | 'center'
+
+const StyledParagraph = styled.p<{ align?: AlignProps }>`
   margin-bottom: 1rem;
+  ${props => props.align && `text-align: ${props.align}`}
 `
 
 type CommonProps = {
   isContent?: boolean
   dataTestId?: string
+  align?: AlignProps
 }
 
 type TruncateProps =
@@ -20,13 +24,18 @@ type ParagraphProps = CommonProps & TruncateProps
 
 const Paragraph: FunctionComponent<ParagraphProps> = ({
   text,
+  align,
   animate = false,
   isContent,
   dataTestId,
   children,
 }) => {
   return (
-    <StyledParagraph data-content={isContent} data-testid={dataTestId}>
+    <StyledParagraph
+      data-content={isContent}
+      data-testid={dataTestId}
+      align={align}
+    >
       {animate && text && !isPrerender()
         ? text
             .split(' ')
