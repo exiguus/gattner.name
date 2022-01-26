@@ -1,4 +1,6 @@
-import * as Sentry from '@sentry/browser'
+import { BrowserMicroSentryClient as Scope } from '@micro-sentry/browser'
+import { sentrySetup } from '../utils/sentry'
+
 export const DEPTH = 10
 
 export function sentryWithExtras(
@@ -6,10 +8,10 @@ export function sentryWithExtras(
   error: Error,
   extras?: unknown
 ) {
-  const sentryDSN = process.env.SENTRY_DSN
-  if (!sentryDSN) return
+  const sentry = sentrySetup()
+  if (!sentry) return
 
-  Sentry.withScope(scope => {
+  sentry.withScope(scope => {
     scope.setTag('feature', feature)
 
     setExtrasFromError(scope, error)
@@ -18,11 +20,11 @@ export function sentryWithExtras(
       setExtrasFromExtras(scope, extras)
     }
 
-    Sentry.captureException(error)
+    scope.report(error)
   })
 }
 
-function setExtrasFromError(scope: Sentry.Scope, error: Error) {
+function setExtrasFromError(scope: Scope, error: Error) {
   if (error && typeof error === 'object') {
     const entries = Object.entries(error)
     entries.forEach(([key, value]) => {
@@ -31,7 +33,7 @@ function setExtrasFromError(scope: Sentry.Scope, error: Error) {
   }
 }
 
-function setExtrasFromExtras(scope: Sentry.Scope, extras: unknown) {
+function setExtrasFromExtras(scope: Scope, extras: unknown) {
   try {
     const normalizedExtras = removeEmpty(
       typeof extras === 'object' && extras != null ? extras : { extras }

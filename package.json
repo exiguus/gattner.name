@@ -104,7 +104,7 @@
   "dependencies": {
     "@babel/runtime": "^7.12.1",
     "@badrap/valita": "^0.1.0",
-    "@sentry/browser": "^6.16.1",
+    "@micro-sentry/browser": "^2.1.2",
     "axios": "^0.24.0",
     "babel-polyfill": "^6.26.0",
     "preact": "10.6.4",
