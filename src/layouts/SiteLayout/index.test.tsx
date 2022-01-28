@@ -1,18 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 import { render, screen } from '../../../test/testUtils'
-import { AppLayout } from '.'
+import { SiteLayout } from '.'
 
 const Component = styled.div`
   background-color: ${props => props.theme.application.backgroundColor};
 `
 
-describe('AppLayout', () => {
+describe('SiteLayout', () => {
   test('theme light has random hsl background color', () => {
     render(
-      <AppLayout>
+      <SiteLayout>
         <Component data-testid="component" />
-      </AppLayout>
+      </SiteLayout>
     )
 
     const component = screen.getByTestId('component')

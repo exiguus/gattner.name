@@ -1,4 +1,4 @@
-import { getRandomInt, sortObject } from '.'
+import { getRandomInt, isArray, isObject, sortObject } from '.'
 
 describe('utils', () => {
   describe('getRandomInt', () => {
@@ -100,5 +100,33 @@ describe('utils', () => {
         },
       })
     })
+  })
+
+  test('isArray', () => {
+    expect(isArray([1, 2, 3])).toEqual(true)
+    expect(isArray([null, undefined, { foo: 'bar' }, [1, 2, 3]])).toEqual(true)
+    expect(isArray(undefined)).toEqual(false)
+    expect(isArray(null)).toEqual(false)
+    expect(isArray('string')).toEqual(false)
+    expect(isArray(42)).toEqual(false)
+    expect(isArray(NaN)).toEqual(false)
+    expect(isArray({ foo: 'bar' })).toEqual(false)
+    expect(isArray(() => [1, 2, 3])).toEqual(false)
+  })
+
+  test('isObject', () => {
+    expect(isObject({ foo: 'bar' })).toEqual(true)
+    expect(isObject({ foo: { foo: 'bar' }, bar: [1, 2, 3] })).toEqual(true)
+    expect(isObject(undefined)).toEqual(false)
+    expect(isObject(null)).toEqual(false)
+    expect(isObject('string')).toEqual(false)
+    expect(isObject(42)).toEqual(false)
+    expect(isObject(NaN)).toEqual(false)
+    expect(isObject([1, 2, 3])).toEqual(false)
+    expect(
+      isObject(() => {
+        'bar'
+      })
+    ).toEqual(false)
   })
 })

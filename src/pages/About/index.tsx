@@ -6,12 +6,12 @@ import { Headline } from '../../components/Headline'
 import { Paragraph } from '../../components/Paragraph'
 import { Blockquote } from '../../components/Blockquote'
 import { Icon } from '../../components/Icon'
-import { sentryWithExtras } from '../../hooks/useSentry'
 
 const About: FunctionComponent<AboutProps> = ({ content, quote, title }) => {
   const visible = useVisible()
   const { visibilityState } = visible
   const [hasSmile, setSmile] = useState(false)
+
   useEffect(() => {
     const setSmileTimeout = setTimeout(() => {
       setSmile(visibilityState === 'visible')

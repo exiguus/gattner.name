@@ -12,13 +12,18 @@ export const sortObject = (
     .reduce(
       (r, k) =>
         Object.assign(r, {
-          [k]:
-            typeof obj[k] === 'object' &&
-            obj[k] !== null &&
-            !Array.isArray(obj[k])
-              ? sortObject(obj[k] as unknown as Record<string, unknown>)
-              : obj[k],
+          [k]: isObject(obj[k])
+            ? sortObject(obj[k] as unknown as Record<string, unknown>)
+            : obj[k],
         }),
       {}
     )
+}
+
+export const isArray = (v: unknown): v is [] => {
+  return Array.isArray(v)
+}
+
+export const isObject = (v: unknown): v is Record<string, unknown> => {
+  return typeof v === 'object' && v !== null && !Array.isArray(v)
 }

@@ -6,6 +6,7 @@ import { render, RenderResult } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { server } from '../mocks/server'
 import { AppLayout } from '../src/layouts/AppLayout'
+import { SiteLayout } from '../src/layouts/SiteLayout'
 
 import 'whatwg-fetch'
 
@@ -23,7 +24,9 @@ const Providers: FunctionComponent<ProviderProps> = ({
 }): ReactElement => {
   return (
     <BrowserRouter>
-      <AppLayout>{children}</AppLayout>
+      <AppLayout>
+        <SiteLayout>{children}</SiteLayout>
+      </AppLayout>
     </BrowserRouter>
   )
 }
