@@ -2,6 +2,8 @@ import React, { FunctionComponent } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { AppProps } from 'schemas'
 import { AppLayout } from './layouts/AppLayout'
+import { PageLayout } from './layouts/PageLayout'
+import { SiteLayout } from './layouts/SiteLayout'
 
 import page from '../data/content/page.json'
 import home from '../data/content/home.json'
@@ -15,8 +17,6 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import Impressum from './pages/Impressum'
 import Error from './pages/Error'
-
-import { PageLayout } from './layouts/PageLayout'
 
 const Page = ({ name }: { name: string }): JSX.Element | null => {
   switch (name) {
@@ -43,9 +43,11 @@ const App: FunctionComponent<AppProps> = props => {
         <Switch>
           {routes.map(({ name, path }) => (
             <Route exact path={path} key={`r-${name}`}>
-              <PageLayout {...props} {...page} name={name} path={path}>
-                <Page name={name} />
-              </PageLayout>
+              <SiteLayout>
+                <PageLayout {...props} {...page} name={name} path={path}>
+                  <Page name={name} />
+                </PageLayout>
+              </SiteLayout>
             </Route>
           ))}
           <Redirect to="/error" />

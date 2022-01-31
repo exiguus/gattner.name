@@ -1,6 +1,5 @@
 import * as v from '@badrap/valita'
 import axios, { AxiosResponse } from 'axios'
-import { isAxiosError } from './axios'
 import { httpConfig } from '../lib/http.service'
 import { validate } from './validate'
 
@@ -53,7 +52,7 @@ export const fetch = async <RequestType, SuccessDataType>({
       url: query,
     })
   } catch (error) {
-    if (isAxiosError(error)) {
+    if (axios.isAxiosError(error)) {
       const { data, status } = error.response || {}
 
       return {

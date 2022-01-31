@@ -11,11 +11,11 @@ const About: FunctionComponent<AboutProps> = ({ content, quote, title }) => {
   const visible = useVisible()
   const { visibilityState } = visible
   const [hasSmile, setSmile] = useState(false)
+
   useEffect(() => {
-    const setSmileTimeout = setTimeout(
-      () => setSmile(visibilityState === 'visible'),
-      1200
-    )
+    const setSmileTimeout = setTimeout(() => {
+      setSmile(visibilityState === 'visible')
+    }, 1200)
     return function cleanup(): void {
       clearTimeout(setSmileTimeout)
     }

@@ -93,9 +93,11 @@ const PageLayout: FunctionComponent<PageLayoutProps> = ({
   }
   const { height } = useWindowSize()
   const [minHeight, setMinHeight] = useState('100vh')
+
   useLayoutEffect(() => {
     if (isTouch()) setMinHeight(`${height}px`)
   }, [height])
+
   return (
     <>
       {prerender ? (
