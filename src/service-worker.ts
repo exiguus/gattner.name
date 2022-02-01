@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-globals */
 import * as navigationPreload from 'workbox-navigation-preload'
 import { precacheAndRoute } from 'workbox-precaching'
 import {
@@ -12,6 +11,12 @@ import {
   NetworkFirst,
 } from 'workbox-strategies'
 import { ExpirationPlugin } from 'workbox-expiration'
+
+// self refers to ServiceWorkerGlobalScope instead of window
+//  origin: https://github.com/microsoft/TypeScript/issues/14877#issuecomment-493729050
+declare let self: ServiceWorkerGlobalScope
+// fix cannot find module error
+export default null
 
 // Optional: use the injectManifest mode of one of the Workbox
 // build tools to precache a list of URLs, including fallbacks.
@@ -37,31 +42,16 @@ const navigationRoute = new NavigationRoute(strategy, {
   // Optionally, provide a allow/denylist of RegExps to determine
   // which paths will match this route.
   // allowlist: ['/', '/about', '/contact', '/impressum'],
-  // denylist: [],
+  denylist: [new RegExp('/error')],
 })
 
 registerRoute(navigationRoute)
 
-// Use an explicit cache-first strategy and a dedicated cache for last-fm
-self.addEventListener('fetch', event => {
-  if (event.request.url.startsWith(process.env.LAST_FM_API_HOST)) {
-    const cacheFirst = new CacheFirst({
-      cacheName: 'lastfm-cache',
-      plugins: [
-        new ExpirationPlugin({
-          maxAgeSeconds: 300,
-          maxEntries: 8,
-        }),
-      ],
-    })
-    event.respondWith(cacheFirst.handle({ request: event.request }))
-  }
-})
-
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', (event: FetchEvent) => {
   const { request } = event
   const url = new URL(request.url)
 
+  // eslint-disable-next-line no-restricted-globals
   if (url.origin === location.origin && url.pathname === '/') {
     event.respondWith(new StaleWhileRevalidate().handle({ event, request }))
   }
@@ -80,9 +70,21 @@ registerRoute(
   })
 )
 
+registerRoute(
+  new RegExp(`^${process.env.LAST_FM_API_HOST}`),
+  new CacheFirst({
+    cacheName: 'lastfm-cache',
+    plugins: [
+      new ExpirationPlugin({
+        maxAgeSeconds: 300,
+        maxEntries: 8,
+      }),
+    ],
+  })
+)
 // Use a stale-while-revalidate strategy for all other requests.
 setDefaultHandler(
-  new StaleWhileRevalidate(),
+  // new StaleWhileRevalidate(),
   new CacheFirst({
     cacheName: 'default-cache',
     plugins: [
