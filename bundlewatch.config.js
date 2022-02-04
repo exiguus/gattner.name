@@ -2,13 +2,16 @@ const bundlewatchConfig = {
   files: [
     {
       path: 'dist/src.*.js',
-      maxSize: '99KB',
+      maxSize: '300KB',
+      compression: 'none',
     },
     {
       path: 'dist/service-worker.js',
-      maxSize: '9KB',
+      maxSize: '30KB',
+      compression: 'none',
     },
   ],
+  normalizeFilenames: /^.+?(\..+?)\.\w+$/,
   bundlewatchServiceHost: 'https://service.bundlewatch.io',
   ci: {
     githubAccessToken: process.env.BUNDLEWATCH_GITHUB_TOKEN,
