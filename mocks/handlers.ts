@@ -13,12 +13,19 @@ const lastFmHandler = rest.get(
   }
 )
 
-const sentryHandler = rest.get(`${process.env.SENTRY_DSN}`, (req, res, ctx) => {
-  console.log('sentry dsn')
-  return res(ctx.json({ message: 'Success' }))
-})
+const sentryHandlers = [
+  rest.options(`${process.env.SENTRY_STORE}`, (req, res, ctx) => {
+    return res(ctx.json({ message: 'Success' }))
+  }),
+  rest.get(`${process.env.SENTRY_DSN}`, (req, res, ctx) => {
+    return res(ctx.json({ message: 'Success' }))
+  }),
+  rest.post(`${process.env.SENTRY_STORE}`, (req, res, ctx) => {
+    return res(ctx.json({ message: 'Success' }))
+  }),
+]
 
-export const handlers = [lastFmHandler, sentryHandler]
+export const handlers = [lastFmHandler, ...sentryHandlers]
 
 export const lastFmExceptionHandler = rest.get(
   `${process.env.LAST_FM_API_HOST}/2.0/`,
