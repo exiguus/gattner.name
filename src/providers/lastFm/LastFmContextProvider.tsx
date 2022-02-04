@@ -5,7 +5,11 @@ import React, {
   useEffect,
   useState,
 } from 'react'
-import { LastFmContext, LastFmContextProps } from './LastFmContext'
+import {
+  LastFmContext,
+  LastFmContextProps,
+  defaultProps,
+} from './LastFmContext'
 import {
   normalizeUserRecenttracks,
   UserRecenttrack,
@@ -29,11 +33,11 @@ export const LastFmContextProvider: FunctionComponent = ({ children }) => {
       data?: unknown
     ) => {
       // only update on successful response
-      if (userRecenttracks && !error) {
-        setUserRecenttrack(
-          userRecenttracks ? normalizeUserRecenttracks(userRecenttracks) : ''
-        )
-      }
+      setUserRecenttrack(
+        userRecenttracks
+          ? normalizeUserRecenttracks(userRecenttracks)
+          : defaultProps.userRecenttrack
+      )
 
       setError(error)
 

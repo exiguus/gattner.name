@@ -7,7 +7,7 @@ module.exports = {
     '[/\\\\](node_modules|.cache|.vscode|coverage)[/\\\\]',
   ],
   coveragePathIgnorePatterns: [
-    '[/\\\\](node_modules|.cache|.vscode|coverage|test)[/\\\\]',
+    '[/\\\\](node_modules|.cache|.vscode|coverage|test|GlobalStyles|mocks)[/\\\\]',
   ],
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$'],
   transform: {

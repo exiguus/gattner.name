@@ -7,10 +7,15 @@ import { BrowserRouter } from 'react-router-dom'
 import { server } from '../mocks/server'
 import { AppLayout } from '../src/layouts/AppLayout'
 import { SiteLayout } from '../src/layouts/SiteLayout'
+import axios from 'axios'
 
 import 'whatwg-fetch'
 
-beforeAll(() => server.listen())
+beforeAll(() => {
+  // Permit CORS in Axios, see https://github.com/axios/axios/issues/1754#issuecomment-572778305
+  axios.defaults.adapter = require('axios/lib/adapters/http')
+  return server.listen()
+})
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 

@@ -12,7 +12,7 @@ export type LastFmContextProps = {
 export const defaultProps: LastFmContextProps = {
   error: undefined,
   pendingRequests: 0,
-  userRecenttrack: 'muse - butterfly and hurricane',
+  userRecenttrack: 'Muse - Butterflies and Hurricanes',
   hasUserRecenttrack: false,
   isPending: true,
 }
