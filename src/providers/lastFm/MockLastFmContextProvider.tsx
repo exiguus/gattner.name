@@ -7,7 +7,7 @@ export const MockLastFmContextProvider: FunctionComponent<
   children,
   userRecenttrack = undefined,
   hasUserRecenttrack = false,
-  isPending = false,
+  isPending = true,
 }) => (
   <LastFmContext.Provider
     value={{
