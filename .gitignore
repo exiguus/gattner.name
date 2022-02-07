@@ -1,0 +1,5 @@
+.turbo
+.pnpm-debug.log
+.vscode
+node_modules
+TODO.md

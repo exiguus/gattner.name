@@ -22,5 +22,4 @@ module.exports = {
   },
   setupFilesAfterEnv: ['<rootDir>/test/__mocks__/windowMediaMock.js'],
   testEnvironment: 'jsdom',
-  setupFiles: ['<rootDir>/jest.dotenv.js'],
 }

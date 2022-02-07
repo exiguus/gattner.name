@@ -1,0 +1,25 @@
+{
+  "name": "gattner",
+  "version": "1.0.0",
+  "description": "Public Build Project",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test"
+  },
+  "author": {
+    "name": "Simon Gattner",
+    "url": "https://gattner.name/",
+    "twitter": "https://twitter.com/exiguus_"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/exiguus/gattner.name.git"
+  },
+  "homepage": "https://github.com/exiguus/gattner.name#readme",
+  "devDependencies": {
+    "turbo": "^1.1.2"
+  },
+  "packageManager": "pnpm@6.29.2"
+}
