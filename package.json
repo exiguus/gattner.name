@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "test": "turbo run test"
+    "test": "turbo run test",
+    "type-check": "turbo run type-check",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,mjs,html}\"",
+    "lint": "eslint . --ext ts --ext tsx --ext js --ext jsx --ext mjs"
   },
   "author": {
     "name": "Simon Gattner",
@@ -19,7 +22,47 @@
   },
   "homepage": "https://github.com/exiguus/gattner.name#readme",
   "devDependencies": {
-    "turbo": "^1.1.2"
+    "turbo": "^1.1.2",
+    "@boxine/eslint-config-jest": "^1.6.0",
+    "@boxine/eslint-config-react": "^1.6.0",
+    "@boxine/prettier-config": "^1.6.0",
+    "@commitlint/cli": "^9.1.2",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@commitlint/prompt-cli": "^9.1.2",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "@typescript-eslint/parser": "^5.8.1",
+    "conventional-changelog-conventionalcommits": "^4.4.0",
+    "eslint": "7",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-config-react-app": "^5.2.1",
+    "eslint-plugin-flowtype": "^4.7.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^23.20.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
+    "eslint-plugin-sonarjs": "^0.5.0",
+    "eslint-plugin-testing-library": "^3.8.0",
+    "prettier": "^2.5.1",
+    "babel-eslint": "^10.1.0",
+    "typescript": "^4.5.4",
+    "husky": "^3.1.0",
+    "lint-staged": "^12.1.5"
+  },
+  "prettier": "@boxine/prettier-config",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "turbo run type-check",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.@(ts|tsx)": [
+      "pnpm run lint",
+      "pnpm run format"
+    ]
   },
   "packageManager": "pnpm@6.29.2"
 }

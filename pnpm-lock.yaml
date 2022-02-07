@@ -4,9 +4,61 @@ importers:
 
   .:
     specifiers:
+      '@boxine/eslint-config-jest': ^1.6.0
+      '@boxine/eslint-config-react': ^1.6.0
+      '@boxine/prettier-config': ^1.6.0
+      '@commitlint/cli': ^9.1.2
+      '@commitlint/config-conventional': ^8.3.4
+      '@commitlint/prompt-cli': ^9.1.2
+      '@typescript-eslint/eslint-plugin': ^5.8.1
+      '@typescript-eslint/parser': ^5.8.1
+      babel-eslint: ^10.1.0
+      conventional-changelog-conventionalcommits: ^4.4.0
+      eslint: '7'
+      eslint-config-prettier: ^6.10.1
+      eslint-config-react-app: ^5.2.1
+      eslint-plugin-flowtype: ^4.7.0
+      eslint-plugin-import: ^2.22.0
+      eslint-plugin-jest: ^23.20.0
+      eslint-plugin-jsx-a11y: ^6.3.1
+      eslint-plugin-prettier: ^3.1.4
+      eslint-plugin-react: ^7.19.0
+      eslint-plugin-react-hooks: ^2.5.1
+      eslint-plugin-sonarjs: ^0.5.0
+      eslint-plugin-testing-library: ^3.8.0
+      husky: ^3.1.0
+      lint-staged: ^12.1.5
+      prettier: ^2.5.1
       turbo: ^1.1.2
+      typescript: ^4.5.4
     devDependencies:
+      '@boxine/eslint-config-jest': 1.7.0_ea0c38635b473f9c06cd1b79502e4146
+      '@boxine/eslint-config-react': 1.7.0_8613299bb85c03ffb5b4e6c5aaf00387
+      '@boxine/prettier-config': 1.7.0_prettier@2.5.1
+      '@commitlint/cli': 9.1.2
+      '@commitlint/config-conventional': 8.3.6
+      '@commitlint/prompt-cli': 9.1.2
+      '@typescript-eslint/eslint-plugin': 5.10.2_3e19df30e549eb9672c3b79dc40c1d5f
+      '@typescript-eslint/parser': 5.10.2_eslint@7.32.0+typescript@4.5.5
+      babel-eslint: 10.1.0_eslint@7.32.0
+      conventional-changelog-conventionalcommits: 4.6.3
+      eslint: 7.32.0
+      eslint-config-prettier: 6.15.0_eslint@7.32.0
+      eslint-config-react-app: 5.2.1_dbff3c0a55c6adf94ade2044808966a7
+      eslint-plugin-flowtype: 4.7.0_eslint@7.32.0
+      eslint-plugin-import: 2.25.4_eslint@7.32.0
+      eslint-plugin-jest: 23.20.0_eslint@7.32.0+typescript@4.5.5
+      eslint-plugin-jsx-a11y: 6.5.1_eslint@7.32.0
+      eslint-plugin-prettier: 3.4.1_a90c626bbf8b44e0aad298faeac07fd7
+      eslint-plugin-react: 7.28.0_eslint@7.32.0
+      eslint-plugin-react-hooks: 2.5.1_eslint@7.32.0
+      eslint-plugin-sonarjs: 0.5.0_eslint@7.32.0
+      eslint-plugin-testing-library: 3.10.2_eslint@7.32.0+typescript@4.5.5
+      husky: 3.1.0
+      lint-staged: 12.3.3
+      prettier: 2.5.1
       turbo: 1.1.2
+      typescript: 4.5.5
 
   apps/corporate:
     specifiers:
@@ -18,12 +70,6 @@ importers:
       '@babel/preset-typescript': ^7.16.7
       '@babel/runtime': ^7.12.1
       '@badrap/valita': ^0.1.0
-      '@boxine/eslint-config-jest': ^1.6.0
-      '@boxine/eslint-config-react': ^1.6.0
-      '@boxine/prettier-config': ^1.6.0
-      '@commitlint/cli': ^9.1.2
-      '@commitlint/config-conventional': ^8.3.4
-      '@commitlint/prompt-cli': ^9.1.2
       '@emotion/is-prop-valid': ^1.1.1
       '@emotion/memoize': ^0.7.5
       '@emotion/stylis': ^0.8.5
@@ -53,12 +99,9 @@ importers:
       '@types/workbox-precaching': ^4.3.1
       '@types/workbox-routing': ^4.3.1
       '@types/workbox-strategies': ^4.3.1
-      '@typescript-eslint/eslint-plugin': ^5.8.1
-      '@typescript-eslint/parser': ^5.8.1
       '@xmldom/xmldom': ^0.8.0
       ajv: ^8.8.2
       axios: ^0.24.0
-      babel-eslint: ^10.1.0
       babel-plugin-styled-components: ^1.11.1
       babel-polyfill: ^6.26.0
       bundlewatch: ^0.3.3
@@ -67,27 +110,13 @@ importers:
       debug: ^4.3.3
       dotenv: ^10.0.0
       dotenv-cli: ^4.1.1
-      eslint: '7'
-      eslint-config-prettier: ^6.10.1
-      eslint-config-react-app: ^5.2.1
-      eslint-plugin-flowtype: ^4.7.0
-      eslint-plugin-import: ^2.22.0
-      eslint-plugin-jest: ^23.20.0
-      eslint-plugin-jsx-a11y: ^6.3.1
-      eslint-plugin-prettier: ^3.1.4
-      eslint-plugin-react: ^7.19.0
-      eslint-plugin-react-hooks: ^2.5.1
-      eslint-plugin-sonarjs: ^0.5.0
-      eslint-plugin-testing-library: ^3.8.0
       headers-utils: ^3.0.2
       history: '4'
       hoist-non-react-statics: ^3.3.2
-      husky: ^3.1.0
       idb: ^7.0.0
       jest: ^27.4.7
       jest-styled-components: ^7.0.8
       jest-watch-typeahead: ^1.0.0
-      lint-staged: ^12.1.5
       mini-create-react-context: ^0.4.1
       ms: ^2.1.3
       msw: ^0.36.3
@@ -102,7 +131,6 @@ importers:
       preact: 10.6.4
       preact-compat: ^3.19.0
       preact-router: ^3.2.1
-      prettier: ^2.5.1
       prop-types: ^15.0.0
       randext: ^1.0.0
       react: '16'
@@ -121,7 +149,6 @@ importers:
       tiny-warning: ^1.0.3
       ts-jest: ^27.1.2
       tslib: ^2.3.1
-      typescript: ^4.5.4
       value-equal: ^1.0.1
       whatwg-fetch: ^3.6.2
       workbox-build: ^6.4.2
@@ -157,6 +184,7 @@ importers:
       react-document-meta: 3.0.0-beta.2_react-dom@16.14.0+react@16.14.0
       react-dom: 16.14.0_react@16.14.0
       react-is: 16.13.1
+      react-router: 5.2.1_react@16.14.0
       react-router-dom: 5.3.0_react@16.14.0
       react-side-effect: 2.1.1_react@16.14.0
       resolve-pathname: 3.0.0
@@ -178,12 +206,6 @@ importers:
       '@babel/preset-env': 7.16.11_@babel+core@7.17.0
       '@babel/preset-react': 7.16.7_@babel+core@7.17.0
       '@babel/preset-typescript': 7.16.7_@babel+core@7.17.0
-      '@boxine/eslint-config-jest': 1.7.0_ea0c38635b473f9c06cd1b79502e4146
-      '@boxine/eslint-config-react': 1.7.0_8613299bb85c03ffb5b4e6c5aaf00387
-      '@boxine/prettier-config': 1.7.0_prettier@2.5.1
-      '@commitlint/cli': 9.1.2
-      '@commitlint/config-conventional': 8.3.6
-      '@commitlint/prompt-cli': 9.1.2
       '@mswjs/cookies': 0.1.7
       '@mswjs/interceptors': 0.13.1
       '@open-draft/until': 1.0.3
@@ -207,11 +229,8 @@ importers:
       '@types/workbox-precaching': 4.3.1
       '@types/workbox-routing': 4.3.1
       '@types/workbox-strategies': 4.3.1
-      '@typescript-eslint/eslint-plugin': 5.10.2_3e19df30e549eb9672c3b79dc40c1d5f
-      '@typescript-eslint/parser': 5.10.2_eslint@7.32.0+typescript@4.5.5
       '@xmldom/xmldom': 0.8.0
       ajv: 8.10.0
-      babel-eslint: 10.1.0_eslint@7.32.0
       babel-plugin-styled-components: 1.13.3_styled-components@5.3.3
       bundlewatch: 0.3.3_debug@4.3.3
       conventional-changelog-conventionalcommits: 4.6.3
@@ -219,24 +238,10 @@ importers:
       debug: 4.3.3
       dotenv: 10.0.0
       dotenv-cli: 4.1.1
-      eslint: 7.32.0
-      eslint-config-prettier: 6.15.0_eslint@7.32.0
-      eslint-config-react-app: 5.2.1_dbff3c0a55c6adf94ade2044808966a7
-      eslint-plugin-flowtype: 4.7.0_eslint@7.32.0
-      eslint-plugin-import: 2.25.4_eslint@7.32.0
-      eslint-plugin-jest: 23.20.0_eslint@7.32.0+typescript@4.5.5
-      eslint-plugin-jsx-a11y: 6.5.1_eslint@7.32.0
-      eslint-plugin-prettier: 3.4.1_a90c626bbf8b44e0aad298faeac07fd7
-      eslint-plugin-react: 7.28.0_eslint@7.32.0
-      eslint-plugin-react-hooks: 2.5.1_eslint@7.32.0
-      eslint-plugin-sonarjs: 0.5.0_eslint@7.32.0
-      eslint-plugin-testing-library: 3.10.2_eslint@7.32.0+typescript@4.5.5
       headers-utils: 3.0.2
-      husky: 3.1.0
       jest: 27.5.0
       jest-styled-components: 7.0.8_styled-components@5.3.3
       jest-watch-typeahead: 1.0.0_jest@27.5.0
-      lint-staged: 12.3.3
       ms: 2.1.3
       msw: 0.36.8
       node-fetch: 2.6.7
@@ -246,13 +251,10 @@ importers:
       parcel-plugin-compress: 2.0.2
       parcel-plugin-prerender: 1.4.1_debug@4.3.3
       postcss: 8.4.6
-      prettier: 2.5.1
-      react-router: 5.2.1_react@16.14.0
       set-cookie-parser: 2.4.8
       strict-event-emitter: 0.2.0
       ts-jest: 27.1.3_7ef2d78ce471893f470776eba2d1fa48
       tslib: 2.3.1
-      typescript: 4.5.5
       whatwg-fetch: 3.6.2
       workbox-build: 6.4.2
       workbox-cli: 6.4.2
@@ -6607,6 +6609,7 @@ packages:
       tiny-invariant: 1.2.0
       tiny-warning: 1.0.3
       value-equal: 1.0.1
+    dev: false
 
   /hmac-drbg/1.0.1:
     resolution: {integrity: sha1-0nRXAQJabHdabFRXk+1QL8DGSaE=}
@@ -7372,6 +7375,7 @@ packages:
 
   /isarray/0.0.1:
     resolution: {integrity: sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=}
+    dev: false
 
   /isarray/1.0.0:
     resolution: {integrity: sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=}
@@ -8629,6 +8633,7 @@ packages:
       prop-types: 15.8.1
       react: 16.14.0
       tiny-warning: 1.0.3
+    dev: false
 
   /minimalistic-assert/1.0.1:
     resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==}
@@ -9523,6 +9528,7 @@ packages:
     resolution: {integrity: sha512-n43JRhlUKUAlibEJhPeir1ncUID16QnEjNpwzNdO3Lm4ywrBpBZ5oLD0I6br9evr1Y9JTqwRtAh7JLoOzAQdVA==}
     dependencies:
       isarray: 0.0.1
+    dev: false
 
   /path-to-regexp/3.2.0:
     resolution: {integrity: sha512-jczvQbCUS7XmS7o+y1aEO9OBVFeZBQ1MDSEqmO7xSoPgOPoowY/SxLpZ6Vh97/8qHZOteiCKb7gkG9gA2ZUxJA==}
@@ -10366,6 +10372,7 @@ packages:
       react-is: 16.13.1
       tiny-invariant: 1.2.0
       tiny-warning: 1.0.3
+    dev: false
 
   /react-side-effect/1.2.0_react@16.14.0:
     resolution: {integrity: sha512-v1ht1aHg5k/thv56DRcjw+WtojuuDHFUgGfc+bFHOWsF4ZK6C2V57DO0Or0GPsg6+LSTE0M6Ry/gfzhzSwbc5w==}
@@ -10671,6 +10678,7 @@ packages:
 
   /resolve-pathname/3.0.0:
     resolution: {integrity: sha512-C7rARubxI8bXFNB/hqcp/4iUeIXJhJZvFPFPiSPRnhU5UPxzMFIl+2E6yY6c4k9giDJAhtV+enfA+G89N6Csng==}
+    dev: false
 
   /resolve-url/0.2.1:
     resolution: {integrity: sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=}
@@ -11761,9 +11769,11 @@ packages:
 
   /tiny-invariant/1.2.0:
     resolution: {integrity: sha512-1Uhn/aqw5C6RI4KejVeTg6mIS7IqxnLJ8Mv2tV5rTc0qWobay7pDUz6Wi392Cnc8ak1H0F2cjoRzb2/AW4+Fvg==}
+    dev: false
 
   /tiny-warning/1.0.3:
     resolution: {integrity: sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA==}
+    dev: false
 
   /tmp/0.0.33:
     resolution: {integrity: sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==}
@@ -12362,6 +12372,7 @@ packages:
 
   /value-equal/1.0.1:
     resolution: {integrity: sha512-NOJ6JZCAWr0zlxZt+xqCHNTEKOsrks2HQd4MqhP1qy4z1SkbEP467eNx6TgDKXMvUOb+OENfJCZwM+16n7fRfw==}
+    dev: false
 
   /vary/1.1.2:
     resolution: {integrity: sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=}
