@@ -13,6 +13,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.8.1
       '@typescript-eslint/parser': ^5.8.1
       babel-eslint: ^10.1.0
+      bundlewatch: ^0.3.3
       conventional-changelog-conventionalcommits: ^4.4.0
       eslint: '7'
       eslint-config-prettier: ^6.10.1
@@ -41,6 +42,7 @@ importers:
       '@typescript-eslint/eslint-plugin': 5.10.2_3e19df30e549eb9672c3b79dc40c1d5f
       '@typescript-eslint/parser': 5.10.2_eslint@7.32.0+typescript@4.5.5
       babel-eslint: 10.1.0_eslint@7.32.0
+      bundlewatch: 0.3.3
       conventional-changelog-conventionalcommits: 4.6.3
       eslint: 7.32.0
       eslint-config-prettier: 6.15.0_eslint@7.32.0
@@ -104,7 +106,6 @@ importers:
       axios: ^0.24.0
       babel-plugin-styled-components: ^1.11.1
       babel-polyfill: ^6.26.0
-      bundlewatch: ^0.3.3
       conventional-changelog-conventionalcommits: ^4.4.0
       cssnano: 4.1.11
       debug: ^4.3.3
@@ -232,7 +233,6 @@ importers:
       '@xmldom/xmldom': 0.8.0
       ajv: 8.10.0
       babel-plugin-styled-components: 1.13.3_styled-components@5.3.3
-      bundlewatch: 0.3.3_debug@4.3.3
       conventional-changelog-conventionalcommits: 4.6.3
       cssnano: 4.1.11
       debug: 4.3.3
@@ -3448,12 +3448,21 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /axios/0.24.0:
+    resolution: {integrity: sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==}
+    dependencies:
+      follow-redirects: 1.14.7
+    transitivePeerDependencies:
+      - debug
+    dev: true
+
   /axios/0.24.0_debug@4.3.3:
     resolution: {integrity: sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==}
     dependencies:
       follow-redirects: 1.14.7_debug@4.3.3
     transitivePeerDependencies:
       - debug
+    dev: false
 
   /axobject-query/2.2.0:
     resolution: {integrity: sha512-Td525n+iPOOyUQIeBfcASuG6uJsDOITl7Mds5gFyerkWiX7qhUTdYUBlSgNMyVqtSJqwpt1kXGLdUt6SykLMRA==}
@@ -3904,12 +3913,12 @@ packages:
     resolution: {integrity: sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=}
     dev: true
 
-  /bundlewatch/0.3.3_debug@4.3.3:
+  /bundlewatch/0.3.3:
     resolution: {integrity: sha512-qzSVWrZyyWXa546JpAPRPTFmnXms9YNVnfzB05DRJKmN6wRRa7SkxE4OgKQmbAY74Z6CM2mKAc6vwvd2R+1lUQ==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      axios: 0.24.0_debug@4.3.3
+      axios: 0.24.0
       bytes: 3.1.2
       chalk: 4.1.2
       ci-env: 1.17.0
@@ -6129,6 +6138,16 @@ packages:
 
   /flatted/3.2.5:
     resolution: {integrity: sha512-WIWGi2L3DyTUvUrwRKgGi9TwxQMUEqPOPQBVi71R96jZXJdFskXEmf54BoZaS1kknGODoIGASGEzBUYdyMCBJg==}
+    dev: true
+
+  /follow-redirects/1.14.7:
+    resolution: {integrity: sha512-+hbxoLbFMbRKDwohX8GkTataGqO6Jb7jGwpAlwgy2bIz25XtRm7KEzJM76R1WiNT5SwZkX4Y75SwBolkpmE7iQ==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
     dev: true
 
   /follow-redirects/1.14.7_debug@4.3.3:

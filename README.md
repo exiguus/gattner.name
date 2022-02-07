@@ -4,7 +4,7 @@
 
 ---
 
-In the middle of 2020 I released my new homepage. At that time I worked a lot with _react_, _preact_ and _Next.js_.
+In the middle of 2020 I rebuild my website. At that time I worked a lot with _react_, _preact_ and _Next.js_.
 
 I wanted to take a closer look at the _parcel_ bundler and was looking for a way to build a static page with it, JAMStack style.
 
@@ -14,26 +14,30 @@ The optimizations have paid off. With the lighthouse cli, the website achieved [
 
 Early 2022 transformed into a mono repo with the goal to create different packages to later switch from [Parcel v1](https://v1.parceljs.org/) to [WMR](https://wmr.dev/) and build various [Next.js](https://nextjs.org/) applications:
 
-- [x] Corporate Application
+- [x] Corporate Site Application
 - [ ] Weblog Application
 - [ ] Dashboard Application
 - [ ] Resume Application
-- [ ] GitLab API fetch content and assets
-- [ ] UI Component Library
-- [ ] UI Icon Library
-- [ ] Utility Library
+- [ ] GitLab API data Package
+- [ ] UI Component Library Package
+- [ ] UI Icon Library Package
+- [ ] Utility Library Package
 
 ## Use
 
-```
+install
+
+```shell
 pnpm i -r
 ```
+
+develop
 
 ```shell
 pnpm dev
 ```
 
-and build with
+build
 
 ```shell
 pnpm build

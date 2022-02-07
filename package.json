@@ -4,11 +4,12 @@
   "description": "Public Build Project",
   "scripts": {
     "dev": "turbo run dev",
-    "build": "turbo run build",
     "test": "turbo run test",
     "type-check": "turbo run type-check",
+    "build": "turbo run data lint type-check test build bundlewatch",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,mjs,html}\"",
-    "lint": "eslint . --ext ts --ext tsx --ext js --ext jsx --ext mjs"
+    "lint": "eslint . --ext ts --ext tsx --ext js --ext jsx --ext mjs",
+    "bundlewatch": "bundlewatch --config bundlewatch.config.js"
   },
   "author": {
     "name": "Simon Gattner",
@@ -22,7 +23,6 @@
   },
   "homepage": "https://github.com/exiguus/gattner.name#readme",
   "devDependencies": {
-    "turbo": "^1.1.2",
     "@boxine/eslint-config-jest": "^1.6.0",
     "@boxine/eslint-config-react": "^1.6.0",
     "@boxine/prettier-config": "^1.6.0",
@@ -31,6 +31,8 @@
     "@commitlint/prompt-cli": "^9.1.2",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
+    "babel-eslint": "^10.1.0",
+    "bundlewatch": "^0.3.3",
     "conventional-changelog-conventionalcommits": "^4.4.0",
     "eslint": "7",
     "eslint-config-prettier": "^6.10.1",
@@ -45,7 +47,7 @@
     "eslint-plugin-sonarjs": "^0.5.0",
     "eslint-plugin-testing-library": "^3.8.0",
     "prettier": "^2.5.1",
-    "babel-eslint": "^10.1.0",
+    "turbo": "^1.1.2",
     "typescript": "^4.5.4",
     "husky": "^3.1.0",
     "lint-staged": "^12.1.5"
@@ -54,14 +56,14 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "turbo run type-check",
+      "pre-push": "pnpm type-check",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
     "*.@(ts|tsx)": [
-      "pnpm run lint",
-      "pnpm run format"
+      "pnpm lint",
+      "pnpm format"
     ]
   },
   "packageManager": "pnpm@6.29.2"
