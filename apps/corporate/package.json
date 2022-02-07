@@ -3,7 +3,7 @@
   "version": "2.3.0",
   "description": "Consulting and development of digital solutions",
   "scripts": {
-    "postinstall": "npm run data:conditional",
+    "postinstall": "npm run data:conditional:update",
     "serve": "NODE_ENV=development dotenv -e .env.local parcel serve ./public/index.html --no-cache",
     "dev:pre": "npm run build:msw",
     "dev": "npm run dev:pre && npm run serve",
