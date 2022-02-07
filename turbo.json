@@ -1,0 +1,42 @@
+{
+  "baseBranch": "origin/main",
+  "pipeline": {
+    "data": {
+      "dependsOn": [
+        "^data"
+      ]
+    },
+    "build": {
+      "dependsOn": [
+        "data",
+        "^build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
+    "bundlewatch": {
+      "dependsOn": [
+        "build"
+      ]
+    },
+    "test": {
+      "dependsOn": [
+        "data"
+      ]
+    },
+    "type-check": {
+      "dependsOn": [
+        "data"
+      ]
+    },
+    "lint": {},
+    "format": {},
+    "dev": {
+      "dependsOn": [
+        "data"
+      ],
+      "cache": false
+    }
+  }
+}

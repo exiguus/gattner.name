@@ -1,8 +1,4 @@
 node_modules
-yarn.lock
-package-lock.json
-public/service-worker.js
-storybook-static
-coverage
-data
-dist
+**/coverage/*
+**/data/*
+**/dist/*

@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, ReactNode } from 'react'
 import styled from 'styled-components'
 
 interface MarkProps {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export const Mark: FunctionComponent<MarkProps> = ({ children }) => (

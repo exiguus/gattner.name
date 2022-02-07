@@ -1,0 +1,15 @@
+.env
+.env.local
+.env.production
+.env.test
+.cache
+.sw-tmp
+.vscode
+.tmp-build/
+node_modules
+dist/
+data/
+public/
+!public/index.html
+coverage/
+TODO.md
