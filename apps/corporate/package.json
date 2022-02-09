@@ -14,7 +14,7 @@
     "build:fetch": "rm -rf ./.tmp-build/ && tsc --build ./build/",
     "build:post": "pnpm build:data && pnpm build:manifest && pnpm build:serviceworker",
     "build:data": "cp ./data/files/public/** ./dist/ ",
-    "build:manifest": " NODE_ENV=production workbox injectManifest",
+    "build:manifest": "NODE_ENV=production workbox injectManifest",
     "data": "pnpm data:conditional:update",
     "data:conditional:update": "test ! -f public/site.webmanifest && pnpm data:update || exit 0",
     "data:update": "pnpm build:fetch && pnpm fetch:data && cp ./data/files/**.* ./public/",

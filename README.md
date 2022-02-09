@@ -15,9 +15,9 @@ The optimizations have paid off. With the lighthouse cli, the website achieved [
 Early 2022 transformed into a mono repo with the goal to create different packages to later switch from [Parcel v1](https://v1.parceljs.org/) to [WMR](https://wmr.dev/) and build various [Next.js](https://nextjs.org/) applications:
 
 - [x] Corporate Site Application
+- [ ] Resume Application
 - [ ] Weblog Application
 - [ ] Dashboard Application
-- [ ] Resume Application
 - [ ] GitLab API data Package
 - [ ] UI Component Library Package
 - [ ] UI Icon Library Package
@@ -34,11 +34,13 @@ pnpm i -r
 develop
 
 ```shell
-pnpm dev
+pnpm dev -- --scope="resume"
+pnpm dev -- --scope="corporate"
 ```
 
 build
 
 ```shell
-pnpm build
+pnpm build -- --scope="resume"
+pnpm build -- --scope="corporate"
 ```
