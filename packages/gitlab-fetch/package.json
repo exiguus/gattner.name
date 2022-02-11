@@ -1,0 +1,24 @@
+{
+  "name": "@gattner/gitlab-fetch",
+  "version": "1.0.0",
+  "description": "Fetch from GitLab with the GitLab Files API",
+  "module": "dist/es/index.js",
+  "types": "dist/types/index.d.ts",
+  "main": "dist/es/index.js",
+  "scripts": {
+    "build": "rm -rf ./dist/ && pnpm build:es",
+    "build:es": "NODE_ENV=production tsc",
+    "test": "echo \"Warning: no test specified\" && exit 0"
+  },
+  "keywords": [
+    "GitLab",
+    "fetch",
+    "download",
+    "API"
+  ],
+  "author": "Simon Gattner",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  }
+}

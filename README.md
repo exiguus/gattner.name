@@ -34,13 +34,13 @@ pnpm i -r
 develop
 
 ```shell
-pnpm dev -- --scope="resume"
-pnpm dev -- --scope="corporate"
+pnpm dev -- --scope="resume" --include-dependencies
+pnpm dev -- --scope="corporate" --include-dependencies
 ```
 
 build
 
 ```shell
-pnpm build -- --scope="resume"
-pnpm build -- --scope="corporate"
+pnpm build -- --scope="resume" --include-dependencies
+pnpm build -- --scope="corporate" --include-dependencies
 ```
