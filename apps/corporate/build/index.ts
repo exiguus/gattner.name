@@ -5,19 +5,25 @@ import {
   token,
   contentFilePaths,
 } from './config'
-import { getContent, getFiles } from '@gattner/gitlab-fetch'
-
-if (!token) {
-  throw new Error('Fetch data: GitLab token is missing')
-}
-
-if (!projectId) {
-  throw new Error('Fetch data: GitLab project ID is missing')
-}
+import GitLabApi from '@gattner/gitlab-fetch'
 
 /*
  * Fetch files and content
  *  from GitLab and store it in {sourcePath}
  */
-getContent(targetPath, contentFilePaths, token, projectId)
-getFiles(targetPath, sourcePath, token, projectId)
+
+async function fetchData() {
+  if (!token) {
+    throw new Error('Fetch data: GitLab token is missing')
+  }
+
+  if (!projectId) {
+    throw new Error('Fetch data: GitLab project ID is missing')
+  }
+
+  const client = new GitLabApi(token, projectId)
+  await client.saveFiles(targetPath, sourcePath)
+  // await client.saveContent(targetPath, contentFilePaths)
+}
+
+fetchData()

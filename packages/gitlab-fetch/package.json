@@ -16,8 +16,17 @@
     "download",
     "API"
   ],
-  "author": "Simon Gattner",
+  "author": {
+    "name": "Simon Gattner",
+    "url": "https://gattner.name/",
+    "twitter": "https://twitter.com/exiguus_"
+  },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/exiguus/gattner.name.git/packages/gitlab-fetch"
+  },
+  "homepage": "https://github.com/exiguus/gattner.name/packages/gitlab-fetch#readme",
   "devDependencies": {
     "typescript": "^4.5.5"
   }
