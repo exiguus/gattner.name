@@ -28,19 +28,17 @@ Early 2022 transformed into a mono repo with the goal to create different packag
 install
 
 ```shell
-pnpm i -r
+pnpm i
 ```
 
 develop
 
 ```shell
-pnpm dev -- --scope="resume" --include-dependencies
-pnpm dev -- --scope="corporate" --include-dependencies
+pnpm dev
 ```
 
 build
 
 ```shell
-pnpm build -- --scope="resume" --include-dependencies
-pnpm build -- --scope="corporate" --include-dependencies
+pnpm build
 ```

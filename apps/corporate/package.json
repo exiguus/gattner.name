@@ -4,10 +4,11 @@
   "description": "Consulting and development of digital solutions",
   "scripts": {
     "serve": "NODE_ENV=development dotenv -e .env.local parcel serve ./public/index.html --no-cache",
-    "dev:pre": "pnpm build:msw",
+    "dev:pre": "pnpm build:msw && pnpm data",
     "dev": "pnpm dev:pre && pnpm serve",
     "dev:build": "pnpm build:app",
-    "build": "pnpm build:app && pnpm build:post",
+    "build:pre": "pnpm data",
+    "build": "pnpm build:pre && pnpm build:app && pnpm build:post",
     "build:app": "rm -rf ./dist/ && NODE_ENV=production parcel build ./public/index.html -d ./dist/ --detailed-report 10 --public-url /",
     "build:serviceworker": "mv ./dist/report.html ./dist/report.html.backup && NODE_ENV=production parcel build ./public/service-worker.ts -d ./dist/ --no-cache --experimental-scope-hoisting && rm ./dist/report.html && mv ./dist/report.html.backup ./dist/report.html",
     "build:msw": "pnpx msw init dist -y",
