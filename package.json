@@ -6,9 +6,9 @@
     "dev": "turbo run dev",
     "test": "turbo run test",
     "type-check": "turbo run type-check",
-    "build": "turbo run build --filter=@gattner/*",
-    "build:corporate": "turbo run build --filter=corporate",
-    "build:resume": "turbo run build --filter=resume",
+    "build": "turbo run lint test build type-check bundlewatch",
+    "build:corporate": "turbo run lint test build type-check bundlewatch --filter=corporate",
+    "build:resume": "turbo run lint test build type-check bundlewatch --filter=resume",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,mjs,html}\"",
     "lint": "eslint . --ext ts --ext tsx --ext js --ext jsx --ext mjs",
     "bundlewatch": "bundlewatch --config bundlewatch.config.js"
