@@ -10,7 +10,7 @@ Fetch from GitLab with the GitLab Files API
 * Store and edit your content and assets in private on GitLab
 * Deploy to Vercel [1]
 
-[1] Trigger a deployment hook [with Vercel](https://vercel.com/docs/concepts/git/deploy*hooks)
+[1] Trigger a deployment hook [with Vercel](https://vercel.com/docs/concepts/git/deploy-hooks)
 
 ## Example
 

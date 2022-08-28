@@ -8,7 +8,7 @@ In the middle of 2020 I rebuild my website. At that time I worked a lot with _re
 
 I wanted to take a closer look at the _parcel_ bundler and was looking for a way to build a static page with it, JAMStack style.
 
-Performance optimization like bundle*size, asset compression or A11y and SEO therefore played a role.
+Performance optimization like bundle-size, asset compression or A11y and SEO therefore played a role.
 
 The optimizations have paid off. With the lighthouse CLI, the website achieved [100 points in all categories](https://googlechrome.github.io/lighthouse/viewer/?gist=6b8b5f4e71fda1b8b7b412c6de92e6ab) like performance, accessibility, best practice and SEO.
 
@@ -50,7 +50,7 @@ pnpm build
 * [x] dependencies with pnpm
 * [x] lint with eslint, commitlint and husky
 * [x] format with prettier and editorconfig
-* [x] unit test with jest and testing*library
+* [x] unit test with jest and testing-library
 * [x] bundlewatch vercel CI GitHub Check
 
 ## Research
@@ -60,7 +60,7 @@ pnpm build
 * [ ] performance tests with [GitHub action](https://github.com/preactjs/compressed-size-action)
 * [x] publishing with pnpm or [lerna](https://github.com/lerna/lerna)
   * [x] [bootstrapping](https://github.com/lerna/lerna/issues/878#issuecomment-308191660) with lerna
-  * [x] [changelog](https://github.com/lerna/lerna*changelog) with lerna
+  * [x] [changelog](https://github.com/lerna/lerna-changelog) with lerna
 * [x] config
   * [x] example from AJV [config](https://github.com/ajv-validator/config) / [usage](https://github.com/ajv-validator/ajv)
 * [ ] conditional font loading
@@ -87,6 +87,6 @@ pnpm build
 * [ ] perf: Replace sentry with micro-sentry ** [corporate/useSentry](app/apps/corporate/src/hooks/useSentry.ts) [corporate/lib](apps/corporate/src/providers/sentry/lib.ts)
   * [ ] [Sentry v7](https://github.com/getsentry/sentry-javascript/issues/4240)
   * [ ] [Alternatives](https://github.com/getsentry/sentry-javascript/issues/2707)
-  * [ ] [Micro*Sentry](https://github.com/Tinkoff/micro-sentry)
+  * [ ] [Micro-Sentry](https://github.com/Tinkoff/micro-sentry)
 * [ ] build: Save in public (open source security and copyright) ** [LICENCE](LICENCE) [@gattner/gitlab-fetch](packages/gitlab-fetch/README.md) [GitGuardian](https://www.gitguardian.com/)
 * [ ] ci: vercel ** [error page](https://www.gattner.name/error) [corporate/vercel.json](apps/corporate/vercel.json)
