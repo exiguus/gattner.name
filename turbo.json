@@ -18,17 +18,26 @@
     },
     "test": {
       "dependsOn": [
-        "lint",
-        "build"
+        "^test",
+        "lint"
       ]
     },
     "type-check": {
       "dependsOn": [
+        "^type-check",
         "build"
       ]
     },
-    "lint": {},
-    "format": {},
+    "lint": {
+      "dependsOn": [
+        "^lint"
+      ]
+    },
+    "format": {
+      "dependsOn": [
+        "^format"
+      ]
+    },
     "dev": {
       "cache": false
     }

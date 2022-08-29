@@ -2,12 +2,15 @@
   "name": "@gattner/gitlab-fetch",
   "version": "1.0.0",
   "description": "Fetch from GitLab with the GitLab Files API",
-  "module": "dist/es/index.js",
-  "types": "dist/types/index.d.ts",
-  "main": "dist/es/index.js",
+  "module": "dist/es/src/index.js",
+  "types": "dist/types/src/index.d.ts",
+  "main": "dist/es/src/index.js",
   "scripts": {
     "build": "rm -rf ./dist/ && rm -rf ./data && pnpm build:es",
     "build:es": "NODE_ENV=production tsc",
+    "type-check": "tsc --pretty --noEmit",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,mjs,html}\"",
+    "lint": "eslint . --ext ts --ext tsx --ext js --ext jsx --ext mjs",
     "test:file:content": "diff ./data/content/app.json ./mocks/__mocks__/gitlabRepositoryFileMock.json >&2",
     "test:unit": "dotenv -e .env.local -- jest",
     "test": "rm -rf ./data && pnpm test:unit && pnpm test:file:content"

@@ -64,6 +64,7 @@ export default class Client extends Config implements IClient {
       )
     } catch (error) {
       console.error(error)
+      throw error
     }
   }
 
@@ -106,6 +107,7 @@ export default class Client extends Config implements IClient {
         )
     } catch (error) {
       console.error(error)
+      throw error
     }
   }
 }

@@ -3,11 +3,15 @@ module.exports = {
   roots: ['<rootDir>'],
   clearMocks: true,
   moduleFileExtensions: ['js', 'ts', 'tsx', 'json'],
+  testMatch: [
+    '**/__tests__/**/*.[jt]s?(x)',
+    '**/?(*.)+(spec|test|contract).[tj]s?(x)',
+  ],
   testPathIgnorePatterns: [
-    '[/\\\\](node_modules|.cache|.vscode|coverage)[/\\\\]',
+    '[/\\\\](node_modules|.cache|.vscode|coverage|data|dist)[/\\\\]',
   ],
   coveragePathIgnorePatterns: [
-    '[/\\\\](node_modules|.cache|.vscode|coverage|test|mocks)[/\\\\]',
+    '[/\\\\](node_modules|.cache|.vscode|coverage|test|mocks|data|dist)[/\\\\]',
   ],
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$'],
   transform: {
@@ -18,5 +22,5 @@ module.exports = {
     'jest-watch-typeahead/testname',
   ],
   testEnvironment: 'node',
-  setupFilesAfterEnv: ['<rootDir>/testSetup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/test/testSetup.ts'],
 }

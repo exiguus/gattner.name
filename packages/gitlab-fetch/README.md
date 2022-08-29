@@ -89,11 +89,11 @@ export const projectId = process.env.GITLAB_PROJECT_ID
 ## TODO
 
 * [ ] refactor tests
-  * [ ] fix includes
+  * [x] fix includes
   * [ ] asset
-  * [ ] data
+  * [x] data
   * [ ] validation
-  * [ ] exeptions
+  * [x] exceptions
   * [x] diff data
   * [ ] diff assets
 * [ ] refactor asset/data classes
