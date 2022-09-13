@@ -2,7 +2,7 @@
 
 > Consulting and development of digital solutions
 
----
+***
 
 In the middle of 2020 I rebuild my website. At that time I worked a lot with _react_, _preact_ and _Next.js_.
 
@@ -10,37 +10,84 @@ I wanted to take a closer look at the _parcel_ bundler and was looking for a way
 
 Performance optimization like bundle-size, asset compression or A11y and SEO therefore played a role.
 
-The optimizations have paid off. With the lighthouse cli, the website achieved [100 points in all categories](https://googlechrome.github.io/lighthouse/viewer/?gist=6b8b5f4e71fda1b8b7b412c6de92e6ab) like performance, accessibility, best practice and SEO.
+The optimizations have paid off. With the lighthouse CLI, the website achieved [100 points in all categories](https://googlechrome.github.io/lighthouse/viewer/?gist=6b8b5f4e71fda1b8b7b412c6de92e6ab) like performance, accessibility, best practice and SEO.
 
 Early 2022 transformed into a mono repo with the goal to create different packages to later switch from [Parcel v1](https://v1.parceljs.org/) to [WMR](https://wmr.dev/) and build various [Next.js](https://nextjs.org/) applications:
 
-- [x] Corporate Site Application
-- [ ] Resume Application
-- [ ] Weblog Application
-- [ ] Dashboard Application
-- [ ] GitLab API data Package
-- [ ] UI Component Library Package
-- [ ] UI Icon Library Package
-- [ ] Utility Library Package
+* [x] Corporate Site Application
+* [ ] Resume Application
+* [ ] Weblog Application
+* [ ] Dashboard Application
+* [x] GitLab API data Package
+* [ ] UI Component Library Package
+* [ ] UI Icon Library Package
+* [x] Utility Library Package
 
 ## Use
 
 install
 
 ```shell
-pnpm i -r
+pnpm i
 ```
 
 develop
 
 ```shell
-pnpm dev -- --scope="resume"
-pnpm dev -- --scope="corporate"
+pnpm dev
 ```
 
 build
 
 ```shell
-pnpm build -- --scope="resume"
-pnpm build -- --scope="corporate"
+pnpm build
 ```
+
+## monorepo
+
+* [x] build with Turborepo
+* [x] workspaces with pnpm
+* [x] dependencies with pnpm
+* [x] lint with eslint, commitlint and husky
+* [x] format with prettier and editorconfig
+* [x] unit test with jest and testing-library
+* [x] bundlewatch vercel CI GitHub Check
+
+## Research
+
+* [ ] e2e tests with [cypress](https://github.com/cypress-io/cypress) with [GitHub action](https://github.com/cypress-io/github-action)
+* [ ] e2e tests with Playwright
+* [ ] performance tests with [GitHub action](https://github.com/preactjs/compressed-size-action)
+* [x] publishing with pnpm or [lerna](https://github.com/lerna/lerna)
+  * [x] [bootstrapping](https://github.com/lerna/lerna/issues/878#issuecomment-308191660) with lerna
+  * [x] [changelog](https://github.com/lerna/lerna-changelog) with lerna
+* [x] config
+  * [x] example from AJV [config](https://github.com/ajv-validator/config) / [usage](https://github.com/ajv-validator/ajv)
+* [ ] conditional font loading
+  * [ ] [font face test](https://stackoverflow.com/questions/2881645/detect-whether-a-particular-font-is-installed)
+  * [ ] [local font](https://css-tricks.com/responsible-conditional-loading/)
+
+## Packages
+
+* [ ] @gattner/icon
+  * [ ] move to [iconoir](https://iconoir.com/) or IBM carbon icons and integrate them via package
+* [ ] @gattner/ui
+  * [ ] integrate IBM Plex fonts via package
+* [x] @gattner/utils
+* [x] @gattner/gitlab-fetch
+* [ ] @gattner/config
+* [ ] @gattner/conditional-font
+
+## Article
+
+* [ ] feat(api): JSON schema validation with yup, ajv and valita (runtime, build) JAMStack **[corporate/ajv](apps/corporate/schemas/index.ts) [corporate/valita](apps/corporate/schemas/lastFm.ts)
+* [ ] feat(api): GitLab file API and JAMStack **[@gattner/gitlab-fetch](packages/gitlab-fetch/README.md)
+* [ ] perf: pre-render styled-components and puppeteer **[corporate/app](apps/corporate/src/index.tsx)**[corporate/routes](apps/corporate/package.json)
+* [ ] perf: Adaptive serving based on network quality (react) ** [corporate/useNetwork](apps/corporate/src/hooks/useNetwork.ts)
+* [ ] perf: Replace sentry with micro-sentry ** [corporate/useSentry](app/apps/corporate/src/hooks/useSentry.ts) [corporate/lib](apps/corporate/src/providers/sentry/lib.ts)
+  * [ ] [Sentry v7](https://github.com/getsentry/sentry-javascript/issues/4240)
+  * [ ] [Alternatives](https://github.com/getsentry/sentry-javascript/issues/2707)
+  * [ ] [Micro-Sentry](https://github.com/Tinkoff/micro-sentry)
+* [ ] build: Save in public (open source security and copyright) ** [LICENCE](LICENCE) [@gattner/gitlab-fetch](packages/gitlab-fetch/README.md) [GitGuardian](https://www.gitguardian.com/)
+* [ ] ci: vercel ** [error page](https://www.gattner.name/error) [corporate/vercel.json](apps/corporate/vercel.json)
+* [ ] perf(workbox): register and configure workbox service-worker (pre-) cache and routing **[corporate/src/service-worker.ts](corporate/src/service-worker.ts)
