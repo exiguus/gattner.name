@@ -12,8 +12,11 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,mjs,html}\"",
     "lint": "eslint . --ext ts --ext tsx --ext js --ext jsx --ext mjs",
     "test:file:content": "diff ./data/content/app.json ./mocks/__mocks__/gitlabRepositoryFileMock.json >&2",
+    "test:file:assets": "diff ./data/assets/image.png ./mocks/__mocks__/image.png",
     "test:unit": "dotenv -e .env.local -- jest",
-    "test": "rm -rf ./data && pnpm test:unit && pnpm test:file:content"
+    "pretest": "echo '\\033[0;33m removing test data\\033[0m' && rm -rf ./data",
+    "test": "pnpm pretest && pnpm test:unit && pnpm posttest",
+    "posttest": "echo '\\033[0;33m checking test data\\033[0m' && pnpm test:file:content && pnpm test:file:assets"
   },
   "keywords": [
     "GitLab",
@@ -33,6 +36,7 @@
   },
   "homepage": "https://github.com/exiguus/gattner.name/packages/gitlab-fetch#readme",
   "devDependencies": {
+    "@gattner/utils": "workspace:^1.0.0",
     "@types/jest": "^27.4.0",
     "@types/node": "^17.0.6",
     "@types/node-fetch": "^2.5.12",

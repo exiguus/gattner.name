@@ -21,7 +21,7 @@ Early 2022 transformed into a mono repo with the goal to create different packag
 * [x] GitLab API data Package
 * [ ] UI Component Library Package
 * [ ] UI Icon Library Package
-* [ ] Utility Library Package
+* [x] Utility Library Package
 
 ## Use
 
@@ -73,7 +73,7 @@ pnpm build
   * [ ] move to [iconoir](https://iconoir.com/) or IBM carbon icons and integrate them via package
 * [ ] @gattner/ui
   * [ ] integrate IBM Plex fonts via package
-* [ ] @gattner/utils
+* [x] @gattner/utils
 * [x] @gattner/gitlab-fetch
 * [ ] @gattner/config
 * [ ] @gattner/conditional-font
@@ -90,3 +90,4 @@ pnpm build
   * [ ] [Micro-Sentry](https://github.com/Tinkoff/micro-sentry)
 * [ ] build: Save in public (open source security and copyright) ** [LICENCE](LICENCE) [@gattner/gitlab-fetch](packages/gitlab-fetch/README.md) [GitGuardian](https://www.gitguardian.com/)
 * [ ] ci: vercel ** [error page](https://www.gattner.name/error) [corporate/vercel.json](apps/corporate/vercel.json)
+* [ ] perf(workbox): register and configure workbox service-worker (pre-) cache and routing **[corporate/src/service-worker.ts](corporate/src/service-worker.ts)

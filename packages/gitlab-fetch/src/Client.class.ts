@@ -1,6 +1,11 @@
-import Config from './Config.class'
+import Config, { GITLAB_API_FILE_MODE } from './Config.class'
 import Factory from './Factory.class'
 import { FilePath } from './types'
+import Helper from './Helper.class'
+import { isError } from '@gattner/utils'
+
+Helper.sourceName = 'Client'
+
 /*
  * Fetch assets and data from GitLab API v4
  *  GET /projects/:id/repository/files/:file_path
@@ -47,24 +52,30 @@ export default class Client extends Config implements IClient {
     filePaths,
   }: DataProps): Promise<void> {
     try {
-      await Promise.all(
-        filePaths.map(async ({ path, validate }) => {
-          const content = new Factory({
-            type: 'data',
-            projectUrl: this.projectUrl,
-            header: this.header,
-            path,
-            targetPath,
-            validate,
+      if (Array.isArray(filePaths) && filePaths.length > 0) {
+        await Promise.all(
+          filePaths.map(async ({ path, validate }) => {
+            const content = new Factory({
+              type: 'data',
+              projectUrl: this.projectUrl,
+              header: this.header,
+              path,
+              targetPath,
+              validate,
+            })
+            if (action === 'save') {
+              await content.save()
+            }
           })
-          if (action === 'save') {
-            await content.save()
-          }
-        })
-      )
+        )
+      } else {
+        Helper.throwError('`filePaths` is empty. No Data files to save')
+      }
     } catch (error) {
-      console.error(error)
-      throw error
+      if (isError(error)) {
+        Helper.log(error.message, true)
+        throw error
+      }
     }
   }
 
@@ -86,10 +97,10 @@ export default class Client extends Config implements IClient {
         header: this.header,
         path: sourcePath,
         targetPath,
-        mode: '100644', // TODO: put into a const
+        mode: GITLAB_API_FILE_MODE,
       })
       const filePaths = await tree.print()
-      if (Array.isArray(filePaths))
+      if (Array.isArray(filePaths) && filePaths.length > 0) {
         await Promise.all(
           filePaths.map(async ({ path }) => {
             const file = new Factory({
@@ -100,14 +111,18 @@ export default class Client extends Config implements IClient {
               targetPath,
             })
             if (action === 'save') {
-              // await file.fetch()
               await file.save()
             }
           })
         )
+      } else {
+        Helper.throwError('`sourcePath` is empty. No Assets files to save')
+      }
     } catch (error) {
-      console.error(error)
-      throw error
+      if (isError(error)) {
+        Helper.log(error.message, true, 'error')
+        throw error
+      }
     }
   }
 }

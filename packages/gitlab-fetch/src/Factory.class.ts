@@ -2,7 +2,10 @@ import { HeaderInit } from 'node-fetch'
 import Asset, { AssetProps as DefaultAssetProps } from './Asset.class'
 import Data, { DataProps as DefaultDataProps } from './Data.class'
 import Tree, { TreeProps as DefaultTreeProps } from './Tree.class'
+import Helper from './Helper.class'
 import { RepositoryTreeItem } from './types'
+
+Helper.sourceName = 'Factory'
 
 type FactoryProps = {
   projectUrl: string
@@ -30,17 +33,17 @@ interface IFactory {
 }
 
 export default class Factory implements IFactory {
-  private instance: Asset | Data | Tree
+  private instance: Asset | Data | Tree | undefined
 
   constructor(options: FetchProps) {
     if (!options.projectUrl) {
-      throw new Error('Factory: `projectUrl` must be defined')
+      Helper.throwError('`projectUrl` must be defined')
     }
     if (!options.header) {
-      throw new Error('Factory: `header` must be defined')
+      Helper.throwError('`header` must be defined')
     }
     if (!options.path) {
-      throw new Error('Factory: `path` must be defined')
+      Helper.throwError('`path` must be defined')
     }
 
     if (options.type === 'asset') {
@@ -65,14 +68,15 @@ export default class Factory implements IFactory {
         mode,
       })
     } else {
-      throw new Error('Factory: `type` must be content, asset or three')
+      Helper.throwError('`type` must be content, asset or three')
     }
   }
 
   public async print() {
-    return await this.instance.print()
+    return await this?.instance?.print()
   }
+
   public async save() {
-    await this.instance.save()
+    await this?.instance?.save()
   }
 }

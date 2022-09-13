@@ -1,5 +1,3 @@
-import { Response } from 'node-fetch'
-
 export type RepositoryTreeItem = {
   id: string
   name: string
@@ -13,7 +11,3 @@ export type FilePath = {
   path: string
   validate?: (schema: unknown) => boolean
 }
-
-export type CreateFileArgs =
-  | { path: string; data: string }
-  | { path: string; res: Response }

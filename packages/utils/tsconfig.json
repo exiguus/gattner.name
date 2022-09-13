@@ -26,5 +26,5 @@
     "skipLibCheck": true
   },
   "exclude": ["node_modules", "./src/*.contract.ts", "./src/*.test.ts"],
-  "include": ["./src/*.ts", "./test/*.ts"]
+  "include": ["./src/*.ts", "./test/*.ts", "./src/*.test.ts"]
 }

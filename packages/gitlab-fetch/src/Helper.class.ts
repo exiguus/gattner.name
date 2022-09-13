@@ -1,7 +1,7 @@
-const NAME = 'gitlab-fetch'
+import { Helper } from '@gattner/utils'
 
-export default class Helper {
-  public static throwError(message: string, source: string) {
-    throw new Error(`${NAME}: ${message} in ${source}`)
-  }
-}
+const NAME = '@gattner/gitlab-fetch'
+
+const helper = new Helper({ name: NAME })
+
+export default helper

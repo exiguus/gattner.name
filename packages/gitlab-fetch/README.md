@@ -7,7 +7,8 @@ Fetch from GitLab with the GitLab Files API
 ### Build in public on GitHub and edit in private on GitLab
 
 * Build in public on GitHub
-* Store and edit your content and assets in private on GitLab
+* Store and edit your content, data (JSON files) and assets (image, document plops) in private on GitLab
+* Fetch and validate your data and assets in public on GitHub
 * Deploy to Vercel [1]
 
 [1] Trigger a deployment hook [with Vercel](https://vercel.com/docs/concepts/git/deploy-hooks)
@@ -25,7 +26,7 @@ import {
 import GitLabApi from '@gattner/gitlab-fetch'
 
 /*
- * Fetch files and content
+ * Fetch assets (plop) and data (json)
  *  from GitLab and store it in {sourcePath}
  */
 
@@ -88,15 +89,15 @@ export const projectId = process.env.GITLAB_PROJECT_ID
 
 ## TODO
 
-* [ ] refactor tests
+* [x] refactor tests
   * [x] fix includes
-  * [ ] asset
+  * [x] asset
   * [x] data
-  * [ ] validation
+  * [x] validation
   * [x] exceptions
   * [x] diff data
-  * [ ] diff assets
-* [ ] refactor asset/data classes
-* [ ] refactor asset/data interface
-* [ ] refactor Helper error handling
-* [ ] add print option
+  * [x] diff assets
+* [x] refactor asset/data classes
+* [x] refactor asset/data interface
+* [x] refactor Helper error handling
+* [x] add print option

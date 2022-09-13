@@ -2,17 +2,20 @@ import { HeaderInit } from 'node-fetch'
 import Helper from './Helper.class'
 
 export const GITLAB_API_URL = 'https://gitlab.com/api/v4/projects/'
+export const GITLAB_API_FILE_MODE = '100644'
+
+Helper.sourceName = 'Config'
 export default class Config {
   private token: string
   private projectId: string
 
   constructor(token: string, projectId: string) {
     if (!token) {
-      Helper.throwError('GitLab `token` is missing', 'Config')
+      Helper.throwError('GitLab `token` is missing')
     }
 
     if (!projectId) {
-      Helper.throwError('GitLab `projectId` is missing', 'Config')
+      Helper.throwError('GitLab `projectId` is missing')
     }
 
     this.projectId = projectId
