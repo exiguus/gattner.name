@@ -1,4 +1,5 @@
-import merge from './merge'
+import { expect, describe, test } from '@jest/globals'
+import { merge } from './merge'
 
 describe('merge', () => {
   const object1 = {

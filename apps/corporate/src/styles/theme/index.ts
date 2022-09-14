@@ -1,5 +1,4 @@
-import merge from '../../utils/merge'
-import { getRandomInt } from '../../utils'
+import { merge, getRandomInt } from '@gattner/utils'
 import { Theme, ThemeBase, ThemeExtended } from 'types/Theme'
 import { variables } from './variables'
 

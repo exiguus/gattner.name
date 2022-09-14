@@ -1,3 +1,5 @@
+import { expect, describe, test } from '@jest/globals'
+
 import { isTouch } from './device'
 
 describe('Device', () => {

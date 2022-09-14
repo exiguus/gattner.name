@@ -4,10 +4,19 @@
   "description": "Utility Library",
   "module": "dist/es/src/index.js",
   "types": "dist/types/src/index.d.ts",
-  "main": "dist/es/src/index.js",
+  "main": "dist/cjs/src/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/src/index.js",
+      "module": "./dist/es/src/index.js",
+      "types": "./dist/types/src/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
-    "build": "rm -rf ./dist/ && pnpm build:es",
+    "build": "rm -rf ./dist/ && pnpm build:es && pnpm build:cjs",
     "build:es": "NODE_ENV=production tsc",
+    "build:cjs": "NODE_ENV=production tsc --project tsconfig.commonjs.json",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,mjs,html}\"",
     "lint": "eslint . --ext ts --ext tsx --ext js --ext jsx --ext mjs",
@@ -31,8 +40,10 @@
   "homepage": "https://github.com/exiguus/gattner.name/packages/utils#readme",
   "devDependencies": {
     "@jest/globals": "^29.0.3",
+    "@testing-library/jest-dom": "^5.16.1",
     "@types/jest": "^27.4.0",
     "@types/node": "^17.0.6",
+    "@types/testing-library__jest-dom": "^5.14.2",
     "dotenv": "^10.0.0",
     "dotenv-cli": "^4.1.1",
     "jest": "^27.4.7",

@@ -4,10 +4,19 @@
   "description": "Fetch from GitLab with the GitLab Files API",
   "module": "dist/es/src/index.js",
   "types": "dist/types/src/index.d.ts",
-  "main": "dist/es/src/index.js",
+  "main": "dist/cjs/src/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/src/index.js",
+      "module": "./dist/es/src/index.js",
+      "types": "./dist/types/src/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
-    "build": "rm -rf ./dist/ && rm -rf ./data && pnpm build:es",
+    "build": "rm -rf ./dist/ && rm -rf ./data && pnpm build:es && pnpm build:cjs",
     "build:es": "NODE_ENV=production tsc",
+    "build:cjs": "NODE_ENV=production tsc --project tsconfig.commonjs.json",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,mjs,html}\"",
     "lint": "eslint . --ext ts --ext tsx --ext js --ext jsx --ext mjs",
