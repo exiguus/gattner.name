@@ -5,6 +5,7 @@ export const GITLAB_API_URL = 'https://gitlab.com/api/v4/projects/'
 export const GITLAB_API_FILE_MODE = '100644'
 
 Helper.sourceName = 'Config'
+
 export default class Config {
   private token: string
   private projectId: string
