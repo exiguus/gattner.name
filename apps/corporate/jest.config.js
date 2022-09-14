@@ -2,6 +2,10 @@ module.exports = {
   verbose: true,
   roots: ['<rootDir>'],
   clearMocks: true,
+  testMatch: [
+    '**/__tests__/**/*.[jt]s?(x)',
+    '**/?(*.)+(spec|test|contract).[tj]s?(x)',
+  ],
   moduleFileExtensions: ['js', 'ts', 'tsx', 'json'],
   testPathIgnorePatterns: [
     '[/\\\\](node_modules|.cache|.vscode|coverage)[/\\\\]',
