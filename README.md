@@ -8,11 +8,18 @@ In the middle of 2020 I rebuild my website. At that time I worked a lot with _re
 
 I wanted to take a closer look at the _parcel_ bundler and was looking for a way to build a static page with it, JAMStack style.
 
+From the beginning, I used the GitLab file API as a headless CMS.
+
+I have a lot of experience with headless content management systems like Contentful or Storyblok.  Which is why I decided to use GitLab and its file API as a headless CMS. Which in turn was the reason to develop the [gitlab-fetch package](/packages/gitlab-fetch).
+
 Performance optimization like bundle-size, asset compression or A11y and SEO therefore played a role.
 
 The optimizations have paid off. With the lighthouse CLI, the website achieved [100 points in all categories](https://googlechrome.github.io/lighthouse/viewer/?gist=6b8b5f4e71fda1b8b7b412c6de92e6ab) like performance, accessibility, best practice and SEO.
 
-Early 2022 transformed into a mono repo with the goal to create different packages to later switch from [Parcel v1](https://v1.parceljs.org/) to [WMR](https://wmr.dev/) and build various [Next.js](https://nextjs.org/) applications:
+Early 2022 transformed into a Monorepo. Using pnpm workspaces and a Turborepo build system.
+
+In the next few months, the plan is to move from [Parcel v1](https://v1.parceljs.org/) to [WMR](https://wmr.dev/) for the corporate app. Create a shared UI Library with packages for buttons, headlines, teaser etc. and document them in Storybook. Build a resume app in Next.js and Supabase.
+And build a blog using the Astro island architecture.
 
 * [x] Corporate Site Application
 * [ ] Resume Application
