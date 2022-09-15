@@ -68,7 +68,7 @@ export default class Factory implements IFactory {
         mode,
       })
     } else {
-      Helper.throwError('`type` must be content, asset or three')
+      Helper.throwError('`type` must be content, asset or tree')
     }
   }
 

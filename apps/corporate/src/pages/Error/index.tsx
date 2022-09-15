@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react'
+import { getRandomInt } from '@gattner/utils'
 import { ErrorProps } from '../../../schemas'
 import { Headline } from '../../components/Headline'
 import { Paragraph } from '../../components/Paragraph'
 import { Blockquote } from '../../components/Blockquote'
 import { HorizontalBreak } from '../../components/HorizontalBreak'
-import { getRandomInt } from '../../utils'
 
 const Error: FunctionComponent<ErrorProps> = ({ content, quote, title }) => {
   const currentQuote = quote.content[getRandomInt(0, quote.content.length)]

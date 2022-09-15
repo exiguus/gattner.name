@@ -6,7 +6,7 @@ import React, {
 } from 'react'
 import styled from 'styled-components'
 // import Randext from 'randext'
-import { getRandomInt } from '../../../utils'
+import { getRandomInt } from '@gattner/utils'
 
 // jest does not support es modules
 // because we us ts-jest to compile typescript

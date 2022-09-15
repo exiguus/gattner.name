@@ -1,5 +1,5 @@
 import { BrowserMicroSentryClient as Sentry } from '@micro-sentry/browser'
-import { removeEmpty } from '../../utils/removeEmpty'
+import { removeEmpty } from '@gattner/utils'
 
 export const RELEASE_NAMESPACE = 'gattner.name@'
 

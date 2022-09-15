@@ -99,6 +99,7 @@
     "@emotion/memoize": "^0.7.5",
     "@emotion/stylis": "^0.8.5",
     "@emotion/unitless": "^0.7.5",
+    "@gattner/utils": "workspace:^1.0.0",
     "@micro-sentry/browser": "^2.1.2",
     "@micro-sentry/core": "^2.1.2",
     "axios": "^0.24.0",

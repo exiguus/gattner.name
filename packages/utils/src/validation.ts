@@ -1,3 +1,11 @@
+export const isArray = (v: unknown): v is [] => {
+  return Array.isArray(v)
+}
+
+export const isObject = (v: unknown): v is Record<string, unknown> => {
+  return typeof v === 'object' && v !== null && !Array.isArray(v)
+}
+
 export const isError = (error: unknown): error is Error =>
   error instanceof Error &&
   typeof error === 'object' &&

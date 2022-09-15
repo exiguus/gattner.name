@@ -1,3 +1,5 @@
+import { isObject } from './validation'
+
 export function getRandomInt(min: number, max: number): number {
   min = Math.ceil(min)
   max = Math.floor(max)
@@ -18,12 +20,4 @@ export const sortObject = (
         }),
       {}
     )
-}
-
-export const isArray = (v: unknown): v is [] => {
-  return Array.isArray(v)
-}
-
-export const isObject = (v: unknown): v is Record<string, unknown> => {
-  return typeof v === 'object' && v !== null && !Array.isArray(v)
 }

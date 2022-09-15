@@ -1,4 +1,4 @@
-import { isObject, isArray } from '.'
+import { isObject, isArray } from './validation'
 export const WRAPPER_DEPTH = 10
 
 let wrapper_depth = 0

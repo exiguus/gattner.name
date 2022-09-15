@@ -28,7 +28,7 @@ const isObject = (obj: unknown) => {
   return false
 }
 
-const merge = <T extends DraftObject[]>(
+export const merge = <T extends DraftObject[]>(
   ...objects: T
 ): UnionToIntersection<T[number]> =>
   objects.reduce((result, current) => {
@@ -43,5 +43,3 @@ const merge = <T extends DraftObject[]>(
     return result
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   }, {}) as any
-
-export default merge

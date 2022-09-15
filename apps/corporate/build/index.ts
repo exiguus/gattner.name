@@ -12,7 +12,7 @@ import GitLabApi from '@gattner/gitlab-fetch'
  *  from GitLab and store it in {sourcePath}
  */
 
-async function fetchData() {
+export async function fetchData() {
   if (!token) {
     throw new Error('Fetch data: GitLab token is missing')
   }

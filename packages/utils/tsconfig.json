@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "target": "ES2019",
+    "lib": ["DOM", "ES2016", "ES2017", "esnext.asynciterable", "DOM.Iterable", "WebWorker"],
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
@@ -13,18 +16,15 @@
     "strictNullChecks": true,
     "declaration": true,
     "declarationDir": "./dist/types",
-    "module": "CommonJS",
-    "moduleResolution": "Node",
+    "module": "ESnext",
+    "moduleResolution": "node",
     "outDir": "./dist/es",
-    "lib": ["ES2016", "ES2017", "ES2018"],
     "allowJs": true,
-    "target": "ES2019",
-    "resolveJsonModule": true,
     "rootDir": ".",
     "typeRoots": ["node_modules/@types"],
-    "types": ["node", "jest"],
+    "types": ["node", "jest", "@testing-library/jest-dom"],
     "skipLibCheck": true
   },
-  "exclude": ["node_modules", "./src/*.contract.ts", "./src/*.test.ts"],
-  "include": ["./src/*.ts", "./test/*.ts", "./src/*.test.ts"]
+  "exclude": ["node_modules", "./src/*.test.ts"],
+  "include": ["./src/*.ts"]
 }

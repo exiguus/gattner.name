@@ -1,5 +1,4 @@
-import merge from './merge'
-import { sortObject } from '.'
+import { merge, sortObject } from '@gattner/utils'
 import { Meta } from '../../schemas'
 import { DocumentMetaProps } from 'react-document-meta'
 
