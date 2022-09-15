@@ -30,6 +30,7 @@ export type BlockquoteProps = {
   author?: string
   cite?: string
 } & OptionalProps
+
 const Blockquote: FunctionComponent<BlockquoteProps> = ({
   author,
   cite,

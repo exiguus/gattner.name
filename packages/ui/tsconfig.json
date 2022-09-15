@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "ES2019",
+    "lib": ["DOM", "ES2016", "ES2017", "esnext.asynciterable", "DOM.Iterable", "WebWorker"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "declaration": true,
+    "module": "ESnext",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "typeRoots": ["node_modules/@types"],
+    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "skipLibCheck": true
+  },
+}
