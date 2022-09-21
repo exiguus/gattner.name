@@ -1,4 +1,7 @@
-module.exports = {
+import { Config } from 'jest'
+
+const config: Config = {
+  preset: 'ts-jest/presets/js-with-babel',
   verbose: true,
   roots: ['<rootDir>'],
   clearMocks: true,
@@ -15,7 +18,7 @@ module.exports = {
   ],
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$'],
   transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest',
+    '^.+\\.(ts|tsx|mjs)$': 'ts-jest',
   },
   watchPlugins: [
     'jest-watch-typeahead/filename',
@@ -27,3 +30,5 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/test/__mocks__/windowMediaMock.js'],
   testEnvironment: 'jsdom',
 }
+
+export default config

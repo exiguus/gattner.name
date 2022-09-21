@@ -9,7 +9,7 @@
     "paths": {
       "react": ["node_modules/preact-compat/"],
       "react-dom": ["node_modules/preact-compat/"],
-      "react-router": ["node_modules/preact-compat/"]
+      "react-router": ["node_modules/preact-compat/"],
     },
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
@@ -29,5 +29,5 @@
     "types": ["node", "jest", "@testing-library/jest-dom"],
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx"],
 }

@@ -1,4 +1,6 @@
-module.exports = {
+import { Config } from 'jest'
+
+const config: Config = {
   verbose: true,
   roots: ['<rootDir>'],
   clearMocks: true,
@@ -23,3 +25,5 @@ module.exports = {
   ],
   testEnvironment: 'jsdom',
 }
+
+export default config

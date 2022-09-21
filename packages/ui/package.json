@@ -1,0 +1,22 @@
+{
+  "name": "@gattner/ui",
+  "version": "1.0.0",
+  "description": "Shared UI Library",
+  "keywords": [
+    "Shared UI",
+    "UI Library"
+  ],
+  "author": {
+    "name": "Simon Gattner",
+    "url": "https://gattner.name/",
+    "twitter": "https://twitter.com/exiguus_"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/exiguus/gattner.name.git/packages/ui"
+  },
+  "devDependencies": {
+    "jest": "^29.0.3"
+  }
+}
