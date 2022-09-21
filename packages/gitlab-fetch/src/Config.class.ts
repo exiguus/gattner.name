@@ -1,4 +1,4 @@
-import { HeaderInit } from 'node-fetch'
+import { HeadersInit } from 'node-fetch'
 import Helper from './Helper.class'
 
 export const GITLAB_API_URL = 'https://gitlab.com/api/v4/projects/'
@@ -23,7 +23,7 @@ export default class Config {
     this.token = token
   }
 
-  public get header(): HeaderInit {
+  public get header(): HeadersInit {
     return {
       Accept: 'text/plain; charset=utf-8',
       'Content-Type': 'application/json',

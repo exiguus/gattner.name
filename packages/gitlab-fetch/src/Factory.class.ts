@@ -1,4 +1,4 @@
-import { HeaderInit } from 'node-fetch'
+import { HeadersInit } from 'node-fetch'
 import Asset, { AssetProps as DefaultAssetProps } from './Asset.class'
 import Data, { DataProps as DefaultDataProps } from './Data.class'
 import Tree, { TreeProps as DefaultTreeProps } from './Tree.class'
@@ -9,7 +9,7 @@ Helper.sourceName = 'Factory'
 
 type FactoryProps = {
   projectUrl: string
-  header: HeaderInit
+  header: HeadersInit
   path: string
 }
 

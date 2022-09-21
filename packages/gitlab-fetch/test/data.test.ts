@@ -1,3 +1,4 @@
+import { expect, describe, test } from '@jest/globals'
 import Ajv from 'ajv'
 import GitLabApi from '../src'
 import { FilePath } from '../src'
