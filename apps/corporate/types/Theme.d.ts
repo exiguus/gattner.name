@@ -1,5 +1,6 @@
 export type ThemeBase = {
   fonts: {
+    fontSize: number
     monospace: string
   }
   application: {

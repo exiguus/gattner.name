@@ -24,7 +24,13 @@ const typeNavCSS = css<ListItemProps>`
 
 const typeIconCSS = css`
   display: block;
-  min-width: 1.5rem;
+  min-width: 1.6rem;
+  height: 2.8rem;
+  line-height: 2.8rem;
+
+  a {
+    display: block;
+  }
 `
 
 const typeMenuCSS = css<ListItemProps>`
@@ -40,6 +46,11 @@ const typeMenuCSS = css<ListItemProps>`
 `
 
 const StyledListItem = styled.li<ListItemProps>`
+  line-height: 1;
+  @media (min-width: ${(props): string =>
+      props.theme.breakpoint.screenTablet}) {
+    font-size: 1.2em;
+  }
   ${(
     props
   ):

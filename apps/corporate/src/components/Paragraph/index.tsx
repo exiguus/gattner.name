@@ -6,6 +6,7 @@ import { isPrerender } from '../../utils/prerender'
 type AlignProps = 'left' | 'right' | 'center'
 
 const StyledParagraph = styled.p<{ align?: AlignProps }>`
+  font-size: 1.2em;
   margin-bottom: 1rem;
   ${props => props.align && `text-align: ${props.align}`}
 `

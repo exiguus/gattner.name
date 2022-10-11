@@ -5,7 +5,6 @@ import React, {
   MutableRefObject,
 } from 'react'
 import styled from 'styled-components'
-// import Randext from 'randext'
 import { getRandomInt } from '@gattner/utils'
 
 // jest does not support es modules
@@ -18,7 +17,7 @@ const Randext = require('../../../../node_modules/randext/dist/randext.min.js')
 const StyledAnimation = styled.span`
   display: block;
   unicode-bidi: embed;
-  font-size: 5.6vh;
+  font-size: 5.2vh;
   font-weight: 600;
   letter-spacing: 0.064em;
   line-height: 1.875em;
@@ -29,7 +28,9 @@ const StyledAnimation = styled.span`
 
   @media (min-width: ${(props): string =>
       props.theme.breakpoint.screenTablet}) {
-    font-size: 5.8vh;
+    font-size: 6.4vh;
+    /* allow oversized words, without line-break them */
+    width: 120%;
   }
 
   [data-randext-char] {
