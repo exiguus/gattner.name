@@ -1,4 +1,4 @@
-import fetch, { HeaderInit, Response } from 'node-fetch'
+import fetch, { HeadersInit, Response } from 'node-fetch'
 import { existsSync, mkdirSync } from 'fs'
 import { RepositoryTreeItem, ValidateFunction } from './types'
 import Helper from './Helper.class'
@@ -7,7 +7,7 @@ Helper.sourceName = 'Fetch'
 
 export type DefaultProps = {
   projectUrl: string
-  header: HeaderInit
+  header: HeadersInit
   path: string
 }
 
@@ -33,7 +33,7 @@ export default class Fetch {
   public readonly path: string
   public readonly targetPath: string
   public readonly validate?: ValidateFunction
-  public readonly header: HeaderInit
+  public readonly header: HeadersInit
   public readonly mode?: string
   public readonly projectUrl: string
   public url: string

@@ -25,7 +25,7 @@ export default class Asset extends Fetch {
   private async createWriteStream(): Promise<void> {
     this.checkDir()
     if (this.res) {
-      await this.res.body.pipe(
+      await this?.res?.body?.pipe(
         createWriteStream(`${this.targetPath}/${this.path}`)
       )
     } else {

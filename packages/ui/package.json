@@ -1,0 +1,47 @@
+{
+  "name": "@gattner/ui",
+  "version": "1.0.0",
+  "description": "Shared UI Library",
+  "keywords": [
+    "Shared UI",
+    "UI Library"
+  ],
+  "author": {
+    "name": "Simon Gattner",
+    "url": "https://gattner.name/",
+    "twitter": "https://twitter.com/exiguus_"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/exiguus/gattner.name.git/packages/ui"
+  },
+  "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "build": "build-storybook --output-dir ./dist/"
+  },
+  "devDependencies": {
+    "@babel/core": ">=7.13.0 <8.0.0",
+    "@babel/plugin-syntax-flow": "^7.14.5",
+    "@babel/plugin-transform-react-jsx": "^7.14.9",
+    "@storybook/addon-a11y": "^6.5.12",
+    "@storybook/addon-actions": "^6.5.12",
+    "@storybook/addon-backgrounds": "^6.5.12",
+    "@storybook/addon-controls": "^6.5.12",
+    "@storybook/addon-docs": "^6.5.12",
+    "@storybook/addon-essentials": "^6.1.17",
+    "@storybook/addon-links": "^6.5.12",
+    "@storybook/addon-viewport": "^6.5.12",
+    "@storybook/node-logger": "^6.1.17",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/react": "^6.1.17",
+    "@types/node": "^18.8.4",
+    "react": "16",
+    "react-dom": "16",
+    "react-refresh": "0.9",
+    "react-scripts": "5.0.1",
+    "require-from-string": "^2.0.2",
+    "typescript": "^4.8.3",
+    "webpack": ">=4.43.0 <6.0.0"
+  }
+}

@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react'
 import { getRandomInt } from '@gattner/utils'
+import { Blockquote } from '@gattner/ui-blockquote'
 import { ErrorProps } from '../../../schemas'
 import { Headline } from '../../components/Headline'
 import { Paragraph } from '../../components/Paragraph'
-import { Blockquote } from '../../components/Blockquote'
 import { HorizontalBreak } from '../../components/HorizontalBreak'
 
 const Error: FunctionComponent<ErrorProps> = ({ content, quote, title }) => {

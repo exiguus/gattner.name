@@ -1,17 +1,19 @@
-module.exports = {
+import { Config } from 'jest'
+
+const config: Config = {
   verbose: true,
   roots: ['<rootDir>'],
   clearMocks: true,
+  moduleFileExtensions: ['js', 'ts', 'tsx', 'json'],
   testMatch: [
     '**/__tests__/**/*.[jt]s?(x)',
     '**/?(*.)+(spec|test|contract).[tj]s?(x)',
   ],
-  moduleFileExtensions: ['js', 'ts', 'tsx', 'json'],
   testPathIgnorePatterns: [
-    '[/\\\\](node_modules|.cache|.vscode|coverage)[/\\\\]',
+    '[/\\\\](node_modules|.cache|.vscode|coverage|data|dist)[/\\\\]',
   ],
   coveragePathIgnorePatterns: [
-    '[/\\\\](node_modules|.cache|.vscode|coverage|test|GlobalStyles|mocks)[/\\\\]',
+    '[/\\\\](node_modules|.cache|.vscode|coverage|test|mocks|data|dist)[/\\\\]',
   ],
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$'],
   transform: {
@@ -21,9 +23,7 @@ module.exports = {
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',
   ],
-  moduleNameMapper: {
-    '\\.(gif|woff|woff2|svg|png)$': '<rootDir>/test/__mocks__/fileMock.js',
-  },
-  setupFilesAfterEnv: ['<rootDir>/test/__mocks__/windowMediaMock.js'],
   testEnvironment: 'jsdom',
 }
+
+export default config

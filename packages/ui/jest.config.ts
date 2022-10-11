@@ -1,4 +1,6 @@
-module.exports = {
+import { Config } from 'jest'
+
+const config: Config = {
   verbose: true,
   roots: ['<rootDir>'],
   clearMocks: true,
@@ -21,6 +23,7 @@ module.exports = {
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',
   ],
-  testEnvironment: 'node',
-  setupFilesAfterEnv: ['<rootDir>/test/testSetup.ts'],
+  testEnvironment: 'jsdom',
 }
+
+export default config
