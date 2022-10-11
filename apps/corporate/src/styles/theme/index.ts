@@ -41,6 +41,7 @@ const [backgroundHue, backgroundSaturation, backgroundAlpha] = getRandomColor()
 
 export const theme: ThemeBase = {
   fonts: {
+    fontSize: variables.FontSize,
     monospace:
       'IBM Plex Mono, Menlo, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier, monospace',
   },
@@ -75,7 +76,7 @@ export const theme: ThemeBase = {
     screenTablet: rem({ px: variables.screenTablet }),
   },
   section: {
-    maxWidthDesktop: `${variables.MaxSectionWidth / 16}vw`,
+    maxWidthDesktop: rem({ px: variables.MaxSectionWidth }),
     maxWidthTablet: rem({ px: variables.MaxSectionWidth }),
     marginBottom: rem({ px: variables.FontSize }),
     column: {

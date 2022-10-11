@@ -56,7 +56,7 @@ const typeLineCSS = css`
 
   li + li::before {
     position: relative;
-    top: -0.333em;
+    top: -0.2em;
     left: -0.5em;
     content: '·';
   }

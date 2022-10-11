@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom'
 export const StyleNavLink = css`
   display: inline-block;
   font-size: inherit;
+  line-height: inherit;
+  height: inherit;
   color: ${(props): string => props.theme.link.color};
   text-decoration: none;
   overflow: hidden;

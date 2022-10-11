@@ -7,7 +7,7 @@ export const variables = {
   White: '#FFFFFF',
 
   MinHeight: 100,
-  MaxSectionWidth: 640,
+  MaxSectionWidth: 520,
 
   // Units
   BorderSize: 1,

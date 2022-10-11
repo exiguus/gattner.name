@@ -17,6 +17,7 @@ const StyledHeaderInner = styled.div`
 `
 
 const Brand = styled.h1`
+  font-size: 1.2em;
   font-weight: 600;
   padding: 0 0.5rem;
   margin-bottom: 1rem;
@@ -28,13 +29,13 @@ const Brand = styled.h1`
 
 const Title = styled.strong`
   display: block;
+  font-size: 0.8em;
   font-weight: 300;
 `
 
 const StyledNavLink = styled(Link)`
   font-size: inherit;
   text-decoration: none;
-
   &:hover,
   &:active,
   &:focus {
