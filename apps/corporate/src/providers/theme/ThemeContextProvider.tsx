@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useMemo, useReducer } from 'react'
-import { darkTheme, lightTheme } from '../../styles/theme'
+import { darkTheme, lightTheme } from '@gattner/ui-theme'
 import { ThemeProvider } from 'styled-components'
 import { prev, current, updateTheme } from './lib'
 import { ThemeContext, ThemeContextProps } from './ThemeContext'

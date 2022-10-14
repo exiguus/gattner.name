@@ -1,5 +1,12 @@
 import { createGlobalStyle } from 'styled-components'
+import '@gattner/types'
 
+/**
+ * IBM / plex
+ * IBM Plex Mono
+ * SOURCE https://github.com/IBM/plex
+ * LICENCE https://github.com/IBM/plex/blob/master/LICENSE.txt
+ */
 import IBMPlexMono300Woff from '../../../assets/fonts/ibm-plex-mono-v6-latin-300.woff'
 import IBMPlexMono300Woff2 from '../../../assets/fonts/ibm-plex-mono-v6-latin-300.woff2'
 import IBMPlexMono600Woff from '../../../assets/fonts/ibm-plex-mono-v6-latin-600.woff'

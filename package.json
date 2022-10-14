@@ -8,7 +8,7 @@
     "type-check": "turbo run type-check",
     "build": "turbo run lint test build type-check bundlewatch",
     "build:corporate": "turbo run lint test build type-check bundlewatch --filter=corporate",
-    "build:resume": "turbo run lint test build type-check bundlewatch --filter=resume",
+    "build:resume": "turbo run lint test build type-check --filter=resume",
     "build:ui": "turbo run lint test build type-check --filter=ui",
     "build:packages": "turbo run lint test build type-check --filter=./packages/* --filter=!ui",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,mjs,html}\"",

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "jsx": "react",
     "target": "ES2019",
+    "jsx": "react",
     "lib": [
       "DOM",
       "ES2016",
@@ -23,11 +23,14 @@
     "strict": true,
     "strictNullChecks": true,
     "declaration": true,
+    "declarationDir": "./dist/types",
     "module": "ESnext",
     "moduleResolution": "node",
+    "outDir": "./dist/es",
     "allowJs": true,
+    "rootDir": ".",
     "typeRoots": [
-      "node_modules/@types",
+      "node_modules/@types"
     ],
     "types": [
       "node",
@@ -36,4 +39,10 @@
     ],
     "skipLibCheck": true
   },
+  "exclude": [
+    "./src/*.test.ts"
+  ],
+  "include": [
+    "./src/*.ts",
+  ]
 }

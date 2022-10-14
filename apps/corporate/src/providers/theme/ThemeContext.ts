@@ -1,6 +1,5 @@
 import { createContext, Dispatch } from 'react'
-import { lightTheme } from '../../styles/theme'
-import { Theme } from '../../../types/Theme'
+import { lightTheme, Theme } from '@gattner/ui-theme'
 
 export type StoreItem = { timestamp: number; darkMode: boolean }
 

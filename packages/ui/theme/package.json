@@ -1,7 +1,7 @@
 {
-  "name": "@gattner/ui-blockquote",
+  "name": "@gattner/ui-theme",
   "version": "1.0.0",
-  "description": "Blockquote Component in Shared UI Library",
+  "description": "Theme in Shared UI Library",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
   "types": "dist/types/index.d.ts",
@@ -14,7 +14,7 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "pnpm build:es && pnpm build:cjs",
+    "build": "rm -rf ./dist/ && pnpm build:es && pnpm build:cjs && cp -R ./assets ./dist/",
     "build:es": "NODE_ENV=production tsc",
     "build:cjs": "NODE_ENV=production tsc --project tsconfig.commonjs.json",
     "type-check": "tsc --pretty --noEmit",
@@ -23,22 +23,22 @@
     "test:unit": "dotenv -e .env.local -- jest"
   },
   "keywords": [
-    "Utilities",
-    "TypeScript"
+    "Theme",
+    "Fonts",
+    "Global Styles"
   ],
   "author": {
     "name": "Simon Gattner",
     "url": "https://gattner.name/",
-    "mastodon": "https://toot.community/@exiguus"
+    "twitter": "https://twitter.com/exiguus_"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/exiguus/gattner.name.git/packages/ui/blockquote"
+    "url": "https://github.com/exiguus/gattner.name.git/packages/ui/theme"
   },
-  "homepage": "https://github.com/exiguus/gattner.name/packages/ui/blockquote#readme",
+  "homepage": "https://github.com/exiguus/gattner.name/packages/ui/theme#readme",
   "devDependencies": {
-    "@gattner/storybook": "workspace:^1.0.0",
     "@gattner/types": "workspace:^1.0.0",
     "@jest/globals": "^29.0.3",
     "@testing-library/jest-dom": "^5.16.5",
@@ -60,5 +60,8 @@
     "react-dom": "16",
     "react-is": "16",
     "styled-components": "5"
+  },
+  "dependencies": {
+    "@gattner/utils": "workspace:^1.0.0"
   }
 }

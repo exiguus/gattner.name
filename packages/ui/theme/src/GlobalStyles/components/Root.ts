@@ -1,6 +1,19 @@
 import { createGlobalStyle } from 'styled-components'
 
-const Body = createGlobalStyle`
+const Root = createGlobalStyle`
+  @keyframes fadeInBody {
+    0% {
+      background-color: ${(props): string =>
+        props.theme.application.backgroundAnimationColor};
+      opacity: 0;
+    }
+    100% {
+      background-color: ${(props): string =>
+        props.theme.application.backgroundColor};
+      opacity: 1;
+    }
+  }
+
   html {
     /**
      * Adoptive Typography
@@ -76,4 +89,4 @@ const Body = createGlobalStyle`
   }
 `
 
-export { Body }
+export { Root }

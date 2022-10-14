@@ -117,6 +117,7 @@
     "@gattner/supabase": "workspace:^1.0.0",
     "@gattner/tracker": "workspace:^1.0.0",
     "@gattner/ui-blockquote": "workspace:^1.0.0",
+    "@gattner/ui-theme": "workspace:^1.0.0",
     "@gattner/utils": "workspace:^1.0.0",
     "@micro-sentry/browser": "^2.1.2",
     "@micro-sentry/core": "^2.1.2",
