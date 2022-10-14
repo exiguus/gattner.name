@@ -1,4 +1,3 @@
-// Blockquote.stories.tsx
 import * as React from 'react'
 import { Meta, Story } from '@storybook/react'
 import { DocsPage } from '@gattner/storybook'

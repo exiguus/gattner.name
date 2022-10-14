@@ -1,4 +1,3 @@
-// Blockquote.stories.tsx
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import styled, { ThemeProvider as OriginThemeProvider } from 'styled-components'
 import { Meta, Story } from '@storybook/react'

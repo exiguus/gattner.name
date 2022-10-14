@@ -43,6 +43,13 @@ const Readme = styled(ReactMarkdown)`
     font-size: 1em;
   }
 
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin-bottom: 0.6em;
+  }
+
   ul li {
     list-style: disc inside;
   }
@@ -67,14 +74,28 @@ const Readme = styled(ReactMarkdown)`
 
   pre {
     margin-bottom: 60px;
+    width: 100%;
   }
 
-  pre code {
+  code {
     padding: 5px 10px;
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.01);
+  }
+
+  pre code {
+    display: inline-block;
+    padding: 5px 10px 25px 10px;
+    width: 100%;
+  }
+
+  pre code::before {
+    content: '<code />';
+    display: block;
+    font-size: 0.6em;
+    margin-bottom: 2em;
   }
 
   a {
@@ -103,4 +124,9 @@ export const DocsPage = ({ markdown }: { markdown: string }) => (
     <ArgsTable story={PRIMARY_STORY} />
     <Stories />
   </>
+)
+
+export const Docs = ({ markdown }: { markdown: string }) => (
+  // eslint-disable-next-line react/no-children-prop
+  <Readme remarkPlugins={[remarkGfm]} children={markdown} />
 )

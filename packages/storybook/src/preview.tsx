@@ -28,7 +28,7 @@ export const parameters: Parameters = {
   options: {
     storySort: (a: SortParams, b: SortParams) => {
       // Sort the Welcome story to the top
-      if (b[1].kind === 'Welcome') {
+      if (b[1].kind === 'UI/Story') {
         return 1
       }
 

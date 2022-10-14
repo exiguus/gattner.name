@@ -1,5 +1,5 @@
 import { parameters, decorators } from './preview'
-import { DocsPage } from './DocsPage'
+import { DocsPage, Docs } from './DocsPage'
 
 export { parameters, decorators }
-export { DocsPage }
+export { DocsPage, Docs }

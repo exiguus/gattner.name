@@ -14,7 +14,7 @@ The Shared UI Library follows the [Atomic Design methodology](https://atomicdesi
 
 Design + Development <https://ui.gattner.name/>
 
-_Goals_:
+### Goals
 
 * Design and development work can be created and replicated quickly and at scale.
 * Creates a unified language within and between cross-functional teams.
@@ -23,12 +23,34 @@ _Goals_:
 
 See: <https://www.nngroup.com/articles/design-systems-101/>
 
-## Development
+## Package Development
 
 ### Build
 
 * esnext build for react
 * commonjs build for jest
+
+```json
+// package.json
+...
+  "name": "@gattner/ui-[name]",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "module": "./dist/es/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+...
+```
+
+### Install
+
+`pnpm i @gattner/ui-[name]`
 
 ### Peer Dependencies
 
@@ -44,7 +66,7 @@ The corporate side use Parcel 1.2 and its pre-render plugin that depends on reac
 * [x] theme package
   * [x] style, fonts, theme, colors packages
   * [x] preview.ts provider for globalStyles, fonts, theme
-* [ ] storybook landing page (README.md)
+* [x] storybook landing page (README.md)
 * [ ] move corporate components into packages and add a story
   * [ ] headline
   * [ ] paragraph
