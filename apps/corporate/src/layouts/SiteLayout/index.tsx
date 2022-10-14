@@ -1,6 +1,5 @@
 import React, { FunctionComponent, ReactNode } from 'react'
 import { ThemeContextProvider } from '../../providers/theme'
-
 import { GlobalStyles } from '@gattner/ui-theme'
 
 interface SiteLayoutProps {

@@ -7,6 +7,7 @@
     "test": "turbo run test --parallel",
     "type-check": "turbo run type-check",
     "build": "turbo run lint test build type-check bundlewatch",
+    "build:packages": "turbo run lint test build type-check --filter=./packages/* --filter=!ui",
     "build:corporate": "turbo run lint test build type-check bundlewatch --filter=corporate",
     "build:resume": "turbo run lint test build type-check --filter=resume",
     "build:ui": "turbo run lint test build type-check --filter=ui",
