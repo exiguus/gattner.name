@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useEffect } from 'react'
 import { getRandomInt } from '@gattner/utils'
+import { Headline } from '@gattner/ui-headline'
 import { Blockquote } from '@gattner/ui-blockquote'
 import { ErrorProps } from '../../../schemas'
-import { useTranslate } from '../../hooks/useTranslate'
-import { Headline } from '../../components/Headline'
 import { Paragraph } from '../../components/Paragraph'
 import { HorizontalBreak } from '../../components/HorizontalBreak'
 import { Group } from '../../components/Group'
+import { useTranslate } from '../../hooks/useTranslate'
 
 const Error: FunctionComponent<ErrorProps> = ({
   content,

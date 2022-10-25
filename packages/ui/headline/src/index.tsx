@@ -1,7 +1,6 @@
-import { FunctionComponent } from 'preact'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, FunctionComponent } from 'react'
 import styled from 'styled-components'
-import { SrOnly } from '../SrOnly'
+import { SrOnly } from './components/SrOnly'
 
 const StyledHeadline = styled.h1`
   margin-bottom: 1rem;
@@ -28,7 +27,7 @@ type OptionalProps =
   | { text: string; children?: never }
   | { text?: never; children: ReactNode }
 
-type HeadlineProps = {
+export type HeadlineProps = {
   icon?: ReactNode
   srOnly?: boolean
 } & OptionalProps
