@@ -15,7 +15,6 @@ import {
   UserRecenttrack,
 } from '../../lib/lastFm/normalizeUserRecenttracks'
 import { UserRecenttracks } from 'schemas/lastFm'
-import { getUserRecenttracks } from '../../lib/lastFm/getUserRecenttracks'
 import { useSentry } from '../../hooks/useSentry'
 
 export const LastFmContextProvider: FunctionComponent = ({ children }) => {
@@ -68,7 +67,16 @@ export const LastFmContextProvider: FunctionComponent = ({ children }) => {
     let isMounted = true
     setPendingRequests(n => n + 1)
 
-    getUserRecenttracks().then(fr => {
+    const getTracks = async () => {
+      return window.sw?.lastfm
+        ? await window.sw.lastfm.messageSW({ type: 'GET_TRACK' })
+        : {
+            error: new Error('Service Worker not registered'),
+            data: 'Service worker not available',
+          }
+    }
+
+    getTracks().then(fr => {
       if (!isMounted) return // do not update state if component is not mounted anymore
 
       if (fr.result === 'successful') {

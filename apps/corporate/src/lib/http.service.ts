@@ -1,7 +1,9 @@
 import axios, { AxiosRequestConfig } from 'axios'
+import fetchAdapter from '@vespaiach/axios-fetch-adapter'
 
 export const httpConfig: AxiosRequestConfig = {
   responseType: 'json',
+  adapter: fetchAdapter,
 }
 
 /**

@@ -1,6 +1,7 @@
 import 'preact/devtools'
 import React from 'react'
 import { hydrate, render } from 'react-dom'
+import { Workbox } from 'workbox-window'
 import { isPrerender } from './utils/prerender'
 import { addPreloadScripts, addPrefetchFonts } from './utils/head'
 import { addStyledComponentStyles } from './utils/styles'
@@ -61,8 +62,21 @@ appElement.hasChildNodes()
       callback
     )
 
+declare global {
+  interface Window {
+    sw: Record<string, Workbox>
+  }
+}
+
+if ('serviceWorker' in navigator) {
+  window.sw = window.sw || {}
+  window.sw.lastfm = new Workbox('/sw-lastfm.js')
+
+  window.sw.lastfm.register()
+}
+
 if (process.env.NODE_ENV === 'production' && !prerender) {
-  const sw = '/service-worker.js'
+  const sw = '/sw-cache.js'
   navigator.serviceWorker
     .register(sw)
     .then(registration => {
