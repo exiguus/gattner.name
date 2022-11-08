@@ -18,11 +18,7 @@ self.addEventListener('message', event => {
   switch (event.data.type) {
     case 'GET_TRACK':
       getUserRecenttracks().then(fr => {
-        if (fr.result === 'successful') {
-          send(fr.data)
-        } else {
-          send(undefined, fr.error, fr.data)
-        }
+        send(fr)
       })
       break
     case 'GET_VERSION':
