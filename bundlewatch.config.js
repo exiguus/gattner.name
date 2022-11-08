@@ -12,7 +12,7 @@ const bundlewatchConfig = {
     },
     {
       path: 'dist/sw-lastfm.js',
-      maxSize: '30KB',
+      maxSize: '60KB',
       compression: 'none',
     },
   ],
