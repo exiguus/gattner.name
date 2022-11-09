@@ -1,3 +1,5 @@
+import { UserRecenttracks } from 'schemas/lastFm'
+import { FetchResult } from 'src/utils/fetch'
 import { Workbox } from 'workbox-window'
 declare global {
   interface Window {
@@ -5,7 +7,7 @@ declare global {
   }
 }
 
-export const getTrack = async () => {
+export const getTrack = async (): Promise<FetchResult<UserRecenttracks>> => {
   if ('serviceWorker' in navigator) {
     window.sw = window.sw || {}
     window.sw.lastfm = new Workbox('/sw-lastfm.js')
@@ -13,9 +15,9 @@ export const getTrack = async () => {
     window.sw.lastfm.register()
     return await window.sw.lastfm.messageSW({ type: 'GET_TRACK' })
   } else {
-    return {
-      error: new Error('Service Worker not registered'),
-      data: 'Service worker is not available',
+    return await {
+      result: 'request-failed',
+      error: new Error('Service Worker not found'),
     }
   }
 }

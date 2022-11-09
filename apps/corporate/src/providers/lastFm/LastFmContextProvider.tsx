@@ -45,7 +45,9 @@ export const LastFmContextProvider: FunctionComponent = ({ children }) => {
       if (error) {
         let message
 
-        if (error.message.includes('Network Error')) {
+        if (error.message.includes('Service Worker')) {
+          message = 'Service Worker not found'
+        } else if (error.message.includes('Network Error')) {
           // 'Network Error' is implemented by Axios
           message = 'Network error'
         } else {
