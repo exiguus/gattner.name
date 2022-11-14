@@ -14,9 +14,12 @@ import {
   normalizeUserRecenttracks,
   UserRecenttrack,
 } from '../../lib/lastFm/normalizeUserRecenttracks'
-import { getTrack } from '../../lib/lastFm/getTrack'
 import { UserRecenttracks } from 'schemas/lastFm'
 import { useSentry } from '../../hooks/useSentry'
+import {
+  getUserRecenttracks,
+  swMessageGetUserRecenttracks,
+} from '../../lib/lastFm/getUserRecenttracks'
 
 export const LastFmContextProvider: FunctionComponent = ({ children }) => {
   const { sentryWithExtras } = useSentry()
@@ -70,11 +73,23 @@ export const LastFmContextProvider: FunctionComponent = ({ children }) => {
     let isMounted = true
     setPendingRequests(n => n + 1)
 
-    getTrack().then(fr => {
+    swMessageGetUserRecenttracks().then(fr => {
       if (!isMounted) return // do not update state if component is not mounted anymore
 
       if (fr.result === 'successful') {
         update(fr.data)
+      } else if (fr.result === 'request-failed') {
+        update(undefined, fr.error)
+        // fallback to userRecenttracks
+        getUserRecenttracks().then(fr => {
+          if (!isMounted) return // do not update state if component is not mounted anymore
+
+          if (fr.result === 'successful') {
+            update(fr.data)
+          } else if (fr.result === 'request-failed') {
+            update(undefined, fr.error)
+          }
+        })
       } else {
         update(undefined, fr.error, fr.data)
       }

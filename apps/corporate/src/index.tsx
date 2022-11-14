@@ -6,6 +6,7 @@ import { addPreloadScripts, addPrefetchFonts } from './utils/head'
 import { addStyledComponentStyles } from './utils/styles'
 import app from '../data/content/app.json'
 import App from './App'
+import { swRegisterUserRecenttracks } from './lib/lastFm/getUserRecenttracks'
 
 const prerender = isPrerender()
 
@@ -16,6 +17,7 @@ const eventName = 'prerender-trigger'
 
 if (!prerender) {
   document.documentElement.setAttribute('data-js', 'true')
+  swRegisterUserRecenttracks()
 }
 
 appElement.setAttribute('data-prerender', `${prerender}`)

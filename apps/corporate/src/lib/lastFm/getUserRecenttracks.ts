@@ -1,5 +1,6 @@
+import { Workbox } from 'workbox-window'
 import { baseURL, userName, apiKey } from './config'
-import { fetch } from '../../utils/fetch'
+import { fetch, FetchResult } from '../../utils/fetch'
 import {
   UserRecenttracks,
   userRecenttracksSchema,
@@ -31,4 +32,34 @@ export const getUserRecenttracks = async () => {
     method: 'get',
     responseSchema: userRecenttracksSchema,
   })
+}
+
+/**
+ * Get the recent played tracks from a user via service worker.
+ */
+declare global {
+  interface Window {
+    sw: Record<string, Workbox>
+  }
+}
+
+export const swRegisterUserRecenttracks = () => {
+  if ('serviceWorker' in navigator) {
+    window.sw = window.sw || {}
+    window.sw.lastfm = new Workbox('/sw-lastfm.js')
+    window.sw.lastfm.register()
+  }
+}
+
+export const swMessageGetUserRecenttracks = async (): Promise<
+  FetchResult<UserRecenttracks>
+> => {
+  if ('sw' in window && 'lastfm' in window.sw) {
+    return await window.sw.lastfm.messageSW({ type: 'GET_TRACK' })
+  } else {
+    return await {
+      result: 'request-failed',
+      error: new Error('Service Worker not found'),
+    }
+  }
 }
