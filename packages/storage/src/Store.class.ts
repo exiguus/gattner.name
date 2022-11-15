@@ -40,6 +40,12 @@ export default class Store {
     return this.store[this.store.length - 1]
   }
 
+  clear() {
+    if (this.storage != null) {
+      this.storage.clear()
+    }
+  }
+
   set store(value: ItemValue[]) {
     if (this.storage != null) {
       const items = this.storage.pull()

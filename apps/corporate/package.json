@@ -110,6 +110,7 @@
     "@emotion/memoize": "^0.7.5",
     "@emotion/stylis": "^0.8.5",
     "@emotion/unitless": "^0.7.5",
+    "@gattner/storage": "workspace:^1.0.0",
     "@gattner/ui-blockquote": "workspace:^1.0.0",
     "@gattner/utils": "workspace:^1.0.0",
     "@micro-sentry/browser": "^2.1.2",

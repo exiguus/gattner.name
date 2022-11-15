@@ -5,7 +5,7 @@ import {
   UserRecenttracks,
   userRecenttracksSchema,
 } from '../../../schemas/lastFm'
-import Store from '../Store.class'
+import Store from '@gattner/storage'
 import { validate } from '../../utils/validate'
 
 export const CACHE_TIME = 60 * 1000 * 3
