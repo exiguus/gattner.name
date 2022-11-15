@@ -84,6 +84,7 @@ importers:
       '@emotion/stylis': ^0.8.5
       '@emotion/unitless': ^0.7.5
       '@gattner/gitlab-fetch': workspace:^1.0.0
+      '@gattner/storage': workspace:^1.0.0
       '@gattner/ui-blockquote': workspace:^1.0.0
       '@gattner/utils': workspace:^1.0.0
       '@micro-sentry/browser': ^2.1.2
@@ -184,6 +185,7 @@ importers:
       '@emotion/memoize': 0.7.5
       '@emotion/stylis': 0.8.5
       '@emotion/unitless': 0.7.5
+      '@gattner/storage': link:../../packages/storage
       '@gattner/ui-blockquote': link:../../packages/ui/blockquote
       '@gattner/utils': link:../../packages/utils
       '@micro-sentry/browser': 2.1.2
@@ -339,6 +341,34 @@ importers:
       jest-watch-typeahead: 2.2.0_jest@29.3.0
       msw: 0.47.4_typescript@4.8.4
       node-fetch: 2.6.7
+      ts-jest: 29.0.3_lg2chfqpf6etezq7e5mtbxakgq
+      typescript: 4.8.4
+
+  packages/storage:
+    specifiers:
+      '@jest/globals': ^29.0.3
+      '@testing-library/jest-dom': ^5.16.5
+      '@types/jest': ^29.0.3
+      '@types/node': ^18.7.18
+      '@types/testing-library__jest-dom': ^5.14.5
+      dotenv: ^16.0.2
+      dotenv-cli: ^6.0.0
+      jest: ^29.0.3
+      jest-environment-jsdom: ^29.0.3
+      jest-watch-typeahead: ^2.2.0
+      ts-jest: ^29.0.1
+      typescript: ^4.8.3
+    devDependencies:
+      '@jest/globals': 29.3.0
+      '@testing-library/jest-dom': 5.16.5
+      '@types/jest': 29.2.2
+      '@types/node': 18.11.9
+      '@types/testing-library__jest-dom': 5.14.5
+      dotenv: 16.0.3
+      dotenv-cli: 6.0.0
+      jest: 29.3.0_@types+node@18.11.9
+      jest-environment-jsdom: 29.3.0
+      jest-watch-typeahead: 2.2.0_jest@29.3.0
       ts-jest: 29.0.3_lg2chfqpf6etezq7e5mtbxakgq
       typescript: 4.8.4
 
@@ -12605,7 +12635,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.15.2_debug@4.3.4
+      follow-redirects: 1.15.2
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug

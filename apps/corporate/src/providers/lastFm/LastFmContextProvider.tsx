@@ -21,7 +21,7 @@ import {
   storePullGetUserRecenttracks,
   swMessageGetUserRecenttracks,
 } from '../../lib/lastFm/getUserRecenttracks'
-import Store from '../../lib/Store.class'
+import Store from '@gattner/storage'
 
 const STORE_NAME = '__gattner__lastfm'
 const STORE_TYPE = 'sessionStorage'

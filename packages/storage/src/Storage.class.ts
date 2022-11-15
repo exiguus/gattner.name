@@ -44,6 +44,10 @@ export default class Storage {
     this.item = value
   }
 
+  clear() {
+    this.removeItem(this.settings.item.name)
+  }
+
   get item() {
     return this.getItem(this.settings.item.name)
   }
