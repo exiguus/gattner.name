@@ -54,10 +54,10 @@ React render called in `process.env.NODE_ENV=development` and hydrate in product
 - [x] add LastFm .env.local and remove from env
 - [x] add LastFm provider and hook
 - [ ] add LastFm Middleware
-- [ ] add LastFm ServiceWorker
+- [x] add LastFm ServiceWorker
   - [x] fallback fetch in client
-  - [ ] cache session or local storage
-  - [ ] tests
+  - [x] cache session or local storage
+  - [x] tests
 - [x] add error logging (sentry)
 - [x] add analytics (counter.dev)
 - [ ] add advanced analytics (hotjar)

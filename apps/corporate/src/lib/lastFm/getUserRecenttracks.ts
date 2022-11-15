@@ -8,7 +8,7 @@ import {
 import Store from '../Store.class'
 import { validate } from '../../utils/validate'
 
-export const CACHE_TIME = 6000
+export const CACHE_TIME = 60 * 1000 * 3
 /**
  * Get the recent played tracks from a user.
  */
@@ -72,21 +72,23 @@ export const storePullGetUserRecenttracks = async (
 ): Promise<FetchResult<UserRecenttracks>> => {
   const { timestamp, data } = store.last() || {}
 
-  try {
-    validate<UserRecenttracks>(userRecenttracksSchema, data)
-  } catch (error) {
-    return {
-      result: 'response-schema-unexpected',
-      data,
-      error:
-        error instanceof Error ? error : new Error(`fetch failed: ${error}`),
-    }
-  }
-
   const validCache =
     Date.now() - (typeof timestamp === 'number' ? timestamp : 0) < CACHE_TIME
 
-  if (validCache && data) {
+  if (data) {
+    try {
+      validate<UserRecenttracks>(userRecenttracksSchema, data)
+    } catch (error) {
+      return {
+        result: 'response-schema-unexpected',
+        data,
+        error:
+          error instanceof Error ? error : new Error(`fetch failed: ${error}`),
+      }
+    }
+  }
+
+  if (data && validCache) {
     return Promise.resolve({
       result: 'successful',
       data: data as UserRecenttracks,

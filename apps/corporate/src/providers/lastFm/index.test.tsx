@@ -77,9 +77,7 @@ describe('LastFmContextProvider', () => {
     await waitFor(() => {
       const userRecenttrackElement = screen.getByTestId('userRecenttrack')
       expect(userRecenttrackElement).toBeInTheDocument()
-      expect(userRecenttrackElement.textContent).toEqual(
-        'Muse - Butterflies and Hurricanes'
-      )
+      expect(userRecenttrackElement.textContent).toEqual('Milliarden - Marie')
     })
   })
 })

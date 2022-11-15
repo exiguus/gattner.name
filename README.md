@@ -97,4 +97,5 @@ pnpm build
   * [ ] [Micro-Sentry](https://github.com/Tinkoff/micro-sentry)
 * [ ] build: Save in public (open source security and copyright) ** [LICENCE](LICENCE) [@gattner/gitlab-fetch](packages/gitlab-fetch/README.md) [GitGuardian](https://www.gitguardian.com/)
 * [ ] ci: vercel ** [error page](https://www.gattner.name/error) [corporate/vercel.json](apps/corporate/vercel.json)
-* [ ] perf(workbox): register and configure workbox service-worker (pre-) cache and routing **[corporate/src/service-worker.ts](corporate/src/service-worker.ts)
+* [ ] perf(workbox): register and configure workbox service-worker (pre-) cache and routing **[corporate/src/ts-cache.ts](corporate/src/service-worker.ts)
+* [ ] perf(serviceworker): use service worker to run fetch request parallel in another thread with fallback and caching ** [corporate/src/ts-lastfm.ts]

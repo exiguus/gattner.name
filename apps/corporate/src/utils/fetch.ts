@@ -39,8 +39,7 @@ export const fetch = async <RequestType, SuccessDataType>({
   let response: AxiosResponse<SuccessDataType> | undefined
 
   try {
-    const http = axios.create(httpConfig)
-    response = await http.request<SuccessDataType>({
+    response = await axios.request<SuccessDataType>({
       headers: {
         Accept: 'application/json',
         'Accept-Language': locale,

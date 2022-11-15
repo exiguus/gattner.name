@@ -3,6 +3,10 @@
 import { UserRecenttracks } from 'schemas/lastFm'
 import { getUserRecenttracks } from './lib/lastFm/getUserRecenttracks'
 import { FetchResult } from './utils/fetch'
+import fetchAdapter from '@vespaiach/axios-fetch-adapter'
+import axios from 'axios'
+
+axios.defaults.adapter = fetchAdapter
 
 //  origin: https://github.com/microsoft/TypeScript/issues/14877#issuecomment-493729050
 declare let self: ServiceWorkerGlobalScope
