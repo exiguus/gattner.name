@@ -15,8 +15,16 @@ import {
   UserRecenttrack,
 } from '../../lib/lastFm/normalizeUserRecenttracks'
 import { UserRecenttracks } from 'schemas/lastFm'
-import { getUserRecenttracks } from '../../lib/lastFm/getUserRecenttracks'
 import { useSentry } from '../../hooks/useSentry'
+import {
+  getUserRecenttracks,
+  storePullGetUserRecenttracks,
+  swMessageGetUserRecenttracks,
+} from '../../lib/lastFm/getUserRecenttracks'
+import Store from '../../lib/Store.class'
+
+const STORE_NAME = '__gattner__lastfm'
+const STORE_TYPE = 'sessionStorage'
 
 export const LastFmContextProvider: FunctionComponent = ({ children }) => {
   const { sentryWithExtras } = useSentry()
@@ -45,7 +53,9 @@ export const LastFmContextProvider: FunctionComponent = ({ children }) => {
       if (error) {
         let message
 
-        if (error.message.includes('Network Error')) {
+        if (error.message.includes('Service Worker')) {
+          message = 'Service Worker not found'
+        } else if (error.message.includes('Network Error')) {
           // 'Network Error' is implemented by Axios
           message = 'Network error'
         } else {
@@ -67,16 +77,43 @@ export const LastFmContextProvider: FunctionComponent = ({ children }) => {
   useEffect(() => {
     let isMounted = true
     setPendingRequests(n => n + 1)
+    const store = new Store({
+      item: {
+        name: STORE_NAME,
+        type: STORE_TYPE,
+      },
+    })
 
-    getUserRecenttracks().then(fr => {
+    storePullGetUserRecenttracks(store).then(fr => {
       if (!isMounted) return // do not update state if component is not mounted anymore
 
       if (fr.result === 'successful') {
         update(fr.data)
       } else {
-        update(undefined, fr.error, fr.data)
-      }
+        swMessageGetUserRecenttracks().then(fr => {
+          if (!isMounted) return // do not update state if component is not mounted anymore
 
+          if (fr.result === 'successful') {
+            update(fr.data)
+            store.push({ timestamp: Date.now(), data: fr.data })
+          } else if (fr.result === 'request-failed') {
+            update(undefined, fr.error)
+            // fallback to userRecenttracks
+            getUserRecenttracks().then(fr => {
+              if (!isMounted) return // do not update state if component is not mounted anymore
+
+              if (fr.result === 'successful') {
+                update(fr.data)
+                store.push({ timestamp: Date.now(), data: fr.data })
+              } else if (fr.result === 'request-failed') {
+                update(undefined, fr.error)
+              }
+            })
+          } else {
+            update(undefined, fr.error, fr.data)
+          }
+        })
+      }
       setPendingRequests(n => n - 1)
     })
 

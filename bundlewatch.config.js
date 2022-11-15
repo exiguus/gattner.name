@@ -6,8 +6,13 @@ const bundlewatchConfig = {
       compression: 'none',
     },
     {
-      path: 'dist/service-worker.js',
+      path: 'dist/sw-cache.js',
       maxSize: '30KB',
+      compression: 'none',
+    },
+    {
+      path: 'dist/sw-lastfm.js',
+      maxSize: '60KB',
       compression: 'none',
     },
   ],

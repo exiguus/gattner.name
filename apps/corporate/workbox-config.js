@@ -4,6 +4,6 @@ module.exports = {
   globPatterns: [
     '**/*.{html,js,css,png,svg,jpg,gif,json,woff2,ico,webmanifest,map}',
   ],
-  swDest: 'public/service-worker.ts',
-  swSrc: 'src/service-worker.ts',
+  swDest: 'public/sw-cache.ts',
+  swSrc: 'src/sw-cache.ts',
 }

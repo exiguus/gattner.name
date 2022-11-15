@@ -1,4 +1,4 @@
 dist
 data
-public/service-worker.ts
+public/sw-cache.ts
 .cache
