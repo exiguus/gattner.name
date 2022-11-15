@@ -5,7 +5,10 @@ import {
   UserRecenttracks,
   userRecenttracksSchema,
 } from '../../../schemas/lastFm'
+import Store from '../Store.class'
+import { validate } from '../../utils/validate'
 
+export const CACHE_TIME = 6000
 /**
  * Get the recent played tracks from a user.
  */
@@ -61,5 +64,37 @@ export const swMessageGetUserRecenttracks = async (): Promise<
       result: 'request-failed',
       error: new Error('Service Worker not found'),
     }
+  }
+}
+
+export const storePullGetUserRecenttracks = async (
+  store: Store
+): Promise<FetchResult<UserRecenttracks>> => {
+  const { timestamp, data } = store.last() || {}
+
+  try {
+    validate<UserRecenttracks>(userRecenttracksSchema, data)
+  } catch (error) {
+    return {
+      result: 'response-schema-unexpected',
+      data,
+      error:
+        error instanceof Error ? error : new Error(`fetch failed: ${error}`),
+    }
+  }
+
+  const validCache =
+    Date.now() - (typeof timestamp === 'number' ? timestamp : 0) < CACHE_TIME
+
+  if (validCache && data) {
+    return Promise.resolve({
+      result: 'successful',
+      data: data as UserRecenttracks,
+    })
+  } else {
+    return Promise.resolve({
+      result: 'request-failed',
+      error: new Error('No data found'),
+    })
   }
 }
