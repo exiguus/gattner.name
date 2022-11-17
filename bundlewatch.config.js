@@ -2,7 +2,7 @@ const bundlewatchConfig = {
   files: [
     {
       path: 'dist/src.*.js',
-      maxSize: '300KB',
+      maxSize: '400KB', // TODO: reduce this to 300 again when tracker is sw
       compression: 'none',
     },
     {
