@@ -68,8 +68,8 @@
   },
   "lint-staged": {
     "*.@(ts|tsx)": [
-      "pnpm lint",
-      "pnpm format"
+      "pnpm format",
+      "pnpm lint"
     ]
   },
   "packageManager": "pnpm@7.9.5"
