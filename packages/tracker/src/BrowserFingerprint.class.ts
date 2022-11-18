@@ -217,3 +217,5 @@ export default class BrowserFingerprint {
     }
   }
 }
+
+export { BrowserFingerprint }

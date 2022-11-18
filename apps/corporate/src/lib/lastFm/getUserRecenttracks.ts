@@ -1,4 +1,3 @@
-import { Workbox } from 'workbox-window'
 import { baseURL, userName, apiKey } from './config'
 import { fetch, FetchResult } from '../../utils/fetch'
 import {
@@ -40,19 +39,6 @@ export const getUserRecenttracks = async () => {
 /**
  * Get the recent played tracks from a user via service worker.
  */
-declare global {
-  interface Window {
-    sw: Record<string, Workbox>
-  }
-}
-
-export const swRegisterUserRecenttracks = () => {
-  if ('serviceWorker' in navigator) {
-    window.sw = window.sw || {}
-    window.sw.lastfm = new Workbox('/sw-lastfm.js')
-    window.sw.lastfm.register()
-  }
-}
 
 export const swMessageGetUserRecenttracks = async (): Promise<
   FetchResult<UserRecenttracks>

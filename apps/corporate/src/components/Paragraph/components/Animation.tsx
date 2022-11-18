@@ -6,6 +6,7 @@ import React, {
 } from 'react'
 import styled from 'styled-components'
 import { getRandomInt } from '@gattner/utils'
+import { track } from '../../../lib/tracker'
 
 // jest does not support es modules
 // because we us ts-jest to compile typescript
@@ -59,11 +60,35 @@ const Animation: FunctionComponent<AnimationProps> = ({ text }) => {
       element: paragraphRef.current,
       ignore: '_,;:./[]<>\\\'"`#$%&@€!?',
       interval: wait / 100 < 15 ? Math.round((wait / 12) * 2) : 120,
+      callback: () =>
+        track({
+          type: 'animation',
+          msg: 'Animation randext finished',
+          value: `Animation randext finished with text "${JSON.stringify(
+            paragraphRef.current.innerText
+          )}"`,
+        }),
     })
-    const timeout = setTimeout(() => randext.start(), wait)
+    const timeout = setTimeout(() => {
+      randext.start()
+      track({
+        type: 'animation',
+        msg: 'Animation randext started',
+        value: `Animation randext started with text "${JSON.stringify(
+          paragraphRef.current.innerText
+        )}"`,
+      })
+    }, wait)
     return (): void => {
       clearTimeout(timeout)
       randext.stop()
+      track({
+        type: 'animation',
+        msg: 'Animation randext stopped',
+        value: `Animation randext stopped with text "${JSON.stringify(
+          paragraphRef.current.innerText
+        )}"`,
+      })
     }
   }, [paragraphRef, text])
 

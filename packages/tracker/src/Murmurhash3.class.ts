@@ -36,6 +36,7 @@ export default class MurmurHash3 {
    * Incrementally add a string to this hash
    * @param key key A UTF-16 or ASCII string
    */
+  // eslint-disable-next-line sonarjs/cognitive-complexity
   hash(key: string) {
     let h1: number
     let top: number

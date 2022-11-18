@@ -1,4 +1,4 @@
-import Tracker, { Action } from './Tracker.class'
+import Tracker, { Action, BrowserFingerprint } from '.'
 import Api from './Api.class'
 import axios from 'axios'
 import 'whatwg-fetch'
@@ -9,11 +9,20 @@ let tracker = new Tracker({
   factor: 1.666,
   max: 14,
   debounce: 2300,
-  append: {
-    pid: 1,
-    name: 'test-env',
-  },
 })
+
+const browserFingerprint = new BrowserFingerprint()
+const fingerprint = browserFingerprint.result()
+
+const append = {
+  pid: 1,
+  name: 'test-env',
+  url: window.location.href,
+  navigator: `${navigator.userAgent || navigator.appVersion}`,
+  origin: window.origin || document.location.origin,
+  referrer: document.referrer,
+  fingerprint,
+}
 
 const track = (...args: Array<Action['value']>) => {
   const timestamps: Set<number> = new Set()
@@ -21,7 +30,8 @@ const track = (...args: Array<Action['value']>) => {
     args.forEach(action => {
       const timestamp = Date.now()
       timestamps.add(timestamp)
-      if (tracker != null) tracker.push({ key: { timestamp }, value: action })
+      if (tracker != null)
+        tracker.push({ key: { timestamp }, value: action, append })
     })
   }
   return Array.from(timestamps)
@@ -40,10 +50,6 @@ describe('Track Class', () => {
       factor: 1.666,
       max: 14,
       debounce: 2300,
-      append: {
-        pid: 1,
-        name: 'test-env',
-      },
     })
   })
 
@@ -60,11 +66,7 @@ describe('Track Class', () => {
     })
     expect(Array.isArray(timestamps)).toBe(true)
     expect(JSON.stringify(tracker.getStore())).toBe(
-      `{\"pid\":1,\"name\":\"test-env\",\"url\":\"http://localhost/\",\"navigator\":\"Mozilla/5.0 (linux) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/20.0.2\",\"origin\":\"http://localhost\",\"referrer\":\"\",\"fingerprint\":${
-        tracker.getStore()?.fingerprint
-      },\"timestamp\":${
-        timestamps[0]
-      },\"type\":\"test\",\"msg\":\"create item\",\"value\":\"test: create item\"}`
+      `{\"type\":\"test\",\"msg\":\"create item\",\"value\":\"test: create item\",\"timestamp\":${timestamps[0]},\"pid\":1,\"name\":\"test-env\",\"url\":\"http://localhost/\",\"navigator\":\"Mozilla/5.0 (linux) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/20.0.2\",\"origin\":\"http://localhost\",\"referrer\":\"\",\"fingerprint\":${fingerprint}}`
     )
     const [timestamp, ...other] = track({
       type: 'test',

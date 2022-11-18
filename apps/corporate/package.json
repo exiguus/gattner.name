@@ -4,7 +4,7 @@
   "description": "Consulting and development of digital solutions",
   "scripts": {
     "serve": "NODE_ENV=development dotenv -e .env.local parcel serve ./public/index.html --no-cache",
-    "dev:sw": "NODE_ENV=development dotenv -e .env.local parcel watch ./src/sw-lastfm.ts --no-cache --experimental-scope-hoisting",
+    "dev:sw": "NODE_ENV=development dotenv -e .env.local parcel watch ./src/sw-tracker.ts --no-cache --experimental-scope-hoisting",
     "dev:pre": "pnpm build:msw && pnpm data",
     "dev": "pnpm dev:pre && pnpm serve",
     "dev:build": "pnpm build:app",
@@ -13,9 +13,10 @@
     "build:app": "rm -rf ./dist/ && rm -rf ./.cache && NODE_ENV=production parcel build ./public/index.html -d ./dist/ --detailed-report 10 --public-url /",
     "build:sw:pre": "mv ./dist/report.html ./dist/report.html.backup",
     "build:sw:post": "rm ./dist/report.html && mv ./dist/report.html.backup ./dist/report.html",
-    "build:sw": "pnpm build:sw:cache && pnpm build:sw:lastfm",
+    "build:sw": "pnpm build:sw:cache && pnpm build:sw:lastfm && pnpm build:sw:tracker",
     "build:sw:cache": "pnpm build:sw:pre && NODE_ENV=production parcel build ./public/sw-cache.ts -d ./dist/ --no-cache --experimental-scope-hoisting && pnpm build:sw:post",
     "build:sw:lastfm": "pnpm build:sw:pre && NODE_ENV=production parcel build ./src/sw-lastfm.ts -d ./dist/ --no-cache --experimental-scope-hoisting && pnpm build:sw:post",
+    "build:sw:tracker": "pnpm build:sw:pre && NODE_ENV=production parcel build ./src/sw-tracker.ts -d ./dist/ --no-cache --experimental-scope-hoisting && pnpm build:sw:post",
     "build:msw": "pnpm msw init dist -y",
     "build:post": "pnpm build:data && pnpm build:manifest && pnpm build:sw",
     "build:data": "cp ./data/files/public/** ./dist/ ",
@@ -149,7 +150,10 @@
   },
   "alias": {
     "react": "preact/compat",
-    "react-dom": "preact/compat"
+    "react-dom": "preact/compat",
+    "@gattner/tracker/utils": "@gattner/tracker",
+    "@gattner/tracker/types": "@gattner/tracker",
+    "@gattner/tracker/BrowserFingerprint": "@gattner/tracker"
   },
   "prerender": {
     "routes": [

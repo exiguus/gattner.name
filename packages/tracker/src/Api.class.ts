@@ -1,5 +1,5 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
-import { Insert } from './Tracker.class'
+import { Insert } from './types'
 
 export default class Api {
   supabase: SupabaseClient

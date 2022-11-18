@@ -6,7 +6,8 @@ import { addPreloadScripts, addPrefetchFonts } from './utils/head'
 import { addStyledComponentStyles } from './utils/styles'
 import app from '../data/content/app.json'
 import App from './App'
-import { swRegisterUserRecenttracks } from './lib/lastFm/getUserRecenttracks'
+import { Workbox } from 'workbox-window'
+import { track, trackBindSendEvent } from './lib/tracker'
 
 const prerender = isPrerender()
 
@@ -15,9 +16,32 @@ const appElement = document.getElementById(appId) as HTMLElement
 
 const eventName = 'prerender-trigger'
 
+declare global {
+  interface Window {
+    sw: Record<string, Workbox>
+    swUtils: Record<string, unknown>
+  }
+}
+
+const registerServiceWorker = () => {
+  if ('serviceWorker' in navigator) {
+    window.sw = window.sw || {}
+    window.sw.lastfm = new Workbox('/sw-lastfm.js')
+    window.sw.lastfm.register()
+    window.sw.tracker = new Workbox('/sw-tracker.js')
+    window.sw.tracker.register()
+    trackBindSendEvent()
+  }
+  track({
+    type: 'register',
+    msg: 'Service Worker registered',
+    value: `Service Worker in navigator is "${'serviceWorker' in navigator}"`,
+  })
+}
+
 if (!prerender) {
   document.documentElement.setAttribute('data-js', 'true')
-  swRegisterUserRecenttracks()
+  registerServiceWorker()
 }
 
 appElement.setAttribute('data-prerender', `${prerender}`)
@@ -62,6 +86,12 @@ appElement.hasChildNodes()
       appElement,
       callback
     )
+
+track({
+  type: 'render',
+  msg: 'App rendered',
+  value: `App rendered`, // TODO: Add more details like render time
+})
 
 if (process.env.NODE_ENV === 'production' && !prerender) {
   const sw = '/sw-cache.js'

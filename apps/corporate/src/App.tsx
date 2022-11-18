@@ -1,5 +1,6 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useEffect } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { track } from './lib/tracker'
 import { AppProps } from 'schemas'
 import { AppLayout } from './layouts/AppLayout'
 import { PageLayout } from './layouts/PageLayout'
@@ -37,6 +38,13 @@ const Page = ({ name }: { name: string }): JSX.Element | null => {
 
 const App: FunctionComponent<AppProps> = props => {
   const { routes } = props
+  useEffect(() => {
+    track({
+      type: 'load',
+      msg: 'App loaded',
+      value: `App loaded at location "${window.location.pathname}"`,
+    })
+  }, [])
   return (
     <AppLayout>
       <BrowserRouter forceRefresh={process.env.NODE_ENV === 'production'}>

@@ -1,87 +1,10 @@
-import BrowserFingerprint from './BrowserFingerprint.class'
+import { defaultSettings } from './config'
+import { Action, Settings, Options, ActionStoreItem, Api } from './types'
 
 /**
  * @fileOverview Tracker Class.
  * @description Class to assign tracking and push log to a backend
  */
-
-export type Action = {
-  key: {
-    timestamp: number
-  }
-  value: {
-    type: string
-    msg: string
-    value: string
-  }
-}
-
-export type Append = {
-  pid: number
-  name: string
-  url: string
-  navigator: string
-  origin: string
-  referrer: string
-  fingerprint: number
-}
-
-export type Insert = Append & Action['value'] & Action['key']
-
-export type Inserts = Array<Insert>
-
-class Api {
-  send(inserts: Insert[]): Promise<{ error: boolean }> {
-    return new Promise((resolve, _reject) => {
-      setTimeout(() => {
-        console.log({ inserts })
-        resolve({ error: false })
-      }, 1000)
-    })
-  }
-}
-
-export type Settings = {
-  api: Api | null
-  count: number
-  factor: number
-  max: number
-  debounce: number
-  append: Append
-}
-
-const browserFingerprint = new BrowserFingerprint()
-console.log({ info: browserFingerprint.getBrowserInfo() })
-const fingerprint = browserFingerprint.result()
-
-const defaultSettings: Settings = {
-  api: null,
-  count: 3,
-  factor: 1.333,
-  max: 13,
-  debounce: 4000,
-  append: {
-    pid: 1,
-    name: 'default',
-    url: window.location.href,
-    navigator: `${navigator.userAgent || navigator.appVersion}`,
-    origin: window.origin || document.location.origin,
-    referrer: document.referrer,
-    fingerprint,
-  },
-}
-
-type RecursivePartial<T> = {
-  [P in keyof T]?: T[P] extends (infer U)[]
-    ? RecursivePartial<U>[]
-    : T[P] extends object
-    ? RecursivePartial<T[P]>
-    : T[P]
-}
-
-type Options = RecursivePartial<Settings> | null
-
-type ActionStoreItem = Action['key'] & Action['value'] & Settings['append']
 
 export default class Tracker {
   options: Options = null
@@ -102,12 +25,6 @@ export default class Tracker {
     this.settings = {
       ...this.settings,
       ...options,
-      ...{
-        append: {
-          ...this.settings.append,
-          ...options?.append,
-        },
-      },
     }
 
     this.count = this.settings.count
@@ -115,28 +32,28 @@ export default class Tracker {
     this.max = this.settings.max
     this.api = this.settings.api
 
-    this.bindEvents()
+    // this.bindEvents()
   }
 
-  bindEvents() {
-    this.events.forEach(event => {
-      window.addEventListener(event, async () => {
-        this.clean()
-      })
-    })
-  }
+  // bindEvents() {
+  //   this.events.forEach(event => {
+  //     window.addEventListener(event, async () => {
+  //       this.clean()
+  //     })
+  //   })
+  // }
 
   getStore() {
     return this.store.get(this.key)
   }
 
   set action(action: Action) {
-    const { key, value } = action
+    const { key, value, append } = action
     this.storage.push(key)
     this.store.set(key, {
-      ...this.settings.append,
-      ...key,
       ...value,
+      ...key,
+      ...append,
     })
     this.key = key
     this.send()
@@ -175,6 +92,7 @@ export default class Tracker {
           return this.store.get(sendKey)
         })
         .filter((item): item is ActionStoreItem => !!item)
+      console.log({ inserts })
       if (this.api)
         this.api.send(inserts).then(({ error }) => {
           console.log('addAction then')

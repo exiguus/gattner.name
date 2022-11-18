@@ -10,6 +10,7 @@ import {
   StyledExternalNavLink,
   StyledNavLink,
 } from './styles'
+import { track } from '../../lib/tracker'
 
 export interface LinkProps {
   children: ReactNode | ReactElement
@@ -39,6 +40,13 @@ const Link: FunctionComponent<LinkProps> = ({
   const handleClick = (event: MouseEvent<HTMLAnchorElement>): boolean => {
     let href = event.currentTarget?.href || ''
     const isMail = href?.startsWith('mailto:')
+
+    track({
+      type: 'click',
+      msg: 'Link clicked',
+      value: `Link clicked with href "${href}" and isMail "${isMail}"`,
+    })
+
     if (isMail) {
       event.preventDefault()
       href = href.replace(/(.*)\[at\](.*)/i, '$1@$2')
@@ -67,6 +75,13 @@ const Link: FunctionComponent<LinkProps> = ({
               data-testid={dataTestId}
               lineThrough={lineThrough}
               title={title}
+              onClickCapture={() =>
+                track({
+                  type: 'click',
+                  msg: 'Link clicked',
+                  value: `Link clicked with to "${to}" and "${title}"`,
+                })
+              }
             >
               {children}
             </StyledActiveNavLink>
@@ -76,6 +91,13 @@ const Link: FunctionComponent<LinkProps> = ({
               to={to}
               title={title}
               exact={exact}
+              onClickCapture={() =>
+                track({
+                  type: 'click',
+                  msg: 'Link clicked',
+                  value: `Link clicked with to "${to}" and "${title}"`,
+                })
+              }
             >
               {children}
             </StyledNavLink>

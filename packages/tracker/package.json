@@ -11,7 +11,38 @@
       "module": "./dist/es/src/index.js",
       "types": "./dist/types/src/index.d.ts"
     },
+    "./utils": {
+      "require": "./dist/cjs/src/utils.js",
+      "module": "./dist/es/src/utils.js",
+      "types": "./dist/types/src/utils.d.ts"
+    },
+    "./types": {
+      "require": "./dist/cjs/src/types.js",
+      "module": "./dist/es/src/types.js",
+      "types": "./dist/types/src/types.d.ts"
+    },
+    "./BrowserFingerprint": {
+      "require": "./dist/cjs/src/BrowserFingerprint.class.js",
+      "module": "./dist/es/src/BrowserFingerprint.class.js",
+      "types": "./dist/types/src/BrowserFingerprint.class.d.ts"
+    },
     "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "dist/types/src/*.d.ts"
+      ],
+      "utils": [
+        "dist/types/src/utils"
+      ],
+      "types": [
+        "dist/types/src/types"
+      ],
+      "BrowserFingerprint": [
+        "dist/types/src/BrowserFingerprint.class"
+      ]
+    }
   },
   "sideEffects": false,
   "scripts": {
@@ -54,6 +85,7 @@
     "typescript": "^4.8.3"
   },
   "dependencies": {
+    "@gattner/utils": "workspace:^1.0.0",
     "@supabase/supabase-js": "^1.35.6"
   }
 }
