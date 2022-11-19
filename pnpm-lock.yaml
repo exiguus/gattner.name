@@ -85,6 +85,7 @@ importers:
       '@emotion/unitless': ^0.7.5
       '@gattner/gitlab-fetch': workspace:^1.0.0
       '@gattner/storage': workspace:^1.0.0
+      '@gattner/supabase': workspace:^1.0.0
       '@gattner/tracker': workspace:^1.0.0
       '@gattner/ui-blockquote': workspace:^1.0.0
       '@gattner/utils': workspace:^1.0.0
@@ -187,6 +188,7 @@ importers:
       '@emotion/stylis': 0.8.5
       '@emotion/unitless': 0.7.5
       '@gattner/storage': link:../../packages/storage
+      '@gattner/supabase': link:../../packages/supabase
       '@gattner/tracker': link:../../packages/tracker
       '@gattner/ui-blockquote': link:../../packages/ui/blockquote
       '@gattner/utils': link:../../packages/utils
@@ -374,9 +376,8 @@ importers:
       ts-jest: 29.0.3_lg2chfqpf6etezq7e5mtbxakgq
       typescript: 4.8.4
 
-  packages/tracker:
+  packages/supabase:
     specifiers:
-      '@gattner/utils': workspace:^1.0.0
       '@jest/globals': ^29.0.3
       '@supabase/supabase-js': ^1.35.6
       '@testing-library/jest-dom': ^5.16.5
@@ -391,7 +392,6 @@ importers:
       ts-jest: ^29.0.1
       typescript: ^4.8.3
     dependencies:
-      '@gattner/utils': link:../utils
       '@supabase/supabase-js': 1.35.7
     devDependencies:
       '@jest/globals': 29.3.0
@@ -402,6 +402,38 @@ importers:
       dotenv: 16.0.3
       dotenv-cli: 6.0.0
       jest: 29.3.0_@types+node@18.11.9
+      jest-environment-jsdom: 29.3.0
+      jest-watch-typeahead: 2.2.0_jest@29.3.0
+      ts-jest: 29.0.3_lg2chfqpf6etezq7e5mtbxakgq
+      typescript: 4.8.4
+
+  packages/tracker:
+    specifiers:
+      '@gattner/utils': workspace:^1.0.0
+      '@jest/globals': ^29.0.3
+      '@testing-library/jest-dom': ^5.16.5
+      '@types/jest': ^29.0.3
+      '@types/node': ^18.7.18
+      '@types/testing-library__jest-dom': ^5.14.5
+      dotenv: ^16.0.2
+      dotenv-cli: ^6.0.0
+      jest: ^29.0.3
+      jest-canvas-mock: ^2.4.0
+      jest-environment-jsdom: ^29.0.3
+      jest-watch-typeahead: ^2.2.0
+      ts-jest: ^29.0.1
+      typescript: ^4.8.3
+    devDependencies:
+      '@gattner/utils': link:../utils
+      '@jest/globals': 29.3.0
+      '@testing-library/jest-dom': 5.16.5
+      '@types/jest': 29.2.2
+      '@types/node': 18.11.9
+      '@types/testing-library__jest-dom': 5.14.5
+      dotenv: 16.0.3
+      dotenv-cli: 6.0.0
+      jest: 29.3.0_@types+node@18.11.9
+      jest-canvas-mock: 2.4.0
       jest-environment-jsdom: 29.3.0
       jest-watch-typeahead: 2.2.0_jest@29.3.0
       ts-jest: 29.0.3_lg2chfqpf6etezq7e5mtbxakgq
@@ -9126,6 +9158,10 @@ packages:
     hasBin: true
     dev: true
 
+  /cssfontparser/1.2.1:
+    resolution: {integrity: sha512-6tun4LoZnj7VN6YeegOVb67KBX/7JJsqvj+pv3ZA7F878/eN33AbGa5b/S/wXxS/tcp8nc40xRUrsPlxIyNUPg==}
+    dev: true
+
   /cssnano-preset-default/4.0.8:
     resolution: {integrity: sha512-LdAyHuq+VRyeVREFmuxUZR1TXjQm8QQU/ktoo/x7bz+SdOge1YKc5eMN6pRW7YWBmyq59CqYba1dJ5cUukEjLQ==}
     engines: {node: '>=6.9.0'}
@@ -12670,7 +12706,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.15.2_debug@4.3.4
+      follow-redirects: 1.15.2
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -13629,6 +13665,13 @@ packages:
       chalk: 4.1.2
       filelist: 1.0.4
       minimatch: 3.1.2
+    dev: true
+
+  /jest-canvas-mock/2.4.0:
+    resolution: {integrity: sha512-mmMpZzpmLzn5vepIaHk5HoH3Ka4WykbSoLuG/EKoJd0x0ID/t+INo1l8ByfcUJuDM+RIsL4QDg/gDnBbrj2/IQ==}
+    dependencies:
+      cssfontparser: 1.2.1
+      moo-color: 1.0.3
     dev: true
 
   /jest-changed-files/27.5.1:
@@ -14623,7 +14666,7 @@ packages:
     dependencies:
       ansi-escapes: 5.0.0
       chalk: 4.1.2
-      jest: 29.3.0_@types+node@17.0.45
+      jest: 29.3.0_@types+node@18.11.9
       jest-regex-util: 29.2.0
       jest-watcher: 29.2.2
       slash: 4.0.0
@@ -15850,6 +15893,12 @@ packages:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
     engines: {node: '>=10'}
     hasBin: true
+    dev: true
+
+  /moo-color/1.0.3:
+    resolution: {integrity: sha512-i/+ZKXMDf6aqYtBhuOcej71YSlbjT3wCO/4H1j8rPvxDJEifdwgg5MaFyu6iYAT8GBZJg2z0dkgK4YMzvURALQ==}
+    dependencies:
+      color-name: 1.1.4
     dev: true
 
   /move-concurrently/1.0.1:

@@ -1,7 +1,6 @@
-import Tracker, { Action, BrowserFingerprint } from '.'
-import Api from './Api.class'
-import axios from 'axios'
-import 'whatwg-fetch'
+import Tracker, { Action, Api } from '.'
+import { BrowserFingerprint } from '@gattner/utils'
+import 'jest-canvas-mock'
 
 let tracker = new Tracker({
   api: new Api(),
@@ -38,11 +37,6 @@ const track = (...args: Array<Action['value']>) => {
 }
 
 describe('Track Class', () => {
-  beforeAll(() => {
-    // Permit CORS in Axios, see https://github.com/axios/axios/issues/1754#issuecomment-572778305
-    axios.defaults.adapter = require('axios/lib/adapters/http')
-  })
-
   beforeEach(() => {
     tracker = new Tracker({
       api: new Api(),

@@ -16,7 +16,7 @@
     "build:sw": "pnpm build:sw:cache && pnpm build:sw:lastfm && pnpm build:sw:tracker",
     "build:sw:cache": "pnpm build:sw:pre && NODE_ENV=production parcel build ./public/sw-cache.ts -d ./dist/ --no-cache --experimental-scope-hoisting && pnpm build:sw:post",
     "build:sw:lastfm": "pnpm build:sw:pre && NODE_ENV=production parcel build ./src/sw-lastfm.ts -d ./dist/ --no-cache --experimental-scope-hoisting && pnpm build:sw:post",
-    "build:sw:tracker": "pnpm build:sw:pre && NODE_ENV=production parcel build ./src/sw-tracker.ts -d ./dist/ --no-cache --experimental-scope-hoisting && pnpm build:sw:post",
+    "build:sw:tracker": "pnpm build:sw:pre && NODE_ENV=production parcel build ./src/sw-tracker.ts -d ./dist/ --no-cache && pnpm build:sw:post",
     "build:msw": "pnpm msw init dist -y",
     "build:post": "pnpm build:data && pnpm build:manifest && pnpm build:sw",
     "build:data": "cp ./data/files/public/** ./dist/ ",
@@ -112,6 +112,7 @@
     "@emotion/stylis": "^0.8.5",
     "@emotion/unitless": "^0.7.5",
     "@gattner/storage": "workspace:^1.0.0",
+    "@gattner/supabase": "workspace:^1.0.0",
     "@gattner/tracker": "workspace:^1.0.0",
     "@gattner/ui-blockquote": "workspace:^1.0.0",
     "@gattner/utils": "workspace:^1.0.0",
@@ -150,10 +151,7 @@
   },
   "alias": {
     "react": "preact/compat",
-    "react-dom": "preact/compat",
-    "@gattner/tracker/utils": "@gattner/tracker",
-    "@gattner/tracker/types": "@gattner/tracker",
-    "@gattner/tracker/BrowserFingerprint": "@gattner/tracker"
+    "react-dom": "preact/compat"
   },
   "prerender": {
     "routes": [

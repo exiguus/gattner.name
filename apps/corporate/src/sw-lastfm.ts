@@ -8,6 +8,7 @@ import axios from 'axios'
 
 axios.defaults.adapter = fetchAdapter
 
+// self refers to ServiceWorkerGlobalScope instead of window
 //  origin: https://github.com/microsoft/TypeScript/issues/14877#issuecomment-493729050
 declare let self: ServiceWorkerGlobalScope
 // fix cannot find module error

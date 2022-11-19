@@ -14,7 +14,7 @@
 /**
  * JS Implementation of incremental MurmurHash3 (r150) (as of May 10, 2013)
  */
-export default class MurmurHash3 {
+export class MurmurHash3 {
   private len!: number
   private rem!: number
   private h1!: number

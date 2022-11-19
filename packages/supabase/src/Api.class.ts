@@ -1,5 +1,4 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
-import { Insert } from './types'
 
 export default class Api {
   supabase: SupabaseClient
@@ -14,15 +13,12 @@ export default class Api {
     this.supabase = createClient(supabaseUrl, supabaseAnonKey)
   }
 
-  send = async (inserts: Insert[]) => {
-    console.log('addAction run')
-    console.log({ inserts })
+  send = async (inserts: unknown[]) => {
     try {
       const { data, error, status } = await this.supabase
         .from('action')
         .insert(inserts, { returning: 'minimal', count: 'planned' })
 
-      console.log({ error, status, data })
       if (error && status !== 406) {
         return { error: true }
       }

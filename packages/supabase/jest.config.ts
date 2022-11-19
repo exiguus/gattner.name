@@ -22,7 +22,6 @@ const config: Config = {
   watchPlugins: [
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',
-    'jest-canvas-mock',
   ],
   testEnvironment: 'jsdom',
 }

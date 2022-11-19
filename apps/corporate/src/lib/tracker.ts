@@ -1,6 +1,5 @@
-import { isActionValue } from '@gattner/tracker/utils'
-import { BrowserFingerprint } from '@gattner/tracker/BrowserFingerprint'
-import { Action } from '@gattner/tracker/types'
+import { isActionValue, Action } from '@gattner/tracker'
+import { BrowserFingerprint } from '@gattner/utils'
 
 const browserFingerprint = new BrowserFingerprint()
 const fingerprint = browserFingerprint.result()

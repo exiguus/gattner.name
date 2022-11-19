@@ -1,13 +1,16 @@
-import Tracker, { Api, isAction } from '@gattner/tracker'
+import Tracker, { isAction } from '@gattner/tracker'
+import Api from '@gattner/supabase'
 import { isObject } from '@gattner/utils'
-declare let self: ServiceWorkerGlobalScope & {
-  swUtils: Record<string, unknown>
-}
+
+// self refers to ServiceWorkerGlobalScope instead of window
+//  origin: https://github.com/microsoft/TypeScript/issues/14877#issuecomment-493729050
+declare let self: ServiceWorkerGlobalScope
 // fix cannot find module error
 export default null
 
 const SW_VERSION = '1.0.0'
 const SW_NAME = 'sw-tracker'
+
 const tracker = new Tracker({
   api: new Api(),
   count: 3,

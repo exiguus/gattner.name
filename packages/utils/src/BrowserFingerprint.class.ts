@@ -1,4 +1,4 @@
-import MurmurHash3 from './Murmurhash3.class'
+import { MurmurHash3 } from './Murmurhash3.class'
 
 declare global {
   interface Navigator {
@@ -23,7 +23,7 @@ declare global {
  * @param {object.debug} boolean - if true, debug info will be collected (default: false)
  * @returns number
  */
-export default class BrowserFingerprint {
+export class BrowserFingerprint {
   murmurHash3 = new MurmurHash3()
 
   constructor() {
@@ -217,5 +217,3 @@ export default class BrowserFingerprint {
     }
   }
 }
-
-export { BrowserFingerprint }

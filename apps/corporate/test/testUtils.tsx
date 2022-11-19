@@ -8,7 +8,6 @@ import { server } from '../mocks/server'
 import { AppLayout } from '../src/layouts/AppLayout'
 import { SiteLayout } from '../src/layouts/SiteLayout'
 import axios from 'axios'
-
 import 'whatwg-fetch'
 
 beforeAll(() => {
