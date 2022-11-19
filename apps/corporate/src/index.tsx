@@ -4,8 +4,6 @@ import { hydrate, render } from 'react-dom'
 import { isPrerender } from './utils/prerender'
 import { addPreloadScripts, addPrefetchFonts } from './utils/head'
 import { addStyledComponentStyles } from './utils/styles'
-import app from '../data/content/app.json'
-import App from './App'
 import { Workbox } from 'workbox-window'
 import { track, trackBindSendEvent } from './lib/tracker'
 
@@ -71,26 +69,32 @@ const callback = async (): Promise<void> => {
   })
 }
 
-appElement.hasChildNodes()
-  ? hydrate(
-      <React.StrictMode>
-        <App {...app} />
-      </React.StrictMode>,
-      appElement,
-      callback
-    )
-  : render(
-      <React.StrictMode>
-        <App {...app} />
-      </React.StrictMode>,
-      appElement,
-      callback
-    )
+async function renderApp(): Promise<void> {
+  const App = (await import('./App')).default
+  const app = await import('../data/content/app.json')
+  appElement.hasChildNodes()
+    ? hydrate(
+        <React.StrictMode>
+          <App {...app} />
+        </React.StrictMode>,
+        appElement,
+        callback
+      )
+    : render(
+        <React.StrictMode>
+          <App {...app} />
+        </React.StrictMode>,
+        appElement,
+        callback
+      )
+}
 
-track({
-  type: 'render',
-  msg: 'App rendered',
-  value: `App rendered`, // TODO: Add more details like render time
+renderApp().then(() => {
+  track({
+    type: 'render',
+    msg: 'App rendered',
+    value: `App rendered`, // TODO: Add more details like render time
+  })
 })
 
 if (process.env.NODE_ENV === 'production' && !prerender) {
