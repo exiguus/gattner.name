@@ -26,9 +26,11 @@ self.addEventListener('message', event => {
     case 'GET_TRACK':
       getUserRecenttracks()
         .then(fr => {
+          console.log({ fr })
           send<FetchResult<UserRecenttracks>>(fr)
         })
         .catch(error => {
+          console.log({ error })
           send<FetchResult<UserRecenttracks>>({
             result: 'request-failed',
             error,

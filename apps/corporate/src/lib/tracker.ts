@@ -1,8 +1,9 @@
 import { isActionValue, Action } from '@gattner/tracker'
 import { BrowserFingerprint } from '@gattner/utils'
+import { isPrerender } from '../utils/prerender'
 
-const browserFingerprint = new BrowserFingerprint()
-const fingerprint = browserFingerprint.result()
+const browserFingerprint = isPrerender() ? null : new BrowserFingerprint()
+const fingerprint = browserFingerprint ? browserFingerprint.result() : 1
 
 const append = {
   pid: 1,
@@ -15,6 +16,7 @@ const append = {
 }
 
 export function trackBindSendEvent() {
+  if (isPrerender()) return
   const events = ['beforeunload', 'popstate', 'onhashchange']
   events.forEach(event => {
     window.addEventListener(event, async () => {
@@ -26,7 +28,7 @@ export function trackBindSendEvent() {
 }
 
 export const track = (...args: Array<Action['value']>) => {
-  if (!('sw' in window && 'tracker' in window.sw)) return
+  if (isPrerender() || !('sw' in window && 'tracker' in window.sw)) return
   const actions = new Set<Action>()
   if (args.every(isActionValue)) {
     args.forEach(action => {

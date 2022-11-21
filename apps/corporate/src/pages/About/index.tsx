@@ -9,8 +9,10 @@ import { Icon } from '../../components/Icon'
 
 const About: FunctionComponent<AboutProps> = ({ content, quote, title }) => {
   const visible = useVisible()
+  const theme = useTheme()
   const { visibilityState } = visible
   const [hasSmile, setSmile] = useState(false)
+  const [iconFill, setIconFill] = useState(theme.application.color)
 
   useEffect(() => {
     const setSmileTimeout = setTimeout(() => {
@@ -21,7 +23,9 @@ const About: FunctionComponent<AboutProps> = ({ content, quote, title }) => {
     }
   }, [visibilityState])
 
-  const theme = useTheme()
+  useEffect(() => {
+    setIconFill(theme.application.color)
+  }, [theme.application.color])
 
   return (
     <>
@@ -30,8 +34,8 @@ const About: FunctionComponent<AboutProps> = ({ content, quote, title }) => {
         icon={
           <Icon
             type="simon-alt"
-            fill={theme.application.color}
-            stroke={hasSmile ? theme.application.color : 'transparent'}
+            fill={iconFill}
+            stroke={hasSmile ? iconFill : 'transparent'}
           />
         }
       />

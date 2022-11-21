@@ -2,17 +2,21 @@ import 'preact/devtools'
 import React from 'react'
 import { hydrate, render } from 'react-dom'
 import { isPrerender } from './utils/prerender'
-import { addPreloadScripts, addPrefetchFonts } from './utils/head'
+import {
+  addPreloadScripts,
+  addPrefetchFonts,
+  fixDynamicImportScripts,
+} from './utils/head'
 import { addStyledComponentStyles } from './utils/styles'
 import { Workbox } from 'workbox-window'
 import { track, trackBindSendEvent } from './lib/tracker'
+import App from './App'
+import app from '../data/content/app.json'
 
 const prerender = isPrerender()
 
 const appId = 'root'
 const appElement = document.getElementById(appId) as HTMLElement
-
-const eventName = 'prerender-trigger'
 
 declare global {
   interface Window {
@@ -37,12 +41,14 @@ const registerServiceWorker = () => {
   })
 }
 
+appElement.setAttribute('data-prerender', `${prerender}`)
+
 if (!prerender) {
   document.documentElement.setAttribute('data-js', 'true')
   registerServiceWorker()
 }
 
-appElement.setAttribute('data-prerender', `${prerender}`)
+const eventName = 'prerender-trigger'
 
 const addLoadingEvent = ({ detail }: { detail?: object }): CustomEvent => {
   return new CustomEvent(eventName, {
@@ -58,20 +64,22 @@ const dispatchLoadingEvent = ({ detail }: { detail?: object }): boolean => {
 
 const callback = async (): Promise<void> => {
   if (prerender) {
-    await addStyledComponentStyles()
+    await fixDynamicImportScripts()
     await addPreloadScripts()
     await addPrefetchFonts()
+
+    setTimeout(async () => {
+      await addStyledComponentStyles()
+      dispatchLoadingEvent({
+        detail: {
+          type: appId,
+        },
+      })
+    }, 5000)
   }
-  dispatchLoadingEvent({
-    detail: {
-      type: appId,
-    },
-  })
 }
 
 async function renderApp(): Promise<void> {
-  const App = (await import('./App')).default
-  const app = await import('../data/content/app.json')
   appElement.hasChildNodes()
     ? hydrate(
         <React.StrictMode>
@@ -97,7 +105,7 @@ renderApp().then(() => {
   })
 })
 
-if (process.env.NODE_ENV === 'production' && !prerender) {
+if (process.env.NODE_ENV === 'production') {
   const sw = '/sw-cache.js'
   navigator.serviceWorker
     .register(sw)

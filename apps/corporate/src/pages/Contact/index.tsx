@@ -17,9 +17,12 @@ const Impressum: FunctionComponent<ContactProps> = ({
   quote,
   title,
 }) => {
+  const theme = useTheme()
   const visible = useVisible()
   const { visibilityState } = visible
   const [hasSmile, setSmile] = useState(false)
+  const [iconFill, setIconFill] = useState(theme.application.color)
+
   useEffect(() => {
     const setSmileTimeout = setTimeout(
       () => setSmile(visibilityState === 'visible'),
@@ -30,7 +33,9 @@ const Impressum: FunctionComponent<ContactProps> = ({
     }
   }, [visibilityState])
 
-  const theme = useTheme()
+  useEffect(() => {
+    setIconFill(theme.application.color)
+  }, [theme.application.color])
 
   return (
     <>
@@ -39,8 +44,8 @@ const Impressum: FunctionComponent<ContactProps> = ({
         icon={
           <Icon
             type="simon-alt"
-            fill={theme.application.color}
-            stroke={hasSmile ? theme.application.color : 'transparent'}
+            fill={iconFill}
+            stroke={hasSmile ? iconFill : 'transparent'}
           />
         }
       />

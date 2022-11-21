@@ -4,7 +4,8 @@
   "description": "Consulting and development of digital solutions",
   "scripts": {
     "serve": "NODE_ENV=development dotenv -e .env.local parcel serve ./public/index.html --no-cache",
-    "dev:sw": "NODE_ENV=development dotenv -e .env.local parcel watch ./src/sw-tracker.ts --no-cache --experimental-scope-hoisting",
+    "dev:sw:tracker": "NODE_ENV=development dotenv -e .env.local parcel watch ./src/sw-tracker.ts --no-cache --experimental-scope-hoisting",
+    "dev:sw:lastfm": "NODE_ENV=development dotenv -e .env.local parcel watch ./src/sw-lastfm.ts --no-cache --experimental-scope-hoisting",
     "dev:pre": "pnpm build:msw && pnpm data",
     "dev": "pnpm dev:pre && pnpm serve",
     "dev:build": "pnpm build:app",
