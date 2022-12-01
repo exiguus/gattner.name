@@ -7,7 +7,7 @@
   ],
   "plugins": [
     "@babel/plugin-transform-runtime",
-    ["babel-plugin-styled-components", { "ssr": "true" }],
+    ["babel-plugin-styled-components", { "ssr": "true", "namespace": "gattner-corporate", "meaninglessFileNames": ["index", "styles"] }],
     "babel-plugin-optimize-react",
     "babel-plugin-minify-simplify"
   ]

@@ -12,6 +12,18 @@ const rem = ({
   return `${px / base}rem`
 }
 
+export const hex2rgba = (hex: string, alpha = 1) => {
+  const r = parseInt(hex.slice(1, 3), 16),
+    g = parseInt(hex.slice(3, 5), 16),
+    b = parseInt(hex.slice(5, 7), 16)
+
+  if (alpha) {
+    return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')'
+  } else {
+    return 'rgb(' + r + ', ' + g + ', ' + b + ')'
+  }
+}
+
 // HSL
 // S (saturation) and L (lightness) are percentages. 100% saturation is completely saturated, while 0% is completely unsaturated (gray). 100% lightness is white, 0% lightness is black, and 50% lightness is “normal.”
 // A (alpha) can be a <number> between 0 and 1, or a <percentage>, where the number 1 corresponds to 100% (full opacity).
@@ -91,7 +103,7 @@ export const themeDark: ThemeExtended = {
   application: {
     backgroundColor: `hsl(${backgroundHue}, 90%, 5%, 0.8)`,
     backgroundAnimationColor: `hsl(${backgroundHue}, 90%, 5%)`,
-    color: variables.BrandSecondary,
+    color: hex2rgba(variables.BrandSecondary, 0.8),
     highlightColor: `hsl(${getRandomColor()}, 0.3)`,
   },
   link: {
@@ -105,7 +117,7 @@ export const themeLight: ThemeExtended = {
   application: {
     backgroundColor: `hsl(${backgroundHue}, ${backgroundSaturation}, ${backgroundAlpha}, 0.5)`,
     backgroundAnimationColor: `hsl(${backgroundHue}, ${backgroundSaturation}, ${backgroundAlpha})`,
-    color: variables.BrandPrimary,
+    color: hex2rgba(variables.BrandPrimary, 0.8),
     highlightColor: `hsl(${getRandomColor()})`,
   },
   link: {

@@ -1,6 +1,3 @@
-import 'preact/devtools'
-import React from 'react'
-import { hydrate, render } from 'react-dom'
 import { isPrerender } from './utils/prerender'
 import {
   addPreloadScripts,
@@ -8,9 +5,7 @@ import {
   fixDynamicImportScripts,
 } from './utils/head'
 import { addStyledComponentStyles } from './utils/styles'
-import { Workbox } from 'workbox-window'
-import { track, trackBindSendEvent } from './lib/tracker'
-import App from './App'
+import { track } from './lib/tracker'
 import app from '../data/content/app.json'
 
 const prerender = isPrerender()
@@ -18,34 +13,15 @@ const prerender = isPrerender()
 const appId = 'root'
 const appElement = document.getElementById(appId) as HTMLElement
 
-declare global {
-  interface Window {
-    sw: Record<string, Workbox>
-    swUtils: Record<string, unknown>
-  }
-}
-
-const registerServiceWorker = () => {
-  if ('serviceWorker' in navigator) {
-    window.sw = window.sw || {}
-    window.sw.lastfm = new Workbox('/sw-lastfm.js')
-    window.sw.lastfm.register()
-    window.sw.tracker = new Workbox('/sw-tracker.js')
-    window.sw.tracker.register()
-    trackBindSendEvent()
-  }
-  track({
-    type: 'register',
-    msg: 'Service Worker registered',
-    value: `Service Worker in navigator is "${'serviceWorker' in navigator}"`,
-  })
-}
-
 appElement.setAttribute('data-prerender', `${prerender}`)
 
 if (!prerender) {
   document.documentElement.setAttribute('data-js', 'true')
-  registerServiceWorker()
+  const rSW = async () => {
+    const { registerServiceWorker } = await import('./sw-register')
+    registerServiceWorker()
+  }
+  rSW()
 }
 
 const eventName = 'prerender-trigger'
@@ -80,6 +56,10 @@ const callback = async (): Promise<void> => {
 }
 
 async function renderApp(): Promise<void> {
+  await import('preact/devtools')
+  const React = await import('react')
+  const { hydrate, render } = await import('react-dom')
+  const App = (await import('./App')).default
   appElement.hasChildNodes()
     ? hydrate(
         <React.StrictMode>
@@ -104,32 +84,3 @@ renderApp().then(() => {
     value: `App rendered`, // TODO: Add more details like render time
   })
 })
-
-if (process.env.NODE_ENV === 'production') {
-  const sw = '/sw-cache.js'
-  navigator.serviceWorker
-    .register(sw)
-    .then(registration => {
-      registration.onupdatefound = (): void => {
-        const installingWorker = registration.installing
-        if (installingWorker == null) {
-          return
-        }
-        installingWorker.onstatechange = (): void => {
-          if (installingWorker.state === 'installed') {
-            if (navigator.serviceWorker.controller) {
-              console.log(
-                'New content is available and will be used when all ' +
-                  'tabs for this page are closed.'
-              )
-            } else {
-              console.log('Content is cached for offline use.')
-            }
-          }
-        }
-      }
-    })
-    .catch(error => {
-      console.error('Error during service worker registration:', error)
-    })
-}

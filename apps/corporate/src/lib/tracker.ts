@@ -20,15 +20,15 @@ export function trackBindSendEvent() {
   const events = ['beforeunload', 'popstate', 'onhashchange']
   events.forEach(event => {
     window.addEventListener(event, async () => {
-      window.sw.tracker.messageSW({
-        type: 'SEND_ACTIONS',
+      window.sw.messageSW({
+        type: 'TRACKER_SEND_ACTIONS',
       })
     })
   })
 }
 
 export const track = (...args: Array<Action['value']>) => {
-  if (isPrerender() || !('sw' in window && 'tracker' in window.sw)) return
+  if (isPrerender() || !('sw' in window)) return
   const actions = new Set<Action>()
   if (args.every(isActionValue)) {
     args.forEach(action => {
@@ -36,8 +36,8 @@ export const track = (...args: Array<Action['value']>) => {
       actions.add({ key: { timestamp }, value: action, append })
     })
   }
-  window.sw.tracker.messageSW({
-    type: 'PUSH_ACTIONS',
+  window.sw.messageSW({
+    type: 'TRACKER_PUSH_ACTIONS',
     actions: Array.from(actions),
   })
 }

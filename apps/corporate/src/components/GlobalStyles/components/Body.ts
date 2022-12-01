@@ -62,6 +62,26 @@ const Body = createGlobalStyle`
     }
   }
 
+  a {
+    color: ${(props): string => props.theme.link.color};
+
+    &:hover {
+      color: ${(props): string => props.theme.link.hoverColor};
+    }
+
+    &:link,
+    &:hover,
+    &:active,
+    &:focus,
+    &:visited {
+      color: ${(props): string => props.theme.link.color};
+    }
+  }
+
+  svg {
+    fill: ${(props): string => props.theme.application.color};
+  }
+
   ::selection {
     background-color: ${(props): string =>
       props.theme.application.highlightColor};

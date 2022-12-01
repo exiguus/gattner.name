@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 const isWindowClient = typeof window === 'object'
 
@@ -38,7 +38,7 @@ const useWindowSize = (): {
     }
   }, [setWindowSize])
 
-  return windowSize
+  return useMemo(() => windowSize, [windowSize])
 }
 
 export default useWindowSize

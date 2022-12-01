@@ -43,8 +43,8 @@ export const getUserRecenttracks = async () => {
 export const swMessageGetUserRecenttracks = async (): Promise<
   FetchResult<UserRecenttracks>
 > => {
-  if ('sw' in window && 'lastfm' in window.sw) {
-    return await window.sw.lastfm.messageSW({ type: 'GET_TRACK' })
+  if ('sw' in window) {
+    return await window.sw.messageSW({ type: 'LASTFM_GET_TRACK' })
   } else {
     return await {
       result: 'request-failed',
@@ -58,6 +58,7 @@ export const storePullGetUserRecenttracks = async (
 ): Promise<FetchResult<UserRecenttracks>> => {
   const { timestamp, data } = store.last() || {}
 
+  console.log({ timestamp, data })
   const validCache =
     Date.now() - (typeof timestamp === 'number' ? timestamp : 0) < CACHE_TIME
 
