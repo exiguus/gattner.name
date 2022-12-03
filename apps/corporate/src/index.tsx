@@ -8,11 +8,6 @@ appElement.setAttribute('data-prerender', `${prerender}`)
 
 if (!prerender) {
   document.documentElement.setAttribute('data-js', 'true')
-  const rSW = async () => {
-    const { registerServiceWorker } = await import('./sw-register')
-    registerServiceWorker()
-  }
-  rSW()
 }
 
 const callback = async (): Promise<void> => {
@@ -64,6 +59,10 @@ async function render(
 }
 
 render(appElement, callback).then(async () => {
+  if (!prerender) {
+    const { registerServiceWorker } = await import('./sw-register')
+    registerServiceWorker()
+  }
   const { track } = await import('./lib/tracker')
   track({
     type: 'render',
