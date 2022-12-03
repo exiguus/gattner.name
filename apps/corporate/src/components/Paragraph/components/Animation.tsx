@@ -35,6 +35,7 @@ const StyledAnimation = styled.span`
   }
 
   [data-randext-char] {
+    will-change: contents, opacity;
     display: inline-block;
     width: 0.65em;
     height: 1.66em;

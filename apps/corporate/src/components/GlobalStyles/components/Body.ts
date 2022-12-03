@@ -46,6 +46,7 @@ const Body = createGlobalStyle`
   }
 
   body {
+    will-change: opacity, background-color;
     padding: 0;
     margin: 0;
     min-height: 100vh;

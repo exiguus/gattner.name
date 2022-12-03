@@ -20,6 +20,7 @@ export const StyledNavLink = styled(NavLink)`
   position: relative;
 
   ::before {
+    will-change: transform;
     position: absolute;
     content: '';
     display: block;
