@@ -86,15 +86,11 @@ export const LastFmContextProvider: FunctionComponent = ({ children }) => {
 
     storePullGetUserRecenttracks(store).then(fr => {
       if (!isMounted) return // do not update state if component is not mounted anymore
-
-      console.log({ fr })
       if (fr.result === 'successful') {
         update(fr.data)
       } else {
         swMessageGetUserRecenttracks().then(fr => {
           if (!isMounted) return // do not update state if component is not mounted anymore
-
-          console.log({ fr })
           if (fr.result === 'successful') {
             update(fr.data)
             store.push({ timestamp: Date.now(), data: fr.data })

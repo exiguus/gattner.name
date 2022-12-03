@@ -75,38 +75,43 @@ export default class Tracker {
   }
 
   async send() {
-    console.log({
-      count: this.count,
-      loading: this.loading,
-      sl: this.storage.length,
-    })
     if (!this.loading && this.storage.length > this.count) {
       this.loading = true
       const start = 0
       const end = this.storage.length
-      console.log('addAction try')
-      const inserts = this.storage
-        .slice(start, end)
-        .map(sendKey => {
-          this.key = sendKey
-          return this.store.get(sendKey)
-        })
-        .filter((item): item is ActionStoreItem => !!item)
-      console.log({ inserts })
-      if (this.api)
-        this.api.send(inserts).then(({ error }) => {
-          console.log('addAction then')
-          this.error = error
-          if (!error) this.storage.splice(start, end)
-          const count = Math.round(this.count * (this.factor * 0.9))
-          this.count = count >= this.max ? this.max : count
-          if (this.storage.length > 256) {
-            this.storage.splice(0, 56)
-          }
-          setTimeout(() => {
-            this.loading = false
-          }, this.settings.debounce)
-        })
+      const inserts = this.apiInserts(start, end)
+      const callback = () => this.apiSendCallback(start, end)
+      this.apiSend(inserts, callback)
     }
+  }
+
+  apiInserts(start: number, end: number) {
+    return this.storage
+      .slice(start, end)
+      .map(sendKey => {
+        this.key = sendKey
+        return this.store.get(sendKey)
+      })
+      .filter((item): item is ActionStoreItem => !!item)
+  }
+
+  async apiSend(inserts: Array<ActionStoreItem>, callback: () => void) {
+    if (!this.api) return
+    this.api.send(inserts).then(({ error }) => {
+      this.error = error
+      callback()
+    })
+  }
+
+  apiSendCallback(start: number, end: number) {
+    if (!this.error) this.storage.splice(start, end)
+    const count = Math.round(this.count * (this.factor * 0.9))
+    this.count = count >= this.max ? this.max : count
+    if (this.storage.length > 256) {
+      this.storage.splice(0, 56)
+    }
+    setTimeout(() => {
+      this.loading = false
+    }, this.settings.debounce)
   }
 }

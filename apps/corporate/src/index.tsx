@@ -1,13 +1,4 @@
-import { isPrerender } from './utils/prerender'
-import {
-  addPreloadScripts,
-  addPrefetchFonts,
-  fixDynamicImportScripts,
-} from './utils/head'
-import { addStyledComponentStyles } from './utils/styles'
-import { track } from './lib/tracker'
-import app from '../data/content/app.json'
-
+import { isPrerender, dispatchLoadingEvent } from './utils/prerender'
 const prerender = isPrerender()
 
 const appId = 'root'
@@ -24,22 +15,17 @@ if (!prerender) {
   rSW()
 }
 
-const eventName = 'prerender-trigger'
-
-const addLoadingEvent = ({ detail }: { detail?: object }): CustomEvent => {
-  return new CustomEvent(eventName, {
-    detail,
-  })
-}
-
-const dispatchLoadingEvent = ({ detail }: { detail?: object }): boolean => {
-  const target = document
-  const event = addLoadingEvent({ detail })
-  return target.dispatchEvent(event)
-}
-
 const callback = async (): Promise<void> => {
+  await import('preact/devtools')
   if (prerender) {
+    const {
+      addPreloadScripts,
+      addPrefetchFonts,
+      removeDoublicateScripts,
+      fixDynamicImportScripts,
+    } = await import('./utils/head')
+    const { addStyledComponentStyles } = await import('./utils/styles')
+    await removeDoublicateScripts()
     await fixDynamicImportScripts()
     await addPreloadScripts()
     await addPrefetchFonts()
@@ -55,11 +41,14 @@ const callback = async (): Promise<void> => {
   }
 }
 
-async function renderApp(): Promise<void> {
-  await import('preact/devtools')
-  const React = await import('react')
-  const { hydrate, render } = await import('react-dom')
+async function render(
+  appElement: HTMLElement,
+  callback: () => void
+): Promise<void> {
+  const React = (await import('react')).default
+  const { hydrate, render } = (await import('react-dom')).default
   const App = (await import('./App')).default
+  const app = await import('../data/content/app.json')
   appElement.hasChildNodes()
     ? hydrate(
         <React.StrictMode>
@@ -77,7 +66,8 @@ async function renderApp(): Promise<void> {
       )
 }
 
-renderApp().then(() => {
+render(appElement, callback).then(async () => {
+  const { track } = await import('./lib/tracker')
   track({
     type: 'render',
     msg: 'App rendered',

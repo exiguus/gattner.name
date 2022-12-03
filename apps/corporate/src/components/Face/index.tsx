@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import useVisible from '../../hooks/useVisible'
-import { Theme } from '../../../types/Theme'
 import { Icon } from '../Icon'
+import { useTheme } from '../../hooks/useTheme'
+import { isPrerender } from '../../utils/prerender'
 
-export const Face = ({ theme }: { theme: Theme }) => {
+export const Face = () => {
+  const { theme } = useTheme()
   const visible = useVisible()
   const { visibilityState } = visible
   const [hasSmile, setSmile] = useState(false)
+  const prerender = isPrerender()
+
   useEffect(() => {
+    if (prerender) return
     const setSmileTimeout = setTimeout(() => {
       setSmile(visibilityState === 'visible')
     }, 1200)
     return function cleanup(): void {
+      if (prerender) return
       clearTimeout(setSmileTimeout)
     }
-  }, [visibilityState])
+  }, [prerender, visibilityState])
   return (
     <Icon
       type="simon-alt"

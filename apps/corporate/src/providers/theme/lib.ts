@@ -43,13 +43,11 @@ export const updateTheme = (theme: Theme, darkMode: boolean): Theme => {
 
 export const current = (): StoreItem => {
   const currentItem = store.last()
-  console.log({ currentItem, storeItem })
   return isStoreItem(currentItem) ? currentItem : storeItem
 }
 
 export const prev = (item: StoreItem, newItem: StoreItem) => {
   store.push(newItem)
   const prevItem = store.last()
-  console.log({ prevItem })
   return isStoreItem(prevItem) ? prevItem : item
 }

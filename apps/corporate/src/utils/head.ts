@@ -1,14 +1,41 @@
 export function fixDynamicImportScripts(): void {
+  removeDoublicateScripts()
   const scriptNodes: NodeListOf<HTMLScriptElement> =
     document.head.querySelectorAll('script[src^="http://localhost:8000/"]')
+
   scriptNodes.forEach(scriptNode => {
     const src = scriptNode.getAttribute('src') ?? ''
     scriptNode.setAttribute('src', src.replace('http://localhost:8000/', '/'))
   })
+}
 
-  const homeScriptNodes: NodeListOf<HTMLScriptElement> =
-    document.head.querySelectorAll('script[src^="/Home."]')
-  if (homeScriptNodes.length === 2) homeScriptNodes[1].remove()
+export const removeDoublicateScripts = (): void => {
+  const scriptNodes: NodeListOf<HTMLScriptElement> =
+    document.head.querySelectorAll('script[src]')
+  const scriptNodeSources = Array.from(scriptNodes).map(({ src }) => src)
+  const scriptNodeSourceDoublicates = scriptNodeSources.filter(
+    (item, index) => scriptNodeSources.indexOf(item) !== index
+  )
+
+  scriptNodeSourceDoublicates.forEach(scriptNodeSourceDoublicate => {
+    const scripts: NodeListOf<HTMLScriptElement> =
+      document.head.querySelectorAll(
+        `script[src^="${scriptNodeSourceDoublicate}"]`
+      )
+    if (scripts.length > 1) {
+      scripts.forEach((script, index) => {
+        if (index > 0) {
+          script.remove()
+        }
+      })
+    }
+  })
+  // remove prerender scripts
+  scriptNodes.forEach(scriptNode => {
+    if (scriptNode.src.match(/(head|styles).*\.js$/)) {
+      scriptNode.remove()
+    }
+  })
 }
 
 export function addPreloadScripts(): void {

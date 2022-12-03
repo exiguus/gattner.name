@@ -57,8 +57,6 @@ export const storePullGetUserRecenttracks = async (
   store: Store
 ): Promise<FetchResult<UserRecenttracks>> => {
   const { timestamp, data } = store.last() || {}
-
-  console.log({ timestamp, data })
   const validCache =
     Date.now() - (typeof timestamp === 'number' ? timestamp : 0) < CACHE_TIME
 

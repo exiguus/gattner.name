@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import { Blockquote } from '@gattner/ui-blockquote'
 import { ContactProps } from '../../../schemas'
-import { useTheme } from '../../hooks/useTheme'
 import { Headline } from '../../components/Headline'
 import { Paragraph } from '../../components/Paragraph'
 import { HorizontalBreak } from '../../components/HorizontalBreak'
@@ -16,11 +15,9 @@ const Contact: FunctionComponent<ContactProps> = ({
   quote,
   title,
 }) => {
-  const { theme } = useTheme()
-
   return (
     <>
-      <Headline text={title} icon={<Face theme={theme} />} />
+      <Headline text={title} icon={<Face />} />
       <Blockquote>
         <Paragraph text={quote} />
       </Blockquote>

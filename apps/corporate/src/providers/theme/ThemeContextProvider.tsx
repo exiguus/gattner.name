@@ -16,7 +16,7 @@ export const ThemeContextProvider: FunctionComponent = ({ children }) => {
     }),
     [darkMode]
   )
-  console.log({ darkMode, timestamp })
+
   return (
     <ThemeContext.Provider value={value}>
       <ThemeProvider theme={value.theme}>{children}</ThemeProvider>

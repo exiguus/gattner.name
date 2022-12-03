@@ -80,6 +80,7 @@ const Body = createGlobalStyle`
 
   svg {
     fill: ${(props): string => props.theme.application.color};
+    stroke: 'transparent';
   }
 
   ::selection {

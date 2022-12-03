@@ -8,12 +8,12 @@ const bundlewatchConfig = {
     })),
     {
       path: 'dist/src.*.js',
-      maxSize: '100KB',
+      maxSize: '60KB',
       compression: 'none',
     },
     {
       path: 'dist/App.*.js',
-      maxSize: '250KB',
+      maxSize: '260KB',
       compression: 'none',
     },
     {

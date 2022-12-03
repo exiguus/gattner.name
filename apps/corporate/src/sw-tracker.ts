@@ -12,7 +12,6 @@ const trackerInstance = new Tracker({
 
 export const tracker = (self: ServiceWorkerGlobalScope) => {
   self.addEventListener('message', event => {
-    console.log({ event })
     if (isObject(event.data) && typeof event.data.type === 'string') {
       switch (event.data.type) {
         case 'TRACKER_PUSH_ACTIONS':
@@ -21,7 +20,6 @@ export const tracker = (self: ServiceWorkerGlobalScope) => {
             event.data.actions.every(isAction)
           ) {
             event.data.actions.forEach(action => {
-              console.log('action', action)
               trackerInstance.push(action)
             })
           }
