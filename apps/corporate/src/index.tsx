@@ -18,26 +18,23 @@ if (!prerender) {
 const callback = async (): Promise<void> => {
   await import('preact/devtools')
   if (prerender) {
-    const {
-      addPreloadScripts,
-      addPrefetchFonts,
-      removeDoublicateScripts,
-      fixDynamicImportScripts,
-    } = await import('./utils/head')
+    const { addPreloadScripts, addPrefetchFonts, removeDynamicImportScripts } =
+      await import('./utils/head')
     const { addStyledComponentStyles } = await import('./utils/styles')
-    await removeDoublicateScripts()
-    await fixDynamicImportScripts()
+    await removeDynamicImportScripts()
     await addPreloadScripts()
     await addPrefetchFonts()
 
     setTimeout(async () => {
       await addStyledComponentStyles()
+    }, 5000)
+    setInterval(() => {
       dispatchLoadingEvent({
         detail: {
           type: appId,
         },
       })
-    }, 5000)
+    }, 10000)
   }
 }
 

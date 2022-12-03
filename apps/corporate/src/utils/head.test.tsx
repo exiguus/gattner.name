@@ -3,14 +3,15 @@ import '@testing-library/jest-dom'
 import {
   addPreloadScripts,
   addPrefetchFonts,
-  fixDynamicImportScripts,
+  removeDynamicImportScripts,
 } from './head'
 
 // TODO: test all functionality for doublicate appends
 const getExampleDocument = (callback: () => void) => {
   const script = document.createElement('script')
-  script.setAttribute('src', 'http://localhost:8000/path/file.js')
+  script.setAttribute('src', '/path/file.js')
   document.head.append(script)
+  document.body.append(script)
 
   const style = document.createElement('style')
   style.innerText = `
@@ -31,14 +32,12 @@ const getExampleDocument = (callback: () => void) => {
 }
 
 describe('head', () => {
-  describe('fixDynamicImportScripts', () => {
-    test('fix dynamic import script link', async () => {
-      const document = getExampleDocument(fixDynamicImportScripts)
+  describe('removeDynamicImportScripts', () => {
+    test('remove dynamic import script link', async () => {
+      const document = getExampleDocument(removeDynamicImportScripts)
       fireEvent(document, new Event('documentContentLoaded'))
       await waitFor(() => {
-        expect(document.querySelector('script')?.getAttribute('src')).toEqual(
-          '/path/file.js'
-        )
+        expect(document.head.querySelectorAll('script').length).toEqual(0)
       })
     })
   })

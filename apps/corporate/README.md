@@ -49,7 +49,7 @@ React render called in `process.env.NODE_ENV=development` and hydrate in product
 - [x] add night / day mode
 - [x] add multi, random home page content
 - [ ] add dark/light switch
-  - [x] auto switch theme
+- [x] auto switch dark/light theme
 - [ ] add [gradient](https://www.joshwcomeau.com/css/make-beautiful-gradients/) switch with [chrome.js](https://gka.github.io/chroma.js/)
 - [x] add LastFm .env.local and remove from env
 - [x] add LastFm provider and hook
@@ -59,8 +59,7 @@ React render called in `process.env.NODE_ENV=development` and hydrate in product
   - [x] cache session or local storage
   - [x] tests
 - [x] add error logging (sentry)
-- [x] add analytics (counter.dev)
-- [ ] add advanced analytics (hotjar)
+- [x] add tracker
 - [x] data repo
   - [x] add fetch data directory three
   - [x] recursive fetch from directory
