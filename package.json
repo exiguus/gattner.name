@@ -72,5 +72,10 @@
       "pnpm lint"
     ]
   },
-  "packageManager": "pnpm@7.9.5"
+  "packageManager": "pnpm@7.9.5",
+  "pnpm": {
+    "patchedDependencies": {
+      "parcel-plugin-prerender@1.4.1": "patches/parcel-plugin-prerender@1.4.1.patch"
+    }
+  }
 }

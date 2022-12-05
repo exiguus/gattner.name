@@ -1,0 +1,22 @@
+diff --git a/index.js b/index.js
+index cd04771b1054b08803325a7cf1cc4ef7ec0778e5..c3bfc74c8040694e1e72e980796ff7c818c1800e 100644
+--- a/index.js
++++ b/index.js
+@@ -11,7 +11,7 @@ const prettyMs = require('pretty-ms');
+ 
+ module.exports = bundler => {
+   bundler.on('buildEnd', async () => {
+-    if (process.env.NODE_ENV !== 'production') return;
++    if (process.env.NODE_ENV !== 'production' || process.env.PRERENDER !== 'true') return;
+     console.log('');
+     const spinner = ora(chalk.grey('Prerendering')).start();
+     let routes = ['/']; // the default route
+@@ -41,7 +41,7 @@ module.exports = bundler => {
+           const outputDir = path.join(outDir, route.route);
+           const file = path.normalize(`${outputDir}/index.html`);
+           mkdirp.sync(outputDir);
+-          const {html} = await htmlnano.process(route.html.trim());
++          const { html } = await htmlnano.process(route.html.trim());
+           fs.writeFileSync(file, html);
+           const end = Date.now();
+         } catch (err) {
