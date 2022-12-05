@@ -68,8 +68,8 @@ The corporate side use Parcel 1.2 and its pre-render plugin that depends on reac
   * [x] preview.ts provider for globalStyles, fonts, theme
 * [x] storybook landing page (README.md)
 * [ ] move corporate components into packages and add a story
-  * [ ] headline
-  * [ ] paragraph
+  * [x] headline
+  * [x] paragraph
   * [x] blockquote
   * [ ] grid
   * [ ] sections / container
@@ -78,3 +78,6 @@ The corporate side use Parcel 1.2 and its pre-render plugin that depends on reac
   * [ ] favicon
 * [x] tsconfig
   * [x] use default type root (declare md for example) for all ui packages
+* [ ] jest config
+  * [x] testUtils for ui
+  * [x] move mocks to testUtils

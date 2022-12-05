@@ -19,9 +19,6 @@ const config: Config = {
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
-  moduleNameMapper: {
-    '\\.(gif|woff|woff2|svg|png)$': '<rootDir>/../test/__mocks__/fileMock.js',
-  },
   watchPlugins: [
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',
