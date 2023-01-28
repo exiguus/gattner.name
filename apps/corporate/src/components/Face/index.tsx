@@ -15,6 +15,13 @@ export const Face = () => {
     if (prerender) return
     const setSmileTimeout = setTimeout(() => {
       setSmile(visibilityState === 'visible')
+      import('../../lib/tracker').then(({ track }) => {
+        track({
+          type: 'animate',
+          msg: 'Smile animated',
+          value: `Smile animated with visibilityState "${visibilityState}"`,
+        })
+      })
     }, 1200)
     return function cleanup(): void {
       if (prerender) return

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useEffect } from 'react'
 import { Blockquote } from '@gattner/ui-blockquote'
 import { ContactProps } from '../../../schemas'
 import { Headline } from '../../components/Headline'
@@ -15,6 +15,15 @@ const Contact: FunctionComponent<ContactProps> = ({
   quote,
   title,
 }) => {
+  useEffect(() => {
+    import('../../lib/tracker').then(({ track }) => {
+      track({
+        type: 'load',
+        msg: 'Contact loaded',
+        value: `Contact Page loaded at location "${window.location.href}"`,
+      })
+    })
+  }, [])
   return (
     <>
       <Headline text={title} icon={<Face />} />

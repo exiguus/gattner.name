@@ -18,11 +18,25 @@ export const lastfm = (self: ServiceWorkerGlobalScope) => {
       getUserRecenttracks()
         .then(fr => {
           send<FetchResult<UserRecenttracks>>(fr)
+          import('./lib/tracker').then(({ track }) => {
+            track({
+              type: 'fetch',
+              msg: 'LastFm fetched',
+              value: `LastFm fetch user.getRecentTracks`,
+            })
+          })
         })
         .catch(error => {
           send<FetchResult<UserRecenttracks>>({
             result: 'request-failed',
             error,
+          })
+          import('./lib/tracker').then(({ track }) => {
+            track({
+              type: 'error',
+              msg: 'LastFm error',
+              value: `LastFm fetch user.getRecentTracks error request-failed`,
+            })
           })
         })
     }

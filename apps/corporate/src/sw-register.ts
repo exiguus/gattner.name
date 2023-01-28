@@ -16,7 +16,9 @@ export const registerServiceWorker = async () => {
       track({
         type: 'register',
         msg: 'Service Worker registered',
-        value: `Service Worker in navigator is "${registration}"`,
+        value: `Service Worker in navigator is "${JSON.stringify(
+          registration ?? ''
+        )}"`,
       })
     },
     /*catch*/ error => {

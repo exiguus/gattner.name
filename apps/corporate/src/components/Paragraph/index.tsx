@@ -37,10 +37,13 @@ const Paragraph: FunctionComponent<ParagraphProps> = ({
       data-testid={dataTestId}
       align={align}
     >
+      {/* this should be by default invisible until the animation start */}
       {animate && text && !isPrerender()
         ? text
             .split(' ')
-            .map((word, index) => <Animation key={index} text={word} />)
+            .map((word, index) => (
+              <Animation key={index} word={word} text={text} />
+            ))
         : text
         ? text
         : children}

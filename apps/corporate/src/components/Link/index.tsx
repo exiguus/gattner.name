@@ -10,7 +10,6 @@ import {
   StyledExternalNavLink,
   StyledNavLink,
 } from './styles'
-import { track } from '../../lib/tracker'
 
 export interface LinkProps {
   children: ReactNode | ReactElement
@@ -41,10 +40,12 @@ const Link: FunctionComponent<LinkProps> = ({
     let href = event.currentTarget?.href || ''
     const isMail = href?.startsWith('mailto:')
 
-    track({
-      type: 'click',
-      msg: 'Link clicked',
-      value: `Link clicked with href "${href}" and isMail "${isMail}"`,
+    import('../../lib/tracker').then(({ track }) => {
+      track({
+        type: 'click',
+        msg: 'Link clicked',
+        value: `Link clicked with href "${href}" and isMail "${isMail}"`,
+      })
     })
 
     if (isMail) {
@@ -76,10 +77,12 @@ const Link: FunctionComponent<LinkProps> = ({
               lineThrough={lineThrough}
               title={title}
               onClickCapture={() =>
-                track({
-                  type: 'click',
-                  msg: 'Link clicked',
-                  value: `Link clicked with to "${to}" and "${title}"`,
+                import('../../lib/tracker').then(({ track }) => {
+                  track({
+                    type: 'click',
+                    msg: 'Link clicked',
+                    value: `Link clicked with to "${to}" and "${title}"`,
+                  })
                 })
               }
             >
@@ -92,10 +95,12 @@ const Link: FunctionComponent<LinkProps> = ({
               title={title}
               exact={exact}
               onClickCapture={() =>
-                track({
-                  type: 'click',
-                  msg: 'Link clicked',
-                  value: `Link clicked with to "${to}" and "${title}"`,
+                import('../../lib/tracker').then(({ track }) => {
+                  track({
+                    type: 'click',
+                    msg: 'Link clicked',
+                    value: `Link clicked with to "${to}" and "${title}"`,
+                  })
                 })
               }
             >

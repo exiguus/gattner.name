@@ -6,7 +6,6 @@ import React, {
 } from 'react'
 import styled from 'styled-components'
 import { getRandomInt } from '@gattner/utils'
-import { track } from '../../../lib/tracker'
 
 // jest does not support es modules
 // because we us ts-jest to compile typescript
@@ -49,53 +48,59 @@ const StyledAnimation = styled.span`
 `
 
 interface AnimationProps {
+  word: string
   text: string
 }
-const Animation: FunctionComponent<AnimationProps> = ({ text }) => {
+const Animation: FunctionComponent<AnimationProps> = ({ text, word }) => {
   const paragraphRef = useRef() as MutableRefObject<HTMLParagraphElement>
   useLayoutEffect(() => {
     paragraphRef.current.setAttribute('data-randext', 'false')
-    if (!paragraphRef.current.innerText) paragraphRef.current.innerText = text
+    if (!paragraphRef.current.innerText) paragraphRef.current.innerText = word
     const wait = getRandomInt(2, 30) * 100
     const randext = new Randext.default({
       element: paragraphRef.current,
       ignore: '_,;:./[]<>\\\'"`#$%&@€!?',
       interval: wait / 100 < 15 ? Math.round((wait / 12) * 2) : 120,
-      callback: () =>
-        track({
-          type: 'animation',
-          msg: 'Animation randext finished',
-          value: `Animation randext finished with text "${JSON.stringify(
-            paragraphRef.current.innerText
-          )}"`,
-        }),
+      callback: () => {
+        if (word === text.split(' ')[text.split(' ').length]) {
+          import('../../../lib/tracker').then(({ track }) => {
+            track({
+              type: 'animation',
+              msg: 'Animation randext finished',
+              value: `Animation randext finished with text "${text}"`,
+            })
+          })
+        }
+      },
     })
     const timeout = setTimeout(() => {
       randext.start()
-      track({
-        type: 'animation',
-        msg: 'Animation randext started',
-        value: `Animation randext started with text "${JSON.stringify(
-          paragraphRef.current.innerText
-        )}"`,
-      })
+      if (word === text.split(' ')[0]) {
+        import('../../../lib/tracker').then(({ track }) => {
+          track({
+            type: 'animation',
+            msg: 'Animation randext started',
+            value: `Animation randext started with text "${text}"`,
+          })
+        })
+      }
     }, wait)
     return (): void => {
       clearTimeout(timeout)
       randext.stop()
-      track({
-        type: 'animation',
-        msg: 'Animation randext stopped',
-        value: `Animation randext stopped with text "${JSON.stringify(
-          paragraphRef.current.innerText
-        )}"`,
+      import('../../../lib/tracker').then(({ track }) => {
+        track({
+          type: 'animation',
+          msg: 'Animation randext stopped',
+          value: `Animation randext stopped with text "${text}"`,
+        })
       })
     }
   }, [paragraphRef, text])
 
   return (
     <StyledAnimation data-testid="randext" ref={paragraphRef}>
-      {text}
+      {word}
     </StyledAnimation>
   )
 }

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useEffect } from 'react'
 import { ImpressumProps } from '../../../schemas'
 import { Headline } from '../../components/Headline'
 import { Paragraph } from '../../components/Paragraph'
@@ -10,6 +10,16 @@ const Impressum: FunctionComponent<ImpressumProps> = ({
   contact,
   title,
 }) => {
+  useEffect(() => {
+    import('../../lib/tracker').then(({ track }) => {
+      track({
+        type: 'load',
+        msg: 'Impressum loaded',
+        value: `Impressum Page loaded at location "${window.location.href}"`,
+      })
+    })
+  }, [])
+
   return (
     <>
       <Headline text={title} />

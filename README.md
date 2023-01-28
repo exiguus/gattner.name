@@ -99,3 +99,27 @@ pnpm build
 * [ ] ci: vercel ** [error page](https://www.gattner.name/error) [corporate/vercel.json](apps/corporate/vercel.json)
 * [ ] perf(workbox): register and configure workbox service-worker (pre-) cache and routing **[corporate/src/ts-cache.ts](corporate/src/service-worker.ts)
 * [ ] perf(serviceworker): use service worker to run fetch request parallel in another thread with fallback and caching ** [corporate/src/ts-lastfm.ts]
+
+## TODO
+
+### Corporate
+
+* [x] perf(loading): prefetch App to avoid blocking time
+* [x] ci(patch): patch packages for bundler-prerender plugin
+* [ ] perf(loading): adjust pre-render hydration switch
+* [ ] perf(tracker): corporate load lazy
+* [x] perf(tracker): corporate add tracking events (and optimize animation events)
+* [ ] test(lastfm): mocks for sw
+* [ ] test(tracker): mock for sw and supabase
+* [ ] test(theme): provider, lib and store
+* [ ] test(cache): mock
+* [ ] test(sw): register
+* [ ] test(prerender): event
+* [ ] test(supabase): api and utils
+* [ ] test(utils): fingerprint
+* [ ] test(utils): murmurhash3
+* [ ] perf(animation): randext and pre-render
+* [ ] perf(lastfm): middleware
+* [ ] feat(navigation): swipeable to prev or next page (<https://github.com/FormidableLabs/react-swipeable>)
+* [ ] feat(theme): add dark/light switch
+* [ ] feat(gradient): switch (<https://www.joshwcomeau.com/css/make-beautiful-gradients/> with <https://gka.github.io/chroma.js/>)
