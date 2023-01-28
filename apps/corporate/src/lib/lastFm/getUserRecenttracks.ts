@@ -46,10 +46,7 @@ export const swMessageGetUserRecenttracks = async (): Promise<
   if ('sw' in window) {
     return await window.sw.messageSW({ type: 'LASTFM_GET_TRACK' })
   } else {
-    return await {
-      result: 'request-failed',
-      error: new Error('Service Worker not found'),
-    }
+    return await getUserRecenttracks()
   }
 }
 
