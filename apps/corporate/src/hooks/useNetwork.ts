@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
 // Network Information API
 // NetworkInfo https://wicg.github.io/netinfo/
@@ -75,7 +75,7 @@ function useNetwork(): NetworkTypes {
       window.removeEventListener('online', updateNetwork)
     }
   })
-  return network
+  return useMemo(() => network, [network])
 }
 
 export default useNetwork

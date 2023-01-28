@@ -1,18 +1,29 @@
+const pages = ['About', 'Contact', 'Error', 'Contact', 'Home', 'Impressum']
 const bundlewatchConfig = {
   files: [
+    ...pages.map(page => ({
+      path: `dist/${page}.*.js`,
+      maxSize: '10KB',
+      compression: 'none',
+    })),
     {
       path: 'dist/src.*.js',
-      maxSize: '300KB',
-      compression: 'none',
-    },
-    {
-      path: 'dist/sw-cache.js',
-      maxSize: '30KB',
-      compression: 'none',
-    },
-    {
-      path: 'dist/sw-lastfm.js',
       maxSize: '60KB',
+      compression: 'none',
+    },
+    {
+      path: 'dist/App.*.js',
+      maxSize: '260KB',
+      compression: 'none',
+    },
+    {
+      path: 'dist/sw-register.*.js',
+      maxSize: '10KB',
+      compression: 'none',
+    },
+    {
+      path: 'dist/sw.js',
+      maxSize: '300KB',
       compression: 'none',
     },
   ],

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useLastFm } from '../../hooks/useLastFm'
 
 const StyledLastFm = styled.aside`
+  will-change: transform;
   position: fixed;
   bottom: 3.5rem;
   right: -1rem;

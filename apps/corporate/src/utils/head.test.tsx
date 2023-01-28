@@ -1,10 +1,16 @@
 import { waitFor, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { addPreloadScripts, addPrefetchFonts } from './head'
+import {
+  addPreloadScripts,
+  addPrefetchFonts,
+  removeDynamicImportScripts,
+} from './head'
 
+// TODO: test all functionality for doublicate appends
 const getExampleDocument = (callback: () => void) => {
   const script = document.createElement('script')
-  script.setAttribute('src', 'path/file.js')
+  script.setAttribute('src', '/path/file.js')
+  document.head.append(script)
   document.body.append(script)
 
   const style = document.createElement('style')
@@ -26,6 +32,16 @@ const getExampleDocument = (callback: () => void) => {
 }
 
 describe('head', () => {
+  describe('removeDynamicImportScripts', () => {
+    test('remove dynamic import script link', async () => {
+      const document = getExampleDocument(removeDynamicImportScripts)
+      fireEvent(document, new Event('documentContentLoaded'))
+      await waitFor(() => {
+        expect(document.head.querySelectorAll('script').length).toEqual(0)
+      })
+    })
+  })
+
   describe('addPreloadScripts', () => {
     test('add preload script link', async () => {
       const document = getExampleDocument(addPreloadScripts)
@@ -33,7 +49,7 @@ describe('head', () => {
       await waitFor(() => {
         expect(
           document.querySelector('link[rel="preload"]')?.getAttribute('href')
-        ).toEqual('/file.js')
+        ).toEqual('/path/file.js')
       })
     })
   })

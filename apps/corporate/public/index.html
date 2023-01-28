@@ -21,15 +21,24 @@
     >
     <style>
       body {
+        color: #999999;
         background-color: #999999;
       }
-      [data-randext] {
-        will-change: transform;
+
+      [data-page='content'] {
+        will-change: transform, contents;
+        opacity: 0;
       }
+
+      [data-randext] {
+        will-change: transform, contents;
+      }
+
       [data-js='false'] [data-content='false'],
       [data-js='true'] [data-randext='false'] {
         opacity: 0;
       }
+
       [data-js='true'] [data-randext='true'],
       [data-js='false'] [data-randext='false'] {
         opacity: 1;
@@ -40,31 +49,17 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <script>
-      if (
-        !sessionStorage.getItem('_swa') &&
-        document.referrer.indexOf(location.protocol + '//' + location.host) !==
-          0
-      ) {
-        fetch(
-          'https://counter.dev/track?' +
-            new URLSearchParams({
-              referrer: document.referrer,
-              screen: screen.width + 'x' + screen.height,
-              user: 'exiguus',
-              utcoffset: '1',
-            })
-        )
-      }
-      sessionStorage.setItem('_swa', '1')
-    </script>
-    <script>
       const isDarkMode =
         (window.matchMedia &&
           window.matchMedia('(prefers-color-scheme: dark)').matches) ||
         false
-      document.querySelector('html').setAttribute('data-dark-mode', isDarkMode)
+      if (isDarkMode)
+        document
+          .querySelector('html')
+          .setAttribute('data-dark-mode', isDarkMode)
     </script>
   </head>
+
   <body>
     <div id="root"></div>
     <script defer src="../src/index.tsx"></script>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 export interface PageVisibilityStateProps {
   readonly hidden: boolean
@@ -30,7 +30,7 @@ const useVisible = (): PageVisibilityStateProps => {
     }
   }, [])
 
-  return state
+  return useMemo(() => state, [state])
 }
 
 export default useVisible

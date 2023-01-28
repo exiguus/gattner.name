@@ -1,49 +1,32 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
-import { useTheme } from 'styled-components'
+import React, { FunctionComponent, useEffect } from 'react'
 import { Blockquote } from '@gattner/ui-blockquote'
 import { ContactProps } from '../../../schemas'
-import useVisible from '../../hooks/useVisible'
 import { Headline } from '../../components/Headline'
 import { Paragraph } from '../../components/Paragraph'
 import { HorizontalBreak } from '../../components/HorizontalBreak'
 import { List } from '../../components/List'
 import { ListItem } from '../../components/ListItem'
 import { Link } from '../../components/Link'
-import { Icon } from '../../components/Icon'
+import { Face } from '../../components/Face'
 
-const Impressum: FunctionComponent<ContactProps> = ({
+const Contact: FunctionComponent<ContactProps> = ({
   content,
   contact,
   quote,
   title,
 }) => {
-  const visible = useVisible()
-  const { visibilityState } = visible
-  const [hasSmile, setSmile] = useState(false)
   useEffect(() => {
-    const setSmileTimeout = setTimeout(
-      () => setSmile(visibilityState === 'visible'),
-      1200
-    )
-    return function cleanup(): void {
-      clearTimeout(setSmileTimeout)
-    }
-  }, [visibilityState])
-
-  const theme = useTheme()
-
+    import('../../lib/tracker').then(({ track }) => {
+      track({
+        type: 'load',
+        msg: 'Contact loaded',
+        value: `Contact Page loaded at location "${window.location.href}"`,
+      })
+    })
+  }, [])
   return (
     <>
-      <Headline
-        text={title}
-        icon={
-          <Icon
-            type="simon-alt"
-            fill={theme.application.color}
-            stroke={hasSmile ? theme.application.color : 'transparent'}
-          />
-        }
-      />
+      <Headline text={title} icon={<Face />} />
       <Blockquote>
         <Paragraph text={quote} />
       </Blockquote>
@@ -68,4 +51,4 @@ const Impressum: FunctionComponent<ContactProps> = ({
   )
 }
 
-export default Impressum
+export default Contact

@@ -6,28 +6,12 @@ export const StyleNavLink = css`
   font-size: inherit;
   line-height: inherit;
   height: inherit;
-  color: ${(props): string => props.theme.link.color};
   text-decoration: none;
   overflow: hidden;
-
-  &:link,
-  &:hover,
-  &:active,
-  &:focus,
-  &:visited {
-    color: ${(props): string => props.theme.link.color};
-  }
 
   svg {
     padding: 0.5em;
     height: 1.5em;
-    fill: ${(props): string => props.theme.link.color};
-  }
-
-  &:hover svg,
-  &:active svg,
-  &:focus svg {
-    fill: ${(props): string => props.theme.link.hoverColor};
   }
 `
 
@@ -36,12 +20,12 @@ export const StyledNavLink = styled(NavLink)`
   position: relative;
 
   ::before {
+    will-change: transform;
     position: absolute;
     content: '';
     display: block;
     height: 2px;
     width: 100%;
-    background-color: ${(props): string => props.theme.link.color};
     transform: translateX(-101%);
     overflow: hidden;
   }

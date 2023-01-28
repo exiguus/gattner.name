@@ -38,6 +38,19 @@ pnpm build
 
 React render called in `process.env.NODE_ENV=development` and hydrate in production mode.
 
+## Tracking
+
+```javascript
+// component, page or layout in callback or useEffect
+import('lib/tracker').then(({ track }) => {
+  track({
+    type: 'click',
+    msg: 'Link clicked',
+    value: `Link clicked with to "${to}" and "${title}"`,
+  })
+})
+```
+
 ## TODO
 
 - [x] update package info
@@ -48,62 +61,58 @@ React render called in `process.env.NODE_ENV=development` and hydrate in product
 - [x] add random backgrounds
 - [x] add night / day mode
 - [x] add multi, random home page content
-- [ ] add dark/light switch
-  - [x] auto switch theme
-- [ ] add [gradient](https://www.joshwcomeau.com/css/make-beautiful-gradients/) switch with [chrome.js](https://gka.github.io/chroma.js/)
+- [x] auto switch dark/light theme
 - [x] add LastFm .env.local and remove from env
 - [x] add LastFm provider and hook
-- [ ] add LastFm Middleware
 - [x] add LastFm ServiceWorker
   - [x] fallback fetch in client
   - [x] cache session or local storage
   - [x] tests
 - [x] add error logging (sentry)
-- [x] add analytics (counter.dev)
-- [ ] add advanced analytics (hotjar)
+- [x] add tracker
 - [x] data repo
   - [x] add fetch data directory three
   - [x] recursive fetch from directory
   - [x] validate data repo
 - [x] use msw in development (won't do)
-- [ ] add e2e tests (cypress or pentf tests)
+- [X] add e2e tests (cypress or pentf tests)
 - [x] add GitHub source link
 - [x] use [valita](https://github.com/badrap/valita/blob/main/README.md) instead of avj for lastFm to reduce bundle size
 - [x] [color browser bar](https://stackoverflow.com/a/37630385)
 - [x] refactor SSR to prerender
-- [ ] add a blog
-  - [ ] use preact and [wmr](https://wmr.dev/)
-  - [ ] [content layer](https://github.com/contentlayerdev/contentlayer)
-  - [ ] front matter [gray-matter](<https://github.com/jonschlinkert/>
-  - [ ] [markdown to JSON](https://github.com/MoOx/markdown-to-json)
+- [X] add a blog
+  - [X] use preact and [wmr](https://wmr.dev/)
+  - [X] [content layer](https://github.com/contentlayerdev/contentlayer)
+  - [X] front matter [gray-matter](<https://github.com/jonschlinkert/>
+  - [X] [markdown to JSON](https://github.com/MoOx/markdown-to-json)
 - [x] data [schema validation](https://ajv.js.org/guide/async-validation.html)
 - [x] add open graph metadata
-- [ ] test coverage
+- [x] test coverage
   - [x] Add test for utils
   - [x] Add per page content tests
   - [x] Add layout tests
   - [x] Add Provider tests
-  - [ ] Add hook tests
-  - [ ] Add lib tests
+  - [X] Add hook tests
+  - [X] Add lib tests
   - [x] Extract lastfm to context and test
   - [x] Extract utils from build and add tests
 - [x] add a 404 page [404.html](https://vercel.com/guides/custom-404-page)
-- [ ] data [charts](https://nivo.rocks/)
+- [X] data [charts](https://nivo.rocks/)
 - [x] use micro-sentry
   - [x] replace sentry
   - [x] create sentry provider
-- [ ] GitHub actions
+- [x] GitHub actions
   - [x] [bundlewatch](https://github.com/bundlewatch/bundlewatch) via vercel CI
-  - [ ] vercel PR, Production deployments
-  - [ ] [lighthouse](https://github.com/marketplace/actions/web-performance-audits-with-lighthouse)
-  - [ ] e2e tests
-- [ ] perf page
-  - [ ] lighthouse web vitals
-  - [ ] bundle report HTML
-  - [ ] bundlewatch
-  - [ ] Checkley
-- [ ] parcel 2
-  - [ ] three shacking
+  - [x] vercel PR, Production deployments
+  - [X] [lighthouse](https://github.com/marketplace/actions/web-performance-audits-with-lighthouse)
+  - [X] e2e tests
+- [x] perf page
+  - [x] lighthouse web vitals
+  - [x] bundle report HTML
+  - [x] bundlewatch
+  - [x] Checkley
+- [X] parcel 2
+  - [X] three shacking
 - [x] bundlewatch pattern match
 - [x] GitLab fetch
   - [x] handle 500 status code

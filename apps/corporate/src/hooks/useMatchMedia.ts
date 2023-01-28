@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 function useMatchMedia(query: string): boolean {
   const [state, setState] = useState(false)
@@ -22,7 +22,7 @@ function useMatchMedia(query: string): boolean {
     }
   }, [query])
 
-  return state
+  return useMemo(() => state, [state])
 }
 
 export default useMatchMedia

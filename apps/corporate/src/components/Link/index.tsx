@@ -39,6 +39,15 @@ const Link: FunctionComponent<LinkProps> = ({
   const handleClick = (event: MouseEvent<HTMLAnchorElement>): boolean => {
     let href = event.currentTarget?.href || ''
     const isMail = href?.startsWith('mailto:')
+
+    import('../../lib/tracker').then(({ track }) => {
+      track({
+        type: 'click',
+        msg: 'Link clicked',
+        value: `Link clicked with href "${href}" and isMail "${isMail}"`,
+      })
+    })
+
     if (isMail) {
       event.preventDefault()
       href = href.replace(/(.*)\[at\](.*)/i, '$1@$2')
@@ -67,6 +76,15 @@ const Link: FunctionComponent<LinkProps> = ({
               data-testid={dataTestId}
               lineThrough={lineThrough}
               title={title}
+              onClickCapture={() =>
+                import('../../lib/tracker').then(({ track }) => {
+                  track({
+                    type: 'click',
+                    msg: 'Link clicked',
+                    value: `Link clicked with to "${to}" and "${title}"`,
+                  })
+                })
+              }
             >
               {children}
             </StyledActiveNavLink>
@@ -76,6 +94,15 @@ const Link: FunctionComponent<LinkProps> = ({
               to={to}
               title={title}
               exact={exact}
+              onClickCapture={() =>
+                import('../../lib/tracker').then(({ track }) => {
+                  track({
+                    type: 'click',
+                    msg: 'Link clicked',
+                    value: `Link clicked with to "${to}" and "${title}"`,
+                  })
+                })
+              }
             >
               {children}
             </StyledNavLink>

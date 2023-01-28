@@ -46,6 +46,7 @@ const Body = createGlobalStyle`
   }
 
   body {
+    will-change: opacity, background-color;
     padding: 0;
     margin: 0;
     min-height: 100vh;
@@ -60,6 +61,27 @@ const Body = createGlobalStyle`
     #root {
       min-height: 100vh;
     }
+  }
+
+  a {
+    color: ${(props): string => props.theme.link.color};
+
+    &:hover {
+      color: ${(props): string => props.theme.link.hoverColor};
+    }
+
+    &:link,
+    &:hover,
+    &:active,
+    &:focus,
+    &:visited {
+      color: ${(props): string => props.theme.link.color};
+    }
+  }
+
+  svg {
+    fill: ${(props): string => props.theme.application.color};
+    stroke: 'transparent';
   }
 
   ::selection {

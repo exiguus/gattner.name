@@ -51,7 +51,7 @@ export const LastFmContextProvider: FunctionComponent = ({ children }) => {
 
       // Generate a error message
       if (error) {
-        let message
+        let message = ''
 
         if (error.message.includes('Service Worker')) {
           message = 'Service Worker not found'
@@ -67,8 +67,23 @@ export const LastFmContextProvider: FunctionComponent = ({ children }) => {
         }
 
         sentryWithExtras('LastFm Provider', error, data)
+        import('../../lib/tracker').then(({ track }) => {
+          track({
+            type: 'error',
+            msg: 'LastFm error',
+            value: `LastFm error ${message}`,
+          })
+        })
         return message
       }
+
+      import('../../lib/tracker').then(({ track }) => {
+        track({
+          type: 'update',
+          msg: 'LastFm update',
+          value: `LastFm update user.getRecentTracks`,
+        })
+      })
     },
     [sentryWithExtras]
   )
@@ -86,13 +101,11 @@ export const LastFmContextProvider: FunctionComponent = ({ children }) => {
 
     storePullGetUserRecenttracks(store).then(fr => {
       if (!isMounted) return // do not update state if component is not mounted anymore
-
       if (fr.result === 'successful') {
         update(fr.data)
       } else {
         swMessageGetUserRecenttracks().then(fr => {
           if (!isMounted) return // do not update state if component is not mounted anymore
-
           if (fr.result === 'successful') {
             update(fr.data)
             store.push({ timestamp: Date.now(), data: fr.data })

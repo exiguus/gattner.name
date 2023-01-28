@@ -1,5 +1,5 @@
 import React, { ElementType, FunctionComponent } from 'react'
-import { useTheme } from 'styled-components'
+import { useTheme } from '../../hooks/useTheme'
 import { Icon as IconName } from '../../../schemas'
 
 import GithubIcon from '../../assets/github-alt.svg'
@@ -31,7 +31,12 @@ interface IconProps {
 }
 
 export const Icon: FunctionComponent<IconProps> = ({ type, fill, stroke }) => {
-  const theme = useTheme()
+  const { theme } = useTheme()
   const I = type in icons ? icons[type as IconName] : icons.analysis
-  return <I fill={fill || theme.link.color} stroke={stroke} />
+  return (
+    <I
+      fill={fill || theme.application.color}
+      stroke={stroke || 'transparent'}
+    />
+  )
 }

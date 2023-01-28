@@ -28,6 +28,13 @@ const Footer: FunctionComponent<FooterProps> = ({ nav, menu }) => {
   useEffect(() => {
     if (hasConnection) {
       setShowLastFm(true)
+      import('../../lib/tracker').then(({ track }) => {
+        track({
+          type: 'animate',
+          msg: 'LastFm animated',
+          value: `LastFm animated with connection "${connection.effectiveType}"`,
+        })
+      })
     }
   }, [hasConnection])
 
