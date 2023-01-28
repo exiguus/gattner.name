@@ -11,7 +11,7 @@ export const Mark: FunctionComponent<MarkProps> = ({ children }) => (
 
 const StyledMark = styled.mark`
   padding: 0 0.2666em;
-  color: ${(props): string => props.theme.application.color};
+  color: inherit;
   background-color: ${(props): string =>
     props.theme.application.highlightColor};
 `

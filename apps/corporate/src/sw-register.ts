@@ -16,13 +16,16 @@ export const registerServiceWorker = async () => {
       track({
         type: 'register',
         msg: 'Service Worker registered',
-        value: `Service Worker in navigator is "${JSON.stringify(
-          registration ?? ''
-        )}"`,
+        value: `Service Worker in navigator is registered with scope: ${registration?.scope}"`,
       })
     },
     /*catch*/ error => {
       console.error(`Service worker registration failed: ${error}`)
+      track({
+        type: 'error',
+        msg: 'Service Worker error',
+        value: `Service Worker in navigator has error: ${error}"`,
+      })
     }
   )
   window.sw.addEventListener('activated', event => {

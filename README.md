@@ -106,8 +106,8 @@ pnpm build
 
 * [x] perf(loading): prefetch App to avoid blocking time
 * [x] ci(patch): patch packages for bundler-prerender plugin
-* [ ] perf(loading): adjust pre-render hydration switch
-* [ ] perf(tracker): corporate load lazy
+* [x] perf(loading): adjust pre-render hydration switch
+* [x] perf(tracker): corporate load lazy
 * [x] perf(tracker): corporate add tracking events (and optimize animation events)
 * [ ] test(lastfm): mocks for sw
 * [ ] test(tracker): mock for sw and supabase

@@ -18,8 +18,16 @@ const Home: FunctionComponent<HomeProps> = props => {
     })
   }, [])
 
+  useEffect(() => {
+    // this is a hack to prevent showing prerendered content blinking on hydration
+    if (!isPrerender())
+      document
+        .querySelector('[data-page]')
+        ?.setAttribute('data-page', 'content-loaded')
+  }, [])
+
   return (
-    <>
+    <div data-page="content">
       {isPrerender() ? (
         content.map((text, index) => (
           <Paragraph isContent={true} key={`cp-${index}`} text={text} />
@@ -32,7 +40,7 @@ const Home: FunctionComponent<HomeProps> = props => {
           data-content="false"
         />
       )}
-    </>
+    </div>
   )
 }
 
