@@ -1,19 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
 const Body = createGlobalStyle`
-  @keyframes fadeInBody {
-    0% {
-      background-color: ${(props): string =>
-        props.theme.application.backgroundAnimationColor};;
-      opacity: 0;
-    }
-    100% {
-      background-color: ${(props): string =>
-        props.theme.application.backgroundColor};
-      opacity: 1;
-    }
-  }
-
   html {
     /**
      * Adoptive Typography
@@ -56,7 +43,6 @@ const Body = createGlobalStyle`
     background-color: ${(props): string =>
       props.theme.application.backgroundColor};
     color: ${(props): string => props.theme.application.color};
-    animation: fadeInBody .6s ease-in;
 
     #root {
       min-height: 100vh;

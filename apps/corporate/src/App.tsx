@@ -4,6 +4,7 @@ import { AppProps } from 'schemas'
 import { AppLayout } from './layouts/AppLayout'
 import { PageLayout } from './layouts/PageLayout'
 import { SiteLayout } from './layouts/SiteLayout'
+import { Loading } from './components/Loading'
 
 import page from '../data/content/page.json'
 import home from '../data/content/home.json'
@@ -50,7 +51,7 @@ const App: FunctionComponent<AppProps> = props => {
               <Route exact path={path} key={`r-${name}`}>
                 <SiteLayout>
                   <PageLayout {...props} {...page} name={name} path={path}>
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<Loading />}>
                       <Page {...pages[name]} />
                     </Suspense>
                   </PageLayout>
