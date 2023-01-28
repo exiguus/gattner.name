@@ -6,7 +6,6 @@ import { FetchResult } from './utils/fetch'
 import fetchAdapter from '@vespaiach/axios-fetch-adapter'
 import axios from 'axios'
 import { isObject } from '@gattner/utils'
-import { track } from './lib/tracker'
 
 axios.defaults.adapter = fetchAdapter
 
@@ -19,10 +18,12 @@ export const lastfm = (self: ServiceWorkerGlobalScope) => {
       getUserRecenttracks()
         .then(fr => {
           send<FetchResult<UserRecenttracks>>(fr)
-          track({
-            type: 'fetch',
-            msg: 'LastFm fetched',
-            value: `LastFm fetch user.getRecentTracks`,
+          import('./lib/tracker').then(({ track }) => {
+            track({
+              type: 'fetch',
+              msg: 'LastFm fetched',
+              value: `LastFm fetch user.getRecentTracks`,
+            })
           })
         })
         .catch(error => {
@@ -30,10 +31,12 @@ export const lastfm = (self: ServiceWorkerGlobalScope) => {
             result: 'request-failed',
             error,
           })
-          track({
-            type: 'error',
-            msg: 'LastFm error',
-            value: `LastFm fetch user.getRecentTracks error request-failed`,
+          import('./lib/tracker').then(({ track }) => {
+            track({
+              type: 'error',
+              msg: 'LastFm error',
+              value: `LastFm fetch user.getRecentTracks error request-failed`,
+            })
           })
         })
     }

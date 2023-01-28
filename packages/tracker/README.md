@@ -7,10 +7,10 @@ Tracking Utils with Superbase backend
 - [x] add Superbase API
 - [ ] mock Superbase API
   - [ ] service worker adapter
-- [ ] fingerprinting
+- [x] fingerprinting
   - [x] adjust murmurhash3_32_gc hash algorithm
-  - [ ] package
-- [ ] add service worker version
+  - [x] package
+- [x] add service worker version
 
 ## MurmurHash3
 
