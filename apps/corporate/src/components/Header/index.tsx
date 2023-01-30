@@ -4,8 +4,7 @@ import { HeaderProps } from '../../../schemas'
 import { Section } from '../Section'
 import { Link } from '../Link'
 import { Mark } from '../Mark'
-import { List } from '../List'
-import { ListItem } from '../ListItem'
+import { Navigation } from '../Navigation'
 
 const StyledHeaderInner = styled.div`
   @media (min-width: ${(props): string =>
@@ -59,20 +58,7 @@ const Header: FunctionComponent<HeaderProps> = ({ title, name, menu }) => {
               </Title>
             </StyledNavLink>
           </Brand>
-          <List type="nav">
-            {menu.list.map(({ id, title, text, href }) => (
-              <ListItem type="nav" key={`header-mli-${id}`}>
-                <StyledNavLink
-                  dataTestId={`header-nav-link-${id}`}
-                  to={href}
-                  title={title}
-                  lineThrough={true}
-                >
-                  {text}
-                </StyledNavLink>
-              </ListItem>
-            ))}
-          </List>
+          <Navigation items={menu.list} />
         </StyledHeaderInner>
       </Section>
     </header>

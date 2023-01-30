@@ -118,8 +118,16 @@ pnpm build
 * [ ] test(supabase): api and utils
 * [ ] test(utils): fingerprint
 * [ ] test(utils): murmurhash3
-* [ ] perf(animation): randext and pre-render
 * [ ] perf(lastfm): middleware
-* [ ] feat(navigation): swipeable to prev or next page (<https://github.com/FormidableLabs/react-swipeable>)
+* [x] perf(animation): randext and pre-render
+* [x] feat(navigation): swipeable to prev or next page
 * [ ] feat(theme): add dark/light switch
 * [ ] feat(gradient): switch (<https://www.joshwcomeau.com/css/make-beautiful-gradients/> with <https://gka.github.io/chroma.js/>)
+* [ ] fix(test): LastFmContextProvider act
+  * `Warning: An update to LastFmContextProvider inside a test was not wrapped in act(...).`
+* [ ] fix(test): mock canvas
+  * `Error: Not implemented: HTMLCanvasElement.prototype.getContext (without installing the canvas npm package)`
+* [ ] fix(test): printWarning
+  * `corporate:test:       at printWarning (../../node_modules/.pnpm/react-dom@16.14.0_react@16.14.0/node_modules/react-dom/cjs/react-dom.development.js:60:5)
+corporate:test:       at error (../../node_modules/.pnpm/react-dom@16.14.0_react@16.14.0/node_modules/react-dom/cjs/react-dom.development.js:23284:7)
+corporate:test:       at warnIfNotCurrentlyActingUpdatesInDev (../../node_modules/.pnpm/react-dom@16.14.0_react@16.14.0/node_modules/react-dom/cjs/react-dom.development.js:15656:9)`
