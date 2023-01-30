@@ -1,67 +1,57 @@
 <!DOCTYPE html>
 <html lang="en" data-js="false">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta
-      name="theme-color"
-      content="#c9d6c2"
-      media="(prefers-color-scheme: light)"
-    />
-    <meta
-      name="theme-color"
-      content="#011218"
-      media="(prefers-color-scheme: dark)"
-    />
-    <title
-      >Simon Gattner - Consulting and development of digital solutions</title
-    >
-    <style>
-      body {
-        color: #999999;
-        background-color: #999999;
-      }
 
-      [data-page='content'] {
-        will-change: transform, contents;
-        opacity: 0;
-      }
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="theme-color" content="#c9d6c2" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#011218" media="(prefers-color-scheme: dark)" />
+  <title>Simon Gattner - Consulting and development of digital solutions</title>
+  <style>
+    body {
+      color: #999999;
+      background-color: #999999;
+    }
 
-      [data-randext] {
-        will-change: transform, contents;
-      }
+    [data-page='content'] {
+      will-change: transform, contents;
+      opacity: 0;
+    }
 
-      [data-js='false'] [data-content='false'],
-      [data-js='true'] [data-randext='false'] {
-        opacity: 0;
-      }
+    [data-randext] {
+      will-change: transform, contents;
+    }
 
-      [data-js='true'] [data-randext='true'],
-      [data-js='false'] [data-randext='false'] {
-        opacity: 1;
-      }
-    </style>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <script>
-      const isDarkMode =
-        (window.matchMedia &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches) ||
-        false
-      if (isDarkMode)
-        document
-          .querySelector('html')
-          .setAttribute('data-dark-mode', isDarkMode)
-    </script>
-  </head>
+    [data-js='false'] [data-content='false'],
+    [data-js='true'] [data-randext='false'] {
+      opacity: 0;
+    }
 
-  <body>
-    <div id="root"></div>
-    <script defer src="../src/index.tsx"></script>
-  </body>
+    [data-js='true'] [data-randext='true'],
+    [data-js='false'] [data-randext='false'] {
+      opacity: 1;
+    }
+  </style>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="preconnect" href="https://ws.audioscrobbler.com">
+  <script>
+    const isDarkMode =
+      (window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches) ||
+      false
+    if (isDarkMode)
+      document
+        .querySelector('html')
+        .setAttribute('data-dark-mode', isDarkMode)
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script defer src="../src/index.tsx"></script>
+</body>
+
 </html>
