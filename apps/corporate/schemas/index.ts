@@ -286,7 +286,7 @@ export const routesSchema: JSONSchemaType<Route[]> = {
 
 export interface HeaderProps {
   name: string
-  title: string
+  title: Array<string>
   menu: {
     list: Array<Link>
   }
@@ -296,7 +296,12 @@ export const headerSchema: JSONSchemaType<HeaderProps> = {
   type: 'object',
   properties: {
     name: { type: 'string' },
-    title: { type: 'string' },
+    title: {
+      type: 'array',
+      items: { type: 'string' },
+      minItems: 1,
+      uniqueItems: true,
+    },
     menu: {
       type: 'object',
       properties: {
