@@ -1,14 +1,10 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
+import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
-import { useSwipeable } from 'react-swipeable'
-import { isTouch } from '@gattner/utils'
 import { HeaderProps } from '../../../schemas'
 import { Section } from '../Section'
 import { Link } from '../Link'
 import { Mark } from '../Mark'
-import { List } from '../List'
-import { ListItem } from '../ListItem'
+import { Navigation } from '../Navigation'
 
 const StyledHeaderInner = styled.div`
   @media (min-width: ${(props): string =>
@@ -47,59 +43,6 @@ const StyledNavLink = styled(Link)`
 `
 
 const Header: FunctionComponent<HeaderProps> = ({ title, name, menu }) => {
-  const isTouchDevice = isTouch()
-  const history = useHistory()
-  const currentMenuIndex = menu.list.findIndex(
-    ({ href }) => href === history.location.pathname
-  )
-  let historyTimeout: ReturnType<typeof setTimeout>
-  const [changeHistory, setChangeHistory] = useState(false)
-
-  console.log({ history, menu, currentMenuIndex })
-  const { ref: documentRef } = useSwipeable({
-    onSwiped: ({ dir, event }) => {
-      if (dir === 'Left') {
-        console.log('swiped left', event)
-        const nextMenuIndex = currentMenuIndex + 1
-        const nextMenuHref = menu.list[nextMenuIndex]?.href || '/'
-        if (history.location.pathname !== nextMenuHref) {
-          historyTimeout = setTimeout(() => {
-            if (!changeHistory) {
-              history.push(nextMenuHref)
-              setChangeHistory(true)
-              console.log({ h: history.location, w: window.location })
-            }
-          }, 0)
-        }
-      } else if (dir === 'Right') {
-        console.log('swiped right', event)
-        const prevMenuIndex = currentMenuIndex - 1
-        const prevMenuHref = menu.list[prevMenuIndex]?.href || '/contact'
-        if (history.location.pathname !== prevMenuHref) {
-          historyTimeout = setTimeout(() => {
-            if (!changeHistory) {
-              history.push(prevMenuHref)
-              setChangeHistory(true)
-              console.log({ h: history.location, w: window.location })
-            }
-          }, 0)
-        }
-      }
-    },
-    onSwiping: ({ event }) => event.stopPropagation(),
-    preventScrollOnSwipe: true,
-    delta: 50,
-  })
-
-  useEffect(() => {
-    if (!isTouchDevice) return
-    documentRef(document as unknown as HTMLElement)
-    return () => {
-      clearTimeout(historyTimeout)
-      documentRef(null)
-    }
-  })
-
   return (
     <header>
       <Section>
@@ -115,20 +58,7 @@ const Header: FunctionComponent<HeaderProps> = ({ title, name, menu }) => {
               </Title>
             </StyledNavLink>
           </Brand>
-          <List type="nav">
-            {menu.list.map(({ id, title, text, href }) => (
-              <ListItem type="nav" key={`header-mli-${id}`}>
-                <StyledNavLink
-                  dataTestId={`header-nav-link-${id}`}
-                  to={href}
-                  title={title}
-                  lineThrough={true}
-                >
-                  {text}
-                </StyledNavLink>
-              </ListItem>
-            ))}
-          </List>
+          <Navigation items={menu.list} />
         </StyledHeaderInner>
       </Section>
     </header>
