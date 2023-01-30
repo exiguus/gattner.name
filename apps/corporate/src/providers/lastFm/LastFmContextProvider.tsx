@@ -104,6 +104,7 @@ export const LastFmContextProvider: FunctionComponent = ({ children }) => {
       if (fr.result === 'successful') {
         update(fr.data)
       } else {
+        // TODO: wait for sw to be ready
         swMessageGetUserRecenttracks().then(fr => {
           if (!isMounted) return // do not update state if component is not mounted anymore
           if (fr.result === 'successful') {

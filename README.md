@@ -132,3 +132,4 @@ pnpm build
 corporate:test:       at error (../../node_modules/.pnpm/react-dom@16.14.0_react@16.14.0/node_modules/react-dom/cjs/react-dom.development.js:23284:7)
 corporate:test:       at warnIfNotCurrentlyActingUpdatesInDev (../../node_modules/.pnpm/react-dom@16.14.0_react@16.14.0/node_modules/react-dom/cjs/react-dom.development.js:15656:9)`
 * [ ] feat(track): conditional
+* [x] feat(lastFm): wait for sw to get recent tracks
