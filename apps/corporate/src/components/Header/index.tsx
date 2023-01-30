@@ -30,6 +30,14 @@ const Title = styled.strong`
   display: block;
   font-size: 0.8em;
   font-weight: 300;
+
+  mark {
+    display: inline-block;
+  }
+
+  mark + mark {
+    margin-top: 0.54em;
+  }
 `
 
 const StyledNavLink = styled(Link)`
@@ -54,7 +62,9 @@ const Header: FunctionComponent<HeaderProps> = ({ title, name, menu }) => {
             <br />
             <StyledNavLink to="/" dataTestId="brand-title">
               <Title>
-                <Mark>{title}</Mark>
+                {title.map((word, index) => (
+                  <Mark key={`title-${index}`}>{word}</Mark>
+                ))}
               </Title>
             </StyledNavLink>
           </Brand>
