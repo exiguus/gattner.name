@@ -40,14 +40,36 @@ export const getUserRecenttracks = async () => {
  * Get the recent played tracks from a user via service worker.
  */
 
+let interval: ReturnType<typeof setInterval>
+async function waitFor(condition: () => boolean) {
+  interval = setInterval(() => {
+    new Promise(function (resolve, reject) {
+      resolve('something')
+    }).then(res => {
+      if (condition()) {
+        console.log({ res, b: 'clear interval' })
+        clearInterval(interval)
+      }
+    })
+  }, 1000)
+}
+
 export const swMessageGetUserRecenttracks = async (): Promise<
   FetchResult<UserRecenttracks>
 > => {
-  if ('sw' in window) {
-    return await window.sw.messageSW({ type: 'LASTFM_GET_TRACK' })
-  } else {
-    return await getUserRecenttracks()
-  }
+  return waitFor(
+    () => 'sw' in window && typeof window?.sw?.messageSW === 'function'
+  )
+    .then(async () => {
+      console.log({ b: 'send sw message' })
+      return await window.sw.messageSW({ type: 'LASTFM_GET_TRACK' })
+    })
+    .catch(_error => {
+      return {
+        result: 'request-failed',
+        error: new Error(`No Service Worker found`),
+      }
+    })
 }
 
 export const storePullGetUserRecenttracks = async (
