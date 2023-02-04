@@ -20,11 +20,10 @@ const SW_NAME = 'sw'
 if (process.env.NODE_ENV === 'production') {
   // __WB_MANIFEST will be injected with workbox-build
   precacheAndRoute(self.__WB_MANIFEST)
-
   cache(self)
-  tracker(self)
 }
-lastfm(self)
+if (process.env.TRACKER_ENABLED === 'true') tracker(self)
+if (process.env.LAST_FM_ENABLED === 'true') lastfm(self)
 
 self.addEventListener('message', event => {
   const send = <T>(arg: T) => {

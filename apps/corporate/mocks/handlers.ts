@@ -25,7 +25,19 @@ const sentryHandlers = [
   }),
 ]
 
-export const handlers = [lastFmHandler, ...sentryHandlers]
+const supabaseHandlers = [
+  rest.options(
+    `${process.env.SUPABASE_URL}/rest/v1/action`,
+    (req, res, ctx) => {
+      return res(ctx.json({ message: 'Success' }))
+    }
+  ),
+  rest.post(`${process.env.SUPABASE_URL}/rest/v1/action`, (req, res, ctx) => {
+    return res(ctx.json({ message: 'Success' }))
+  }),
+]
+
+export const handlers = [lastFmHandler, ...sentryHandlers, ...supabaseHandlers]
 
 export const lastFmExceptionHandler = rest.get(
   `${process.env.LAST_FM_API_HOST}/2.0/`,
