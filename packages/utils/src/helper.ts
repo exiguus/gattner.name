@@ -21,3 +21,36 @@ export const sortObject = (
       {}
     )
 }
+
+export async function waitFor(
+  condition: () => boolean,
+  name = 'waitFor',
+  maxCount = 10
+) {
+  let interval: ReturnType<typeof setInterval>
+  let count = 0
+  return await new Promise(function (resolve, reject) {
+    interval = setInterval(() => {
+      if (condition()) {
+        resolve(`${name}: resolved`)
+        if (process.env.NODE_ENV === 'development')
+          console.log({ name, i: 'resolve interval', c: condition() })
+      } else {
+        if (count > maxCount) reject(`${name}: rejected`)
+      }
+      count++
+    })
+  })
+    .then(res => {
+      if (process.env.NODE_ENV === 'development')
+        console.log({ name, res, t: 'clear interval' })
+      clearInterval(interval)
+      return res
+    })
+    .catch(error => {
+      if (process.env.NODE_ENV === 'development')
+        console.log({ error, e: 'clear interval' })
+      clearInterval(interval)
+      return error
+    })
+}
