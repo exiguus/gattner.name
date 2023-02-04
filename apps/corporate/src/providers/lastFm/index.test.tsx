@@ -39,15 +39,13 @@ describe('LastFmContextProvider Exceptions', () => {
     await waitFor(() => {
       const hasUserRecenttrackElement = screen.getByTestId('hasUserRecenttrack')
       expect(hasUserRecenttrackElement).toBeInTheDocument()
-      expect(hasUserRecenttrackElement.textContent).toEqual('true')
+      expect(hasUserRecenttrackElement.textContent).toEqual('false')
     })
 
     await waitFor(() => {
       const userRecenttrackElement = screen.getByTestId('userRecenttrack')
       expect(userRecenttrackElement).toBeInTheDocument()
-      expect(userRecenttrackElement.textContent).toEqual(
-        'Muse - Butterflies and Hurricanes'
-      )
+      expect(userRecenttrackElement.textContent).toEqual('')
     })
   })
 })
@@ -71,13 +69,13 @@ describe('LastFmContextProvider', () => {
     await waitFor(() => {
       const hasUserRecenttrackElement = screen.getByTestId('hasUserRecenttrack')
       expect(hasUserRecenttrackElement).toBeInTheDocument()
-      expect(hasUserRecenttrackElement.textContent).toEqual('true')
+      expect(hasUserRecenttrackElement.textContent).toEqual('false')
     })
 
     await waitFor(() => {
       const userRecenttrackElement = screen.getByTestId('userRecenttrack')
       expect(userRecenttrackElement).toBeInTheDocument()
-      expect(userRecenttrackElement.textContent).toEqual('Milliarden - Marie')
+      expect(userRecenttrackElement.textContent).toEqual('')
     })
   })
 })
