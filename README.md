@@ -133,5 +133,6 @@ corporate:test:       at error (../../node_modules/.pnpm/react-dom@16.14.0_react
 corporate:test:       at warnIfNotCurrentlyActingUpdatesInDev (../../node_modules/.pnpm/react-dom@16.14.0_react@16.14.0/node_modules/react-dom/cjs/react-dom.development.js:15656:9)`
 * [x] feat(track): conditional
 * [x] feat(lastfm): wait for sw to get recent tracks
+* [x] feat(track): support sw and browser
 * [ ] feat(track): shared fingerprint for sw and browser window
 * [ ] test(utils): waitFor
