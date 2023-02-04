@@ -2,7 +2,6 @@ import { isActionValue, Action } from '@gattner/tracker'
 import { BrowserFingerprint, MurmurHash3, waitFor } from '@gattner/utils'
 import { isServiceWorker } from '../utils/serviceworker'
 import { isPrerender } from '../utils/prerender'
-import { pushActions } from '../sw-tracker'
 
 // self refers to ServiceWorkerGlobalScope instead of window
 //  origin: https://github.com/microsoft/TypeScript/issues/14877#issuecomment-493729050
@@ -56,12 +55,12 @@ export function trackBindSendEvent() {
 export const track = (...args: Array<Action['value']>) => {
   if (args.length === 0 || isPrerender()) return
   if (args.every(isActionValue)) {
-    waitFor(() => isServiceWorker(), 'trackerAddActions', 30)
+    waitFor(() => isServiceWorker(), 'trackerAddActions')
       .then(async res => {
         await res
         return isServiceWorker()
-          ? sendPushActions(args)
-          : sendPushActionsSW(args)
+          ? await sendPushActions(args)
+          : await sendPushActionsSW(args)
       })
       .catch(error => {
         if (process.env.NODE_ENV === 'development')
@@ -86,7 +85,7 @@ const sendPushActions = (actions: Array<Action['value']>) => {
   })
 }
 
-const sendPushActionsSW = (actions: Array<Action['value']>) => {
+const sendPushActionsSW = async (actions: Array<Action['value']>) => {
   const actionItems = new Set<Action>()
   actions.forEach(action => {
     const timestamp = Date.now()
@@ -96,5 +95,8 @@ const sendPushActionsSW = (actions: Array<Action['value']>) => {
       append: generateAppendSW(),
     })
   })
-  return pushActions(Array.from(actionItems))
+  self.serviceWorker.postMessage({
+    type: 'TRACKER_PUSH_ACTIONS',
+    actions: Array.from(actionItems),
+  })
 }

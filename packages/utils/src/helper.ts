@@ -39,7 +39,7 @@ export async function waitFor(
         if (count > maxCount) reject(`${name}: rejected`)
       }
       count++
-    })
+    }, 1000)
   })
     .then(res => {
       if (process.env.NODE_ENV === 'development')
