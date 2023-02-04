@@ -1,5 +1,7 @@
 import { baseURL, userName, apiKey } from './config'
 import { fetch, FetchResult } from '../../utils/fetch'
+import { isServiceWorker } from '../../utils/serviceworker'
+import { waitFor } from '@gattner/utils'
 import {
   UserRecenttracks,
   userRecenttracksSchema,
@@ -40,28 +42,12 @@ export const getUserRecenttracks = async () => {
  * Get the recent played tracks from a user via service worker.
  */
 
-let interval: ReturnType<typeof setInterval>
-async function waitFor(condition: () => boolean) {
-  interval = setInterval(() => {
-    new Promise(function (resolve, reject) {
-      resolve('something')
-    }).then(res => {
-      if (condition()) {
-        console.log({ res, b: 'clear interval' })
-        clearInterval(interval)
-      }
-    })
-  }, 1000)
-}
-
 export const swMessageGetUserRecenttracks = async (): Promise<
   FetchResult<UserRecenttracks>
 > => {
-  return waitFor(
-    () => 'sw' in window && typeof window?.sw?.messageSW === 'function'
-  )
-    .then(async () => {
-      console.log({ b: 'send sw message' })
+  return await waitFor(() => isServiceWorker(), 'getRecentTracks')
+    .then(async res => {
+      await res
       return await window.sw.messageSW({ type: 'LASTFM_GET_TRACK' })
     })
     .catch(_error => {

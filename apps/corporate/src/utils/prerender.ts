@@ -4,7 +4,8 @@ declare global {
   }
 }
 
-const isPrerender = (): boolean => !!window && !!window['__PRERENDER']
+const isPrerender = (): boolean =>
+  typeof window !== 'undefined' && Boolean(window['__PRERENDER'])
 
 const eventName = 'prerender-trigger'
 
