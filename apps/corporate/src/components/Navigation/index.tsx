@@ -9,7 +9,7 @@ import { List } from '../List'
 import { ListItem } from '../ListItem'
 
 // delta can be either a number or an object specifying different deltas for each direction, [left, right, up, down]
-const SWIPE_DELTA = { left: 50, right: 50, up: 150, down: 150 }
+const SWIPE_DELTA = { left: 50, right: 50, up: 200, down: 200 }
 // allowable duration of a swipe (ms)
 const SWIPE_DURATION = 300
 
@@ -36,20 +36,6 @@ const Navigation = ({ items }: { items: Array<LinkProps> }) => {
       if (historyChange) return
 
       switch (true) {
-        case dir === 'Up':
-          updateHistory({
-            pathname: '/contact',
-            history,
-            setHistoryChange,
-          })
-          break
-        case dir === 'Down':
-          updateHistory({
-            pathname: '/',
-            history,
-            setHistoryChange,
-          })
-          break
         case dir === 'Left':
           updateHistory({
             pathname: items[currentIndex + 1]?.href || '/',
