@@ -1,6 +1,6 @@
 import { baseURL, userName, apiKey } from './config'
 import { fetch, FetchResult } from '../../utils/fetch'
-import { isServiceWorker } from '../../utils/serviceworker'
+import { isServiceWorkerOnline } from '../../utils/serviceworker'
 import { waitFor } from '@gattner/utils'
 import {
   UserRecenttracks,
@@ -42,13 +42,19 @@ export const getUserRecenttracks = async () => {
  * Get the recent played tracks from a user via service worker.
  */
 
+// self refers to ServiceWorkerGlobalScope instead of window
+//  origin: https://github.com/microsoft/TypeScript/issues/14877#issuecomment-493729050
+declare let self: ServiceWorkerGlobalScope
+
 export const swMessageGetUserRecenttracks = async (): Promise<
   FetchResult<UserRecenttracks>
 > => {
-  return await waitFor(() => isServiceWorker(), 'getRecentTracks')
+  return await waitFor(() => isServiceWorkerOnline(), 'getRecentTracks')
     .then(async res => {
       await res
-      return await window.sw.messageSW({ type: 'LASTFM_GET_TRACK' })
+      return isServiceWorkerOnline()
+        ? window.sw.messageSW({ type: 'LASTFM_GET_TRACK' })
+        : self.serviceWorker.postMessage({ type: 'LASTFM_GET_TRACK' })
     })
     .catch(_error => {
       return {

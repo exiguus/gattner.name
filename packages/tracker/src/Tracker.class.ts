@@ -31,17 +31,7 @@ export default class Tracker {
     this.factor = this.settings.factor
     this.max = this.settings.max
     this.api = this.settings.api
-
-    // this.bindEvents()
   }
-
-  // bindEvents() {
-  //   this.events.forEach(event => {
-  //     window.addEventListener(event, async () => {
-  //       this.clean()
-  //     })
-  //   })
-  // }
 
   getStore() {
     return this.store.get(this.key)

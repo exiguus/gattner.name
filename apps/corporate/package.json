@@ -207,7 +207,7 @@
     "production": [
       ">0.5% and last 2 versions",
       "not dead",
-      "not ie <= 11",
+      "not ie > 0",
       "not op_mini all",
       "not IE_Mob 11"
     ],
