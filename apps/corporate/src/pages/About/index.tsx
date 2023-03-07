@@ -4,8 +4,17 @@ import { AboutProps } from '../../../schemas'
 import { Headline } from '../../components/Headline'
 import { Paragraph } from '../../components/Paragraph'
 import { Face } from '../../components/Face'
+import { HorizontalBreak } from '../../components/HorizontalBreak'
+import { List } from '../../components/List'
+import { ListItem } from '../../components/ListItem'
+import { Link } from '../../components/Link'
 
-const About: FunctionComponent<AboutProps> = ({ content, quote, title }) => {
+const About: FunctionComponent<AboutProps> = ({
+  content,
+  quote,
+  title,
+  contact,
+}) => {
   useEffect(() => {
     import('../../lib/tracker').then(({ track }) => {
       track({
@@ -25,6 +34,20 @@ const About: FunctionComponent<AboutProps> = ({ content, quote, title }) => {
       {content.map((text, index) => (
         <Paragraph key={`cp-${index}`} text={text} />
       ))}
+      <HorizontalBreak />
+      {contact.information.map((text, index) => (
+        <Paragraph key={`ci-${index}`} text={text} />
+      ))}
+      <HorizontalBreak />
+      <List type="line">
+        {contact.links.map(({ id, text, href, title }) => (
+          <ListItem key={`cl-${id}`}>
+            <Link data-testid={`contact-link-${id}`} href={href} title={title}>
+              {text}
+            </Link>
+          </ListItem>
+        ))}
+      </List>
     </>
   )
 }

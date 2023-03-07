@@ -1,45 +1,5 @@
 import { JSONSchemaType } from 'ajv'
 
-export interface HomeProps {
-  content: Array<string>
-}
-
-export const homeSchema: JSONSchemaType<HomeProps> = {
-  type: 'object',
-  properties: {
-    content: {
-      type: 'array',
-      items: { type: 'string' },
-      minItems: 2,
-      uniqueItems: true,
-    },
-  },
-  required: ['content'],
-  additionalProperties: false,
-}
-
-export interface AboutProps {
-  title: string
-  quote: string
-  content: Array<string>
-}
-
-export const aboutSchema: JSONSchemaType<AboutProps> = {
-  type: 'object',
-  properties: {
-    title: { type: 'string' },
-    quote: { type: 'string' },
-    content: {
-      type: 'array',
-      items: { type: 'string' },
-      minItems: 1,
-      uniqueItems: true,
-    },
-  },
-  required: ['title', 'quote', 'content'],
-  additionalProperties: false,
-}
-
 export type Link = {
   id: string
   title: string
@@ -89,14 +49,78 @@ export const linkIconSchema: JSONSchemaType<LinkIcon> = {
   additionalProperties: false,
 }
 
+type ContactList = {
+  links: Link[]
+  information: string[]
+}
+
+export const contactListSchema: JSONSchemaType<ContactList> = {
+  type: 'object',
+  properties: {
+    links: {
+      type: 'array',
+      items: linkSchema,
+      minItems: 1,
+      uniqueItems: true,
+    },
+    information: {
+      type: 'array',
+      items: { type: 'string' },
+      minItems: 1,
+      uniqueItems: true,
+    },
+  },
+  required: ['information'],
+  additionalProperties: false,
+}
+
+export interface HomeProps {
+  content: Array<string>
+}
+
+export const homeSchema: JSONSchemaType<HomeProps> = {
+  type: 'object',
+  properties: {
+    content: {
+      type: 'array',
+      items: { type: 'string' },
+      minItems: 2,
+      uniqueItems: true,
+    },
+  },
+  required: ['content'],
+  additionalProperties: false,
+}
+
+export interface AboutProps {
+  title: string
+  quote: string
+  content: Array<string>
+  contact: ContactList
+}
+
+export const aboutSchema: JSONSchemaType<AboutProps> = {
+  type: 'object',
+  properties: {
+    title: { type: 'string' },
+    quote: { type: 'string' },
+    content: {
+      type: 'array',
+      items: { type: 'string' },
+      minItems: 1,
+      uniqueItems: true,
+    },
+    contact: contactListSchema,
+  },
+  required: ['title', 'quote', 'content', 'contact'],
+  additionalProperties: false,
+}
+
 export interface ContactProps {
   title: string
   quote: string
   content: Array<string>
-  contact: {
-    links: Link[]
-    information: string[]
-  }
+  contact: ContactList
 }
 
 export const contactSchema: JSONSchemaType<ContactProps> = {
@@ -110,25 +134,7 @@ export const contactSchema: JSONSchemaType<ContactProps> = {
       minItems: 1,
       uniqueItems: true,
     },
-    contact: {
-      type: 'object',
-      properties: {
-        links: {
-          type: 'array',
-          items: linkSchema,
-          minItems: 1,
-          uniqueItems: true,
-        },
-        information: {
-          type: 'array',
-          items: { type: 'string' },
-          minItems: 1,
-          uniqueItems: true,
-        },
-      },
-      required: ['information'],
-      additionalProperties: false,
-    },
+    contact: contactListSchema,
   },
   required: ['title', 'quote', 'contact', 'content'],
   additionalProperties: false,
@@ -170,6 +176,7 @@ export const impressumSchema: JSONSchemaType<ImpressumProps> = {
 
 export interface ErrorProps {
   title: string
+  description: string
   quote: {
     content: Array<string>
     author: string
@@ -182,6 +189,7 @@ export const errorSchema: JSONSchemaType<ErrorProps> = {
   type: 'object',
   properties: {
     title: { type: 'string' },
+    description: { type: 'string' },
     quote: {
       type: 'object',
       properties: {
