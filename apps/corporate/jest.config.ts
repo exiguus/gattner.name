@@ -25,9 +25,9 @@ const config: Config = {
     'jest-watch-typeahead/testname',
   ],
   moduleNameMapper: {
-    '\\.(gif|woff|woff2|svg|png)$': '<rootDir>/test/__mocks__/fileMock.js',
+    '\\.(gif|woff|woff2|svg|png)$': '<rootDir>/tests/__mocks__/fileMock.js',
   },
-  setupFilesAfterEnv: ['<rootDir>/test/__mocks__/windowMediaMock.js'],
+  setupFilesAfterEnv: ['<rootDir>/tests/__mocks__/windowMediaMock.js'],
   testEnvironment: 'jsdom',
 }
 

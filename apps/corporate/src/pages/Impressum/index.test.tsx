@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '../../../test/testUtils'
+import { render, screen } from '../../../tests/testUtils'
 import Impressum from '.'
 import impressum from '../../../data/content/impressum.json'
 
