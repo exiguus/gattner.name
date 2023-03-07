@@ -25,7 +25,7 @@
     "fetch:data": "dotenv -e .env.local -- babel-node -x .ts build/index.ts",
     "test:unit": "dotenv -e .env.test -- jest",
     "test:unit:watch": "dotenv -e .env.test -- jest --watch",
-    "test:e2e": "playwright test",
+    "test:e2e": "dotenv -e .env.test -- playwright test",
     "test": "pnpm test:unit",
     "coverage": "dotenv -e .env.test -- jest --coverage",
     "type-check": "tsc --pretty --noEmit",
