@@ -5,7 +5,7 @@ import React, {
   useState,
 } from 'react'
 import styled from 'styled-components'
-import DocumentMeta from 'react-document-meta'
+import DocumentMeta, { DocumentMetaProps } from 'react-document-meta'
 import { isTouch } from '@gattner/utils'
 import { AppProps, Meta, PageProps, Route } from '../../../schemas'
 import useWindowSize from '../../hooks/useWindowSize'
@@ -56,6 +56,7 @@ const StyledContent = styled.div<StyledContentProps>`
 interface PageLayoutProps extends PageProps, AppProps {
   path: Route['path']
   name: Route['name']
+  title: Route['title']
   children: ReactNode
 }
 
@@ -64,15 +65,16 @@ const PageLayout: FunctionComponent<PageLayoutProps> = ({
   origin,
   path,
   name,
+  title,
   footer,
   children,
-  routes,
   meta,
 }) => {
   const prerender = isPrerender()
-  let documentMeta = {}
+  let documentMeta: DocumentMetaProps = {}
   if (prerender) {
     const metaDynamic: Meta = {
+      title: `${title ? `${title} - ` : ''}${meta.title}`,
       canonical: `${origin}${path}`,
       meta: {
         name: {
@@ -86,10 +88,7 @@ const PageLayout: FunctionComponent<PageLayoutProps> = ({
         },
       },
     }
-    const metaPage =
-      routes.find(route => route.meta != null && route.name === name)?.meta ??
-      null
-    documentMeta = getDocumentMeta(metaPage, metaDynamic, meta)
+    documentMeta = getDocumentMeta(metaDynamic, meta)
   }
   const { height } = useWindowSize()
   const [minHeight, setMinHeight] = useState('100vh')

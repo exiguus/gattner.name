@@ -30,7 +30,7 @@ const Pages: Record<string, ReturnType<typeof lazy>> = {
 }
 
 const App: FunctionComponent<AppProps> = props => {
-  const { routes } = props
+  const { routes, meta: appMeta } = props
   useEffect(() => {
     import('./lib/tracker').then(({ track }) => {
       track({
@@ -45,12 +45,19 @@ const App: FunctionComponent<AppProps> = props => {
     <AppLayout>
       <BrowserRouter forceRefresh={process.env.NODE_ENV === 'production'}>
         <Switch>
-          {routes.map(({ name, path }) => {
+          {routes.map(({ name, title, meta: pageMeta, path }) => {
             const Page = Pages[name]
             return (
               <Route exact path={path} key={`r-${name}`}>
                 <SiteLayout>
-                  <PageLayout {...props} {...page} name={name} path={path}>
+                  <PageLayout
+                    {...props}
+                    {...page}
+                    name={name}
+                    title={title}
+                    meta={{ ...appMeta, ...pageMeta }}
+                    path={path}
+                  >
                     <Suspense fallback={<Loading />}>
                       <Page {...pages[name]} />
                     </Suspense>
