@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect } from 'react'
-import { render, screen } from '../../../test/testUtils'
+import { render, screen } from '../../../tests/testUtils'
 import { MockSentryContextProvider, SentryContextProvider } from '.'
 import { useSentry } from '../../hooks/useSentry'
 

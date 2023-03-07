@@ -62,8 +62,8 @@ pnpm build
 
 ## Research
 
-* [ ] e2e tests with [cypress](https://github.com/cypress-io/cypress) with [GitHub action](https://github.com/cypress-io/github-action)
-* [ ] e2e tests with Playwright
+* [x] e2e tests with [cypress](https://github.com/cypress-io/cypress) with [GitHub action](https://github.com/cypress-io/github-action)
+* [x] e2e tests with Playwright
 * [ ] performance tests with [GitHub action](https://github.com/preactjs/compressed-size-action)
 * [x] publishing with pnpm or [lerna](https://github.com/lerna/lerna)
   * [x] [bootstrapping](https://github.com/lerna/lerna/issues/878#issuecomment-308191660) with lerna
