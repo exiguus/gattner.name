@@ -228,7 +228,7 @@ export type Meta = {
       [x: string]: string
     }
   } | null
-} | null
+}
 
 export const metaSchema: JSONSchemaType<Meta> = {
   type: 'object',
@@ -264,13 +264,14 @@ export const metaSchema: JSONSchemaType<Meta> = {
     },
   },
   required: [],
-  nullable: true,
+  nullable: false,
   additionalProperties: false,
 }
 
 export type Route = {
   name: string
   path: string
+  title?: string
   meta: Meta | null
 }
 
@@ -279,7 +280,8 @@ export const routeSchema: JSONSchemaType<Route> = {
   properties: {
     name: { type: 'string' },
     path: { type: 'string' },
-    meta: metaSchema,
+    title: { type: 'string', nullable: true },
+    meta: { ...metaSchema, nullable: true },
   },
   required: ['name', 'path'],
   additionalProperties: false,
