@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { render, screen, waitFor } from '../../../test/testUtils'
+import { render, screen, waitFor } from '../../../tests/testUtils'
 import { LastFmContextProvider, MockLastFmContextProvider } from '.'
 import { useLastFm } from '../../hooks/useLastFm'
 import { server } from '../../../mocks/server'

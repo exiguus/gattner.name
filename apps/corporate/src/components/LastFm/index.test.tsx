@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, waitFor, screen } from '../../../test/testUtils'
+import { render, waitFor, screen } from '../../../tests/testUtils'
 import { LastFm } from '.'
 import { MockLastFmContextProvider } from '../../providers/lastFm'
 

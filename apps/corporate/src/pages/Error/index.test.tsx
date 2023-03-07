@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '../../../test/testUtils'
+import { render, screen } from '../../../tests/testUtils'
 import Error from '.'
 import error from '../../../data/content/error.json'
 

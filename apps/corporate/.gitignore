@@ -13,3 +13,7 @@ public/
 !public/index.html
 coverage/
 TODO.md
+salt
+/test-results/
+/playwright-report/
+/playwright/.cache/

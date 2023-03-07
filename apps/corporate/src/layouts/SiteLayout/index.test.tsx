@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { render, screen } from '../../../test/testUtils'
+import { render, screen } from '../../../tests/testUtils'
 import { SiteLayout } from '.'
 
 const Component = styled.div`

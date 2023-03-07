@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, waitFor } from '../../../test/testUtils'
+import { render, screen, waitFor } from '../../../tests/testUtils'
 import { Paragraph } from '.'
 
 describe('Paragraph Component', () => {
