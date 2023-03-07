@@ -34,6 +34,10 @@ const Contact: FunctionComponent<ContactProps> = ({
         <Paragraph key={`cp-${index}`} text={text} />
       ))}
       <HorizontalBreak />
+      {contact.information.map((text, index) => (
+        <Paragraph key={`ci-${index}`} text={text} />
+      ))}
+      <HorizontalBreak />
       <List type="line">
         {contact.links.map(({ id, text, href, title }) => (
           <ListItem key={`cl-${id}`}>
@@ -43,10 +47,6 @@ const Contact: FunctionComponent<ContactProps> = ({
           </ListItem>
         ))}
       </List>
-      <HorizontalBreak />
-      {contact.information.map((text, index) => (
-        <Paragraph key={`ci-${index}`} text={text} />
-      ))}
     </>
   )
 }
