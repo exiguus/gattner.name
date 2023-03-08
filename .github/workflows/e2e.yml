@@ -32,7 +32,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           max_timeout: 600
-          environment: Preview – gattner-name-corporate
+          environment: Production – gattner-name-corporate
       - run: echo ${{ steps.waitForVercelProductionDeployment.outputs.url }}
 
   test_run:
