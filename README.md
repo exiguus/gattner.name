@@ -99,6 +99,9 @@ pnpm build
 * [ ] ci: vercel ** [error page](https://www.gattner.name/error) [corporate/vercel.json](apps/corporate/vercel.json)
 * [ ] perf(workbox): register and configure workbox service-worker (pre-) cache and routing **[corporate/src/ts-cache.ts](corporate/src/service-worker.ts)
 * [ ] perf(serviceworker): use service worker to run fetch request parallel in another thread with fallback and caching ** [corporate/src/ts-lastfm.ts]
+* [ ] test(e2e): monorepo deployments on vercel with github actions **[.github/e2e.yml](.github/e2e.yml)
+* [ ] feat(stats): show current programming and system info with <https://github.com/it-novum/openitcockpit-agent-go/wiki/Agent-Overview>
+* [ ] feat(serveless): api using express with vercel
 
 ## TODO
 
