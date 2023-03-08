@@ -4,3 +4,7 @@
 .env
 node_modules
 TODO.md
+salt
+/test-results/
+/playwright-report/
+/playwright/.cache/
