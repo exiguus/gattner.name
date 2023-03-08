@@ -32,6 +32,29 @@ and build with
 pnpm build
 ```
 
+## Tests
+
+Location `src/**` or `tests/**`
+
+- `*.test.(ts|tsx)` for unit and integration tests
+- `*.contract.(ts|tsx)` for contract tests
+- `*.e2e.(ts|tsx)` for e2e tests
+
+### Unit tests
+
+```shell
+pnpm test:unit
+```
+
+### E2E tests
+
+To run the e2e tests local you need to build the app first.
+
+```shell
+pnpm build
+pnpm test:e2e
+```
+
 ## Prerender
 
 `window['__PRERENDER']` is true while prerender and undefined if not.

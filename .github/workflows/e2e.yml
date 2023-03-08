@@ -1,4 +1,4 @@
-name: e2e Tests
+name: E2E
 on:
   push:
     branches: [main]
@@ -11,7 +11,7 @@ on:
 
 jobs:
   test_setup:
-    name: Setup
+    name: Test Setup
     runs-on: ubuntu-latest
     outputs:
       preview_url: ${{ steps.waitForVercelPreviewDeployment.outputs.url }}
@@ -37,7 +37,7 @@ jobs:
 
   test_run:
     needs: test_setup
-    name: Run
+    name: Test run
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
