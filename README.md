@@ -25,10 +25,8 @@ And build a blog using the Astro island architecture.
 * [ ] Resume Application
 * [ ] Weblog Application
 * [ ] Dashboard Application
-* [x] GitLab API data Package
-* [ ] UI Component Library Package
-* [ ] UI Icon Library Package
-* [x] Utility Library Package
+* [ ] LastFm Serverless
+* [ ] CodeInfo Serverless
 
 ## Use
 
@@ -57,13 +55,14 @@ pnpm build
 * [x] dependencies with pnpm
 * [x] lint with eslint, commitlint and husky
 * [x] format with prettier and editorconfig
-* [x] unit test with jest and testing-library
-* [x] bundlewatch vercel CI GitHub Check
+* [x] unit tests with jest and testing-library
+* [x] e2e tests with Playwright Vercel deployment GitHub Action
+* [x] bundlewatch Vercel deployment GitHub Action
 
 ## Research
 
 * [x] e2e tests with [cypress](https://github.com/cypress-io/cypress) with [GitHub action](https://github.com/cypress-io/github-action)
-* [x] e2e tests with Playwright
+* [x] e2e tests with Playwright and [GitHub action](.github/e2e.yml)
 * [ ] performance tests with [GitHub action](https://github.com/preactjs/compressed-size-action)
 * [x] publishing with pnpm or [lerna](https://github.com/lerna/lerna)
   * [x] [bootstrapping](https://github.com/lerna/lerna/issues/878#issuecomment-308191660) with lerna
@@ -76,14 +75,14 @@ pnpm build
 
 ## Packages
 
-* [ ] @gattner/icon
-  * [ ] move to [iconoir](https://iconoir.com/) or IBM carbon icons and integrate them via package
-* [ ] @gattner/ui
-  * [ ] integrate IBM Plex fonts via package
-* [x] @gattner/utils
-* [x] @gattner/gitlab-fetch
+* [x] [@gattner/ui](packages/ui/README.md)
+* [x] [@gattner/utils](packages/utils/README.md)
+* [x] [@gattner/gitlab-fetch](packages/gitlab-fetch/README.md)
+* [x] [@gattner/storage](packages/storage/README.md)
+* [x] [@gattner/storybook](packages/storybook/README.md)
+* [x] [@gattner/superbase](packages/superbase/README.md)
+* [x] [@gattner/tracker](packages/tracker/README.md)
 * [ ] @gattner/config
-* [ ] @gattner/conditional-font
 
 ## Article
 
@@ -96,14 +95,19 @@ pnpm build
   * [ ] [Alternatives](https://github.com/getsentry/sentry-javascript/issues/2707)
   * [ ] [Micro-Sentry](https://github.com/Tinkoff/micro-sentry)
 * [ ] build: Save in public (open source security and copyright) ** [LICENCE](LICENCE) [@gattner/gitlab-fetch](packages/gitlab-fetch/README.md) [GitGuardian](https://www.gitguardian.com/)
-* [ ] ci: vercel ** [error page](https://www.gattner.name/error) [corporate/vercel.json](apps/corporate/vercel.json)
+* [ ] ci: Vercel ** [error page](https://www.gattner.name/error) [corporate/vercel.json](apps/corporate/vercel.json)
 * [ ] perf(workbox): register and configure workbox service-worker (pre-) cache and routing **[corporate/src/ts-cache.ts](corporate/src/service-worker.ts)
 * [ ] perf(serviceworker): use service worker to run fetch request parallel in another thread with fallback and caching ** [corporate/src/ts-lastfm.ts]
-* [ ] test(e2e): monorepo deployments on vercel with github actions **[.github/e2e.yml](.github/e2e.yml)
+* [ ] test(e2e): monorepo deployments on Vercel with GitHub actions **[.github/e2e.yml](.github/e2e.yml)
 * [ ] feat(stats): show current programming and system info with <https://github.com/it-novum/openitcockpit-agent-go/wiki/Agent-Overview>
-* [ ] feat(serveless): api using express with vercel
+* [ ] feat(serveless): api using express with Vercel
 
 ## TODO
+
+### UI
+
+* [ ] feat(icons): [iconoir](https://iconoir.com/) or IBM carbon icons and integrate them via package
+* [ ] feat(font): conditional
 
 ### Corporate
 
