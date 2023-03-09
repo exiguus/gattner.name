@@ -80,7 +80,7 @@ pnpm build
 * [x] [@gattner/gitlab-fetch](packages/gitlab-fetch/README.md)
 * [x] [@gattner/storage](packages/storage/README.md)
 * [x] [@gattner/storybook](packages/storybook/README.md)
-* [x] [@gattner/superbase](packages/superbase/README.md)
+* [x] [@gattner/supabase](packages/supabase/README.md)
 * [x] [@gattner/tracker](packages/tracker/README.md)
 * [ ] @gattner/config
 
