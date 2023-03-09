@@ -34,7 +34,7 @@ pnpm build
 
 ## Tests
 
-Location `src/**` or `tests/**`
+Location `*/**` or `tests/**`
 
 - `*.test.(ts|tsx)` for unit and integration tests
 - `*.contract.(ts|tsx)` for contract tests

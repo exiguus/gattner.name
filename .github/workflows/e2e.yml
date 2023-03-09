@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       preview_url: ${{ steps.waitForVercelPreviewDeployment.outputs.url }}
-      production_url: ${{ steps.waitForVercelProductionDeployment.outputs.url }}
+      production_url: ${{ steps.waitForVercelProductionDeployment.outputs.url || env.VERCEL_DEPLOYMENT_URL }}
     steps:
       - name: Wait for Vercel preview deployment to be ready
         if: github.event_name == 'pull_request'
@@ -33,7 +33,21 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           max_timeout: 600
           environment: Production – gattner-name-corporate
-      - run: echo ${{ steps.waitForVercelProductionDeployment.outputs.url }}
+      - name: Retrieve deployment URL
+        if: github.event_name == 'push'
+        run: "echo VERCEL_DEPLOYMENT_URL=www.gattner.name >> $GITHUB_ENV"
+      - name: Await Vercel deployment
+        uses: UnlyEd/github-action-await-vercel@v1.2.39
+        if: github.event_name == 'push'
+        id: await-vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        with:
+          deployment-url: ${{ env.VERCEL_DEPLOYMENT_URL }}
+          timeout: 10 # Wait for 10 seconds before failing
+      - name: Displays the deployment name
+        if: github.event_name == 'push'
+        run: "echo The deployment at ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).url }} is ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).readyState }}"
 
   test_run:
     needs: test_setup
