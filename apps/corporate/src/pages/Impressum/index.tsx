@@ -1,8 +1,11 @@
 import React, { FunctionComponent, useEffect } from 'react'
 import { ImpressumProps } from '../../../schemas'
+import { useTranslate } from '../../hooks/useTranslate'
 import { Headline } from '../../components/Headline'
 import { Paragraph } from '../../components/Paragraph'
 import { HorizontalBreak } from '../../components/HorizontalBreak'
+import { ContactInfo } from '../../components/ContactInfo'
+import { Group } from '../../components/Group'
 
 const Impressum: FunctionComponent<ImpressumProps> = ({
   address,
@@ -10,6 +13,8 @@ const Impressum: FunctionComponent<ImpressumProps> = ({
   contact,
   title,
 }) => {
+  const { t } = useTranslate()
+
   useEffect(() => {
     import('../../lib/tracker').then(({ track }) => {
       track({
@@ -23,17 +28,21 @@ const Impressum: FunctionComponent<ImpressumProps> = ({
   return (
     <>
       <Headline text={title} />
-      {address.map((text, index) => (
-        <Paragraph key={index} text={text} />
-      ))}
+      <Group label={t('a11y.impressum.group.address.label')}>
+        {address.map((text, index) => (
+          <Paragraph key={index} text={text} />
+        ))}
+      </Group>
       <HorizontalBreak />
-      {vat.map((text, index) => (
-        <Paragraph key={index} text={text} />
-      ))}
+      <Group label={t('a11y.impressum.group.vat.label')}>
+        {vat.map((text, index) => (
+          <Paragraph key={index} text={text} />
+        ))}
+      </Group>
       <HorizontalBreak />
-      {contact.map((text, index) => (
-        <Paragraph key={index} text={text} />
-      ))}
+      <Group label={t('a11y.impressum.group.contact.label')}>
+        <ContactInfo contact={contact} />
+      </Group>
     </>
   )
 }

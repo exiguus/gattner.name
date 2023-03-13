@@ -1,13 +1,12 @@
 import React, { FunctionComponent, useEffect } from 'react'
 import { Blockquote } from '@gattner/ui-blockquote'
 import { ContactProps } from '../../../schemas'
+import { useTranslate } from '../../hooks/useTranslate'
 import { Headline } from '../../components/Headline'
 import { Paragraph } from '../../components/Paragraph'
 import { HorizontalBreak } from '../../components/HorizontalBreak'
-import { List } from '../../components/List'
-import { ListItem } from '../../components/ListItem'
-import { Link } from '../../components/Link'
 import { Face } from '../../components/Face'
+import { ContactInfo } from '../../components/ContactInfo'
 
 const Contact: FunctionComponent<ContactProps> = ({
   content,
@@ -15,6 +14,8 @@ const Contact: FunctionComponent<ContactProps> = ({
   quote,
   title,
 }) => {
+  const { t } = useTranslate()
+
   useEffect(() => {
     import('../../lib/tracker').then(({ track }) => {
       track({
@@ -24,29 +25,18 @@ const Contact: FunctionComponent<ContactProps> = ({
       })
     })
   }, [])
+
   return (
     <>
       <Headline text={title} icon={<Face />} />
-      <Blockquote>
+      <Blockquote aria-label={t('a11y.contact.blockquote.label')}>
         <Paragraph text={quote} />
       </Blockquote>
       {content.map((text, index) => (
         <Paragraph key={`cp-${index}`} text={text} />
       ))}
       <HorizontalBreak />
-      {contact.information.map((text, index) => (
-        <Paragraph key={`ci-${index}`} text={text} />
-      ))}
-      <HorizontalBreak />
-      <List type="line">
-        {contact.links.map(({ id, text, href, title }) => (
-          <ListItem key={`cl-${id}`}>
-            <Link data-testid={`contact-link-${id}`} href={href} title={title}>
-              {text}
-            </Link>
-          </ListItem>
-        ))}
-      </List>
+      <ContactInfo contact={contact} />
     </>
   )
 }

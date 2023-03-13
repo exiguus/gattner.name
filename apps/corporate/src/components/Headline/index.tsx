@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'preact'
 import React, { ReactNode } from 'react'
 import styled from 'styled-components'
-import { SrOnly } from './components/SrOnly'
+import { SrOnly } from '../SrOnly'
 
 const StyledHeadline = styled.h1`
   margin-bottom: 1rem;

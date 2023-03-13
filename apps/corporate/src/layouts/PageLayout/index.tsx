@@ -14,6 +14,8 @@ import { getDocumentMeta } from '../../utils/meta'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { Main } from '../../components/Main'
+import { Aside } from '../../components/Aside'
+import { SkipNav } from '../../components/SkipNav'
 
 interface StyledContentProps {
   minHeight: string
@@ -24,7 +26,7 @@ const StyledContent = styled.div<StyledContentProps>`
   display: grid;
   grid-gap: 0;
   grid-template-columns: 100%;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: 2rem auto auto auto auto;
   justify-content: center;
   align-items: center;
   min-height: ${(props): string =>
@@ -34,18 +36,21 @@ const StyledContent = styled.div<StyledContentProps>`
   @media (min-width: ${(props): string =>
       props.theme.breakpoint.screenTablet}) {
     grid-template-columns: ${(props): string =>
-      props.theme.section.maxWidthTablet};
+      props.theme.container.maxWidthTablet};
   }
 
   @media (min-width: ${(props): string =>
       props.theme.breakpoint.screenLaptopL}) {
     grid-template-columns: ${(props): string =>
-      props.theme.section.maxWidthDesktop};
+      props.theme.container.maxWidthDesktop};
+  }
+
+  nav {
+    margin-top: -1px;
   }
 
   header {
     align-self: start;
-    padding-top: 1rem;
   }
 
   footer {
@@ -61,6 +66,7 @@ interface PageLayoutProps extends PageProps, AppProps {
 }
 
 const PageLayout: FunctionComponent<PageLayoutProps> = ({
+  skipNav,
   header,
   origin,
   path,
@@ -72,6 +78,7 @@ const PageLayout: FunctionComponent<PageLayoutProps> = ({
 }) => {
   const prerender = isPrerender()
   let documentMeta: DocumentMetaProps = {}
+
   if (prerender) {
     const metaDynamic: Meta = {
       title: `${title ? `${title} - ` : ''}${meta.title}`,
@@ -102,15 +109,19 @@ const PageLayout: FunctionComponent<PageLayoutProps> = ({
       {prerender ? (
         <DocumentMeta {...documentMeta}>
           <StyledContent minHeight={minHeight} data-testid={`page-${name}`}>
+            <SkipNav {...skipNav} />
             <Header {...header} />
             <Main>{children}</Main>
+            <Aside />
             <Footer {...footer} />
           </StyledContent>
         </DocumentMeta>
       ) : (
         <StyledContent minHeight={minHeight} data-testid={`page-${name}`}>
+          <SkipNav {...skipNav} />
           <Header {...header} />
           <Main>{children}</Main>
+          <Aside />
           <Footer {...footer} />
         </StyledContent>
       )}

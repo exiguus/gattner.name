@@ -5,6 +5,7 @@ import React, {
   MouseEvent,
 } from 'react'
 import { LocationDescriptor } from 'history'
+import { SrOnly } from '../SrOnly'
 import {
   StyledActiveNavLink,
   StyledExternalNavLink,
@@ -19,9 +20,20 @@ export interface LinkProps {
   exact?: boolean
   dataTestId?: string
   lineThrough?: boolean
+  srOnly?: boolean
 }
 
-const Link: FunctionComponent<LinkProps> = ({
+const Link: FunctionComponent<LinkProps> = props => {
+  return props.srOnly ? (
+    <SrOnly>
+      <LinkItem {...props} />
+    </SrOnly>
+  ) : (
+    <LinkItem {...props} />
+  )
+}
+
+const LinkItem: FunctionComponent<LinkProps> = ({
   children,
   to,
   href,
@@ -29,6 +41,7 @@ const Link: FunctionComponent<LinkProps> = ({
   dataTestId,
   exact = true,
   lineThrough = false,
+  srOnly = false,
 }) => {
   const isMail = href?.startsWith('mailto:')
   if (isMail) {

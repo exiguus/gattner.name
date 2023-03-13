@@ -16,7 +16,7 @@ const Home: FunctionComponent<HomeProps> = props => {
         value: `Home Page loaded at location "${window.location.href}" with Slogan "${text}"`,
       })
     })
-  }, [])
+  }, [text])
 
   useEffect(() => {
     // this is a hack to prevent showing prerendered content blinking on hydration

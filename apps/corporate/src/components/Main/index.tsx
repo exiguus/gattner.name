@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import { Section } from '../Section'
+import { Container } from '../Container'
 
 const StyledMainInner = styled.div`
   margin-bottom: 2rem;
@@ -9,10 +9,10 @@ const StyledMainInner = styled.div`
 `
 const Main: FunctionComponent = ({ children }) => {
   return (
-    <main>
-      <Section>
+    <main id="main">
+      <Container>
         <StyledMainInner>{children}</StyledMainInner>
-      </Section>
+      </Container>
     </main>
   )
 }

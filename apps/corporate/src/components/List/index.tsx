@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import styled, {
   css,
   DefaultTheme,
@@ -83,12 +83,13 @@ const StyledList = styled.ul<ListProps>`
     props.type === 'line' && typeLineCSS}
 `
 
-export const List: FunctionComponent<ListProps> = ({
+export const List = ({
   listStyleType,
   type,
   children,
-}) => (
-  <StyledList type={type} listStyleType={listStyleType}>
+  ...props
+}: ListProps) => (
+  <StyledList type={type} listStyleType={listStyleType} {...props}>
     {children}
   </StyledList>
 )

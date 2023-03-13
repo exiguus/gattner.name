@@ -2,9 +2,11 @@ import React, { FunctionComponent, useEffect } from 'react'
 import { getRandomInt } from '@gattner/utils'
 import { Blockquote } from '@gattner/ui-blockquote'
 import { ErrorProps } from '../../../schemas'
+import { useTranslate } from '../../hooks/useTranslate'
 import { Headline } from '../../components/Headline'
 import { Paragraph } from '../../components/Paragraph'
 import { HorizontalBreak } from '../../components/HorizontalBreak'
+import { Group } from '../../components/Group'
 
 const Error: FunctionComponent<ErrorProps> = ({
   content,
@@ -12,7 +14,9 @@ const Error: FunctionComponent<ErrorProps> = ({
   title,
   description,
 }) => {
+  const { t } = useTranslate()
   const currentQuote = quote.content[getRandomInt(0, quote.content.length)]
+
   useEffect(() => {
     if (currentQuote)
       import('../../lib/tracker').then(({ track }) => {
@@ -27,14 +31,22 @@ const Error: FunctionComponent<ErrorProps> = ({
   return (
     <>
       <Headline>{title}</Headline>
-      <Paragraph>{description}</Paragraph>
-      <Blockquote author={quote.author} cite={quote.cite}>
+      <Paragraph aria-label={t('a11y.error.description.label')}>
+        {description}
+      </Paragraph>
+      <Blockquote
+        author={quote.author}
+        cite={quote.cite}
+        aria-label={t('a11y.error.quote.label')}
+      >
         <Paragraph text={currentQuote} />
       </Blockquote>
       <HorizontalBreak />
-      {content.map((text, index) => (
-        <Paragraph key={`cp-${index}`} text={text} />
-      ))}
+      <Group label={t('a11y.error.detail.label')}>
+        {content.map((text, index) => (
+          <Paragraph key={`cp-${index}`} text={text} />
+        ))}
+      </Group>
     </>
   )
 }

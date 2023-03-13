@@ -1,9 +1,11 @@
+import { isArray } from '@gattner/utils'
 import Fetch, {
   TreeProps as DefaultTreeProps,
   DefaultProps,
 } from './Fetch.class'
 import { RepositoryTreeItem } from './types'
 import Helper from './Helper.class'
+import { TREE_LIMIT } from './Config.class'
 
 Helper.sourceName = 'Tree'
 
@@ -24,8 +26,10 @@ export default class Tree extends Fetch {
     }
 
     super(options)
-
-    this.url = `${this.projectUrl}/repository/tree/?recursive=${true}`
+    // https://docs.gitlab.com/ee/api/repositories.html#list-repository-tree
+    this.url = `${
+      this.projectUrl
+    }/repository/tree/?recursive=${true}&per_page=${TREE_LIMIT}`
     this.tree = []
   }
 
@@ -42,6 +46,11 @@ export default class Tree extends Fetch {
 
   public async updateData() {
     this.data = await this?.res?.json()
+    if (isArray(this.data) && `${this.data.length}` === `${TREE_LIMIT}`) {
+      Helper.log(
+        `Tree limit has been reach. The tree is limited to ${TREE_LIMIT} items`
+      )
+    }
     this.tree = this.isRepositoryTree(this.data)
       ? this.data?.filter(
           // filter to have files only and no directories within the sourcePath

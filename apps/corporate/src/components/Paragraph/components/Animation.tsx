@@ -96,10 +96,14 @@ const Animation: FunctionComponent<AnimationProps> = ({ text, word }) => {
         })
       })
     }
-  }, [paragraphRef, text])
+  }, [paragraphRef, text, word])
 
   return (
-    <StyledAnimation data-testid="randext" ref={paragraphRef}>
+    <StyledAnimation
+      data-testid="randext"
+      ref={paragraphRef}
+      aria-hidden="true"
+    >
       {word}
     </StyledAnimation>
   )
