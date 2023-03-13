@@ -2,7 +2,7 @@
 
 > Consulting and development of digital solutions
 
-***
+*
 
 In the middle of 2020 I rebuild my website. At that time I worked a lot with _react_, _preact_ and _Next.js_.
 
@@ -55,8 +55,8 @@ pnpm build
 * [x] dependencies with pnpm
 * [x] lint with eslint, commitlint and husky
 * [x] format with prettier and editorconfig
-* [x] unit tests with jest and testing-library
-* [x] e2e tests with Playwright Vercel deployment GitHub Action
+* [x] unit and contract tests with jest and testing-library
+* [x] acceptance, integration and e2e tests with Playwright Vercel deployment GitHub Action
 * [x] bundlewatch Vercel deployment GitHub Action
 
 ## Research
@@ -86,50 +86,59 @@ pnpm build
 
 ## Article
 
-* [ ] feat(api): JSON schema validation with yup, ajv and valita (runtime, build) JAMStack **[corporate/ajv](apps/corporate/schemas/index.ts) [corporate/valita](apps/corporate/schemas/lastFm.ts)
-* [ ] feat(api): GitLab file API and JAMStack **[@gattner/gitlab-fetch](packages/gitlab-fetch/README.md)
-* [ ] perf: pre-render styled-components and puppeteer **[corporate/app](apps/corporate/src/index.tsx)**[corporate/routes](apps/corporate/package.json)
-* [ ] perf: Adaptive serving based on network quality (react) ** [corporate/useNetwork](apps/corporate/src/hooks/useNetwork.ts)
-* [ ] perf: Replace sentry with micro-sentry ** [corporate/useSentry](app/apps/corporate/src/hooks/useSentry.ts) [corporate/lib](apps/corporate/src/providers/sentry/lib.ts)
+* [ ] feat(api): JSON schema validation with yup, ajv and valita (runtime, build) JAMStack [corporate/ajv](apps/corporate/schemas/index.ts) [corporate/valita](apps/corporate/schemas/lastFm.ts)
+* [ ] feat(api): GitLab file API and JAMStack [@gattner/gitlab-fetch](packages/gitlab-fetch/README.md)
+* [ ] perf: pre-render styled-components and puppeteer [corporate/app](apps/corporate/src/index.tsx) [corporate/routes](apps/corporate/package.json)
+* [ ] perf: Adaptive serving based on network quality (react) [corporate/useNetwork](apps/corporate/src/hooks/useNetwork.ts)
+* [ ] perf: Replace sentry with micro-sentry [corporate/useSentry](apps/corporate/src/hooks/useSentry.ts) [corporate/lib](apps/corporate/src/providers/sentry/lib.ts)
   * [ ] [Sentry v7](https://github.com/getsentry/sentry-javascript/issues/4240)
   * [ ] [Alternatives](https://github.com/getsentry/sentry-javascript/issues/2707)
   * [ ] [Micro-Sentry](https://github.com/Tinkoff/micro-sentry)
-* [ ] build: Save in public (open source security and copyright) ** [LICENCE](LICENCE) [@gattner/gitlab-fetch](packages/gitlab-fetch/README.md) [GitGuardian](https://www.gitguardian.com/)
-* [ ] ci: Vercel ** [error page](https://www.gattner.name/error) [corporate/vercel.json](apps/corporate/vercel.json)
-* [ ] perf(workbox): register and configure workbox service-worker (pre-) cache and routing **[corporate/src/ts-cache.ts](corporate/src/service-worker.ts)
-* [ ] perf(serviceworker): use service worker to run fetch request parallel in another thread with fallback and caching ** [corporate/src/ts-lastfm.ts]
-* [ ] test(e2e): monorepo deployments on Vercel with GitHub actions **[.github/e2e.yml](.github/e2e.yml)
+* [ ] build: Save in public (open source security and copyright) [LICENSE](LICENSE) [@gattner/gitlab-fetch](packages/gitlab-fetch/README.md) [GitGuardian](https://www.gitguardian.com/)
+* [ ] ci: Vercel  [error page](https://www.gattner.name/error) [corporate/vercel.json](apps/corporate/vercel.json)
+* [ ] perf(workbox): register and configure workbox service-worker (pre-) cache and routing [corporate/src/ts-cache.ts](apps/corporate/src/service-worker.ts)
+* [ ] perf(serviceworker): use service worker to run fetch request parallel in another thread with fallback and [caching](apps/corporate/src/ts-lastfm.ts)
+* [ ] test(e2e): monorepo deployments on Vercel with GitHub actions [.github/e2e.yml](.github/e2e.yml)
 * [ ] feat(stats): show current programming and system info with <https://github.com/it-novum/openitcockpit-agent-go/wiki/Agent-Overview>
 * [ ] feat(serveless): api using express with Vercel
 
 ## TODO
 
-### UI
+### Features
 
+* [x] feat(a11y): skip navigation
+* [x] feat(a11y): add groups and labels
+* [x] feat(a11y): structure and semantics
+* [x] feat(track): conditional
+* [x] feat(lastfm): wait for sw to get recent tracks
+* [x] feat(track): support sw and browser
+* [ ] feat(track): shared fingerprint for sw and browser window
+* [ ] feat(theme): add dark/light switch
+* [ ] feat(gradient): switch (<https://www.joshwcomeau.com/css/make-beautiful-gradients/> with <https://gka.github.io/chroma.js/>)
 * [ ] feat(icons): [iconoir](https://iconoir.com/) or IBM carbon icons and integrate them via package
 * [ ] feat(font): conditional
 
-### Corporate
+### Performance
 
 * [x] perf(loading): prefetch App to avoid blocking time
-* [x] ci(patch): patch packages for bundler-prerender plugin
 * [x] perf(loading): adjust pre-render hydration switch
 * [x] perf(tracker): corporate load lazy
 * [x] perf(tracker): corporate add tracking events (and optimize animation events)
+* [ ] perf(lastfm): middleware
+* [x] perf(animation): randext and pre-render
+* [x] feat(navigation): swipeable to prev or next page
+
+### Tests
+
+* [ ] test(theme): provider, lib and store
 * [ ] test(lastfm): mocks for sw
 * [ ] test(tracker): mock for sw and supabase
-* [ ] test(theme): provider, lib and store
-* [ ] test(cache): mock
+* [ ] test(cache): mock for sw and storage
 * [ ] test(sw): register
 * [ ] test(prerender): event
 * [ ] test(supabase): api and utils
 * [ ] test(utils): fingerprint
 * [ ] test(utils): murmurhash3
-* [ ] perf(lastfm): middleware
-* [x] perf(animation): randext and pre-render
-* [x] feat(navigation): swipeable to prev or next page
-* [ ] feat(theme): add dark/light switch
-* [ ] feat(gradient): switch (<https://www.joshwcomeau.com/css/make-beautiful-gradients/> with <https://gka.github.io/chroma.js/>)
 * [ ] fix(test): LastFmContextProvider act
   * `Warning: An update to LastFmContextProvider inside a test was not wrapped in act(...).`
 * [ ] fix(test): mock canvas
@@ -138,8 +147,4 @@ pnpm build
   * `corporate:test:       at printWarning (../../node_modules/.pnpm/react-dom@16.14.0_react@16.14.0/node_modules/react-dom/cjs/react-dom.development.js:60:5)
 corporate:test:       at error (../../node_modules/.pnpm/react-dom@16.14.0_react@16.14.0/node_modules/react-dom/cjs/react-dom.development.js:23284:7)
 corporate:test:       at warnIfNotCurrentlyActingUpdatesInDev (../../node_modules/.pnpm/react-dom@16.14.0_react@16.14.0/node_modules/react-dom/cjs/react-dom.development.js:15656:9)`
-* [x] feat(track): conditional
-* [x] feat(lastfm): wait for sw to get recent tracks
-* [x] feat(track): support sw and browser
-* [ ] feat(track): shared fingerprint for sw and browser window
 * [ ] test(utils): waitFor

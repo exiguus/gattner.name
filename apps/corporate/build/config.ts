@@ -9,6 +9,7 @@ import {
   appSchema,
   pageSchema,
   errorSchema,
+  i18nSchema,
 } from '../schemas'
 
 const ajv = new Ajv()
@@ -21,6 +22,7 @@ export const contentFilePaths: FilePath[] = [
   { path: 'content/about.json', validate: ajv.compile(aboutSchema) },
   { path: 'content/contact.json', validate: ajv.compile(contactSchema) },
   { path: 'content/impressum.json', validate: ajv.compile(impressumSchema) },
+  { path: 'content/i18n.json', validate: ajv.compile(i18nSchema) },
 ]
 
 export const token = process.env.GITLAB_API_BEARER_TOKEN

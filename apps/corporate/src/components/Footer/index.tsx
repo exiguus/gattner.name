@@ -1,49 +1,33 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
+import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import useNetwork from '../../hooks/useNetwork'
-import { isPrerender } from '../../utils/prerender'
+import { useTranslate } from '../../hooks/useTranslate'
 import { FooterProps } from '../../../schemas'
-import { Section } from '../Section'
+import { Container } from '../Container'
 import { Link } from '../Link'
 import { List } from '../List'
 import { ListItem } from '../ListItem'
-import { LastFm } from '../LastFm'
 import { Icon } from '../Icon'
+import { ServiceNavListItem } from './components/ServiceNavListItem'
+import { SrOnly } from '../SrOnly'
 
-const StyledFooterInner = styled.div`
+const StyledFooterNav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `
 
 const Footer: FunctionComponent<FooterProps> = ({ nav, menu }) => {
-  const [showLastFm, setShowLastFm] = useState<boolean>(false)
-  const { online, connection } = useNetwork()
-  const hasConnection =
-    connection.effectiveType !== 'slow-2g' &&
-    connection.effectiveType !== '2g' &&
-    online &&
-    !isPrerender()
-
-  useEffect(() => {
-    if (hasConnection) {
-      setShowLastFm(true)
-      import('../../lib/tracker').then(({ track }) => {
-        track({
-          type: 'animate',
-          msg: 'LastFm animated',
-          value: `LastFm animated with connection "${connection.effectiveType}"`,
-        })
-      })
-    }
-  }, [hasConnection])
+  const { t } = useTranslate()
 
   return (
-    <footer>
-      <Section>
-        <StyledFooterInner>
+    <footer id="footer">
+      <Container>
+        <StyledFooterNav aria-label={t('a11y.footer.nav.label')}>
           {nav.list && (
-            <List type="footer">
+            <List
+              type="footer"
+              aria-label={t('a11y.footer.quicklinklist.label')}
+            >
               {nav.list.map(({ id, href, title, icon }) => (
                 <ListItem type="icon" key={`fnli-${id}`}>
                   <Link
@@ -57,23 +41,19 @@ const Footer: FunctionComponent<FooterProps> = ({ nav, menu }) => {
               ))}
             </List>
           )}
-          <List type="menu">
-            {menu.list.map(({ id, href, title, text }) => (
-              <ListItem key={`fmli-${id}`} type="menu">
-                <Link
-                  dataTestId={`footer-menu-link-${id}`}
-                  to={href}
-                  title={title}
-                  lineThrough={true}
-                >
-                  {text}
-                </Link>
-              </ListItem>
-            ))}
+          <List type="menu" aria-label={t('a11y.footer.servicelinklist.label')}>
+            {menu.list.map((item, index) =>
+              item?.srOnly ? (
+                <SrOnly key={`fmli-sronly-${item.id}`}>
+                  <ServiceNavListItem {...item} />
+                </SrOnly>
+              ) : (
+                <ServiceNavListItem {...item} />
+              )
+            )}
           </List>
-          {showLastFm && <LastFm />}
-        </StyledFooterInner>
-      </Section>
+        </StyledFooterNav>
+      </Container>
     </footer>
   )
 }

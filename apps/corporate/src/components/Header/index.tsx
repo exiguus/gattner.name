@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { HeaderProps } from '../../../schemas'
-import { Section } from '../Section'
+import { Container } from '../Container'
 import { Link } from '../Link'
 import { Mark } from '../Mark'
 import { Navigation } from '../Navigation'
@@ -53,7 +53,7 @@ const StyledNavLink = styled(Link)`
 const Header: FunctionComponent<HeaderProps> = ({ title, name, menu }) => {
   return (
     <header>
-      <Section>
+      <Container>
         <StyledHeaderInner>
           <Brand data-testid="brand">
             <StyledNavLink to="/" dataTestId="brand-name">
@@ -70,7 +70,7 @@ const Header: FunctionComponent<HeaderProps> = ({ title, name, menu }) => {
           </Brand>
           <Navigation items={menu.list} />
         </StyledHeaderInner>
-      </Section>
+      </Container>
     </header>
   )
 }

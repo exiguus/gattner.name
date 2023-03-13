@@ -4,6 +4,8 @@ import Helper from './Helper.class'
 export const GITLAB_API_URL = 'https://gitlab.com/api/v4/projects/'
 export const GITLAB_API_FILE_MODE = '100644'
 
+export const TREE_LIMIT = 100
+
 Helper.sourceName = 'Config'
 
 export default class Config {

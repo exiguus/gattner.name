@@ -7,7 +7,7 @@ const StyledHorizontalBreak = styled.hr`
 `
 
 const HorizontalBreak = (): ReactElement => {
-  return <StyledHorizontalBreak />
+  return <StyledHorizontalBreak aria-hidden="true" />
 }
 
 export { HorizontalBreak }

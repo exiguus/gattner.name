@@ -8,7 +8,7 @@ export type ThemeBase = {
     padding: string
     minHeight: string
   }
-  section: {
+  container: {
     maxWidthTablet: string
     maxWidthDesktop: string
     marginBottom: string

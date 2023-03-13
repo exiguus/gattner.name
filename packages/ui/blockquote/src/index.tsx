@@ -36,9 +36,10 @@ const Blockquote: FunctionComponent<BlockquoteProps> = ({
   cite,
   quote,
   children,
+  ...props
 }) => {
   return (
-    <figure>
+    <figure {...props}>
       <StyledBlockquote>{quote || children}</StyledBlockquote>
       {author && (
         <StyledFigcaption>

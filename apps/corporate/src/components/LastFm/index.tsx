@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import { useLastFm } from '../../hooks/useLastFm'
+import { useTranslate } from '../../hooks/useTranslate'
 
-const StyledLastFm = styled.aside`
+const StyledLastFm = styled.div`
   will-change: transform;
   position: fixed;
   bottom: 3.5rem;
@@ -23,7 +24,7 @@ const StyledLastFm = styled.aside`
   }
 `
 
-const StyledLastFmInner = styled.span`
+const StyledLastFmInner = styled.p`
   position: relative;
   top: 1rem;
   left: -90vh;
@@ -35,14 +36,25 @@ const StyledLastFmInner = styled.span`
 
 const LastFm: FunctionComponent = () => {
   const { isPending, hasUserRecenttrack, userRecenttrack } = useLastFm()
+  const { t } = useTranslate()
   return isPending ? (
     <StyledLastFm data-testid="lastfm">
-      <StyledLastFmInner>Updating...</StyledLastFmInner>
+      <StyledLastFmInner
+        role="alert"
+        aria-busy="true"
+        aria-label={t('a11y.lastfm.label')}
+      >
+        Updating...
+      </StyledLastFmInner>
     </StyledLastFm>
   ) : hasUserRecenttrack ? (
     <StyledLastFm data-testid="lastfm">
-      <StyledLastFmInner>
-        Listen to{' '}
+      <StyledLastFmInner
+        role="alert"
+        aria-busy="false"
+        aria-label={t('a11y.lastfm.label')}
+      >
+        {t('lastfm.listen.to')}
         <strong>
           <span data-testid="lastfm-listen">{userRecenttrack}</span>
         </strong>

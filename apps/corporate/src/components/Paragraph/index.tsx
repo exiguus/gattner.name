@@ -2,6 +2,7 @@ import React, { FunctionComponent, ReactNode } from 'react'
 import styled from 'styled-components'
 import { Animation } from './components/Animation'
 import { isPrerender } from '../../utils/prerender'
+import { SrOnly } from '../SrOnly'
 
 type AlignProps = 'left' | 'right' | 'center'
 
@@ -30,24 +31,35 @@ const Paragraph: FunctionComponent<ParagraphProps> = ({
   isContent,
   dataTestId,
   children,
+  ...props
 }) => {
+  const isAnimate = !!(animate && text && !isPrerender())
   return (
-    <StyledParagraph
-      data-content={isContent}
-      data-testid={dataTestId}
-      align={align}
-    >
-      {/* this should be by default invisible until the animation start */}
-      {animate && text && !isPrerender()
-        ? text
-            .split(' ')
-            .map((word, index) => (
-              <Animation key={index} word={word} text={text} />
-            ))
-        : text
-        ? text
-        : children}
-    </StyledParagraph>
+    <>
+      <StyledParagraph
+        data-content={isContent}
+        data-testid={dataTestId}
+        aria-hidden={isAnimate || undefined}
+        align={align}
+        {...props}
+      >
+        {/* this should be by default invisible until the animation start */}
+        {isAnimate
+          ? text
+              .split(' ')
+              .map((word, index) => (
+                <Animation key={index} word={word} text={text} />
+              ))
+          : text
+          ? text
+          : children}
+      </StyledParagraph>
+      {isAnimate && (
+        <SrOnly>
+          <Paragraph>{text}</Paragraph>
+        </SrOnly>
+      )}
+    </>
   )
 }
 

@@ -87,9 +87,9 @@ export const theme: ThemeBase = {
     }),
     screenTablet: rem({ px: variables.screenTablet }),
   },
-  section: {
-    maxWidthDesktop: rem({ px: variables.MaxSectionWidth }),
-    maxWidthTablet: rem({ px: variables.MaxSectionWidth }),
+  container: {
+    maxWidthDesktop: rem({ px: variables.MaxContainerWidth }),
+    maxWidthTablet: rem({ px: variables.MaxContainerWidth }),
     marginBottom: rem({ px: variables.FontSize }),
     column: {
       padding: rem({ px: variables.Padding }),

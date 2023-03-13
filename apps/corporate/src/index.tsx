@@ -1,4 +1,6 @@
+import 'preact/devtools'
 import { isPrerender, dispatchLoadingEvent } from './utils/prerender'
+
 const prerender = isPrerender()
 
 const appId = 'root'
@@ -11,7 +13,6 @@ if (!prerender) {
 }
 
 const callback = async (): Promise<void> => {
-  await import('preact/devtools')
   if (prerender) {
     const { addPreloadScripts, addPrefetchFonts, removeDynamicImportScripts } =
       await import('./utils/head')

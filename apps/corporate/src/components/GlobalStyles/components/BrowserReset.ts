@@ -22,7 +22,7 @@ const BrowserReset = createGlobalStyle`
   vertical-align: baseline;
   }
   article, aside, details, figcaption, figure,
-  footer, header, hgroup, main, menu, nav, section {
+  footer, header, hgroup, main, menu, nav, container {
   display: block;
   }
   ol, ul {

@@ -1,3 +1,4 @@
+import { isObject } from '@gattner/utils'
 import { JSONSchemaType } from 'ajv'
 
 export type Link = {
@@ -5,6 +6,7 @@ export type Link = {
   title: string
   href: string
   text: string
+  srOnly?: boolean
 }
 
 export type Icon =
@@ -32,6 +34,7 @@ export const linkSchema: JSONSchemaType<Link> = {
     text: { type: 'string' },
     title: { type: 'string' },
     href: { type: 'string' },
+    srOnly: { type: 'boolean', nullable: true },
   },
   required: ['text', 'title', 'href', 'id'],
   additionalProperties: false,
@@ -49,9 +52,19 @@ export const linkIconSchema: JSONSchemaType<LinkIcon> = {
   additionalProperties: false,
 }
 
-type ContactList = {
-  links: Link[]
-  information: string[]
+export type ContactList = {
+  links?: Link[]
+  information: Array<string | Link>
+}
+
+export const isContactListInformationLink = (value: unknown): value is Link => {
+  return (
+    isObject(value) &&
+    'href' in value &&
+    'text' in value &&
+    'title' in value &&
+    'id' in value
+  )
 }
 
 export const contactListSchema: JSONSchemaType<ContactList> = {
@@ -62,10 +75,13 @@ export const contactListSchema: JSONSchemaType<ContactList> = {
       items: linkSchema,
       minItems: 1,
       uniqueItems: true,
+      nullable: true,
     },
     information: {
       type: 'array',
-      items: { type: 'string' },
+      items: {
+        anyOf: [linkSchema, { type: 'string' }],
+      },
       minItems: 1,
       uniqueItems: true,
     },
@@ -144,7 +160,7 @@ export interface ImpressumProps {
   title: string
   address: Array<string>
   vat: Array<string>
-  contact: Array<string>
+  contact: ContactList
 }
 
 export const impressumSchema: JSONSchemaType<ImpressumProps> = {
@@ -163,12 +179,7 @@ export const impressumSchema: JSONSchemaType<ImpressumProps> = {
       minItems: 1,
       uniqueItems: true,
     },
-    contact: {
-      type: 'array',
-      items: { type: 'string' },
-      minItems: 1,
-      uniqueItems: true,
-    },
+    contact: contactListSchema,
   },
   required: ['title', 'address', 'vat', 'contact'],
   additionalProperties: false,
@@ -294,6 +305,33 @@ export const routesSchema: JSONSchemaType<Route[]> = {
   uniqueItems: true,
 }
 
+export interface SkipNavProps {
+  nav: {
+    list: Array<Link>
+  }
+}
+
+export const skipNavSchema: JSONSchemaType<SkipNavProps> = {
+  type: 'object',
+  properties: {
+    nav: {
+      type: 'object',
+      properties: {
+        list: {
+          type: 'array',
+          items: linkSchema,
+          minItems: 1,
+          uniqueItems: true,
+        },
+      },
+      required: ['list'],
+      additionalProperties: false,
+    },
+  },
+  required: ['nav'],
+  additionalProperties: false,
+}
+
 export interface HeaderProps {
   name: string
   title: Array<string>
@@ -374,6 +412,7 @@ export const footerSchema: JSONSchemaType<FooterProps> = {
 }
 
 export interface PageProps {
+  skipNav: SkipNavProps
   header: HeaderProps
   footer: FooterProps
 }
@@ -381,6 +420,7 @@ export interface PageProps {
 export const pageSchema: JSONSchemaType<PageProps> = {
   type: 'object',
   properties: {
+    skipNav: skipNavSchema,
     header: headerSchema,
     footer: footerSchema,
   },
@@ -402,5 +442,43 @@ export const appSchema: JSONSchemaType<AppProps> = {
     meta: metaSchema,
   },
   required: ['routes', 'meta', 'origin'],
+  additionalProperties: false,
+}
+
+export interface I18n {
+  i18n: {
+    translation: {
+      [k: string]: Record<string, string>
+    }
+  }
+}
+
+export const i18nSchema: JSONSchemaType<I18n> = {
+  type: 'object',
+  properties: {
+    i18n: {
+      type: 'object',
+      properties: {
+        translation: {
+          type: 'object',
+          patternProperties: {
+            '[a-z]*': {
+              type: 'object',
+              patternProperties: {
+                '[a-z]*': { type: 'string' },
+              },
+              required: [],
+              additionalProperties: false,
+            },
+          },
+          required: [],
+          additionalProperties: false,
+        },
+      },
+      required: ['translation'],
+      additionalProperties: false,
+    },
+  },
+  required: ['i18n'],
   additionalProperties: false,
 }
