@@ -7,7 +7,6 @@ import { Link } from '../Link'
 import { List } from '../List'
 import { ListItem } from '../ListItem'
 import { Icon } from '../Icon'
-import { ServiceNavListItem } from './components/ServiceNavListItem'
 import { SrOnly } from '../SrOnly'
 
 const StyledFooterNav = styled.nav`
@@ -42,13 +41,31 @@ const Footer: FunctionComponent<FooterProps> = ({ nav, menu }) => {
             </List>
           )}
           <List type="menu" aria-label={t('a11y.footer.servicelinklist.label')}>
-            {menu.list.map((item, index) =>
-              item?.srOnly ? (
-                <SrOnly key={`fmli-sronly-${item.id}`}>
-                  <ServiceNavListItem {...item} />
+            {menu.list.map(({ id, href, title, text, srOnly }) =>
+              srOnly ? (
+                <SrOnly asHtml="li" key={`fmli-sronly-${id}`}>
+                  <Link
+                    dataTestId={`footer-menu-link-${id}`}
+                    to={href}
+                    title={title}
+                    lineThrough={true}
+                    srOnly={srOnly}
+                  >
+                    {text}
+                  </Link>
                 </SrOnly>
               ) : (
-                <ServiceNavListItem {...item} />
+                <ListItem key={`fmli-${id}`} type="menu">
+                  <Link
+                    dataTestId={`footer-menu-link-${id}`}
+                    to={href}
+                    title={title}
+                    lineThrough={true}
+                    srOnly={srOnly}
+                  >
+                    {text}
+                  </Link>
+                </ListItem>
               )
             )}
           </List>

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'preact'
-import React, { ReactNode } from 'react'
+import React, { ComponentType, ReactNode } from 'react'
 import styled from 'styled-components'
 
 const StyledText = styled.span`
@@ -15,11 +15,15 @@ const StyledText = styled.span`
 `
 
 interface SrOnlyProps {
+  asHtml?: string | ComponentType<unknown> | undefined
   children: ReactNode
 }
 
-const SrOnly: FunctionComponent<SrOnlyProps> = ({ children }) => {
-  return <StyledText>{children}</StyledText>
+const SrOnly: FunctionComponent<SrOnlyProps> = ({
+  asHtml = 'span',
+  children,
+}) => {
+  return <StyledText as={asHtml}>{children}</StyledText>
 }
 
 export { SrOnly }

@@ -2,7 +2,7 @@
 
 > Consulting and development of digital solutions
 
-*
+***
 
 In the middle of 2020 I rebuild my website. At that time I worked a lot with _react_, _preact_ and _Next.js_.
 
