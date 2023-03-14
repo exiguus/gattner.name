@@ -21,7 +21,7 @@ const Navigation = ({ items }: { items: Array<LinkProps> }) => {
   const { t } = useTranslate()
   return (
     <Swipeable items={items}>
-      <nav aria-label={t('a11y.mainNav.label')} id="main-nav">
+      <nav aria-label={t('a11y.mainNav.label')} id="nav">
         <List type="nav">
           {items.map(({ id, title, text, href }) => (
             <ListItem type="nav" key={`navigation-mli-${id}`}>
