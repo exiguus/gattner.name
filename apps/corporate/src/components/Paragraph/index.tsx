@@ -54,11 +54,7 @@ const Paragraph: FunctionComponent<ParagraphProps> = ({
           ? text
           : children}
       </StyledParagraph>
-      {isAnimate && (
-        <SrOnly>
-          <Paragraph>{text}</Paragraph>
-        </SrOnly>
-      )}
+      {isAnimate && <SrOnly asHtml="p">{text}</SrOnly>}
     </>
   )
 }
