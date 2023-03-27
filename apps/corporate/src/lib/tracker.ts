@@ -75,7 +75,7 @@ export function trackBindSendEvent() {
   events.forEach(event => {
     window.addEventListener(event, async () => {
       window.sw.messageSW({
-        type: 'TRACKER_SEND_ACTIONS',
+        type: 'TRACKER_CLEAN_ACTIONS',
       })
     })
   })
