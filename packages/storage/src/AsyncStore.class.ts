@@ -52,8 +52,7 @@ export default class AsyncStore {
   }
 
   async last() {
-    const value = await this.getLastStore()
-    return value[value.length - 1]
+    return await this.getLastStore()
   }
 
   async clear() {
