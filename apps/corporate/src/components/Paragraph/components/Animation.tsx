@@ -12,7 +12,7 @@ import { getRandomInt } from '@gattner/utils'
 // not babel with @babel/plugin-transform-modules-commonjs
 // at this time, so we use require
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const Randext = require('../../../../node_modules/randext/dist/randext.min.js')
+const Randext = require('randext/dist/randext.min.js')
 
 const StyledAnimation = styled.span`
   display: block;

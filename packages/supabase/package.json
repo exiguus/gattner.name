@@ -14,7 +14,7 @@
   },
   "sideEffects": false,
   "scripts": {
-    "build": "rm -rf ./dist/ && pnpm build:es && pnpm build:cjs",
+    "build": "pnpm build:es && pnpm build:cjs",
     "build:es": "NODE_ENV=production tsc",
     "build:cjs": "NODE_ENV=production tsc --project tsconfig.commonjs.json",
     "type-check": "tsc --pretty --noEmit",

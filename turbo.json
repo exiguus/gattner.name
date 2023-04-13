@@ -7,7 +7,17 @@
       ],
       "outputs": [
         "dist/**",
+        "!.next/cache/**",
         ".next/**"
+      ],
+      "env": [
+        "LAST_FM_API_HOST",
+        "LAST_FM_API_KEY",
+        "LAST_FM_USER_NAME",
+        "GITLAB_API_BEARER_TOKEN",
+        "GITLAB_PROJECT_ID",
+        "SENTRY_DSN",
+        "SENTRY_STORE"
       ]
     },
     "bundlewatch": {
@@ -18,7 +28,20 @@
     "test": {
       "dependsOn": [
         "^test",
+        "build",
         "lint"
+      ],
+      "inputs": [
+        "src/*.tsx",
+        "src/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.ts",
+        "test/*.tsx",
+        "test/*.ts",
+        "test/**/*.tsx",
+        "test/**/*.ts",
+        "types/*.ts",
+        "mocks/*.ts"
       ]
     },
     "type-check": {
@@ -30,15 +53,50 @@
     "lint": {
       "dependsOn": [
         "^lint"
+      ],
+      "inputs": [
+        "*.tsx",
+        "*.ts",
+        "**/*.tsx",
+        "**/*.ts",
+        "*.jsx",
+        "*.js",
+        "**/*.jsx",
+        "**/*.js",
+        "*.mjs",
+        "**/*.mjs",
+        "*.cjs",
+        "**/*.cjs",
+        "*.css",
+        "**/*.css",
+        "*.scss",
+        "**/*.scss"
       ]
     },
     "format": {
       "dependsOn": [
         "^format"
+      ],
+      "inputs": [
+        "*.tsx",
+        "*.ts",
+        "*.js",
+        "*.jsx",
+        "*.mjs",
+        "*.cjs",
+        "*.html",
+        "*.css",
+        "*.scss"
       ]
     },
     "dev": {
       "cache": false
     }
-  }
+  },
+  "globalDependencies": [
+    ".env",
+    "package.json",
+    "tsconfig.json",
+    "tsconfig.global.json"
+  ]
 }
