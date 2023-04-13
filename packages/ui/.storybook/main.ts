@@ -8,6 +8,13 @@ module.exports = {
     '@storybook/addon-docs',
     '@storybook/addon-links',
     '@storybook/addon-viewport',
+    {
+      name: 'storybook-addon-turbo-build',
+      options: {
+        optimizationLevel: 2,
+        esbuildMinifyOptions: { target: 'es2019' },
+      },
+    },
   ],
   core: {
     disableTelemetry: true,
