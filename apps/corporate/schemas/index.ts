@@ -110,6 +110,10 @@ export const homeSchema: JSONSchemaType<HomeProps> = {
 
 export interface AboutProps {
   title: string
+  introduction: {
+    quote: string
+    content: Array<string>
+  }
   quote: string
   content: Array<string>
   contact: ContactList
@@ -119,6 +123,20 @@ export const aboutSchema: JSONSchemaType<AboutProps> = {
   type: 'object',
   properties: {
     title: { type: 'string' },
+    introduction: {
+      type: 'object',
+      properties: {
+        quote: { type: 'string' },
+        content: {
+          type: 'array',
+          items: { type: 'string' },
+          minItems: 1,
+          uniqueItems: true,
+        },
+      },
+      required: ['quote', 'content'],
+      additionalProperties: false,
+    },
     quote: { type: 'string' },
     content: {
       type: 'array',

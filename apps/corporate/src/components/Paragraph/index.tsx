@@ -4,18 +4,33 @@ import { Animation } from './components/Animation'
 import { isPrerender } from '../../utils/prerender'
 import { SrOnly } from '../SrOnly'
 
-type AlignProps = 'left' | 'right' | 'center'
+enum Size {
+  sm = '1em',
+  md = '1.2em',
+  lg = '1.4em',
+  xl = '1.8em',
+}
 
-const StyledParagraph = styled.p<{ align?: AlignProps }>`
-  font-size: 1.2em;
+type AlignProps = 'left' | 'right' | 'center'
+type SizeProps = keyof typeof Size
+
+const StyledParagraph = styled.p<{
+  align?: AlignProps
+  size?: SizeProps
+  indent?: boolean
+}>`
+  ${props => props.align && `text-align: ${props.align};`}
+  ${props => props.size && `font-size: ${Size[props.size]};`}
+  ${props => props.indent && `text-indent: 12.5%;`}
   margin-bottom: 1rem;
-  ${props => props.align && `text-align: ${props.align}`}
 `
 
 type CommonProps = {
   isContent?: boolean
   dataTestId?: string
   align?: AlignProps
+  size?: SizeProps
+  indent?: boolean
 }
 
 type TruncateProps =
@@ -27,6 +42,8 @@ type ParagraphProps = CommonProps & TruncateProps
 const Paragraph: FunctionComponent<ParagraphProps> = ({
   text,
   align,
+  size = 'md',
+  indent = false,
   animate = false,
   isContent,
   dataTestId,
@@ -41,6 +58,8 @@ const Paragraph: FunctionComponent<ParagraphProps> = ({
         data-testid={dataTestId}
         aria-hidden={isAnimate || undefined}
         align={align}
+        indent={indent}
+        size={size}
         {...props}
       >
         {/* this should be by default invisible until the animation start */}
