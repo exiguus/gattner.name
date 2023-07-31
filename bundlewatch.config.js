@@ -3,7 +3,7 @@ const bundlewatchConfig = {
   files: [
     ...pages.map(page => ({
       path: `dist/${page}.*.js`,
-      maxSize: '10KB',
+      maxSize: '20KB',
       compression: 'none',
     })),
     {

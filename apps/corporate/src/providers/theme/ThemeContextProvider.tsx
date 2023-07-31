@@ -5,7 +5,7 @@ import { prev, current, updateTheme } from './lib'
 import { ThemeContext, ThemeContextProps } from './ThemeContext'
 
 export const ThemeContextProvider: FunctionComponent = ({ children }) => {
-  const [{ timestamp, darkMode }, setDarkMode] = useReducer(prev, current())
+  const [{ darkMode }, setDarkMode] = useReducer(prev, current())
 
   // Create context value
   const value: ThemeContextProps = useMemo(

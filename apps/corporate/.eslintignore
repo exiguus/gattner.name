@@ -1,4 +1,4 @@
 dist
 data
-public/sw-cache.ts
+public/sw.ts
 .cache
