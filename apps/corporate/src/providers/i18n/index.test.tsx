@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useContext } from 'react'
 import { render, screen } from '../../../tests/testUtils'
-import { MockI18nContextProvider, I18nContextProps, I18nContext } from '.'
+import { MockI18nContextProvider, I18nContext } from '.'
 
 const translations = {
   'music.listen.to': 'Listen to:',

@@ -11,7 +11,7 @@ export type Link = {
 
 export type Icon =
   | 'github'
-  | 'twitter'
+  | 'mastodon'
   | 'simon'
   | 'simon-alt'
   | 'analysis'
@@ -20,7 +20,7 @@ export type Icon =
 
 export const iconSchema: JSONSchemaType<Icon> = {
   type: 'string',
-  pattern: '^(github|twitter|simon|simon-alt|analysis|envelope|fork)$',
+  pattern: '^(github|mastodon|simon|simon-alt|analysis|envelope|fork)$',
 }
 
 export type LinkIcon = {

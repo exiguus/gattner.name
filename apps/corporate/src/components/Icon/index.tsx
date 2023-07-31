@@ -1,9 +1,9 @@
-import React, { ElementType, FunctionComponent } from 'react'
+import React, { ElementType } from 'react'
 import { useTheme } from '../../hooks/useTheme'
 import { Icon as IconName } from '../../../schemas'
 
 import GithubIcon from '../../assets/github-alt.svg'
-import TwitterIcon from '../../assets/twitter-alt.svg'
+import MastodonIcon from '../../assets/mastodon-alt.svg'
 import SimonIcon from '../../assets/simon-alt.svg'
 import SimonAltIcon from '../../assets/simon.svg'
 import AnalysisIcon from '../../assets/analysis-alt.svg'
@@ -16,7 +16,7 @@ type Icons = {
 
 const icons: Icons = {
   github: GithubIcon,
-  twitter: TwitterIcon,
+  mastodon: MastodonIcon,
   simon: SimonIcon,
   'simon-alt': SimonAltIcon,
   analysis: AnalysisIcon,
@@ -24,13 +24,13 @@ const icons: Icons = {
   fork: ForkIcon,
 }
 
-interface IconProps {
+type IconProps = {
   type: string
   fill?: string
   stroke?: string
 }
 
-export const Icon: FunctionComponent<IconProps> = ({ type, fill, stroke }) => {
+export const Icon = ({ type, fill, stroke }: IconProps) => {
   const { theme } = useTheme()
   const I = type in icons ? icons[type as IconName] : icons.analysis
   return (

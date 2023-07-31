@@ -90,8 +90,6 @@ const PageLayout: FunctionComponent<PageLayoutProps> = ({
         },
         property: {
           'og:url': `${origin}${path}`,
-          'twitter:domain': `${new URL(origin).hostname}`,
-          'twitter:url': `${origin}${path}`,
         },
       },
     }
