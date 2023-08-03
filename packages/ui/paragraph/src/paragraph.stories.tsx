@@ -4,6 +4,7 @@ import { Meta, Story } from '@storybook/react'
 import { DocsPage } from '@gattner/storybook'
 import '@gattner/types'
 import Readme from '../README.md'
+import { textAligns, textSizes } from '@gattner/ui-theme'
 
 import { Paragraph, ParagraphProps } from '.'
 
@@ -29,13 +30,22 @@ const StyledSection = styled.section`
   padding: 2rem;
 `
 
-const aligns: ParagraphProps['align'][] = ['left', 'right', 'center']
+const aligns: ParagraphProps['align'][] = textAligns
 export const Align = () => {
   return aligns.map((align, index) => (
     <StyledSection key={`${align}-${index} `}>
       <Paragraph align={align}>
         This is {align} aligned text in a paragraph.
       </Paragraph>
+    </StyledSection>
+  ))
+}
+
+const size: ParagraphProps['size'][] = textSizes
+export const Size = () => {
+  return size.map((size, index) => (
+    <StyledSection key={`${size}-${index} `}>
+      <Paragraph size={size}>This is {size} text in a paragraph.</Paragraph>
     </StyledSection>
   ))
 }

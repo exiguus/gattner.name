@@ -3,14 +3,13 @@ import React, {
   useLayoutEffect,
   FunctionComponent,
   MutableRefObject,
-  useState,
 } from 'react'
 import styled from 'styled-components'
 import '@gattner/types'
 import Randext from 'randext'
 import { getRandomInt } from '@gattner/utils'
 
-const StyledAnimation = styled.span<{ opacity: number }>`
+const StyledAnimation = styled.span`
   display: block;
   unicode-bidi: embed;
   font-size: 5.2vh;
@@ -20,10 +19,8 @@ const StyledAnimation = styled.span<{ opacity: number }>`
   white-space: pre-line;
   width: 100%;
   color: inherit;
-  opacity: ${props => props.opacity};
 
   @media (min-width: ${(props): string =>
-      // TODO: jest missing screenTablet fix
       props.theme.breakpoint?.screenTablet ?? '768px'}) {
     font-size: 6.4vh;
     /* allow oversized words, without line-break them */
@@ -47,7 +44,6 @@ interface AnimationProps {
   text: string
 }
 const Animation: FunctionComponent<AnimationProps> = ({ text }) => {
-  const [opacity, setOpacity] = useState<0 | 1>(0)
   const paragraphRef = useRef() as MutableRefObject<HTMLParagraphElement>
   useLayoutEffect(() => {
     paragraphRef.current.setAttribute('data-randext', 'false')
@@ -59,7 +55,6 @@ const Animation: FunctionComponent<AnimationProps> = ({ text }) => {
       interval: wait / 100 < 15 ? Math.round((wait / 12) * 2) : 120,
     })
     const timeout = setTimeout(() => {
-      setOpacity(1)
       randext.start()
     }, wait)
     return (): void => {
@@ -69,7 +64,7 @@ const Animation: FunctionComponent<AnimationProps> = ({ text }) => {
   }, [paragraphRef, text])
 
   return (
-    <StyledAnimation opacity={opacity} data-testid="randext" ref={paragraphRef}>
+    <StyledAnimation data-testid="randext" ref={paragraphRef}>
       {text}
     </StyledAnimation>
   )

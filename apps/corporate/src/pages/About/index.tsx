@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Blockquote } from '@gattner/ui-blockquote'
 import { Headline } from '@gattner/ui-headline'
 import { AboutProps } from '../../../schemas'
-import { Paragraph } from '../../components/Paragraph'
+import { Paragraph } from '@gattner/ui-paragraph'
 import { Face } from '../../components/Face'
 import { HorizontalBreak } from '../../components/HorizontalBreak'
 import { ContactInfo } from '../../components/ContactInfo'
@@ -50,7 +50,7 @@ const About: FunctionComponent<AboutProps> = ({
         <Paragraph text={quote} />
       </Blockquote>
       {content.map((text, index) => (
-        <Paragraph key={`cp-${index}`} text={text} />
+        <Paragraph indent key={`cp-${index}`} text={text} />
       ))}
       <HorizontalBreak />
       <ContactInfo contact={contact} />

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect } from 'react'
 import { getRandomInt } from '@gattner/utils'
 import { HomeProps } from '../../../schemas'
-import { Paragraph } from '../../components/Paragraph'
+import { Paragraph } from '@gattner/ui-paragraph'
 import { isPrerender } from '../../utils/prerender'
 
 const Home: FunctionComponent<HomeProps> = props => {

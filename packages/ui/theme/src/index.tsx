@@ -9,3 +9,5 @@ export { theme, themeLight, themeDark, darkTheme, lightTheme }
 export { variables as themeVariables }
 export { rem, getRandomColor, hex2rgba }
 export type { Theme, ThemeBase, ThemeExtended }
+
+export * from './theme/text'

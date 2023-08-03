@@ -118,6 +118,7 @@
     "@gattner/tracker": "workspace:^1.0.0",
     "@gattner/ui-blockquote": "workspace:^1.0.0",
     "@gattner/ui-headline": "workspace:^",
+    "@gattner/ui-paragraph": "workspace:^",
     "@gattner/ui-theme": "workspace:^1.0.0",
     "@gattner/utils": "workspace:^1.0.0",
     "@micro-sentry/browser": "^2.1.2",

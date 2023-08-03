@@ -1,10 +1,14 @@
 import React, { ReactNode, FunctionComponent } from 'react'
 import styled from 'styled-components'
+import { TextSizes, TextSize, TextAlign } from '@gattner/ui-theme'
+
 import { SrOnly } from './components/SrOnly'
 
-const StyledHeadline = styled.h1`
+const StyledHeadline = styled.h1<{ size: TextSize; align?: TextAlign }>`
   margin-bottom: 1rem;
   font-weight: 600;
+  ${props => props.align && `text-align: ${props.align}`};
+  ${props => props.size && `font-size: ${TextSizes[props.size]}`};
 `
 
 const StyledIcon = styled.div`
@@ -28,6 +32,8 @@ type OptionalProps =
   | { text?: never; children: ReactNode }
 
 export type HeadlineProps = {
+  size?: TextSize
+  align?: TextAlign
   icon?: ReactNode
   srOnly?: boolean
 } & OptionalProps
@@ -35,11 +41,13 @@ export type HeadlineProps = {
 const Headline: FunctionComponent<HeadlineProps> = ({
   text,
   icon,
+  align,
+  size = 'md',
   srOnly = false,
   children,
 }) => {
   return (
-    <StyledHeadline>
+    <StyledHeadline align={align} size={size}>
       {((text || children) && icon) || ((text || children) && srOnly) ? (
         <SrOnly>{text || children}</SrOnly>
       ) : (

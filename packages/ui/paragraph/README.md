@@ -9,4 +9,4 @@ pnpm i @gattner/ui-paragraph
 ## TODO
 
 - [X] stories
-- [ ] test
+- [X] test

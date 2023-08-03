@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslate } from '../../hooks/useTranslate'
 import { ContactList, isContactListInformationLink } from '../../../schemas'
-import { Paragraph } from '../Paragraph'
+import { Paragraph } from '@gattner/ui-paragraph'
 import { HorizontalBreak } from '../HorizontalBreak'
 import { List } from '../List'
 import { ListItem } from '../ListItem'

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect } from 'react'
 import { Headline } from '@gattner/ui-headline'
 import { ImpressumProps } from '../../../schemas'
-import { Paragraph } from '../../components/Paragraph'
+import { Paragraph } from '@gattner/ui-paragraph'
 import { HorizontalBreak } from '../../components/HorizontalBreak'
 import { ContactInfo } from '../../components/ContactInfo'
 import { Group } from '../../components/Group'

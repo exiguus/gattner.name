@@ -9,6 +9,15 @@ import { AppLayout } from '../src/layouts/AppLayout'
 import { SiteLayout } from '../src/layouts/SiteLayout'
 import axios from 'axios'
 import 'whatwg-fetch'
+// Mock randext for testing purposes (used in Paragraph component)
+jest.mock('randext', () => {
+  return jest.fn().mockImplementation(() => {
+    return {
+      start: jest.fn(),
+      stop: jest.fn(),
+    }
+  })
+})
 
 beforeAll(() => {
   // Permit CORS in Axios, see https://github.com/axios/axios/issues/1754#issuecomment-572778305

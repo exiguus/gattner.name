@@ -9,4 +9,3 @@ pnpm i @gattner/ui-headline
 ## TODO
 
 - [X] stories
-- [ ] test

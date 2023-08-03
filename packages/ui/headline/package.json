@@ -60,5 +60,8 @@
     "react-dom": "16",
     "react-is": "16",
     "styled-components": "5"
+  },
+  "dependencies": {
+    "@gattner/ui-theme": "workspace:^"
   }
 }

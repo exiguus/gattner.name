@@ -145,6 +145,9 @@ importers:
       '@gattner/ui-headline':
         specifier: workspace:^
         version: link:../../packages/ui/headline
+      '@gattner/ui-paragraph':
+        specifier: workspace:^
+        version: link:../../packages/ui/paragraph
       '@gattner/ui-theme':
         specifier: workspace:^1.0.0
         version: link:../../packages/ui/theme
@@ -1022,6 +1025,10 @@ importers:
         version: 4.8.4
 
   packages/ui/headline:
+    dependencies:
+      '@gattner/ui-theme':
+        specifier: workspace:^
+        version: link:../theme
     devDependencies:
       '@gattner/storybook':
         specifier: workspace:^1.0.0
@@ -1074,6 +1081,9 @@ importers:
 
   packages/ui/paragraph:
     dependencies:
+      '@gattner/ui-theme':
+        specifier: workspace:^
+        version: link:../theme
       '@gattner/utils':
         specifier: workspace:^1.0.0
         version: link:../../utils
