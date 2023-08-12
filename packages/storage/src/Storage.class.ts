@@ -1,24 +1,26 @@
 /**
- * @description handle storage
+ * @description handle localStorage and sessionStorage
  */
 
-export const DEFAULT_NAME = '__gattner'
-export const DEFAULT_TYPE = 'sessionStorage'
+export const STORAGE_DEFAULT_NAME = '__gattner'
+export const STORAGE_DEFAULT_TYPE = 'sessionStorage'
 
-export type ItemName = string
-export type ItemValue = Record<string, unknown>
-export type ItemType = 'localStorage' | 'sessionStorage'
-export type Item = { item: { name: ItemName; type: ItemType } }
+export type StorageItemName = string
+export type StorageItemValue = Record<string, unknown>
+export type StorageItemType = 'localStorage' | 'sessionStorage'
+export type StorageItem = {
+  item: { name: StorageItemName; type: StorageItemType }
+}
 
 export default class Storage {
-  settings: Item = {
+  settings: StorageItem = {
     item: {
-      name: DEFAULT_NAME,
-      type: DEFAULT_TYPE,
+      name: STORAGE_DEFAULT_NAME,
+      type: STORAGE_DEFAULT_TYPE,
     },
   }
 
-  constructor(options: Partial<Item>) {
+  constructor(options: Partial<StorageItem>) {
     this.settings = {
       ...this.settings,
       ...options,
@@ -29,30 +31,30 @@ export default class Storage {
     }
   }
 
-  getItem = (name: ItemName) =>
+  private getStorageItem = (name: StorageItemName) =>
     JSON.parse(window[this.settings.item.type].getItem(name) ?? '[]')
-  setItem = (name: ItemName, value: ItemValue[]) =>
+  private setStorageItem = (name: StorageItemName, value: StorageItemValue[]) =>
     window[this.settings.item.type].setItem(name, JSON.stringify(value ?? []))
-  removeItem = (name: ItemName) =>
+  private removeStorageItem = (name: StorageItemName) =>
     window[this.settings.item.type].removeItem(name)
 
   pull() {
     return this.item
   }
 
-  push(value: ItemValue[]) {
+  push(value: StorageItemValue[]) {
     this.item = value
   }
 
   clear() {
-    this.removeItem(this.settings.item.name)
+    this.removeStorageItem(this.settings.item.name)
   }
 
   get item() {
-    return this.getItem(this.settings.item.name)
+    return this.getStorageItem(this.settings.item.name)
   }
 
-  set item(value: ItemValue[]) {
-    this.setItem(this.settings.item.name, value)
+  set item(value: StorageItemValue[]) {
+    this.setStorageItem(this.settings.item.name, value)
   }
 }

@@ -1,15 +1,15 @@
-import Storage, {
-  Item,
-  ItemValue,
-  DEFAULT_NAME,
-  DEFAULT_TYPE,
-} from './Storage.class'
+import Storage, { StorageItem, StorageItemValue } from './Storage.class'
 
 /**
  * @description handle store state
  */
 
 export const MAX_ITEMS = 256
+export const DEFAULT_NAME = '__gattner'
+export const DEFAULT_TYPE = 'sessionStorage'
+
+export type Item = StorageItem
+export type ItemValue = StorageItemValue
 
 export default class Store {
   settings: Item = { item: { name: DEFAULT_NAME, type: DEFAULT_TYPE } }

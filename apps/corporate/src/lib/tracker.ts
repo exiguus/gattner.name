@@ -1,44 +1,73 @@
 import { isActionValue, Action } from '@gattner/tracker'
-import { BrowserFingerprint, MurmurHash3, waitFor } from '@gattner/utils'
-import { isServiceWorker } from '../utils/serviceworker'
+import { BrowserFingerprint, isObject, waitFor } from '@gattner/utils'
+import { AsyncStore } from '@gattner/storage'
+import { isServiceWorkerOnline } from '../utils/serviceworker'
 import { isPrerender } from '../utils/prerender'
+import { validate } from '../utils/validate'
+import { StaticAppend, staticAppendSchema } from '../../schemas/tracker'
+
+const PAGE_ID = parseInt(process.env.TRACKER_PAGE_ID ?? '0')
+const PAGE_NAME = process.env.TRACKER_PAGE_NAME ?? 'unknown'
+const STORE_NAME = '__gattner__trackerAppend'
+const STORE_TYPE = 'indexedDB'
+const store = new AsyncStore({
+  item: {
+    name: STORE_NAME,
+    type: STORE_TYPE,
+  },
+})
+console.log({ store })
+
+const isStaticAppendStore = (
+  value: unknown
+): value is { data: Record<string, unknown> } =>
+  isObject(value) && isObject(value.data)
 
 // self refers to ServiceWorkerGlobalScope instead of window
 //  origin: https://github.com/microsoft/TypeScript/issues/14877#issuecomment-493729050
 declare let self: ServiceWorkerGlobalScope
 
-const appendBase = {
-  pid: 1,
-  name: 'gattner-corporate',
-  url: '',
-  navigator: '',
-  origin: '',
-  referrer: '',
-  fingerprint:
-    typeof window !== 'undefined' && !isPrerender()
-      ? new BrowserFingerprint().result()
-      : // self refers to ServiceWorkerGlobalScope instead of window
-        //  also this is the reason why we need to use a different fingerprint for the service worker
-        //  the service worker does not have access to the window
-        //  therefore we have to find a way to generate a fingerprint for the service worker and the window
-        new MurmurHash3(self.serviceWorker.scriptURL).result(),
+const generateAppend = async () => {
+  let staticAppend: StaticAppend | null = null
+  let data = null
+
+  try {
+    await store.open()
+    const value = (await store.last()) || null
+    data = isStaticAppendStore(value) ? value.data : null
+    await store.close()
+  } catch (error) {
+    if (process.env.NODE_ENV === 'development') console.error(error)
+  }
+
+  if (data) {
+    try {
+      validate<StaticAppend>(staticAppendSchema, data)
+      staticAppend = data as StaticAppend
+    } catch (error) {
+      if (process.env.NODE_ENV === 'development') console.log(error)
+    }
+  } else {
+    await trackPushStoreStaticAppend()
+  }
+
+  return {
+    pid: PAGE_ID,
+    name: PAGE_NAME,
+    url: isServiceWorkerOnline() ? window.location.href : self.location.href,
+    navigator: isServiceWorkerOnline()
+      ? `${navigator.userAgent || navigator.appVersion}`
+      : `${self.navigator.userAgent || self.navigator.appVersion}`,
+    origin: isServiceWorkerOnline()
+      ? window.origin || document.location.origin
+      : self.location.origin,
+    referrer: isServiceWorkerOnline()
+      ? document.referrer
+      : self.serviceWorker?.scriptURL || 'unknown',
+    fingerprint: 0,
+    ...staticAppend,
+  }
 }
-
-const generateAppend = () => ({
-  ...appendBase,
-  url: window.location.href,
-  navigator: `${navigator.userAgent || navigator.appVersion}`,
-  origin: window.origin || document.location.origin,
-  referrer: document.referrer,
-})
-
-const generateAppendSW = () => ({
-  ...appendBase,
-  url: self.location.href,
-  navigator: `${self.navigator.userAgent || self.navigator.appVersion}`,
-  origin: self.location.origin,
-  referrer: self.serviceWorker.scriptURL,
-})
 
 export function trackBindSendEvent() {
   if (isPrerender()) return
@@ -46,21 +75,51 @@ export function trackBindSendEvent() {
   events.forEach(event => {
     window.addEventListener(event, async () => {
       window.sw.messageSW({
-        type: 'TRACKER_SEND_ACTIONS',
+        type: 'TRACKER_CLEAN_ACTIONS',
       })
     })
   })
 }
 
+export async function trackPushStoreStaticAppend() {
+  if (isPrerender() || typeof window === 'undefined') return
+
+  const staticAppend: StaticAppend = {
+    pid: 1,
+    name: 'gattner-corporate',
+    fingerprint: new BrowserFingerprint().result(),
+  }
+
+  let data = null
+  try {
+    await store.open()
+    const value = (await store.last()) || { data: null }
+    data = isStaticAppendStore(value) ? value.data : null
+    await store.close()
+  } catch (error) {
+    if (process.env.NODE_ENV === 'development') console.error(error)
+  }
+
+  if (data) {
+    validate<StaticAppend>(staticAppendSchema, data)
+  } else {
+    try {
+      await store.open()
+      await store.push({ timestamp: Date.now(), data: staticAppend })
+      await store.close()
+    } catch (error) {
+      if (process.env.NODE_ENV === 'development') console.error(error)
+    }
+  }
+}
+
 export const track = (...args: Array<Action['value']>) => {
   if (args.length === 0 || isPrerender()) return
   if (args.every(isActionValue)) {
-    waitFor(() => isServiceWorker(), 'trackerAddActions')
+    waitFor(() => isServiceWorkerOnline(), 'trackerAddActions')
       .then(async res => {
         await res
-        return isServiceWorker()
-          ? await sendPushActions(args)
-          : await sendPushActionsSW(args)
+        await sendPushActions(args)
       })
       .catch(error => {
         if (process.env.NODE_ENV === 'development')
@@ -69,34 +128,24 @@ export const track = (...args: Array<Action['value']>) => {
   }
 }
 
-const sendPushActions = (actions: Array<Action['value']>) => {
+const sendPushActions = async (actions: Array<Action['value']>) => {
   const actionItems = new Set<Action>()
+  const append = await generateAppend()
   actions.forEach(action => {
     const timestamp = Date.now()
     actionItems.add({
       key: { timestamp },
       value: action,
-      append: generateAppend(),
+      append,
     })
   })
-  return window.sw.messageSW({
-    type: 'TRACKER_PUSH_ACTIONS',
-    actions: Array.from(actionItems),
-  })
-}
-
-const sendPushActionsSW = async (actions: Array<Action['value']>) => {
-  const actionItems = new Set<Action>()
-  actions.forEach(action => {
-    const timestamp = Date.now()
-    actionItems.add({
-      key: { timestamp },
-      value: action,
-      append: generateAppendSW(),
-    })
-  })
-  self.serviceWorker.postMessage({
-    type: 'TRACKER_PUSH_ACTIONS',
-    actions: Array.from(actionItems),
-  })
+  return isServiceWorkerOnline()
+    ? window.sw.messageSW({
+        type: 'TRACKER_PUSH_ACTIONS',
+        actions: Array.from(actionItems),
+      })
+    : self.serviceWorker.postMessage({
+        type: 'TRACKER_PUSH_ACTIONS',
+        actions: Array.from(actionItems),
+      })
 }

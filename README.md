@@ -48,6 +48,13 @@ build
 pnpm build
 ```
 
+link
+
+```shell
+pnpx turbo login
+pnpx turbo link
+```
+
 ## monorepo
 
 * [x] build with Turborepo
@@ -117,6 +124,11 @@ pnpm build
 * [ ] feat(gradient): switch (<https://www.joshwcomeau.com/css/make-beautiful-gradients/> with <https://gka.github.io/chroma.js/>)
 * [ ] feat(icons): [iconoir](https://iconoir.com/) or IBM carbon icons and integrate them via package
 * [ ] feat(font): conditional
+* [x] feat(track): shared fingerprint
+* [x] feat(storage): add async storage
+* [ ] feat(device): add device detector
+* [ ] feat(tracker): use device-detector
+* [ ] feat(packages): add api report and documentation <https://api-extractor.com/pages/setup/invoking/>
 
 ### Performance
 
@@ -137,6 +149,7 @@ pnpm build
 * [ ] test(sw): register
 * [ ] test(prerender): event
 * [ ] test(supabase): api and utils
+* [ ] test(utils): waitFor
 * [ ] test(utils): fingerprint
 * [ ] test(utils): murmurhash3
 * [ ] fix(test): LastFmContextProvider act
@@ -147,4 +160,3 @@ pnpm build
   * `corporate:test:       at printWarning (../../node_modules/.pnpm/react-dom@16.14.0_react@16.14.0/node_modules/react-dom/cjs/react-dom.development.js:60:5)
 corporate:test:       at error (../../node_modules/.pnpm/react-dom@16.14.0_react@16.14.0/node_modules/react-dom/cjs/react-dom.development.js:23284:7)
 corporate:test:       at warnIfNotCurrentlyActingUpdatesInDev (../../node_modules/.pnpm/react-dom@16.14.0_react@16.14.0/node_modules/react-dom/cjs/react-dom.development.js:15656:9)`
-* [ ] test(utils): waitFor

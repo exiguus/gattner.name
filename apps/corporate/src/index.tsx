@@ -60,14 +60,15 @@ async function render(
 }
 
 render(appElement, callback).then(async () => {
-  if (!prerender) {
-    const { registerServiceWorker } = await import('./sw-register')
-    registerServiceWorker()
-  }
-  const { track } = await import('./lib/tracker')
+  const { track, trackPushStoreStaticAppend } = await import('./lib/tracker')
+  await trackPushStoreStaticAppend()
   track({
     type: 'render',
     msg: 'App rendered',
     value: `App rendered`, // TODO: Add more details like render time
   })
+  if (!prerender) {
+    const { registerServiceWorker } = await import('./sw-register')
+    await registerServiceWorker()
+  }
 })
