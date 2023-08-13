@@ -22,7 +22,7 @@
     },
     "bundlewatch": {
       "dependsOn": [
-        "build"
+        "corporate#build"
       ]
     },
     "test": {

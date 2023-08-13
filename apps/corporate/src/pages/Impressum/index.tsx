@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useEffect } from 'react'
+import { Headline } from '@gattner/ui-headline'
 import { ImpressumProps } from '../../../schemas'
-import { useTranslate } from '../../hooks/useTranslate'
-import { Headline } from '../../components/Headline'
-import { Paragraph } from '../../components/Paragraph'
+import { Paragraph } from '@gattner/ui-paragraph'
 import { HorizontalBreak } from '../../components/HorizontalBreak'
 import { ContactInfo } from '../../components/ContactInfo'
 import { Group } from '../../components/Group'
+import { useTranslate } from '../../hooks/useTranslate'
 
 const Impressum: FunctionComponent<ImpressumProps> = ({
   address,

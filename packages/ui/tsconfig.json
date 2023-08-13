@@ -2,7 +2,14 @@
   "compilerOptions": {
     "jsx": "react",
     "target": "ES2019",
-    "lib": ["DOM", "ES2016", "ES2017", "esnext.asynciterable", "DOM.Iterable", "WebWorker"],
+    "lib": [
+      "DOM",
+      "ES2016",
+      "ES2017",
+      "esnext.asynciterable",
+      "DOM.Iterable",
+      "WebWorker"
+    ],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -19,8 +26,17 @@
     "module": "ESnext",
     "moduleResolution": "node",
     "allowJs": true,
-    "typeRoots": ["node_modules/@types"],
-    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "typeRoots": [
+      "node_modules/@types",
+    ],
+    "types": [
+      "node",
+      "jest",
+      "@testing-library/jest-dom"
+    ],
     "skipLibCheck": true
   },
+  "include": [
+    "./ui.stories.tsx"
+  ]
 }

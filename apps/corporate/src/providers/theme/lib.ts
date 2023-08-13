@@ -1,8 +1,11 @@
 import Store from '@gattner/storage'
 import { isObject, hasOwnProperty } from '@gattner/utils'
-import { getRandomColor, hex2rgba } from '../../styles/theme'
-import { Theme } from '../../../types/Theme'
-import { variables } from '../../styles/theme/variables'
+import {
+  Theme,
+  themeVariables,
+  getRandomColor,
+  hex2rgba,
+} from '@gattner/ui-theme'
 
 const store = new Store({
   item: { name: '__gattner__darkMode', type: 'localStorage' },
@@ -26,8 +29,8 @@ export const updateTheme = (theme: Theme, darkMode: boolean): Theme => {
   const [backgroundHue, backgroundSaturation, backgroundAlpha] =
     getRandomColor()
   theme.application.color = darkMode
-    ? hex2rgba(variables.BrandSecondary, 0.8)
-    : hex2rgba(variables.BrandPrimary, 0.8)
+    ? hex2rgba(themeVariables.BrandSecondary, 0.8)
+    : hex2rgba(themeVariables.BrandPrimary, 0.8)
   theme.application.backgroundColor = darkMode
     ? `hsl(${backgroundHue}, 90%, 5%, 0.8)`
     : `hsl(${backgroundHue}, ${backgroundSaturation}, ${backgroundAlpha}, 0.5)`

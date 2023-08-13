@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react'
 import { ThemeContextProvider } from '../../providers/theme'
-import { GlobalStyles } from '../../components/GlobalStyles'
+import { GlobalStyles } from '@gattner/ui-theme'
 
 interface SiteLayoutProps {
   children: ReactNode

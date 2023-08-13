@@ -59,6 +59,15 @@ pnpm build
 * [x] acceptance, integration and e2e tests with Playwright Vercel deployment GitHub Action
 * [x] bundlewatch Vercel deployment GitHub Action
 
+### housekeeping
+
+* [ ] add packages dev task `tsc --watch`
+* [ ] move common child dependencies in packages and apps to top-level (for example: jest & react)
+* [ ] update to eslint 8
+* [ ] clean eslint and prettier config
+* [ ] clean package.json eslint and prettier scripts
+* [ ] update to react 18
+
 ## Research
 
 * [x] e2e tests with [cypress](https://github.com/cypress-io/cypress) with [GitHub action](https://github.com/cypress-io/github-action)

@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useEffect } from 'react'
+import { Headline } from '@gattner/ui-headline'
 import { Blockquote } from '@gattner/ui-blockquote'
 import { ContactProps } from '../../../schemas'
-import { useTranslate } from '../../hooks/useTranslate'
-import { Headline } from '../../components/Headline'
-import { Paragraph } from '../../components/Paragraph'
+import { Paragraph } from '@gattner/ui-paragraph'
 import { HorizontalBreak } from '../../components/HorizontalBreak'
 import { Face } from '../../components/Face'
 import { ContactInfo } from '../../components/ContactInfo'
+import { useTranslate } from '../../hooks/useTranslate'
 
 const Contact: FunctionComponent<ContactProps> = ({
   content,

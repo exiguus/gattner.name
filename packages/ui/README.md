@@ -1,26 +1,83 @@
 # @gattner/ui-*
 
-Components in Shared UI Library
+Shared UI Library, Pattern Library, Design System and Style Guide
 
-## Build
+The Shared UI Library follows the [Atomic Design methodology](https://atomicdesign.bradfrost.com/chapter-2/) and categorieze in the following, more deliberate and hierarchical manner:
 
-- esnext build for react
-- commonjs build for jest
+1. Atoms
+2. Molecules
+3. Organisms
+4. Templates
+5. Pages
 
-## Peer Dependencies
+## Design System
 
-parcel 1.2 pre-render depends on react v16
+Design + Development <https://ui.gattner.name/>
 
-- react, react-dom and react-is v16
-- styled-components v5
+### Goals
+
+* Design and development work can be created and replicated quickly and at scale.
+* Creates a unified language within and between cross-functional teams.
+* Create visual consistency across products and channels.
+* Serve as an educational tool and reference for developer, designers and content contributors.
+
+See: <https://www.nngroup.com/articles/design-systems-101/>
+
+## Package Development
+
+### Build
+
+* esnext build for react
+* commonjs build for jest
+
+```json
+// package.json
+...
+  "name": "@gattner/ui-[name]",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "module": "./dist/es/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+...
+```
+
+### Install
+
+`pnpm i @gattner/ui-[name]`
+
+### Peer Dependencies
+
+* react, react-dom and react-is v16
+* styled-components v5
+
+The corporate side use Parcel 1.2 and its pre-render plugin that depends on react v16, that's the reason why stick to react v16 for now.
 
 ## TODO
 
-- [X] storybook dev
-- [ ] style, fonts, theme, colors
-  - [ ] package
-  - [ ] preview.ts provider for globalStyles, fonts, theme
-- [ ] storybook deploy
-  - [ ] github action (github page) or vercel ui.gattner.name
-- [ ] storybook landing page (README.mdx)
-- [ ] move corporate components into packages and add a stories
+* [X] storybook dev
+* [x] storybook deploy
+* [x] theme package
+  * [x] style, fonts, theme, colors packages
+  * [x] preview.ts provider for globalStyles, fonts, theme
+* [x] storybook landing page (README.md)
+* [ ] move corporate components into packages and add a story
+  * [x] headline
+  * [x] paragraph
+  * [x] blockquote
+  * [ ] grid
+  * [ ] sections / container
+  * [ ] ...
+* [ ] storybook assets
+  * [ ] favicon
+* [x] tsconfig
+  * [x] use default type root (declare md for example) for all ui packages
+* [ ] jest config
+  * [x] testUtils for ui
+  * [x] move mocks to testUtils

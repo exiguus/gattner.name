@@ -9,12 +9,14 @@ interface AppLayoutProps {
 }
 
 const AppLayout: FunctionComponent<AppLayoutProps> = ({ children }) => {
-  if (process.env.NODE_ENV === 'development') {
+  if (
+    process.env.MOCK_API_LAST_FM === 'enabled' &&
+    process.env.NODE_ENV === 'development'
+  ) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { worker } = require('../../../mocks/browser')
     worker.start()
   }
-
   return (
     <I18nContextProvider lang="en" client={client}>
       <SentryContextProvider>
