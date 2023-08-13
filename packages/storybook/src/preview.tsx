@@ -53,56 +53,56 @@ export const parameters: Parameters = {
       ]
       return sectionOrder.indexOf(sectionA) - sectionOrder.indexOf(sectionB)
     },
-    viewport: {
-      viewports: {
-        MobileS: {
-          name: 'Mobile S',
-          styles: {
-            height: '568px',
-            width: '320px',
-          },
-          type: 'mobile',
+  },
+  viewport: {
+    viewports: {
+      MobileS: {
+        name: 'Mobile S',
+        styles: {
+          height: '568px',
+          width: '320px',
         },
-        MobileM: {
-          name: 'Mobile M',
-          styles: {
-            height: '812px',
-            width: '375px',
-          },
-          type: 'mobile',
+        type: 'mobile',
+      },
+      MobileM: {
+        name: 'Mobile M',
+        styles: {
+          height: '812px',
+          width: '375px',
         },
-        MobileL: {
-          name: 'Mobile L',
-          styles: {
-            height: '756px',
-            width: '425px',
-          },
-          type: 'mobile',
+        type: 'mobile',
+      },
+      MobileL: {
+        name: 'Mobile L',
+        styles: {
+          height: '756px',
+          width: '425px',
         },
-        Tablet: {
-          name: 'Tablet',
-          styles: {
-            height: '1024px',
-            width: '768px',
-          },
-          type: 'tablet',
+        type: 'mobile',
+      },
+      Tablet: {
+        name: 'Tablet',
+        styles: {
+          height: '1024px',
+          width: '768px',
         },
-        Laptop: {
-          name: 'Laptop',
-          styles: {
-            height: '768px',
-            width: '1024px',
-          },
-          type: 'desktop',
+        type: 'tablet',
+      },
+      Laptop: {
+        name: 'Laptop',
+        styles: {
+          height: '768px',
+          width: '1024px',
         },
-        LaptopL: {
-          name: 'Laptop L',
-          styles: {
-            height: '900px',
-            width: '1440px',
-          },
-          type: 'desktop',
+        type: 'desktop',
+      },
+      LaptopL: {
+        name: 'Laptop L',
+        styles: {
+          height: '900px',
+          width: '1440px',
         },
+        type: 'desktop',
       },
     },
   },

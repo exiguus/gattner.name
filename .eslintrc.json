@@ -1,6 +1,9 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "sonarjs"],
+  "plugins": [
+    "@typescript-eslint",
+    "sonarjs"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -18,14 +21,22 @@
   },
   "overrides": [
     {
-      "files": ["*.tsx"],
+      "files": [
+        "*.tsx"
+      ],
       "rules": {
         "react/require-default-props": "off",
-        "sonarjs/cognitive-complexity": ["warn", 30]
+        "react/jsx-fragments": "off",
+        "sonarjs/cognitive-complexity": [
+          "warn",
+          30
+        ]
       }
     },
     {
-      "files": ["stories.tsx"],
+      "files": [
+        "stories.tsx"
+      ],
       "rules": {
         "@typescript-eslint/no-var-requires": "off"
       }

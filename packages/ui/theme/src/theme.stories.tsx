@@ -48,8 +48,8 @@ const ThemeProvider: FunctionComponent<ThemeProviderProps> = ({ theme }) => {
         <StyledHeadline>{theme.name.toUpperCase()} Theme</StyledHeadline>
         <StyledDescription>Body CSS Declaration </StyledDescription>
         {headlineStyle &&
-          Object.values(headlineStyle).map(value => (
-            <div key={`headlineStyles-${value}`}>
+          Object.values(headlineStyle).map((value, index) => (
+            <div key={`headlineStyles-${value}-${index}`}>
               <StyledStrong>{value}:</StyledStrong>{' '}
               {headlineStyle.getPropertyValue(value) && (
                 <StyledCode>{headlineStyle.getPropertyValue(value)}</StyledCode>
