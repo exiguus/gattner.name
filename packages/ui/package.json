@@ -18,8 +18,8 @@
   },
   "scripts": {
     "dev": "pnpm storybook",
-    "storybook": "start-storybook -p 6006 --no-open",
-    "build": "build-storybook --output-dir ./dist/"
+    "storybook": "NODE_OPTIONS='--openssl-legacy-provider' start-storybook -p 6006 --no-open",
+    "build": "NODE_OPTIONS='--openssl-legacy-provider' build-storybook --output-dir ./dist/"
   },
   "devDependencies": {
     "@babel/core": ">=7.13.0 <8.0.0",
